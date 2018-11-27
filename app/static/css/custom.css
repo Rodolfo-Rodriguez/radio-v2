@@ -1,0 +1,411 @@
+.col-player{
+  position: relative;
+  width: 20%;
+  min-height: 1px;
+  padding-right: 5px;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+}
+
+.col-grid{
+  position: relative;
+  width: 79.6%;
+  min-height: 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+}
+
+.col-grid-full{
+  display: flex;
+  flex: 0 0 100%;
+  min-height: 1px;
+  padding-right: 1px;
+  padding-left: 1px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.col-grid-element{
+  position: relative;
+  width: 12.5%;
+  min-height: 1px;
+  padding-right: 3px;
+  padding-left: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.col-grid-element-full{
+  flex: 0 0 10%;
+  min-height: 1px;
+  padding-right: 3px;
+  padding-left: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.col-grid-list{
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 3px;
+  padding-left: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.thumb-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 300px;
+  max-height: 300px;
+  display: flex;
+}
+
+.thumb-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.thumb-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .3s ease;
+  background-color: black;
+  border-radius: 10px;
+  display: flex;
+}
+
+.thumb-overlay-main-player {
+  opacity: 0;
+  transition: .3s ease;
+  margin: auto;
+}
+
+.thumb-overlay-play {
+  opacity: 0;
+  transition: .3s ease;
+  margin: auto;
+}
+
+.thumb-overlay-edit {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  opacity: 0;
+  transition: .3s ease;
+}
+
+.thumb-overlay-delete {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  opacity: 0;
+  transition: .3s ease;
+}
+
+.thumb-overlay-link {
+  opacity: 0;
+  transition: .3s ease;
+  background-color: black;
+  margin: auto;
+  display: flex;
+  text-align: center;
+}
+
+.thumb-overlay-link-radio {
+  opacity: 0;
+  transition: .3s ease;
+  background-color: black;
+  margin: auto;
+  display: flex;
+  text-align: center;
+}
+
+.thumb-container:hover .thumb-overlay {
+  opacity: 0.8;
+}
+
+.thumb-container:hover .thumb-overlay-main-player {
+  opacity: 0.8;
+}
+
+.thumb-container:hover .thumb-overlay-play {
+  opacity: 0.8;
+}
+
+.thumb-container:hover .thumb-overlay-link {
+  opacity: 1;
+}
+
+.thumb-container:hover .thumb-overlay-edit {
+  opacity: 0.8;
+}
+
+.thumb-container:hover .thumb-overlay-delete {
+  opacity: 0.8;
+}
+
+.thumb-icon-edit {
+  color: white;
+  font-size: 15px;
+}
+
+.thumb-icon-delete {
+  color: white;
+  font-size: 15px;
+}
+
+.thumb-icon-play {
+  color: white;
+  font-size: 40px;
+}
+
+.thumb-link-text {
+  color: white;
+  font-size: 16px;
+  margin: auto;
+}
+
+.thumb-link-text:link {
+  text-decoration: none;
+}
+
+.thumb-icon-main-player {
+  color: white;
+  font-size: 80px;
+}
+
+.fa-play:hover {
+  color: orange;
+}
+
+.fa-stop:hover {
+  color: orange;
+}
+
+.fa-pause:hover {
+  color: orange;
+}
+
+.fa-forward:hover {
+  color: orange;
+}
+
+.fa-backward:hover {
+  color: orange;
+}
+
+.fa-play-circle:hover {
+  color: orange;
+}
+
+.fa-stop-circle:hover {
+  color: orange;
+}
+
+.fa-pause-circle:hover {
+  color: orange;
+}
+
+.fa-edit:hover {
+  color: orange;
+}
+
+.fa-trash-alt:hover {
+  color: orange;
+}
+
+.fa-download:hover {
+  color: lightgreen;
+}
+
+.thumb-link-text:hover {
+  color: orange;
+}
+
+
+.song-list-col{
+  display: flex;
+}
+
+.song-play{
+  text-align: left;
+  flex: 0 0 30px;
+}
+.song-track{
+  text-align: left;
+  flex: 0 0 30px;
+  color: gray;
+}
+.song-text{
+  text-align: left;
+  flex: 1 1 auto;
+}
+.song-text a {
+  text-decoration: none;
+  color: gray;
+}
+.song-time{
+  text-align: right;
+  flex: 0 0 80px;
+  color: gray;
+}
+.song-tag{
+  text-align: right;
+  flex: 0 0 30px;
+}
+.song-title{
+  text-align: left;
+  flex: 1 1 auto;
+}
+.song-artist{
+  text-align: right;
+  flex: 1 1 auto;
+  color: gray;
+}
+.text-playing{
+  color: lightgreen;
+}
+.text-playing a {
+  color: lightgreen;
+}
+
+.episode-list-col{
+  display: flex;
+}
+.episode-track{
+  text-align: left;
+  flex: 0 0 40px;
+  color: lightgreen;
+}
+.episode-date{
+  text-align: left;
+  flex: 0 0 250px;
+}
+.episode-date-down{
+  text-align: left;
+  flex: 0 0 250px;
+  color: lightgreen;
+}
+.episode-title{
+  text-align: left;
+  padding-left: 15px;
+  flex: 1 1 auto;
+}
+.episode-title-down{
+  text-align: left;
+  padding-left: 15px;
+  flex: 1 1 auto;
+  color: lightgreen;
+}
+.episode-icon{
+  text-align: center;
+  flex: 0 0 30px;
+}
+
+.episode-down-icon {
+  color: orange;
+}
+
+.player-controls{
+  display: flex;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.player-left-control{
+  flex: 0 0 30%;
+  text-align: right;
+}
+.player-center-control{
+  flex: 1 1 auto;
+}
+
+.player-right-control{
+  flex: 0 0 30%;
+  text-align: left;
+}
+
+.player-mid-control{
+  flex: 1 1 auto;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.player-mid-control a:hover {
+  color: lightgreen;
+  text-decoration: none;
+}
+
+.card-subtitle{
+  padding-right: 1px;
+  padding-left: 1px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.card-header a {
+  text-decoration: none;
+}
+
+.card-header a:hover {
+  color: orange;
+}
+
+.card-title a {
+  text-decoration: none;
+}
+
+.card-title a:hover {
+  color: orange;
+}
+
+.text-muted a {
+  text-decoration: none;
+  color: gray;
+}
+
+.text-muted a:hover {
+  color: orange;
+}
+
+.navbar-img {
+  width: 30px;
+  height: 30px;
+  opacity: 0.5;
+  border-radius: 5px;
+  padding: 0;
+}
+
+.navbar-img:hover {
+  opacity: 1;
+}
+
+.navbar-play-img {
+  width: 35px;
+  height: 35px;
+  opacity: 1;
+  border-radius: 5px;
+  padding: 0;
+}
+
+.navbar-custpadd {
+  padding-left: 9px;
+  padding-right: 9px;
+}
+

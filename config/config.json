@@ -1,0 +1,19 @@
+{
+  "project_root_dir" : "/home/pi/develop/radio-v2",
+  "project_db_dir" : "database",
+  "project_db_filename" : "radio.db",
+  "project_csv_dir" : "csv_files",
+  "default_mpd_client" : "rune-1",
+  "default_mpd_port" : 6600,
+  "mpd_servers" : [ { "name":"Oficina", "server":"rune-1" } , { "name":"Sala", "server":"rune-2" } ],
+  "podcast_feed_file" : ".podcast_feed.rss",
+  "downloaded_episodes_file" : ".downloaded_episodes.txt",
+  "playlist_dir" : "/Playlists",
+  "base_uri" : "USB/WD-500",
+  "csv_radios_table_file" : "csv_data/radios_table.csv",
+  "csv_artist_table_file" : "csv_data/artist_table.csv",
+  "csv_playlist_table_file" : "csv_data/playlist_table.csv",
+  "csv_podcast_table_file" : "csv_data/podcast_table.csv",
+  "artist_images_dir" : "app/static/images/artist",
+  "albums_images_dir" : "app/static/images/albums"
+}

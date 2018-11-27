@@ -1,0 +1,71 @@
+{% extends "web/base.html" %}
+
+{% block title %} Playlist {% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+<div class="col-player">
+<!--   <div class="bs-component"> -->
+
+    <div class="card text-white bg-dark mb-3">
+
+      {% if radio_player.loaded=='album' %}
+        <div class="card-body">
+          <h4 class="card-title"><a href="/web/artist/albums/{{radio_player.artist.id}}">{{radio_player.artist.name}}</a></h4>
+          <h5 class="card-subtitle text-muted">{{radio_player.album}}</h5>
+        </div>
+
+        <div class="card-body" style ="padding: 5px;">
+          <div class="thumb-container">
+            <img src="/static/images/albums/{{radio_player.artist.name}}/{{radio_player.album}}.png" class="thumb-image">
+          </div>
+        </div>
+
+      {% endif %}
+
+    </div>
+
+</div>
+
+<div class="col-grid">
+
+  <div class="bs-component">
+    <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+      <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+          {% for song in songs_list %}
+
+             <li class="list-group-item">
+               <div class="song-list-col">
+                 {% if radio_player.song_pos==song['pos'] %}
+                   <div class="song-play">
+                     <a href="/web/song/play/{{song['pos']}}" class="card-link"  style="color: lightgreen;"><i class="far fa-play-circle fa-lg"></i></a>
+                    </div>
+                    <div class="song-text" style="color: lightgreen;">{{song['title']}}</div>
+                    <div class="song-time" style="color: lightgreen;">{{song['time']}}</div>
+                  {% else %}
+                    <div class="song-play">
+                      <a href="/web/song/play/{{song['pos']}}" class="card-link"><i class="far fa-play-circle fa-lg"></i></a>
+                     </div>
+                     <div class="song-text">{{song['title']}}</div>
+                     <div class="song-time">{{song['time']}}</div>
+                  {% endif %}
+               </div>
+             </li>
+
+          {% endfor %}
+        </ul>
+
+    </div>
+   </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

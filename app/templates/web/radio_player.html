@@ -1,0 +1,99 @@
+{% extends "web/base.html" %}
+
+{% block title %} RadioPlayer {% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+<div class="col-player">
+<!--   <div class="bs-component"> -->
+
+    <div class="card text-white bg-primary mb-3">
+
+      {% if radio_player.loaded == 'radio' %}
+
+      <h3 class="card-header">{{radio_player.radio.name}}</h3>
+
+       <div class="card-body">
+         <h5 class="card-subtitle text-muted">{{radio_player.radio.country}} ({{radio_player.radio.style}})</h5>
+       </div>
+
+       <div class="card-body" style ="padding: 5px;">
+         <div class="thumb-container">
+           <img src="/static/images/radios/{{radio_player.radio.nickname}}.png" class="thumb-image">
+           <div class="thumb-overlay">
+             <div class="thumb-overlay-main-player">
+               {% if radio_player.state == 'play' %}
+                 <a href="/web/stop" class="thumb-icon-main-player" title="Stop"><i class="far fa-stop-circle fa-lg"></i></a>
+               {% else %}
+                 <a href="/web/play" class="thumb-icon-main-player" title="Play"><i class="far fa-play-circle fa-lg"></i></a>
+               {% endif %}
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <ul class="list-group list-group-flush">
+         <li class="list-group-item"><a target="blank" href="{{radio_player.radio.web_url}}" class="card-link">Web</a></li>
+         <li class="list-group-item"><a target="blank" href="{{radio_player.radio.twitter}}" class="card-link">Twitter</a></li>
+       </ul>
+
+       {% else %}
+
+       <div class="card-body" style ="padding: 5px;">
+         <div class="thumb-container">
+           <img src="/static/images/radios/empty.png" class="thumb-image">
+         </div>
+       </div>
+
+       {% endif %}
+
+    </div>
+<!--   </div> -->
+</div>
+
+<div class="col-grid">
+
+  <div class="bs-component">
+    <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+      <div class="card-body">
+        <div class="row">
+
+          {% for radio in radio_list %}
+
+          {% if (radio_player.loaded != 'radio') or (radio.nickname != radio_player.radio.nickname) %}
+
+          <div class="col-grid-element">
+              <div class="thumb-container">
+                <img src="/static/images/radios/{{radio.nickname}}.png" class="thumb-image">
+                <div class="thumb-overlay">
+                  <div class="thumb-overlay-play">
+                    <a href="/web/playradio/{{radio.nickname}}" class="thumb-icon-play" title="Play"><i class="far fa-play-circle fa-lg"></i></a>
+                  </div>
+                  <div class="thumb-overlay-edit">
+                    <a href="/radio/edit/{{radio.nickname}}" class="thumb-icon-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                  </div>
+                  <div class="thumb-overlay-delete">
+                    <a href="/radio/delete/{{radio.nickname}}" class="thumb-icon-delete" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                  </div>
+                </div>
+              </div>
+         </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+       </div>
+
+    </div>
+   </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

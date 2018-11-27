@@ -1,0 +1,32 @@
+{% extends "web/base.html" %}
+
+{% block title %} RadioPlayer {% endblock %}
+
+{% block body %}
+
+<div class="bs-component">
+
+  <div class="col-grid-full">
+
+    <div class="card text-white bg-dark mb-3" style="flex: 0 0 100%">
+
+      <h5 class="card-header">Styles</h5>
+
+      <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+          {% for style in radio_styles %}
+             <li class="list-group-item"><a href="/web/radio/style/{{style}}" class="card-link">{{style}}</a></li>
+          {% endfor %}
+        </ul>
+
+    </div>
+   </div>
+  </div>
+
+</div>
+
+
+<!-- Page -->
+
+{% endblock body %}

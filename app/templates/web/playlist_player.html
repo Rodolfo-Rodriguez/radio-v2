@@ -1,0 +1,62 @@
+{% extends "web/base.html" %}
+
+{% block title %} RadioPlayer {% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+<div class="col-player">
+<!--   <div class="bs-component"> -->
+
+    <div class="card text-white bg-dark mb-3">
+
+       {% if radio_player.loaded == 'playlist' %}
+
+       <div class="card-body">
+         <h4 class="card-title">{{radio_player.playlist}}</h4>
+       </div>
+
+       <div class="card-body" style ="padding: 5px;">
+         <div class="thumb-container">
+           <img src="/static/images/playlists/{{radio_player.playlist}}.png" class="thumb-image">
+           <div class="thumb-overlay">
+             <div class="thumb-overlay-main-player">
+               {% if radio_player.state == 'play' %}
+                 <a href="/stop" class="thumb-icon-main-player" title="Stop"><i class="far fa-stop-circle fa-lg"></i></a>
+               {% else %}
+                 <a href="/playlist/play/{{radio_player.playlist}}" class="thumb-icon-main-player" title="Play"><i class="far fa-play-circle fa-lg"></i></a>
+               {% endif %}
+             </div>
+           </div>
+         </div>
+       </div>
+
+       {% endif %}
+
+    </div>
+<!--   </div> -->
+</div>
+
+<div class="col-grid">
+
+  <div class="bs-component">
+    <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+      <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+          {% for song in radio_player.playlist_info() %}
+             <li class="list-group-item"><a href="/playlist/play/song/{{song['pos']}}" class="card-link"><i class="far fa-play-circle fa-lg"></i></a>  {{song['title']}}</li>
+          {% endfor %}
+        </ul>
+
+    </div>
+   </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

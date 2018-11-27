@@ -1,0 +1,54 @@
+{% extends "web/base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+<div class="row">
+   <div class="col-lg-10 offset-lg-1">
+     <div class="bs-component">
+       <form method="POST" action="/radio/edit_commit/{{radio.nickname}}">
+         <fieldset>
+           <legend>Edit Radio</legend>
+           <div class="form-group">
+             <label>Nickname</label>
+             <input type="text" class="form-control" name="nickname" value="{{radio.nickname}}">
+           </div>
+           <div class="form-group">
+             <label>Name</label>
+             <input type="text" class="form-control" name="name" value="{{radio.name}}">
+           </div>
+           <div class="form-group">
+             <label>URL</label>
+             <input type="text" class="form-control" name="url" value="{{radio.url}}">
+           </div>
+           <div class="form-group">
+             <label>Country</label>
+             <input type="text" class="form-control" name="country" value="{{radio.country}}">
+           </div>
+           <div class="form-group">
+             <label>Style</label>
+             <input type="text" class="form-control" name="style" value="{{radio.style}}">
+           </div>
+           <div class="form-group">
+             <label>Stars</label>
+             <input type="text" class="form-control" name="stars" value="{{radio.stars}}">
+           </div>
+           <div class="form-group">
+             <label>Web</label>
+             <input type="text" class="form-control" name="web_url" value="{{radio.web_url}}">
+           </div>
+           <div class="form-group">
+             <label>Twitter</label>
+             <input type="text" class="form-control" name="twitter" value="{{radio.twitter}}">
+           </div>
+         </fieldset>
+         <button type="submit" class="btn btn-primary">Edit Radio</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

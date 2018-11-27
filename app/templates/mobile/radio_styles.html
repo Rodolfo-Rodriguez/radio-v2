@@ -1,0 +1,27 @@
+{% extends "mobile/base.html" %}
+
+{% block title %} Radios {% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-grid">
+
+  <div class="mobile-cell">
+    <a href="/mobile">HOME</a>
+  </div>
+
+  {% for style in radio_styles %}
+
+  <div class="mobile-cell">
+    <a href="/mobile/radio/style/{{style}}">{{style}}</a>
+  </div>
+
+  {% endfor %}
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

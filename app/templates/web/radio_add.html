@@ -1,0 +1,42 @@
+{% extends "web/base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+<div class="row">
+   <div class="col-lg-10 offset-lg-1">
+     <div class="bs-component">
+       <form method="POST" action="/radio/add_commit">
+         <fieldset>
+           <legend>Add Radio</legend>
+           <div class="form-group">
+             <label>Nickname</label>
+             <input type="text" class="form-control" name="nickname">
+           </div>
+           <div class="form-group">
+             <label>Name</label>
+             <input type="text" class="form-control" name="name">
+           </div>
+           <div class="form-group">
+             <label>URL</label>
+             <input type="text" class="form-control" name="url">
+           </div>
+           <div class="form-group">
+             <label>Country</label>
+             <input type="text" class="form-control" name="country">
+           </div>
+           <div class="form-group">
+             <label>Style</label>
+             <input type="text" class="form-control" name="style">
+           </div>
+         </fieldset>
+         <button type="submit" class="btn btn-primary">Add Radio</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

@@ -1,0 +1,138 @@
+{% extends "web/base.html" %}
+
+{% block title %} Album {% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+<div class="col-player">
+<!--   <div class="bs-component"> -->
+
+    <div class="card text-white bg-dark mb-3">
+
+      <h3 class="card-header">{{podcast.name}}</h3>
+
+      <div class="card-body">
+         <h5 class="card-title"><a href="/web/podcast/country/{{podcast.country}}">{{podcast.country}}</a></h5>
+         <h5 class="card-title"><a href="/web/podcast/style/{{podcast.style}}">{{podcast.style}}</a></h5>
+      </div>
+
+       <div class="card-body" style ="padding: 5px;">
+         <div class="thumb-container">
+           <img src="/static/images/playlists/{{podcast.image}}" class="thumb-image">
+           <div class="thumb-overlay">
+               <div class="thumb-overlay-main-player">
+                   <a href="/web/podcast/load/{{podcast.id}}" class="thumb-icon-main-player" title="Play"><i class="far fa-play-circle fa-lg"></i></a>
+               </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="card-body">
+
+       {% if (radio_player.loaded=='podcast') and (radio_player.podcast.id==podcast.id) %}
+
+
+          <div class="player-controls">
+            <div class="player-mid-control" id="id_time">Time: {{radio_player.elapsed_time_str()}}</div>
+          </div>
+          <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" style="width: {{radio_player.play_progress()}};" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          
+          <div class="player-controls">
+            <div class="player-mid-control"><a href="/web/seekplus/30">+30s</a></div>
+            <div class="player-mid-control"><a href="/web/seekplus/60">+60s</a></div>
+            <div class="player-mid-control"><a href="/web/seekplus/300">+5m</a></div>
+            <div class="player-mid-control"><a href="/web/seekplus/900">+15m</a></div>
+          </div>
+          <div class="player-controls">
+            <div class="player-mid-control"><a href="/web/seekless/30">-30s</a></div>
+            <div class="player-mid-control"><a href="/web/seekless/60">-60s</a></div>
+            <div class="player-mid-control"><a href="/web/seekless/300">-5m</a></div>
+            <div class="player-mid-control"><a href="/web/seekless/900">-15m</a></div>
+          </div>
+
+       {% endif %}
+
+       <ul class="list-group list-group-flush">
+         <li class="list-group-item"><a target="blank" href="{{podcast.web_url}}" class="card-link">Web</a></li>
+         <li class="list-group-item"><a href="/web/podcast/feed/episodes/{{podcast.id}}" class="card-link">Check Feed</a></li>
+       </ul>
+ 
+      </div>
+
+      <div class="card-footer">
+        <p class="card-text text-right"><a class="card-link" href="/podcast/edit/{{podcast.id}}">Edit</a></p>
+      </div>
+
+    </div>
+
+<!--   </div> -->
+</div>
+
+<div class="col-grid">
+
+  <div class="bs-component">
+    <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+      <h5 class="card-header">Episodes</h5>
+      <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+          {% for song in songs_list %}
+
+             <li class="list-group-item">
+               <div class="episode-list-col">
+
+                 {% if (radio_player.loaded=='podcast') and (radio_player.podcast.id==podcast.id) %}
+                   
+                   {% if radio_player.song_pos==song['pos'] %}
+                     <div class="song-play">
+                      {% if radio_player.state=='play' %}
+                        <a href="/web/pause" class="card-link text-playing"><i class="far fa-pause-circle fa-lg"></i></a>
+                      {% else %}
+                        <a href="/web/play" class="card-link text-playing"><i class="far fa-play-circle fa-lg"></i></a>
+                      {% endif %}
+                     </div>
+                     <div class="song-text text-playing">{{song['title']}}</div>
+                     <div class="song-time text-playing">{{song['time']}}</div>
+                   {% else %}
+                     <div class="song-play">
+                      <a href="/web/podcast/play_song/{{podcast.id}}/{{song['pos']}}" class="card-link"><i class="far fa-play-circle fa-lg"></i></a>
+                     </div>
+                     <div class="song-text">{{song['title']}}</div>
+                     <div class="song-time">{{song['time']}}</div>
+                   {% endif %}
+                 
+                 {% else %}
+                   <div class="song-track">{{song['track']}}</div>
+                   <div class="song-text">{{song['title']}}</div>
+                   <div class="song-time">{{song['time']}}</div>
+                   <div class="song-tag"><a href="/podcast/edit_tag/{{podcast.id}}/{{song['track']}}"><i class="fas fa-edit"></i></a></div>
+                   <div class="song-tag"><a href="/podcast/delete_episode/{{podcast.id}}/{{song['track']}}"><i class="fas fa-trash-alt"></i></a></div>
+                 {% endif %}
+
+               </div>
+             </li>
+
+          {% endfor %}
+        </ul>
+
+    </div>
+   </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Page -->
+
+<!-- <script type="text/javascript">
+   setTimeout(function(){
+       // location.reload();
+   },10);
+</script>
+ -->
+
+{% endblock body %}

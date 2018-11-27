@@ -1,0 +1,27 @@
+{% extends "mobile/base.html" %}
+
+{% block title %} Radios {% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-grid">
+
+  <div class="mobile-cell">
+    <a href="/mobile">HOME</a>
+  </div>
+
+  {% for pl in radio_player.playlists %}
+
+  <div class="mobile-cell">
+    <a href="/mobile/playlist/songs/{{pl['playlist']}}"><img src="/static/images/playlists/{{pl['playlist']}}.png"></a>
+  </div>
+
+  {% endfor %}
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

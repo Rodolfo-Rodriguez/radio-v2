@@ -1,0 +1,49 @@
+{% extends "web/base.html" %}
+
+{% block title %} RadioPlayer {% endblock %}
+
+{% block body %}
+
+<div class="bs-component">
+
+<div class="col-grid-full">
+
+    <div class="card text-white bg-dark" style="flex: 0 0 100%">
+      <h5 class="card-header">{{title}}</h5>
+      <div class="card-body">
+        <div class="row">
+
+        {% for artist in artist_list %}
+
+         <div class="col-grid-element-full">
+
+             <div class="thumb-container">
+               <img src="/static/images/artist/{{artist.image}}" class="thumb-image">
+               <div class="thumb-overlay">
+                 <div class="thumb-overlay-link">
+                   <a href="/web/artist/albums/{{artist.id}}" class="thumb-link-text" title="Play">{{artist.name}}</a>
+                 </div>
+               </div>
+               <div class="thumb-overlay-edit">
+                 <a href="/artist/edit/{{artist.id}}" class="thumb-icon-edit" title="Edit"><i class="fas fa-edit fa-xs"></i></a>
+               </div>
+               <div class="thumb-overlay-delete">
+                 <a href="/artist/delete/{{artist.id}}" class="thumb-icon-delete" title="Delete"><i class="fas fa-trash-alt"></i></a>
+               </div>
+             </div>
+        
+        </div>
+
+        {% endfor %}
+
+       </div>
+
+    </div>
+   </div>
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

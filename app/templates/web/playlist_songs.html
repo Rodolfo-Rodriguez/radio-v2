@@ -1,0 +1,94 @@
+{% extends "web/base.html" %}
+
+{% block title %} Album {% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+<div class="col-player">
+<!--   <div class="bs-component"> -->
+
+    <div class="card text-white bg-dark mb-3">
+
+
+      <div class="card-body">
+         <h4 class="card-title">{{playlist.name}}</h4>     
+         <h6 class="card-title">{{playlist.description}}</h4>     
+      </div>
+
+       <div class="card-body" style ="padding: 5px;">
+         <div class="thumb-container">
+           <img src="/static/images/playlists/{{playlist.image}}" class="thumb-image">
+           <div class="thumb-overlay">
+             <div class="thumb-overlay-main-player">
+                 <a href="/web/playlist/load/{{playlist.id}}" class="thumb-icon-main-player" title="Play"><i class="far fa-play-circle fa-lg"></i></a>
+             </div>
+           </div>
+         </div>
+       </div>
+
+       {% if (radio_player.loaded=='playlist') and (radio_player.playlist==playlist.playlist) %}
+        <div class="card-body">
+          <h6 class="card-title">Time: {{radio_player.elapsed_time_str()}}</h6>
+          <h6 class="card-title"><a href="/web/seekplus/30">[+30s] </a><a href="/web/seekplus/60">[+1m] </a><a href="/web/seekplus/300">[+5m] </a><a href="/web/seekplus/900">[+15m]</a></h6>
+          <h6 class="card-title"><a href="/web/seekless/30">[-30s] </a><a href="/web/seekless/60">[-1m] </a><a href="/web/seekless/300">[-5m] </a><a href="/web/seekless/900">[-15m]</a></h6>
+        </div>
+       {% endif %}
+ 
+
+    </div>
+<!--   </div> -->
+</div>
+
+<div class="col-grid">
+
+  <div class="bs-component">
+    <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+      <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+          {% for song in songs_list %}
+
+             <li class="list-group-item">
+               <div class="song-list-col">
+
+                 {% if (radio_player.loaded=='playlist') and (radio_player.playlist==playlist.playlist) %}
+                   {% if radio_player.song_pos==song['pos'] %}
+                     <div class="song-play">
+                       <a href="/web/playlist/play_song/{{playlist.id}}/{{song['pos']}}" class="card-link text-playing"><i class="far fa-play-circle fa-lg"></i></a>
+                     </div>
+                     <div class="song-title text-playing">{{song['title']}}</div>
+                     <div class="song-artist text-playing">{{song['artist']}}</div>
+                     <div class="song-time text-playing">{{song['time']}}</div>
+                   {% else %}
+                     <div class="song-play">
+                      <a href="/web/playlist/play_song/{{playlist.id}}/{{song['pos']}}" class="card-link"><i class="far fa-play-circle fa-lg"></i></a>
+                     </div>
+                     <div class="song-title">{{song['title']}}</div>
+                     <div class="song-artist">{{song['artist']}}</div>
+                     <div class="song-time">{{song['time']}}</div>
+                   {% endif %}
+                 {% else %}
+                   <div class="song-track">{{song['track']}}</div>
+                   <div class="song-title">{{song['title']}}</div>
+                   <div class="song-artist">{{song['artist']}}</div>
+                   <div class="song-time">{{song['time']}}</div>
+                 {% endif %}
+
+               </div>
+             </li>
+
+          {% endfor %}
+        </ul>
+
+    </div>
+   </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

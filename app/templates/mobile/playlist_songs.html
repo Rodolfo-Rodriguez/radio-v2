@@ -1,0 +1,50 @@
+{% extends "mobile/base.html" %}
+
+{% block title %} Songs {% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-grid">
+
+  <div class="mobile-cell">
+    <a href="/mobile">HOME</a>
+  </div>
+
+  {% if (radio_player.state=='play') and (radio_player.loaded=='playlist') and (radio_player.playlist==playlist) %}
+    <div class="mobile-cell-icon">
+      <a href="/mobile/playlist/stop"><i class="far fa-stop-circle fa-lg"></i></a>
+    </div>
+  {% else %}
+    <div class="mobile-cell-icon">
+      <a href="/mobile/playlist/load/{{playlist}}"><i class="far fa-play-circle fa-lg"></i></a>
+    </div>
+  {% endif %}
+
+  <div class="mobile-cell">
+      <img src="/static/images/playlists/{{playlist}}.png">
+  </div>
+
+
+  {% for song in songs_list %}
+
+  <div class="mobile-song">
+    {% if (radio_player.loaded=='playlist') and (radio_player.playlist==playlist) %}
+      {% if radio_player.song_pos==song['pos'] %}
+        <a href="/mobile/playlist/play_song/{{song['pos']}}" style='color: lightgreen;'><i class="far fa-play-circle fa-lg"></i> {{song['title']}}</a>
+      {% else %}
+        <a href="/mobile/playlist/play_song/{{song['pos']}}"><i class="far fa-play-circle fa-lg"></i> {{song['title']}}</a>
+      {% endif %}
+    {% else %}
+      <div class="mobile-song-track">{{song['track']}}</div> <p>{{song['title']}}</p>
+    {% endif %}
+  </div>
+
+  {% endfor %}
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

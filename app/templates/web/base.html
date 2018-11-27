@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>{% block title %}{% endblock title %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="/static/icons/player.ico"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Slte CSS -->
+    <link rel="stylesheet" href="/static/css/slate/bootstrap.css" media="screen">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/custom.css" media="screen">
+
+    <!-- DataTables CSS -->
+    <link "https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <!-- Font Awsome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+  <div class="container" style="max-width: 1500px;">
+
+    <div class="bs-component">
+       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+         
+         <a class="navbar-brand" href="/">MPD</a>
+
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+         </button>
+
+         <div class="collapse navbar-collapse" id="navbarColor01">
+
+           <ul class="navbar-nav mr-auto">
+
+             <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">MPD Client <span class="caret"></span></a>
+               <div class="dropdown-menu" aria-labelledby="download">
+                 {% for server in radio_player.mpd_servers %}
+                   <a class="dropdown-item" href="/mpd_client/{{server['server']}}">{{server['name']}}</a>
+                 {% endfor %}
+               </div>
+             </li>
+
+             <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Radio <span class="caret"></span></a>
+               <div class="dropdown-menu" aria-labelledby="download">
+                 <a class="dropdown-item" href="/radio/add">Add Radio</a>
+                 <a class="dropdown-item" href="/radio/list">List Radios</a>
+                 <a class="dropdown-item" href="/web/radio/all">All Radios</a>
+                 <a class="dropdown-item" href="/web/radio/styles">Styles</a>
+                 <a class="dropdown-item" href="/web/radio/countries">Countries</a>
+               </div>
+             </li>
+
+             <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Artists <span class="caret"></span></a>
+               <div class="dropdown-menu" aria-labelledby="download">
+                 <a class="dropdown-item" href="/artist/add">Add Artist</a>
+                 <a class="dropdown-item" href="/web/artist/list">List Artist</a>
+                 <a class="dropdown-item" href="/web/artist/all">All Artist</a>
+                 <a class="dropdown-item" href="/web/artist/styles">Styles</a>
+                 <a class="dropdown-item" href="/web/artist/countries">Countries</a>
+               </div>
+             </li>
+
+             <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Playlist <span class="caret"></span></a>
+               <div class="dropdown-menu" aria-labelledby="download">
+                 <a class="dropdown-item" href="/playlist/add">Add Playlist</a>
+                 <a class="dropdown-item" href="/web/playlist/all">All Playlists</a>
+                 <a class="dropdown-item" href="/web/playlist/type">Type</a>
+               </div>
+             </li>
+
+             <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Podcasts <span class="caret"></span></a>
+               <div class="dropdown-menu" aria-labelledby="download">
+                 <a class="dropdown-item" href="/podcast/add">Add Podcast</a>
+                 <a class="dropdown-item" href="/web/podcast/all">All Podcast</a>
+                 <a class="dropdown-item" href="/web/podcast/styles">Styles</a>
+                 <a class="dropdown-item" href="/web/podcast/countries">Countries</a>
+               </div>
+             </li>
+
+           </ul>
+
+           <ul class="navbar-nav ml-auto">
+              <a class="navbar-brand navbar-custpadd" href="/web/playradio_menu/delsol"><img src="/static/images/radios/delsol.png" class="navbar-img"></a>
+              <a class="navbar-brand navbar-custpadd" href="/web/playradio_menu/oceano"><img src="/static/images/radios/oceano.png" class="navbar-img"></a>
+              <a class="navbar-brand navbar-custpadd" href="/web/previous"><i class="fas fa-backward fa-lg"></i></a>
+              <a class="navbar-brand navbar-custpadd" href="/web/stop"><i class="fas fa-stop fa-lg"></i></a>
+              <a class="navbar-brand navbar-custpadd" href="/web/play"><i class="fas fa-play fa-lg"></i></a>
+              <a class="navbar-brand navbar-custpadd" href="/web/pause"><i class="fas fa-pause fa-lg"></i></a>
+              <a class="navbar-brand navbar-custpadd" href="/web/next"><i class="fas fa-forward fa-lg"></i></a>
+              <a class="navbar-brand navbar-custpadd" href="/"><img src="{{radio_player.player_img}}"" class="navbar-play-img"></a>
+           </ul>
+
+         </div>
+
+       </nav>
+
+     </div>
+
+  {% block body %}
+  {% endblock body %}
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+  <!-- DataTables JavaScript -->
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+  <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+  <script>
+      $(document).ready(function() {
+          $('#dataTables-radios').DataTable({
+              responsive: true,
+              stateSave: true,
+              "lengthMenu": [ 50, 100 ]
+          });
+      });
+
+
+      $(document).ready( function () {
+        $('#dataTable-artist').DataTable({
+              responsive: true,
+              stateSave: true,
+              "lengthMenu": [ 50, 100 ]
+        });
+      });
+  
+      
+      $('.episode-icon').click(function(){
+        icon = $(this).find("i");
+        icon.toggleClass("fas fa-download fas fa-spinner fa-spin episode-down-icon")
+      })
+
+  </script>
+
+
+</body>

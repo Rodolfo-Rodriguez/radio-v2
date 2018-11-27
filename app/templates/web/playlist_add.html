@@ -1,0 +1,34 @@
+{% extends "web/base.html" %}
+
+{% block title %} Add Playlist {% endblock %}
+
+{% block body %}
+
+<div class="row">
+   <div class="col-lg-10 offset-lg-1">
+     <div class="bs-component">
+       <form method="POST" action="/playlist/add_commit">
+         <fieldset>
+           <legend>Add Playlist</legend>
+           <div class="form-group">
+             <label>Name</label>
+             <input type="text" class="form-control" name="name">
+           </div>
+           <div class="form-group">
+             <label>Image</label>
+             <input type="text" class="form-control" name="image">
+           </div>
+           <div class="form-group">
+             <label>Playlist</label>
+             <input type="text" class="form-control" name="playlist">
+           </div>
+         </fieldset>
+         <button type="submit" class="btn btn-primary">Add Playlist</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

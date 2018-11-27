@@ -1,0 +1,26 @@
+{% extends "web/base.html" %}
+
+{% block title %} Edit Tag {% endblock %}
+
+{% block body %}
+
+<div class="row">
+   <div class="col-lg-10 offset-lg-1">
+     <div class="bs-component">
+       <form method="POST" action="/podcast/edit_tag_commit/{{podcast.id}}/{{track}}">
+         <fieldset>
+           <legend>Edit Tag</legend>
+           <div class="form-group">
+             <label>Title</label>
+             <input type="text" class="form-control" name="title" value="{{title}}">
+           </div>
+         </fieldset>
+         <button type="submit" class="btn btn-primary">Edit Tag</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Page -->
+
+{% endblock body %}
