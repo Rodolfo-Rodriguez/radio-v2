@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} Radio Image Edit {% endblock %}
+
+{% block body %}
+
+<div class="row">
+   <div class="col-lg-10 offset-lg-1">
+     <div class="bs-component">
+       <form method="POST" enctype="multipart/form-data">
+
+        {{form.csrf_token}}
+         
+         <fieldset>
+           <legend>Edit Image</legend>
+
+           <div class="form-group">{{form.image_file(class="form-control")}}</div>
+
+         </fieldset>
+
+         {{form.submit(class="btn btn-primary")}}
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

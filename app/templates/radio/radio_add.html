@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+<div class="row">
+   <div class="col-lg-10 offset-lg-1">
+     <div class="bs-component">
+       <form method="POST" enctype="multipart/form-data">
+
+        {{form.csrf_token}}
+         
+         <fieldset>
+           <legend>Add Radio</legend>
+         
+           <div class="form-group">{{form.name.label}} {{form.name(class="form-control")}}</div>
+           <div class="form-group">{{form.image_file.label}} {{form.image_file(class="form-control")}}</div>
+           <div class="form-group">{{form.url.label}} {{form.url(class="form-control")}}</div>
+           <div class="form-group">{{form.country.label}} {{form.country(class="form-control")}}</div>
+           <div class="form-group">{{form.style.label}} {{form.style(class="form-control")}}</div>
+
+         </fieldset>
+
+         {{form.submit(class="btn btn-primary")}}
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

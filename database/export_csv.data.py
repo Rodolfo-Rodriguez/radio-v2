@@ -1,7 +1,10 @@
 #!/usr/bin/python
 
-import sys
-sys.path.append('/home/pi/develop/radio-v2')
+import sys, os
+
+base_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+
+sys.path.append(base_path)
 
 from app import db_manager
 

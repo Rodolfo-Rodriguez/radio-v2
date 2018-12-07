@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block title %} RadioPlayer {% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+<div class="col-player">
+<!--   <div class="bs-component"> -->
+
+    <div class="card text-white bg-primary mb-3">
+
+ 
+      <h5 class="card-header">{{radio.name}}</h5>
+
+       <div class="card-body">
+         <p class="card-text">{{radio.description}}</p>
+       </div>
+
+
+       <div class="card-body" style ="padding: 5px;">
+         <div class="thumb-container">
+           <img src="/static/images/radios/{{radio.image}}" class="thumb-image">
+           <div class="thumb-overlay">
+             <div class="thumb-overlay-main-player">
+               {% if radio_player.radio.id != radio.id %}
+                 <a href="{{url_for('radio.playradio',id=radio.id)}}" class="thumb-icon-main-player" title="Play"><i class="far fa-play-circle fa-lg"></i></a>
+               {% endif %}
+             </div>
+
+             <div class="thumb-overlay-fav">
+               {% if radio.fav %}
+                  <a href="{{url_for('radio.radio_unfav',id=radio.id)}}"><i class="fas fa-star"></i></a>           
+               {% else %}
+                  <a href="{{url_for('radio.radio_fav',id=radio.id)}}"><i class="far fa-star"></i></a>            
+               {% endif %}
+             </div>
+           
+           </div>
+         </div>
+       </div>
+
+       <div class="card-body">
+        <ul class="list-group list-group-flush">
+
+         <li class="list-group-item text-center" style="font-size: 1.6rem;">
+         {% for star in range(0,radio.stars) %}
+           <a href="/radio/stars/{{radio.id}}/{{star + 1}}"><i class="fas fa-star"></i></a>
+         {% endfor %}
+         {% for star in range(radio.stars,5) %}
+           <a href="/radio/stars/{{radio.id}}/{{star + 1}}"><i class="far fa-star"></i></a>
+         {% endfor %}
+         </li>
+        
+        </ul>
+       </div>
+
+       <div class="card-footer">
+        <p class="card-text text-right">
+          <a class="card-link" href="/radio/edit_image/{{radio.id}}">Edit Image</a>
+        </p>
+       </div>
+
+    </div>
+<!--   </div> -->
+</div>
+
+
+<div class="col-info">
+
+  <div class="bs-component">
+    <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+      <h5 class="card-header">Info</h5>
+      <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+             <li class="list-group-item">
+               <div class="info-list-items">
+                  <div class="info-title"><strong>ID</strong></div>
+                  <div class="info-text">{{radio.id}}</div>
+               </div>
+             </li>
+
+             <li class="list-group-item">
+               <div class="info-list-items">
+                 <div class="info-title"><strong>URL</strong></div>
+                 <div class="info-text">{{radio.url}}</div>
+               </div>
+             </li>
+             
+             <li class="list-group-item">
+               <div class="info-list-items">
+                 <div class="info-title"><strong>Country</strong></div>
+                 <div class="info-text"><a href="/radio/country/{{radio.country}}" class="card-link"><strong>{{radio.country}}</strong></a></div>
+               </div>
+             </li>
+
+             <li class="list-group-item">
+               <div class="info-list-items">
+                 <div class="info-title"><strong>Style</strong></div>
+                 <div class="info-text"><a href="/radio/style/{{radio.style}}" class="card-link"><strong>{{radio.style}}</strong></a></div>
+               </div>
+             </li>
+
+             <li class="list-group-item">
+               <div class="info-list-items">
+                 <div class="info-title"><strong>Plays</strong></div>
+                 <div class="info-text">{{radio.num_plays}}</div>
+               </div>
+             </li>
+
+        </ul>
+
+    </div>
+
+    <div class="card-footer">
+      <p class="card-text text-right">
+        <a class="card-link" href="/radio/edit/{{radio.id}}">Edit</a>
+      </p>
+    </div>
+
+   </div>
+  </div>
+</div>
+
+
+<div class="col-links">
+
+  <div class="bs-component">
+    <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+      <h5 class="card-header">Social</h5>
+      <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+
+               <li class="list-group-item text-center">
+                 {% for link in radio.radio_link_list %}
+                  {% if link.name in social_sites %}
+                   <a target="blank" href="{{link.url}}" class="card-link" style="font-size: 1.5rem;"><i class="fab fa-{{link.name}} "></i></a>
+                  {% endif %}
+                 {% endfor %}
+              </li>
+
+        </ul>
+
+    </div>
+
+      <h5 class="card-header">Links</h5>
+      <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+
+             {% for link in radio.radio_link_list %}
+              {% if not(link.name in social_sites) %}
+               <li class="list-group-item">
+                <div class="episode-list-col">
+                  <div class="song-text"><a target="blank" href="{{link.url}}" class="card-link"><strong>{{link.name}}</strong></a></div>
+                  <div class="song-tag"><a href="/radio/edit_link/{{link.id}}"><i class="fas fa-edit"></i></a></div>
+                  <div class="song-tag"><a href="/radio/delete_link/{{link.id}}"><i class="fas fa-trash-alt"></i></a></div>
+                </div>
+              </li>
+              {% endif %}
+             {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <div class="card-footer">
+      <p class="card-text text-right">
+            <a class="card-link" href="/radio/add_link/{{radio.id}}">Add Link</a>
+      </p>
+    </div>
+
+   </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

@@ -2,7 +2,7 @@
 
 from mpd import MPDClient
 
-mpd_client = 'rune-2'
+mpd_client = 'rune-1'
 mpd_port = '6600'
 
 client = MPDClient()

@@ -1,6 +1,12 @@
 #!/usr/bin/python2
 
 import sys, os
+
+base_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+sys.path.append(base_path)
+
+from app import CONFIG
+
 import mutagen
 from mutagen.mp4 import MP4, MP4Cover
 from mutagen import File
@@ -15,7 +21,7 @@ skip_dirs = ['.AppleDouble']
 
 artist_dir = sys.argv[1]
 
-dest_dir = '/home/pi/develop/radio-v2/app/static/images/albums'
+dest_dir = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_ALBUMS_IMG_DIR)
 
 audio_files = []
 
@@ -39,7 +45,7 @@ for file in audio_files:
 			artwork = audio['covr'][0]
 			artwork_find = True
 
-		cover_filename = dest_dir + '/' + artist + '/' + album + '.png'
+		cover_filename = os.path.join(dest_dir, artist, album + '.png')
 		print '[MP4] --> ' + artist + '/' + album + '.png'
 
 	elif file.endswith('mp3'):
@@ -49,11 +55,11 @@ for file in audio_files:
 		artwork = audio['APIC:'].data
 		artwork_find = True
 
-		cover_filename = dest_dir + '/' + str(artist) + '/' + str(album) + '.png'
+		cover_filename = os.path.join(dest_dir, str(artist), str(album) + '.png')
 		print '[MP3] --> ' + str(artist) + '/' + str(album) + '.png'
 	
 	
-	album_dir = dest_dir + '/' + str(artist)
+	album_dir = os.path.join(dest_dir, str(artist))
 	if not(os.path.exists(album_dir)):
 		os.mkdir(album_dir)
         

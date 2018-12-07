@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %} Album {% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+<div class="col-player">
+<!--   <div class="bs-component"> -->
+
+    <div class="card text-white bg-dark mb-3">
+
+      <h5 class="card-header">{{playlist.name}}</h5>
+
+      <div class="card-body">
+         <p class="card-text">{{playlist.description}}</p>     
+      </div>
+
+       <div class="card-body" style ="padding: 5px;">
+         <div class="thumb-container">
+           <img src="/static/images/playlists/{{playlist.image}}" class="thumb-image">
+           <div class="thumb-overlay">
+             <div class="thumb-overlay-main-player">
+                 <a href="{{url_for('playlist.playlist_load',id=playlist.id)}}" class="thumb-icon-main-player" title="Play"><i class="far fa-play-circle fa-lg"></i></a>
+             </div>
+           </div>
+         </div>
+       </div> 
+
+    </div>
+<!--   </div> -->
+</div>
+
+<div class="col-grid">
+
+  <div class="bs-component">
+    <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+      <h5 class="card-header">Songs</h5>
+      <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+          {% for song in songs_list %}
+
+             <li class="list-group-item">
+               <div class="song-list-col">
+
+                 {% if (radio_player.loaded=='playlist') and (radio_player.playlist.id==playlist.id) %}
+
+                   {% if radio_player.song_pos==song['pos'] %}
+                     <div class="song-play">
+                       <a href="{{url_for('playlist.playlist_play_song', id=playlist.id, pos=song['pos'])}}" class="card-link text-playing"><i class="far fa-play-circle fa-lg"></i></a>
+                     </div>
+                     <div class="song-title text-playing">{{song['title']}}</div>
+                     <div class="song-artist text-playing">{{song['artist']}}</div>
+                     <div class="song-time text-playing">{{song['time']}}</div>
+                   {% else %}
+                     <div class="song-play">
+                      <a href="{{url_for('playlist.playlist_play_song', id=playlist.id, pos=song['pos'])}}" class="card-link"><i class="far fa-play-circle fa-lg"></i></a>
+                     </div>
+                     <div class="song-title">{{song['title']}}</div>
+                     <div class="song-artist">{{song['artist']}}</div>
+                     <div class="song-time">{{song['time']}}</div>
+                   {% endif %}
+                 {% else %}
+                   <div class="song-track">{{song['track']}}</div>
+                   <div class="song-title">{{song['title']}}</div>
+                   <div class="song-artist">{{song['artist']}}</div>
+                   <div class="song-time">{{song['time']}}</div>
+                 {% endif %}
+
+               </div>
+             </li>
+
+          {% endfor %}
+        </ul>
+
+    </div>
+   </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

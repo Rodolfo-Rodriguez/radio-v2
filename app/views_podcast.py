@@ -5,10 +5,11 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-podcast = Blueprint('podcast', __name__)
+podcast = Blueprint('podcast', __name__, template_folder='templates/podcast')
 
-from .models import Podcast
-from . import db, radio_player
+from .models import Podcast, Podcast_Link
+from . import db, radio_player, CONFIG
+from .forms import ImageForm, LinkForm, PodcastForm, TagForm
 
 from sqlalchemy import desc
 
@@ -16,82 +17,78 @@ from radio import RadioPlayer
 from podcast import PodcastInfo
 
 ###########################################################################################
-# Podcast
+# Podcast List and Load
 ###########################################################################################
 
 # ---> All Podcasts
-@podcast.route('/<client>/podcast/all', methods=['GET'])
-def podcast_all(client):
+@podcast.route('/podcast/all', methods=['GET'])
+def podcast_all():
 
     podcast_list = Podcast.query.order_by(Podcast.priority).all()
 
-    session['last_url'] = url_for('podcast.podcast_all',client=client)
+    session['last_url'] = url_for('podcast.podcast_all')
 
-    template_page = client + '/podcast_all.html'
+    template_page = 'podcast_grid.html'
 
-    return render_template(template_page,podcast_list=podcast_list,radio_player=radio_player,title='All Podcasts')
-
+    return render_template(template_page, podcast_list=podcast_list, radio_player=radio_player, title='All Podcasts')
 
 # ---> Styles
-@podcast.route('/<client>/podcast/styles', methods=['GET'])
-def podcast_styles(client):
+@podcast.route('/podcast/styles', methods=['GET'])
+def podcast_styles():
 
     podcast_list = db.session.query(Podcast.style).distinct()
-    podcast_styles = []
-    for podcast in podcast_list:
-        if (podcast.style != ''):
-            podcast_styles.append(podcast.style)
+    podcast_styles = [ podcast.style for podcast in podcast_list if podcast.style != '' ]
+    podcast_styles.sort()
 
-    session['last_url'] = url_for('podcast.podcast_styles',client=client)
+    session['last_url'] = url_for('podcast.podcast_styles')
 
-    template_page = client + '/podcast_styles.html'
+    template_page = 'podcast_styles.html'
 
-    return render_template(template_page,podcast_styles=podcast_styles,radio_player=radio_player)
+    return render_template(template_page, podcast_styles=podcast_styles, radio_player=radio_player)
 
-# ---> Style
-@podcast.route('/<client>/podcast/style/<style>', methods=['GET'])
-def podcast_style(client,style):
+@podcast.route('/podcast/style/<style>', methods=['GET'])
+def podcast_style(style):
 
     podcast_list = Podcast.query.filter(Podcast.style==style)
 
-    session['last_url'] = url_for('podcast.podcast_style',client=client,style=style)
+    session['last_url'] = url_for('podcast.podcast_style', style=style)
 
-    template_page = client + '/podcast_all.html'
+    template_page = 'podcast_grid.html'
 
-    return render_template(template_page,podcast_list=podcast_list,radio_player=radio_player,title=style)
-
+    return render_template(template_page, podcast_list=podcast_list, radio_player=radio_player, title=style)
 
 # ---> Countries
-@podcast.route('/<client>/podcast/countries', methods=['GET'])
-def podcast_countries(client):
+@podcast.route('/podcast/countries', methods=['GET'])
+def podcast_countries():
 
     podcast_list = db.session.query(Podcast.country).distinct()
-    podcast_countries = []
-    for podcast in podcast_list:
-        if (podcast.country != ''):
-            podcast_countries.append(podcast.country)
+    podcast_countries = [ podcast.country for podcast in podcast_list if podcast.country != '' ]
+    podcast_countries.sort()
 
-    session['last_url'] = url_for('podcast.podcast_countries',client=client)
+    session['last_url'] = url_for('podcast.podcast_countries')
 
-    template_page = client + '/podcast_countries.html'
+    template_page = 'podcast_countries.html'
 
     return render_template(template_page,podcast_countries=podcast_countries,radio_player=radio_player)
 
-# ---> Country
-@podcast.route('/<client>/podcast/country/<country>', methods=['GET'])
-def podcast_country(client,country):
+@podcast.route('/podcast/country/<country>', methods=['GET'])
+def podcast_country(country):
 
     podcast_list = Podcast.query.filter(Podcast.country==country)
 
-    session['last_url'] = url_for('podcast.podcast_country',client=client,country=country)
+    session['last_url'] = url_for('podcast.podcast_country',country=country)
 
-    template_page = client + '/podcast_all.html'
+    template_page = 'podcast_grid.html'
 
-    return render_template(template_page,podcast_list=podcast_list,radio_player=radio_player,title=country)
+    return render_template(template_page, podcast_list=podcast_list, radio_player=radio_player, title=country)
 
-# ---> Podcast Episodes
-@podcast.route('/<client>/podcast/episodes/<id>', methods=['GET'])
-def podcast_episodes(client,id):
+###########################################################################################
+# Feeds, Episodes
+###########################################################################################
+
+# ---> Podcast Show
+@podcast.route('/podcast/show/<id>', methods=['GET'])
+def podcast_show(id):
 
     podcast = Podcast.query.filter_by(id=id).first()
 
@@ -99,137 +96,16 @@ def podcast_episodes(client,id):
 
     songs_list = radio_player.playlist_songs(playlist)
 
-    session['last_url'] = url_for('podcast.podcast_episodes',client=client,id=id)
+    session['last_url'] = url_for('podcast.podcast_show', id=id)
 
-    template_page = client + '/podcast_episodes.html'
+    template_page = 'podcast_show.html'
 
-    return render_template(template_page,podcast=podcast,songs_list=songs_list,radio_player=radio_player)
-
-
-# ---> Feed Episodes
-@podcast.route('/<client>/podcast/feed/episodes/<id>', methods=['GET'])
-def podcast_feed_episodes(client,id):
-
-    podcast = Podcast.query.filter_by(id=id).first()
-    pod_info = PodcastInfo(podcast)
-    pod_info.update_items_list()
-    
-    episodes_list = pod_info.episode_list()
-
-    session['last_url'] = url_for('podcast.podcast_feed_episodes',client=client,id=id)
-
-    template_page = client + '/podcast_feed_episodes.html'
-
-    return render_template(template_page,podcast=podcast,episodes_list=episodes_list,radio_player=radio_player)
+    return render_template(template_page,podcast=podcast,songs_list=songs_list,radio_player=radio_player, social_sites=CONFIG.SOCIAL_SITES)
 
 
-# ---> Download Episodes
-@podcast.route('/<client>/podcast/download/episode/<id>/<track_num>', methods=['GET'])
-def podcast_download_episode(client,id,track_num):
-
-    podcast = Podcast.query.filter_by(id=id).first()
-    pod_info = PodcastInfo(podcast)    
-    pod_info.download_episode(track_num)
-
-    redirect_page = url_for('podcast.podcast_episodes',client=client,id=id)
-
-    session['last_url'] = redirect_page
-
-    return redirect(redirect_page)
-
-# ---> Podcast Add
-@podcast.route('/podcast/add', methods=['GET', 'POST'])
-def podcast_add():
-    return render_template('web/podcast_add.html',radio_player=radio_player)
-
-# ---> Podcast Add Commit
-@podcast.route('/podcast/add_commit', methods=['GET', 'POST'])
-def podcast_add_commit():
-
-    name = request.form.get("name")
-    image = request.form.get("image")
-    playlist = request.form.get("playlist")
-    pod_dir = request.form.get("pod_dir")
-
-    podcast = Podcast(name=name,image=image,playlist=playlist,pod_dir=pod_dir)
-
-    db.session.add(podcast)
-    db.session.commit()
-
-    pod_info = PodcastInfo(podcast)
-    pod_info.create_init_files()
-
-    return redirect('/web/podcast/all')
-
-# ---> Podcast Edit
-@podcast.route('/podcast/edit/<id>', methods=['GET'])
-def podcast_edit(id):
-
-    podcast = Podcast.query.filter_by(id=id).first()
-
-    session['last_url'] = url_for('podcast.podcast_edit',id=id)
-
-    return render_template('web/podcast_edit.html',podcast=podcast,radio_player=radio_player)
-
-# ---> Podcast Edit Commit
-@podcast.route('/podcast/edit_commit/<id>', methods=['GET', 'POST'])
-def podcast_edit_commit(id):
-    podcast = Podcast.query.filter_by(id=id).first()
-
-    podcast.name = request.form.get("name")
-    podcast.image = request.form.get("image")
-    podcast.playlist = request.form.get("playlist")
-    podcast.country = request.form.get("country")
-    podcast.description = request.form.get("description")
-    podcast.style = request.form.get("style")
-    podcast.stars = request.form.get("stars")
-    podcast.web_url = request.form.get("web_url")
-    podcast.feed_url = request.form.get("feed_url")
-    podcast.pod_dir = request.form.get("pod_dir")
-    podcast.feed_filter = request.form.get("feed_filter")
-    podcast.publisher = request.form.get("publisher")
-    podcast.priority = request.form.get("priority")
-
-    db.session.commit()
-
-    redirect_page = url_for('podcast.podcast_episodes',client='web',id=id)
-
-    session['last_url'] = redirect_page
-
-    return redirect(redirect_page)
-
-@podcast.route('/podcast/delete/<id>', methods=['GET'])
-def podcast_delete(id):
-    podcast = Podcast.query.filter_by(id=id).first()
-    db.session.delete(podcast)
-    db.session.commit()
-
-    return redirect('/web/podcast/all')
-
-
-@podcast.route('/podcast/edit_tag/<id>/<track>', methods=['GET'])
-def podcast_edit_tag(id,track):
-    podcast = Podcast.query.filter_by(id=id).first()
-    pod_info = PodcastInfo(podcast)
-    [title, artist] = pod_info.file_tags(int(track))
-
-    return render_template('web/podcast_edit_tag.html',podcast=podcast,title=title,artist=artist,track=track,radio_player=radio_player)
-
-
-@podcast.route('/podcast/edit_tag_commit/<id>/<track>', methods=['GET', 'POST'])
-def podcast_edit_tag_commit(id,track):
-    podcast = Podcast.query.filter_by(id=id).first()
-    pod_info = PodcastInfo(podcast)
-
-    title = request.form.get("title")
-
-    pod_info.write_file_tags(int(track),title)
-
-    return redirect('/web/podcast/episodes/' + id)
-
-
-@podcast.route('/<client>/podcast/load/<id>', methods=['GET'])
-def podcast_load(client,id):
+# ---> Podcast Load
+@podcast.route('/podcast/load/<id>', methods=['GET'])
+def podcast_load(id):
 
     podcast = Podcast.query.filter_by(id=id).first()
 
@@ -237,30 +113,283 @@ def podcast_load(client,id):
 
     radio_player.load_podcast(podcast)
 
-    template_page = client + '/podcast_episodes.html'
+    session['last_url'] = url_for('podcast.podcast_show',id=id)
 
-    return render_template(template_page,podcast=podcast,songs_list=songs_list,radio_player=radio_player)
+    template_page = 'podcast_show.html'
+
+    return render_template(template_page,podcast=podcast,songs_list=songs_list,radio_player=radio_player, social_sites=CONFIG.SOCIAL_SITES)
 
 
-@podcast.route('/<client>/podcast/play_song/<id>/<pos>', methods=['GET'])
-def podcast_play_song(client,id,pos):
+# ---> Feed Episodes
+@podcast.route('/podcast/feed/episodes/<id>', methods=['GET'])
+def podcast_feed_episodes(id):
 
     podcast = Podcast.query.filter_by(id=id).first()
+    pod_info = PodcastInfo(podcast)
+    pod_info.update_items_list()
+    
+    episodes_list = pod_info.episode_list()
 
-    radio_player.play_song(pos)
+    session['last_url'] = url_for('podcast.podcast_feed_episodes', id=id)
 
-    songs_list = radio_player.playlist_songs(podcast.playlist)
+    template_page = 'podcast_feed_episodes.html'
 
-    template_page = client + '/podcast_episodes.html'
-
-    return render_template(template_page,podcast=podcast,songs_list=songs_list,radio_player=radio_player)
+    return render_template(template_page,podcast=podcast,episodes_list=episodes_list,radio_player=radio_player)
 
 
+# ---> Download Episodes
+@podcast.route('/podcast/download/episode/<id>/<track_num>', methods=['GET'])
+def podcast_download_episode(id,track_num):
+
+    podcast = Podcast.query.filter_by(id=id).first()
+    pod_info = PodcastInfo(podcast)    
+    pod_info.download_episode(track_num)
+
+    redirect_page = url_for('podcast.podcast_show', id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+
+# ---> Delete Episode
 @podcast.route('/podcast/delete_episode/<id>/<track>', methods=['GET', 'POST'])
 def podcast_delete_episode(id,track):
+    
     podcast = Podcast.query.filter_by(id=id).first()
     pod_info = PodcastInfo(podcast)
 
     pod_info.delete_episode(int(track))
 
-    return redirect('/web/podcast/episodes/' + id)
+    redirect_page = url_for('podcast.podcast_show', id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+
+###########################################################################################
+# Podcast Add, Edit, Del
+###########################################################################################
+
+# ---> Podcast Add
+@podcast.route('/podcast/add', methods=['GET', 'POST'])
+def podcast_add():
+
+    form = PodcastForm()
+    
+    if form.validate_on_submit():
+
+        name = form.name.data
+        image = form.image.data
+        playlist = form.playlist.data
+        pod_dir = form.pod_dir.data
+
+        stars = 1
+        fav = False
+
+        podcast = Podcast(name=name,
+                        image=image,
+                        playlist=playlist,
+                        pod_dir=pod_dir,
+                        stars=stars,
+                        fav=fav)
+
+        db.session.add(podcast)
+        db.session.commit()
+
+        pod_info = PodcastInfo(podcast)
+        pod_info.create_init_files()
+
+        redirect_page = url_for('podcast.podcast_show',id=podcast.id)
+
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+    session['last_url'] = url_for('podcast.podcast_add')
+
+    template_page = 'podcast_add.html'
+
+    return render_template(template_page, form=form, radio_player=radio_player)
+
+
+# ---> Podcast Edit
+@podcast.route('/podcast/edit/<id>', methods=['GET', 'POST'])
+def podcast_edit(id):
+
+    podcast = Podcast.query.filter_by(id=id).first()
+
+    form = PodcastForm()
+    
+    if form.validate_on_submit():
+
+        podcast.name = form.name.data
+        podcast.image = form.image.data
+        podcast.playlist = form.playlist.data
+        podcast.country = form.country.data
+        podcast.description = form.description.data
+        podcast.style = form.style.data
+        podcast.feed_url = form.feed_url.data
+        podcast.pod_dir = form.pod_dir.data
+        podcast.feed_filter = form.feed_filter.data
+        podcast.publisher = form.publisher.data
+        podcast.priority = form.priority.data
+
+        db.session.commit()
+
+        redirect_page = url_for('podcast.podcast_show',id=id)
+
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+
+    form.name.data = podcast.name
+    form.image.data = podcast.image 
+    form.playlist.data = podcast.playlist
+    form.country.data = podcast.country
+    form.description.data = podcast.description 
+    form.style.data = podcast.style 
+    form.feed_url.data = podcast.feed_url 
+    form.pod_dir.data = podcast.pod_dir 
+    form.feed_filter.data = podcast.feed_filter 
+    form.publisher.data = podcast.publisher 
+    form.priority.data = podcast.priority 
+
+    session['last_url'] = url_for('podcast.podcast_edit',id=id)
+
+    template_page = 'podcast_edit.html'
+
+    return render_template(template_page,form=form,radio_player=radio_player)
+
+
+# ---> Podcast Delete
+@podcast.route('/podcast/delete/<id>', methods=['GET'])
+def podcast_delete(id):
+    podcast = Podcast.query.filter_by(id=id).first()
+    db.session.delete(podcast)
+    db.session.commit()
+
+    redirect_page = url_for('podcast.podcast_all')
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+###########################################################################################
+# Tag Edit
+###########################################################################################
+
+# ---> Podcast Edit Tag
+@podcast.route('/podcast/edit_tag/<id>/<track>', methods=['GET', 'POST'])
+def podcast_edit_tag(id,track):
+
+    podcast = Podcast.query.filter_by(id=id).first()
+    pod_info = PodcastInfo(podcast)
+    [title, artist] = pod_info.file_tags(int(track))
+
+    form = TagForm()
+
+    if form.validate_on_submit():
+
+        title = form.title.data
+
+        pod_info.write_file_tags(int(track),title)
+
+        redirect_page = url_for('podcast.podcast_show', id=id)
+
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+
+    form.title.data = title
+
+    session['last_url'] = url_for('podcast.podcast_edit_tag',id=id,track=track)
+
+    return render_template('podcast_edit_tag.html',form=form,radio_player=radio_player)
+
+
+###########################################################################################
+# Podcast Link Add, Edit, Del
+###########################################################################################
+
+# ---> Podcast Link Add
+@podcast.route('/podcast/add_link/<id>', methods=['GET', 'POST'])
+def podcast_add_link(id):
+
+    form = LinkForm()
+
+    if form.validate_on_submit():
+
+        name = form.name.data
+        url = form.url.data
+
+        podcast = Podcast.query.filter_by(id=id).first()
+        
+        podcast_link = Podcast_Link(name=name,url=url,podcast=podcast)
+
+        db.session.add(podcast_link)
+        db.session.commit()
+
+        redirect_page = url_for('podcast.podcast_show', id=id)
+
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+
+    session['last_url'] = url_for('podcast.podcast_add_link', id=id)
+
+    template_page = 'podcast_add_link.html'
+
+    return render_template(template_page, form=form, radio_player=radio_player)
+
+
+# ---> Podcast Link Edit
+@podcast.route('/podcast/edit_link/<id>', methods=['GET', 'POST'])
+def podcast_edit_link(id):
+
+    podcast_link = Podcast_Link.query.filter_by(id=id).first()
+
+    form = LinkForm()
+
+    if form.validate_on_submit():
+
+        podcast_link.name = form.name.data
+        podcast_link.url = form.url.data
+
+        db.session.commit()
+
+        redirect_page = url_for('podcast.podcast_show', id=podcast_link.podcast_id)
+
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+    form.name.data = podcast_link.name
+    form.url.data = podcast_link.url
+
+    session['last_url'] = url_for('podcast.podcast_edit_link',id=id)
+
+    template_page = 'podcast_edit_link.html'
+
+    return render_template(template_page, form=form, radio_player=radio_player)
+
+
+
+# ---> Delete Podcast Link
+@podcast.route('/podcast/delete_link/<id>', methods=['GET', 'POST'])
+def podcast_delete_link(id):
+
+    podcast_link = Podcast_Link.query.filter_by(id=id).first()
+    db.session.delete(podcast_link)
+    db.session.commit()
+
+    redirect_page = url_for('podcast.podcast_show',id=podcast_link.podcast_id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+

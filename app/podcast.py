@@ -7,7 +7,7 @@ import eyed3
 from mpd import MPDClient
 
 from .models import Podcast
-from . import global_values 
+from . import CONFIG
 
 ####################################################################################
 # Podcast Info
@@ -22,15 +22,15 @@ class PodcastInfo:
 	down_episodes = []
 	pod_uri = ''
 	client = MPDClient()
-	mpd_client = global_values.default_mpd_client
-	mpd_port = global_values.default_mpd_port
+	mpd_client = CONFIG.DEFAULT_MPD_CLIENT
+	mpd_port = CONFIG.DEFAULT_MPD_PORT
 
 	def __init__(self,podcast):
 		self.podcast = podcast
-		self.feed_file = podcast.pod_dir + '/' + global_values.podcast_feed_file
-		self.down_ep_file = podcast.pod_dir + '/' + global_values.downloaded_episodes_file
-		self.playlist_file = global_values.playlist_dir + '/' + podcast.playlist + '.m3u'
-		self.pod_uri = global_values.base_uri + podcast.pod_dir
+		self.feed_file = os.path.join(podcast.pod_dir, CONFIG.PODCAST_FEED_FILE)
+		self.down_ep_file = os.path.join(podcast.pod_dir, CONFIG.DOWNLOADED_EPISODES_FILE)
+		self.playlist_file = os.path.join(CONFIG.PLAYLIST_DIR, podcast.playlist + '.m3u')
+		self.pod_uri = CONFIG.BASE_URI + podcast.pod_dir
 
 	def update_items_list(self):
 

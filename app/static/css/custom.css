@@ -1,3 +1,26 @@
+.navbar {
+  padding: 0.2rem;
+}
+
+.navbar .nav-link {
+  color: white;
+  padding: 0.2rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  padding: 0.5rem;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.dropdown-item {
+  color: white;
+}
+
+.nav-icon:link {
+  color: white;
+}
+
 .col-player{
   position: relative;
   width: 20%;
@@ -12,6 +35,28 @@
 .col-grid{
   position: relative;
   width: 79.6%;
+  min-height: 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+}
+
+.col-info{
+  position: relative;
+  width: 59.4%;
+  min-height: 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: center;
+}
+
+.col-links{
+  position: relative;
+  width: 20%;
   min-height: 1px;
   padding-right: 5px;
   padding-left: 5px;
@@ -47,6 +92,16 @@
   padding-left: 3px;
   padding-top: 3px;
   padding-bottom: 3px;
+}
+
+.col-grid-album{
+  position: relative;
+  width: 20%;
+  min-height: 1px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .col-grid-list{
@@ -110,6 +165,24 @@
   transition: .3s ease;
 }
 
+.thumb-overlay-stars {
+  position: absolute;
+  bottom: 12px;
+  left: 10px;
+  opacity: 0;
+  transition: .3s ease;
+  font-size: 10px;
+}
+
+.thumb-overlay-fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 0;
+  transition: .3s ease;
+  font-size: 25px;
+}
+
 .thumb-overlay-delete {
   position: absolute;
   bottom: 10px;
@@ -125,6 +198,8 @@
   margin: auto;
   display: flex;
   text-align: center;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .thumb-overlay-link-radio {
@@ -157,6 +232,14 @@
 }
 
 .thumb-container:hover .thumb-overlay-delete {
+  opacity: 0.8;
+}
+
+.thumb-container:hover .thumb-overlay-stars {
+  opacity: 0.8;
+}
+
+.thumb-container:hover .thumb-overlay-fav {
   opacity: 0.8;
 }
 
@@ -230,9 +313,27 @@
   color: orange;
 }
 
+.fa-star:hover {
+  color: orange;
+}
+
 .fa-download:hover {
   color: lightgreen;
 }
+
+.fa-twitter:hover {
+  color: skyblue;
+}
+.fa-instagram:hover {
+  color: orange;
+}
+.fa-youtube:hover {
+  color: red;
+}
+.fa-spotify:hover {
+  color: lightgreen;
+}
+
 
 .thumb-link-text:hover {
   color: orange;
@@ -258,7 +359,6 @@
 }
 .song-text a {
   text-decoration: none;
-  color: gray;
 }
 .song-time{
   text-align: right;
@@ -387,7 +487,7 @@
 .navbar-img {
   width: 30px;
   height: 30px;
-  opacity: 0.5;
+  opacity: 1;
   border-radius: 5px;
   padding: 0;
 }
@@ -405,7 +505,20 @@
 }
 
 .navbar-custpadd {
-  padding-left: 9px;
-  padding-right: 9px;
+  padding: 0 0 0 0;
 }
 
+.info-list-items{
+  display: flex;
+}
+.info-title{
+  text-align: left;
+  flex: 1 1 12%;
+  color: grey;
+  padding-right: 15px;
+  text-align: right;
+}
+.info-text{
+  text-align: left;
+  flex: 1 1 88%;
+}

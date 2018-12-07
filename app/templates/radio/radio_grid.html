@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %} RadioPlayer {% endblock %}
+
+{% block body %}
+
+<div class="bs-component">
+
+<div class="col-grid-full">
+
+    <div class="card text-white bg-dark" style="flex: 0 0 100%">
+      <h5 class="card-header">{{title}}</h5>
+      <div class="card-body">
+        <div class="row">
+
+          {% for radio in radio_list %}
+
+
+          <div class="col-grid-element-full">
+              <div class="thumb-container">
+                <img src="/static/images/radios/{{radio.image}}" class="thumb-image">
+                <div class="thumb-overlay">
+
+                 <div class="thumb-overlay-link">
+                   <a href={{ url_for('radio.radio_show',id=radio.id) }} class="thumb-link-text" title="Play">{{radio.name}}</a>
+                 </div>
+                  <div class="thumb-overlay-stars">
+                    {% for st in range (0,radio.stars) %}
+                       <i class="fas fa-star"></i>
+                    {% endfor %}
+                  </div>
+                  <div class="thumb-overlay-delete">
+                    <a href="/radio/delete/{{radio.id}}" class="thumb-icon-delete" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                  </div>
+                </div>
+              </div>
+         </div>
+
+
+        {% endfor %}
+
+       </div>
+
+    </div>
+   </div>
+  
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

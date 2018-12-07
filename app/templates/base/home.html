@@ -1,0 +1,165 @@
+{% extends "base/base.html" %}
+
+{% block title %} Radio List {% endblock %}
+
+{% block body %}
+
+<div class="bs-component">
+
+<div class="col-grid-full">
+
+    <div class="card text-white bg-dark" style="flex: 0 0 100%">
+      <h4 class="card-header">Radio Player</h4>
+      <div class="card-body">
+
+      <div class="row">
+
+        <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">MPD Server</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.mpd_client }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">MPD Port</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.mpd_port }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Loaded</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.loaded }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">State</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.state }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Album</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.album }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Song Pos</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.song_pos }}</h5>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-grid-full">
+
+    <div class="card text-white bg-dark" style="flex: 0 0 100%">
+      <h4 class="card-header">Database</h4>
+      <div class="card-body">
+
+      <div class="row">
+
+        <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Radios</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ db_manager.count_records('Radios') }}</h5>
+            </div>
+          </div>
+        </div>
+
+       <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Artist</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ db_manager.count_records('Artist') }}</h5>
+            </div>
+          </div>
+        </div>
+
+       <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Podcasts</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ db_manager.count_records('Podcast') }}</h5>
+            </div>
+          </div>
+       </div>
+
+       <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Playlist</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ db_manager.count_records('Playlist') }}</h5>
+            </div>
+          </div>
+       </div>
+
+      </div>
+
+      <div class="row">
+
+
+        <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Radios Links</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ db_manager.count_records('Radio_Link') }}</h5>
+            </div>
+          </div>
+        </div>
+
+       <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Artist Links</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ db_manager.count_records('Artist_Link') }}</h5>
+            </div>
+          </div>
+        </div>
+
+       <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Podcast Link</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ db_manager.count_records('Podcast_Link') }}</h5>
+            </div>
+          </div>
+       </div>
+
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Page -->
+
+{% endblock body %}

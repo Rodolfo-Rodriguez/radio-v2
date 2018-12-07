@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %} Edit Podcast {% endblock %}
+
+{% block body %}
+
+<div class="row">
+   <div class="col-lg-12">
+     <div class="bs-component">
+       <form method="POST">
+
+        {{form.csrf_token}}
+        
+         <fieldset>
+           <legend>Edit Podcast</legend>
+
+            <div class="row">
+              <div class="col-lg-6"><div class="form-group">{{form.name.label}} {{form.name(class="form-control")}}</div></div>
+              <div class="col-lg-6"><div class="form-group">{{form.image.label}} {{form.image(class="form-control")}}</div></div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6"><div class="form-group">{{form.playlist.label}} {{form.playlist(class="form-control")}}</div></div>
+              <div class="col-lg-6"><div class="form-group">{{form.country.label}} {{form.country(class="form-control")}}</div></div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6"><div class="form-group">{{form.description.label}} {{form.description(class="form-control")}}</div></div>
+              <div class="col-lg-6"><div class="form-group">{{form.style.label}} {{form.style(class="form-control")}}</div></div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6"><div class="form-group">{{form.feed_url.label}} {{form.feed_url(class="form-control")}}</div></div>
+              <div class="col-lg-6"><div class="form-group">{{form.feed_filter.label}} {{form.feed_filter(class="form-control")}}</div></div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6"><div class="form-group">{{form.pod_dir.label}} {{form.pod_dir(class="form-control")}}</div></div>
+              <div class="col-lg-6"><div class="form-group">{{form.publisher.label}} {{form.publisher(class="form-control")}}</div></div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6"><div class="form-group">{{form.priority.label}} {{form.priority(class="form-control")}}</div></div>
+            </div>
+
+        </fieldset>
+
+        {{form.submit(class="btn btn-primary")}}
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

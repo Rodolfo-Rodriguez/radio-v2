@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %} RadioPlayer {% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+<div class="col-player">
+<!--   <div class="bs-component"> -->
+
+    <div class="card text-white bg-primary mb-3">
+
+       <h5 class="card-header">{{artist.name}}</h5>
+
+       <div class="card-body">
+         <p class="card-text">{{artist.description}}</p>
+       </div>
+
+       <div class="card-body" style ="padding: 5px;">
+         <div class="thumb-container">
+           <img src="/static/images/artist/{{artist.image}}" class="thumb-image">
+         </div>
+       </div>
+
+       <div class="card-body">
+        <ul class="list-group list-group-flush">
+
+         <li class="list-group-item text-center">
+         {% for star in range(0,artist.stars) %}
+           <a href="/artist/stars/{{artist.id}}/{{star + 1}}"><i class="fas fa-star"></i></a>
+         {% endfor %}
+         {% for star in range(artist.stars,5) %}
+           <a href="/artist/stars/{{artist.id}}/{{star + 1}}"><i class="far fa-star"></i></a>
+         {% endfor %}
+         </li>
+         <li class="list-group-item text-center"><a class="card-link" href="/artist/country/{{artist.country}}"> <strong>{{artist.country}}</strong> </a></li>
+         <li class="list-group-item text-center"><a class="card-link" href="/artist/style/{{artist.style}}"> <strong>{{artist.style}}</strong></a></li>
+        
+        </ul>
+       </div>
+
+       <div class="card-footer">
+         <p class="card-text text-right"><a class="card-link" href="{{ url_for('artist.artist_edit',id=artist.id) }}">Edit</a></p>
+       </div>
+
+    </div>
+<!--   </div> -->
+</div>
+
+<div class="col-info">
+
+  <div class="bs-component">
+    <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+
+      <h5 class="card-header">Albums</h5>
+      
+      <div class="card-body">
+
+        <div class="row">
+
+        {% for album in album_list %}
+
+          <div class="col-grid-album">
+                 <div class="thumb-container">
+                   <img src="/static/images/albums/{{artist.name}}/{{album}}.png" class="thumb-image">
+                   <div class="thumb-overlay">
+                     <div class="thumb-overlay-link">
+                       <a href="{{ url_for('artist.artist_album', artist_id=artist.id, album=album) }}" class="thumb-link-text" title="Play">{{album}}</a>
+                     </div>
+                   </div>
+                 </div>
+          </div>
+    
+        {% endfor %}
+
+       </div>
+
+      </div>
+   </div>
+  </div>
+</div>
+
+
+<div class="col-links">
+
+  <div class="bs-component">
+    <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+      
+      <h5 class="card-header">Social</h5>
+      <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+
+            {% if artist.artist_link_list %}
+            <li class="list-group-item text-center">
+            {% for link in artist.artist_link_list %}
+                {% if link.name in social_sites %}
+                  <a target="blank" href="{{link.url}}" class="card-link" style="font-size: 1.6rem;"><i class="fab fa-{{link.name}}"></i></a>
+              {% endif %}
+            {% endfor %}
+            </li>
+            {% endif %}
+
+        </ul>
+
+      </div>
+
+      <h5 class="card-header">Links</h5>
+      <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+
+             {% for link in artist.artist_link_list %}
+                {% if not(link.name in social_sites) %}
+
+               <li class="list-group-item">
+                <div class="episode-list-col">
+                  <div class="song-text"><a target="blank" href="{{link.url}}" class="card-link"><strong>{{link.name}}</strong></a></div>
+                  <div class="song-tag"><a href="/artist/edit_link/{{link.id}}"><i class="fas fa-edit"></i></a></div>
+                  <div class="song-tag"><a href="/artist/delete_link/{{link.id}}"><i class="fas fa-trash-alt"></i></a></div>
+                </div>
+              </li>
+
+              {% endif %}
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <div class="card-footer">
+      <p class="card-text text-right"><a class="card-link" href="/artist/add_link/{{artist.id}}">Add Link</a>
+    </div>
+
+   </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

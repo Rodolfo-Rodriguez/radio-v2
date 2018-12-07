@@ -1,29 +1,33 @@
 import os, sys
 
+from sqlalchemy import desc
+
 from mpd import MPDClient
 
 from .models import Radios,Artist,Playlist,Podcast
-from . import global_values 
+from . import CONFIG
+
 
 ################################################################################################################################################################
 # Radio Player
 ################################################################################################################################################################
 
 class RadioPlayer:
-      mpd_client = global_values.default_mpd_client
-      mpd_port = global_values.default_mpd_port
-      mpd_servers = global_values.mpd_servers
+      mpd_client = CONFIG.DEFAULT_MPD_CLIENT
+      mpd_port = CONFIG.DEFAULT_MPD_PORT
+      mpd_servers = CONFIG.MPD_SERVERS
       client = MPDClient()
+      fav_radios = []
       state = ''
       loaded = ''
       radio = Radios()
-      playlists = []
-      playlist = ''
+      playlist = Playlist()
       artist = Artist()
+      podcast = Podcast()
       album = ''
       song_pos = 0
-      podcast = Podcast()
       player_img = ''
+      playlist_len = 0
 
       def __init__(self):
           self.client = MPDClient()
@@ -31,8 +35,17 @@ class RadioPlayer:
           self.state = 'stop'
           self.loaded = 'none'
           self.player_img = '/static/images/radios/empty.png'
-          self.playlists = self.client.listplaylists()
           self.client.close()
+          self.client.disconnect()
+          #self.update_fav_radios()
+
+      def connect(self,hostname):
+          self.mpd_client = hostname
+          self.client.disconnect()
+          self.client.connect(self.mpd_client, self.mpd_port)
+          self.client.disconnect()
+
+      def disconnect(self):
           self.client.disconnect()
 
       def playradio(self,radio):
@@ -40,13 +53,16 @@ class RadioPlayer:
           self.client.clear()
           self.client.add(radio.url)
           self.client.play(0)
+          self.playlist_len = int(self.client.status()['playlistlength'])
           self.client.close()
           self.client.disconnect()
 
           self.loaded = 'radio'
           self.state = 'play'
           self.radio = radio
-          self.player_img = '/static/images/radios/' + radio.nickname + '.png'
+          self.album = ''
+          self.song_pos = 0
+          self.player_img = '/static/images/radios/' + radio.image
 
       def play(self):
           self.client.connect(self.mpd_client, self.mpd_port)
@@ -71,19 +87,20 @@ class RadioPlayer:
 
       def next(self):
           if self.loaded in ['album','playlist','podcast']:
-            self.client.connect(self.mpd_client, self.mpd_port)
-            self.client.next()
-            self.client.close()
-            self.client.disconnect()
-            self.song_pos = self.song_pos + 1
+            if self.song_pos < (self.playlist_len - 1):
+              self.client.connect(self.mpd_client, self.mpd_port)
+              self.client.next()
+              self.client.close()
+              self.client.disconnect()
+              self.song_pos = self.song_pos + 1
 
       def previous(self):
-          if self.loaded in ['album','playlist','podcast']:
-            self.client.connect(self.mpd_client, self.mpd_port)
-            self.client.previous()
-            self.client.close()
-            self.client.disconnect()
-            if self.song_pos > 0:
+          if self.song_pos > 0:
+            if self.loaded in ['album','playlist','podcast']:
+              self.client.connect(self.mpd_client, self.mpd_port)
+              self.client.previous()
+              self.client.close()
+              self.client.disconnect()
               self.song_pos = self.song_pos - 1
 
       def play_song(self,pos):
@@ -152,12 +169,13 @@ class RadioPlayer:
         return play_progress_str   
 
 
-      def playlist_songs(self,playlist):
+      def playlist_songs(self,playlist_name):
+
           self.client.connect(self.mpd_client, self.mpd_port)
 
           songs_list = []
           pos = 0
-          playlist_info = self.client.listplaylistinfo(playlist)
+          playlist_info = self.client.listplaylistinfo(playlist_name)
 
           for info in playlist_info:
 
@@ -193,23 +211,27 @@ class RadioPlayer:
 
           return songs_list
 
-      def load_playlist(self,playlist):
+      def load_playlist(self,playlist_name):
+
           self.client.connect(self.mpd_client, self.mpd_port)
 
-          playlist_rec = Playlist.query.filter_by(name=playlist).first()
+          playlist = Playlist.query.filter_by(playlist=playlist_name).first()
 
           self.client.clear()
-          self.client.load(playlist)
+          self.client.load(playlist_name)
           self.client.play()
 
           self.loaded = 'playlist'
           self.state = 'play'
           self.playlist = playlist
+          self.album = ''
           self.song_pos = 0
-          self.player_img = '/static/images/playlists/' + playlist_rec.image
+          self.player_img = '/static/images/playlists/' + playlist.image
+          self.playlist_len = int(self.client.status()['playlistlength'])
 
           self.client.close()
           self.client.disconnect()
+
 
       def playlist_info(self):
           self.client.connect(self.mpd_client, self.mpd_port)
@@ -316,20 +338,12 @@ class RadioPlayer:
           self.album = album
           self.song_pos = 0
           self.player_img = '/static/images/albums/' + str(artist.name) + '/' + str(album) + '.png'
+          self.playlist_len = int(self.client.status()['playlistlength'])
 
           self.client.close()
           self.client.disconnect()
 
           return songs_list
-
-      def update_playlists(self):
-          self.client.connect(self.mpd_client, self.mpd_port)
-
-          self.playlists = self.client.listplaylists()
-
-          self.client.close()
-          self.client.disconnect()
-
 
 
       def update_state(self,radio_list):
@@ -364,6 +378,22 @@ class RadioPlayer:
           self.podcast = podcast
           self.song_pos = 0
           self.player_img = '/static/images/playlists/' + podcast.image
+          self.playlist_len = int(self.client.status()['playlistlength'])
 
           self.client.close()
           self.client.disconnect()
+
+      def update_fav_radios(self):
+          radio_list = Radios.query.order_by(desc(Radios.stars)).order_by(desc(Radios.num_plays)).filter_by(fav=True).all()
+
+          self.fav_radios = []
+
+          for radio in radio_list:
+            self.fav_radios.append(radio)
+
+
+
+
+
+
+
