@@ -14,6 +14,20 @@ class Radios(db.Model):
     fav = db.Column(db.Boolean,nullable=False)
     description = db.Column(db.String(120),nullable=True)
     radio_link_list = db.relationship('Radio_Link', backref='radios')
+    program_list = db.relationship('Program', backref='radios')
+
+class Program(db.Model):
+    __tablename__ = 'program'
+    id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True)
+    name = db.Column(db.String(80),nullable=False)
+    times = db.Column(db.String(80),nullable=True)
+    week_days = db.Column(db.String(80),nullable=True)
+    description = db.Column(db.String(120),nullable=True)
+    style = db.Column(db.String(80),nullable=True)
+    stars = db.Column(db.Integer,nullable=True)
+    fav = db.Column(db.Boolean,nullable=True)
+    twitter = db.Column(db.String(120),nullable=True)
+    radio_id = db.Column(db.Integer, db.ForeignKey('radios.id'), nullable=False)
 
 class Artist(db.Model):
     __tablename__ = 'artist'
@@ -24,6 +38,7 @@ class Artist(db.Model):
     description = db.Column(db.String(120),nullable=True)
     style = db.Column(db.String(80),nullable=True)
     stars = db.Column(db.Integer,nullable=True)
+    fav = db.Column(db.Boolean,nullable=True)
     artist_link_list = db.relationship('Artist_Link', backref='artist')
 
 class Playlist(db.Model):
@@ -53,19 +68,19 @@ class Podcast(db.Model):
     fav = db.Column(db.Boolean,nullable=True)
     podcast_link_list = db.relationship('Podcast_Link', backref='podcast')
 
-class Artist_Link(db.Model):
-    __tablename__ = 'artist_link'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80),nullable=False)
-    url = db.Column(db.String(120),nullable=False)
-    artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'), nullable=False)
-
 class Radio_Link(db.Model):
     __tablename__ = 'radio_link'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80),nullable=False)
     url = db.Column(db.String(120),nullable=False)
     radio_id = db.Column(db.Integer, db.ForeignKey('radios.id'), nullable=False)
+
+class Artist_Link(db.Model):
+    __tablename__ = 'artist_link'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80),nullable=False)
+    url = db.Column(db.String(120),nullable=False)
+    artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'), nullable=False)
 
 class Podcast_Link(db.Model):
     __tablename__ = 'podcast_link'

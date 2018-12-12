@@ -520,5 +520,39 @@
 }
 .info-text{
   text-align: left;
-  flex: 1 1 88%;
+  flex: 1 1 80%;
 }
+
+.info-prog{
+  display: flex;
+}
+
+.info-prog-date_time{
+  text-align: right;
+  flex: 1 1 15%;
+  color: grey;
+  padding-right: 10px;
+}
+
+.info-prog-name{
+  text-align: left;
+  flex: 1 1 30%;
+  color: white;
+}
+
+.info-prog-description{
+  text-align: left;
+  flex: 1 1 43%;
+  color: grey;
+}
+
+.info-prog-tag{
+  text-align: center;
+  flex: 1 1 4%;
+  color: white;
+}
+
+.prog-live{
+  color: lightgreen;
+}
+

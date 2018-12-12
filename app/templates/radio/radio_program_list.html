@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %} Program List {% endblock %}
+
+{% block head %}
+
+    <!-- DataTables CSS -->
+    <link "https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+
+{% endblock head %}
+
+
+{% block body %}
+
+<div class="bs-component">
+
+<div class="col-grid-full">
+
+  <div class="card text-white bg-dark" style="flex: 0 0 100%">
+
+  <h5 class="card-header">List Programs</h5>
+
+  <div class="card-body">
+
+  <table width="100%" class="table table-hover" id="dataTables">
+    <thead>
+      <tr class="table-active">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Times</th>
+        <th>Week Days</th>
+        <th>Radio ID</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for program in program_list %}
+        <tr>
+          <td>{{program.id}}</td>
+          <td>{{program.name}}</td>
+          <td>{{program.description}}</td>
+          <td>{{program.times}}</td>
+          <td>{{program.week_days}}</td>
+          <td>{{program.radio_id}}</td>
+          <td><a href="{{ url_for('radio.radio_edit_program',id=program.id) }}">Edit</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  </div>
+
+  </div>
+
+</div>
+
+</div>
+
+
+<!-- Page -->
+
+{% endblock body %}
+
+{% block scripts %}
+
+  <!-- DataTables JavaScript -->
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+  <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+  <script>
+
+      $(document).ready(function() {
+          $('#dataTables').DataTable({
+              responsive: true,
+              stateSave: true,
+              "lengthMenu": [ 25,50 ],
+              "dom": '<"class=form-control"f<t>pl>'
+          });
+      });
+
+  </script>
+
+
+{% endblock scripts %}

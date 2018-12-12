@@ -10,10 +10,10 @@ sys.setdefaultencoding('utf8')
 radio = Blueprint('radio', __name__, template_folder='templates/radio')
 
 from . import db, radio_player, CONFIG
-from .models import Radios, Artist, Playlist, Podcast, Radio_Link
-from .forms import RadioForm, ImageForm, LinkForm
+from .models import Radios, Program, Artist, Playlist, Podcast, Radio_Link
+from .forms import RadioForm, ImageForm, ProgramForm, LinkForm
 
-from radio import RadioPlayer
+from radio import RadioPlayer, ProgramsInfo
 from podcast import PodcastInfo
 
 
@@ -44,6 +44,18 @@ def radio_all():
     template_page = 'radio_grid.html'
 
     return render_template(template_page,radio_list=radio_list,radio_player=radio_player,title='All Radios')
+
+# ---> Favorite Radios
+@radio.route('/radio/favorite', methods=['GET'])
+def radio_favorite():
+    radio_list = Radios.query.filter(Radios.fav==True).order_by(desc(Radios.stars)).order_by(desc(Radios.num_plays)).all()
+    radio_player.update_state(radio_list)
+
+    session['last_url'] = url_for('radio.radio_all')
+
+    template_page = 'radio_grid.html'
+
+    return render_template(template_page,radio_list=radio_list,radio_player=radio_player,title='Favorite Radios')
 
 # ---> Radio Styles
 @radio.route('/radio/styles', methods=['GET'])
@@ -101,45 +113,67 @@ def radio_country(country):
 ## Show, Play
 ###########################################################################################
 
+# ----> Set Week Day
+@radio.route('/radio/set_wday/<id>/<wday>', methods=['GET'])
+def radio_set_wday(id,wday):
+    
+    session['list_week_day'] = int(wday)
+
+    redirect_page = url_for('radio.radio_show',id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+
 # ----> Radio Show
 @radio.route('/radio_show/<id>', methods=['GET'])
 def radio_show(id):
 
     radio = Radios.query.filter_by(id=id).first()
 
+    programs_info = ProgramsInfo(radio)
+
+    if 'list_week_day' in session:
+        programs_info.set_list_week_day(session['list_week_day'])
+
     session['last_url'] = url_for('radio.radio_show',id=id)
 
     template_page = 'radio_show.html'
 
-    return render_template(template_page,radio_player=radio_player,radio=radio, social_sites=CONFIG.SOCIAL_SITES) 
+    return render_template(template_page,radio_player=radio_player,radio=radio, programs_info=programs_info, social_sites=CONFIG.SOCIAL_SITES) 
 
 # ----> Play Radio
 @radio.route('/playradio/<id>/', methods=['GET'])
 def playradio(id):
 
     radio = Radios.query.filter_by(id=id).first()
-    radio_player.playradio(radio)
-
     radio.num_plays = radio.num_plays + 1
-
     db.session.commit()
 
-    session['last_url'] = url_for('radio.radio_show', id=id)
+    radio_player.playradio(radio)
+    
+    if 'list_week_day' in session:
+        del session['list_week_day']
 
-    template_page = 'radio_show.html'
+    redirect_page = url_for('radio.radio_show', id=id)
 
-    return render_template(template_page, radio_player=radio_player, radio=radio, social_sites=CONFIG.SOCIAL_SITES)
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
 
 # ----> Play Radio in Menu
 @radio.route('/playradio_menu/<id>', methods=['GET'])
 def playradio_menu(id):
 
     radio = Radios.query.filter_by(id=id).first()
-    radio_player.playradio(radio)
-
     radio.num_plays = radio.num_plays + 1
+    db.session.commit()
 
-    #db.session.commit()
+    radio_player.playradio(radio)
+    
+    if 'list_week_day' in session:
+        del session['list_week_day']
 
     redirect_page = session['last_url']
 
@@ -186,16 +220,14 @@ def radio_add():
         db.session.add(radio)
         db.session.commit()
 
-        redirect_page = url_for('radio.radio_show',client='web',id=radio.id)
+        redirect_page = url_for('radio.radio_show',id=radio.id)
 
         session['last_url'] = redirect_page
 
         return redirect(redirect_page)
 
-
-    test_radio = Radios.query.filter_by(name='Test Radio').first()
-
-    form.url.data = test_radio.url
+    form.name.data = radio_player.server_currentsong('name')
+    form.url.data = radio_player.server_currentsong('file')
 
     session['last_url'] = url_for('radio.radio_add')
 
@@ -307,7 +339,11 @@ def radio_add_link(id):
     if form.validate_on_submit():
 
         name = form.name.data
+        social_name = form.social_name.data
         url = form.url.data
+
+        if social_name != 'none':
+            name = social_name
 
         radio = Radios.query.filter_by(id=id).first()
 
@@ -432,4 +468,118 @@ def radio_stars(id,stars):
     return redirect(redirect_page)
 
 
+###########################################################################################
+## Program
+###########################################################################################
 
+# ---> Program List
+@radio.route('/radio/list_program', methods=['GET'])
+def radio_list_program():
+
+    program_list = Program.query.all()
+
+    session['last_url'] = url_for('radio.radio_list_program')
+
+    template_page = 'radio_program_list.html'
+
+    return render_template(template_page, program_list=program_list, radio_player=radio_player)
+
+# ---> Program Add
+@radio.route('/radio/add_program/<id>', methods=['GET', 'POST'])
+def radio_add_program(id):
+
+    form = ProgramForm()
+
+    if form.validate_on_submit():
+
+        name = form.name.data
+        times = form.times.data
+        week_days = form.week_days.data
+
+        description = ''
+        style = ''
+        stars = 0
+        fav = False
+
+        radio = Radios.query.filter_by(id=id).first()
+
+        program = Program(name=name,
+                        times=times,
+                        week_days=week_days,
+                        description=description,
+                        style=style,
+                        stars=stars,
+                        fav=fav,
+                        radios=radio)
+
+        db.session.add(program)
+        db.session.commit()
+
+        redirect_page = url_for('radio.radio_show',id=id)
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+    
+    form.times.data = 'XX:00-XX:00'
+    form.week_days.data = '0,1,2,3,4'
+
+    session['last_url'] = url_for('radio.radio_add_program',id=id)
+
+    template_page = 'radio_add_program.html'
+
+    return render_template(template_page, form=form, radio_player=radio_player)
+
+
+# ---> Program Edit
+@radio.route('/radio/edit_program/<id>', methods=['GET', 'POST'])
+def radio_edit_program(id):
+
+    program = Program.query.filter_by(id=id).first()
+ 
+    form = ProgramForm()
+
+    if form.validate_on_submit():
+
+        program.name = form.name.data
+        program.times = form.times.data
+        program.week_days = form.week_days.data
+        program.description = form.description.data
+        program.style = form.style.data
+        program.twitter = form.twitter.data
+
+        db.session.commit()
+
+        redirect_page = url_for('radio.radio_show',id=program.radio_id)
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+    form.name.data = program.name
+    form.times.data = program.times
+    form.week_days.data = program.week_days
+    form.description.data = program.description
+    form.style.data = program.style
+    form.twitter.data = program.twitter
+    
+    session['last_url'] = url_for('radio.radio_edit_program',id=id)
+
+    template_page = 'radio_edit_program.html'
+
+    return render_template(template_page, form=form, radio_player=radio_player)
+
+
+# ---> Program Delete
+@radio.route('/radio/delete_program/<id>', methods=['GET'])
+def radio_program_delete(id):
+    program = Program.query.filter_by(id=id).first()
+    radio_id = program.radio_id
+
+    db.session.delete(program)
+    db.session.commit()
+
+    redirect_page = url_for('radio.radio_show',id=radio_id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)

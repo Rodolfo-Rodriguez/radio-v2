@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} RadioPlayer {% endblock %}
+{% block title %} Artist {% endblock %}
 
 {% block body %}
 
@@ -18,15 +18,29 @@
        </div>
 
        <div class="card-body" style ="padding: 5px;">
+
          <div class="thumb-container">
            <img src="/static/images/artist/{{artist.image}}" class="thumb-image">
+           <div class="thumb-overlay">
+
+             <div class="thumb-overlay-fav">
+               {% if artist.fav %}
+                  <a href="{{url_for('artist.artist_unfav',id=artist.id)}}"><i class="fas fa-star"></i></a>           
+               {% else %}
+                  <a href="{{url_for('artist.artist_fav',id=artist.id)}}"><i class="far fa-star"></i></a>            
+               {% endif %}
+             </div>
+
+           </div>
          </div>
+        
+
        </div>
 
        <div class="card-body">
         <ul class="list-group list-group-flush">
 
-         <li class="list-group-item text-center">
+         <li class="list-group-item text-center" style="font-size: 1.5rem;">
          {% for star in range(0,artist.stars) %}
            <a href="/artist/stars/{{artist.id}}/{{star + 1}}"><i class="fas fa-star"></i></a>
          {% endfor %}
@@ -34,7 +48,8 @@
            <a href="/artist/stars/{{artist.id}}/{{star + 1}}"><i class="far fa-star"></i></a>
          {% endfor %}
          </li>
-         <li class="list-group-item text-center"><a class="card-link" href="/artist/country/{{artist.country}}"> <strong>{{artist.country}}</strong> </a></li>
+         
+         <li class="list-group-item text-center"><a class="card-link" href="/artist/country/{{artist.country}}"> <img src="/static/images/flags/{{artist.country}}-24.png"></a></li>
          <li class="list-group-item text-center"><a class="card-link" href="/artist/style/{{artist.style}}"> <strong>{{artist.style}}</strong></a></li>
         
         </ul>
@@ -59,14 +74,17 @@
 
         <div class="row">
 
-        {% for album in album_list %}
+        {% for info in album_info %}
 
           <div class="col-grid-album">
                  <div class="thumb-container">
-                   <img src="/static/images/albums/{{artist.name}}/{{album}}.png" class="thumb-image">
+                   <img src="/static/images/albums/{{artist.name}}/{{info['album']}}.png" class="thumb-image">
                    <div class="thumb-overlay">
                      <div class="thumb-overlay-link">
-                       <a href="{{ url_for('artist.artist_album', artist_id=artist.id, album=album) }}" class="thumb-link-text" title="Play">{{album}}</a>
+                       <a href="{{ url_for('artist.artist_album', artist_id=artist.id, album=info['album']) }}" class="thumb-link-text" title="Play">{{info['album']}}</a>
+                     </div>
+                     <div class="thumb-overlay-delete">
+                       {{info['date']}}
                      </div>
                    </div>
                  </div>

@@ -20,6 +20,18 @@ from podcast import PodcastInfo
 # Podcast List and Load
 ###########################################################################################
 
+# ---> Podcast List
+@podcast.route('/podcast/list', methods=['GET'])
+def podcast_list():
+
+    podcast_list = Podcast.query.all()
+
+    session['last_url'] = url_for('podcast.podcast_list')
+
+    template_page = 'podcast_list.html'
+
+    return render_template(template_page, podcast_list=podcast_list, radio_player=radio_player)
+
 # ---> All Podcasts
 @podcast.route('/podcast/all', methods=['GET'])
 def podcast_all():
@@ -31,6 +43,18 @@ def podcast_all():
     template_page = 'podcast_grid.html'
 
     return render_template(template_page, podcast_list=podcast_list, radio_player=radio_player, title='All Podcasts')
+
+# ---> Favorite Podcasts
+@podcast.route('/podcast/favorite', methods=['GET'])
+def podcast_favorite():
+
+    podcast_list = Podcast.query.filter(Podcast.fav==True).order_by(Podcast.priority).all()
+
+    session['last_url'] = url_for('podcast.podcast_all')
+
+    template_page = 'podcast_grid.html'
+
+    return render_template(template_page, podcast_list=podcast_list, radio_player=radio_player, title='Favorite Podcasts')
 
 # ---> Styles
 @podcast.route('/podcast/styles', methods=['GET'])
@@ -113,11 +137,26 @@ def podcast_load(id):
 
     radio_player.load_podcast(podcast)
 
-    session['last_url'] = url_for('podcast.podcast_show',id=id)
+    redirect_page = url_for('podcast.podcast_show', id=id)
 
-    template_page = 'podcast_show.html'
+    session['last_url'] = redirect_page
 
-    return render_template(template_page,podcast=podcast,songs_list=songs_list,radio_player=radio_player, social_sites=CONFIG.SOCIAL_SITES)
+    return redirect(redirect_page)
+
+
+# ---> Feed Update
+@podcast.route('/podcast/feed/update/<id>', methods=['GET'])
+def podcast_feed_update(id):
+
+    podcast = Podcast.query.filter_by(id=id).first()
+    pod_info = PodcastInfo(podcast)
+    pod_info.update_feed()
+    
+    redirect_page = url_for('podcast.podcast_feed_episodes', id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
 
 
 # ---> Feed Episodes
@@ -235,6 +274,7 @@ def podcast_edit(id):
         podcast.feed_filter = form.feed_filter.data
         podcast.publisher = form.publisher.data
         podcast.priority = form.priority.data
+        podcast.stars = form.stars.data
 
         db.session.commit()
 
@@ -256,6 +296,7 @@ def podcast_edit(id):
     form.feed_filter.data = podcast.feed_filter 
     form.publisher.data = podcast.publisher 
     form.priority.data = podcast.priority 
+    form.stars.data = podcast.stars
 
     session['last_url'] = url_for('podcast.podcast_edit',id=id)
 
@@ -324,7 +365,11 @@ def podcast_add_link(id):
     if form.validate_on_submit():
 
         name = form.name.data
+        social_name = form.social_name.data
         url = form.url.data
+
+        if social_name != 'none':
+            name = social_name
 
         podcast = Podcast.query.filter_by(id=id).first()
         
@@ -392,4 +437,58 @@ def podcast_delete_link(id):
     session['last_url'] = redirect_page
 
     return redirect(redirect_page)
+
+
+###########################################################################################
+## Fav, Unfav, Stars
+###########################################################################################
+
+# ---> Podcast Fav
+@podcast.route('/podcast_fav/<id>', methods=['GET'])
+def podcast_fav(id):
+    podcast = Podcast.query.filter_by(id=id).first()
+
+    podcast.fav = True
+
+    db.session.commit()
+
+    redirect_page = url_for('podcast.podcast_show', id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+# ---> Podcast UnFav
+@podcast.route('/podcast_unfav/<id>', methods=['GET'])
+def podcast_unfav(id):
+    podcast = Podcast.query.filter_by(id=id).first()
+
+    podcast.fav = False
+
+    db.session.commit()
+
+    redirect_page = url_for('podcast.podcast_show', id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+
+# ---> Podcast Set Stars
+@podcast.route('/podcast/stars/<id>/<stars>', methods=['GET'])
+def podcast_stars(id,stars):
+    podcast = Podcast.query.filter_by(id=id).first()
+
+    podcast.stars = int(stars)
+
+    db.session.commit()
+
+    redirect_page = url_for('podcast.podcast_show',id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+
+
 

@@ -27,6 +27,10 @@
     <!-- Font Awsome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
+{% block head %}
+
+{% endblock head %}
+
 </head>
 
 <body>
@@ -71,8 +75,10 @@
                  <a class="dropdown-item" href="/radio/add"><strong>Add Radio</strong></a>
                  <a class="dropdown-item" href="/radio/list"><strong>List Radios</strong></a>
                  <a class="dropdown-item" href="/radio/all"><strong>All Radios</strong></a>
+                 <a class="dropdown-item" href="/radio/favorite"><strong>Fav Radios</strong></a>
                  <a class="dropdown-item" href="/radio/styles"><strong>Styles</strong></a>
                  <a class="dropdown-item" href="/radio/countries"><strong>Countries</strong></a>
+                 <a class="dropdown-item" href="/radio/list_program"><strong>List Programs</strong></a>
                </div>
              </li>
 
@@ -82,6 +88,7 @@
                  <a class="dropdown-item" href="/artist/add"><strong>Add Artist</strong></a>
                  <a class="dropdown-item" href="/artist/list"><strong>List Artist</strong></a>
                  <a class="dropdown-item" href="/artist/all"><strong>All Artist</strong></a>
+                 <a class="dropdown-item" href="/artist/favorite"><strong>Fav Artist</strong></a>
                  <a class="dropdown-item" href="/artist/styles"><strong>Styles</strong></a>
                  <a class="dropdown-item" href="/artist/countries"><strong>Countries</strong></a>
                </div>
@@ -91,7 +98,9 @@
                <a class="nav-link" data-toggle="dropdown" href="#" id="download"><i class="fas fa-podcast"></i></a>
                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="download">
                  <a class="dropdown-item" href="/podcast/add"><strong>Add Podcast</strong></a>
+                 <a class="dropdown-item" href="/podcast/list"><strong>List Podcast</strong></a>
                  <a class="dropdown-item" href="/podcast/all"><strong>All Podcast</strong></a>
+                 <a class="dropdown-item" href="/podcast/favorite"><strong>Fav Podcast</strong></a>
                  <a class="dropdown-item" href="/podcast/styles"><strong>Styles</strong></a>
                  <a class="dropdown-item" href="/podcast/countries"><strong>Countries</strong></a>
                </div>
@@ -113,6 +122,7 @@
                  {% for server in radio_player.mpd_servers %}
                    <a class="dropdown-item" href="/mpd_client/{{server['server']}}"><strong>{{server['name']}}</strong></a>
                  {% endfor %}
+                 <a class="dropdown-item" href="/play_url"><strong>Play URI</strong></a>
                </div>
              </li>
 
@@ -135,35 +145,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
-  <!-- DataTables JavaScript -->
-  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
-  <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-  <script>
-      $(document).ready(function() {
-          $('#dataTables-radios').DataTable({
-              responsive: true,
-              stateSave: true,
-              "lengthMenu": [ 50, 100 ]
-          });
-      });
-
-
-      $(document).ready( function () {
-        $('#dataTable-artist').DataTable({
-              responsive: true,
-              stateSave: true,
-              "lengthMenu": [ 50, 100 ]
-        });
-      });
+  {% block scripts %}
   
-      
-      $('.episode-icon').click(function(){
-        icon = $(this).find("i");
-        icon.toggleClass("fas fa-download fas fa-spinner fa-spin episode-down-icon")
-      })
-
-  </script>
+  {% endblock scripts %}
 
 
 </body>

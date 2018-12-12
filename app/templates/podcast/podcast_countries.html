@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} RadioPlayer {% endblock %}
+{% block title %} Podcast Countries {% endblock %}
 
 {% block body %}
 
@@ -10,13 +10,30 @@
 
     <div class="card text-white bg-dark mb-3" style="flex: 0 0 100%">
 
+      <h5 class="card-header">Podcast Countries</h5>
+
       <div class="card-body">
 
-        <ul class="list-group list-group-flush">
+        <div class="row">
+
           {% for country in podcast_countries %}
-             <li class="list-group-item"><a href="{{ url_for('podcast.podcast_country', country=country) }}" class="card-link">{{country}}</a></li>
-          {% endfor %}
-        </ul>
+
+
+          <div class="col-grid-element-full">
+              <div class="thumb-container">
+                <img src="/static/images/flags/{{country}}-256.png" class="thumb-image">
+                <div class="thumb-overlay">
+
+                 <div class="thumb-overlay-link">
+                   <a href={{ url_for('podcast.podcast_country',country=country) }} class="thumb-link-text" title="Play">{{country}}</a>
+                 </div>
+                </div>
+              </div>
+         </div>
+
+        {% endfor %}
+
+       </div>
 
       </div>
     

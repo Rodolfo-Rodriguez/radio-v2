@@ -3,6 +3,7 @@ import os, sys
 import xml.etree.ElementTree as ET
 import wget
 import eyed3
+import datetime
 
 from mpd import MPDClient
 
@@ -32,12 +33,18 @@ class PodcastInfo:
 		self.playlist_file = os.path.join(CONFIG.PLAYLIST_DIR, podcast.playlist + '.m3u')
 		self.pod_uri = CONFIG.BASE_URI + podcast.pod_dir
 
-	def update_items_list(self):
+	def update_feed(self):
 
 		if os.path.isfile(self.feed_file):
 			os.remove(self.feed_file)
 		
 		wget.download(self.podcast.feed_url, self.feed_file)    	
+
+
+	def update_items_list(self):
+
+		if not(os.path.isfile(self.feed_file)):		
+			wget.download(self.podcast.feed_url, self.feed_file)    	
 
 		tree = ET.parse(self.feed_file)
 		root = tree.getroot()
@@ -160,9 +167,16 @@ class PodcastInfo:
 
 			## Tag File
 
-			pub_date = item_pub_date.split(':')[0]
-			pub_date = pub_date[0:-3]
-			title_tag = pub_date + ' - ' + item_title
+			pub_date_d = int(item_pub_date.split(' ')[1])
+			pub_date_mn = item_pub_date.split(' ')[2]
+			pub_date_y = int(item_pub_date.split(' ')[3])
+
+			pub_date_m = datetime.datetime.strptime(pub_date_mn, '%b').month
+
+			pub_date = datetime.date(pub_date_y, pub_date_m, pub_date_d)
+			pub_date_txt = pub_date.strftime('%Y.%m.%d')
+
+			title_tag = pub_date_txt + ' - ' + item_title
 
 			if '.mp3' in ep_file:
 				self.tag_file(pod_ep_name,title_tag)

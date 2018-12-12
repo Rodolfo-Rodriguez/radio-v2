@@ -55,7 +55,7 @@ def playling():
         redirect_page = url_for('podcast.podcast_show', id=radio_player.podcast.id)
 
     else:
-        redirect_page = url_for('radio.radio_all')
+        redirect_page = url_for('base.home')
 
     session['last_url'] = redirect_page
     

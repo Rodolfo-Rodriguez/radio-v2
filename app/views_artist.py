@@ -44,6 +44,18 @@ def artist_all():
 
     return render_template(template_page, artist_list=artist_list, radio_player=radio_player, title="All Artists")
 
+# ---> Fav Artists
+@artist.route('/artist/favorite', methods=['GET'])
+def artist_favorite():
+
+    artist_list = Artist.query.filter(Artist.fav==True).order_by(desc(Artist.stars)).all()
+
+    session['last_url'] = url_for('artist.artist_favorite')
+
+    template_page = 'artist_grid.html'
+
+    return render_template(template_page, artist_list=artist_list, radio_player=radio_player, title="Favorite Artists")
+
 # ---> Artist Styles
 @artist.route('/artist/styles', methods=['GET'])
 def artist_styles():
@@ -106,13 +118,13 @@ def artist_country(country):
 def artist_show(id):
 
     artist = Artist.query.filter_by(id=id).first()
-    album_list = radio_player.artist_albums(artist)
+    album_info = radio_player.artist_albums(artist)
 
     session['last_url'] = url_for('artist.artist_show', id=id)
 
     template_page = 'artist_show.html'
 
-    return render_template(template_page, album_list=album_list, artist=artist, radio_player=radio_player, social_sites=CONFIG.SOCIAL_SITES)
+    return render_template(template_page, album_info=album_info, artist=artist, radio_player=radio_player, social_sites=CONFIG.SOCIAL_SITES)
 
 # ---> Artist Album
 @artist.route('/artist/album/<artist_id>/<album>', methods=['GET'])
@@ -120,12 +132,13 @@ def artist_album(artist_id,album):
 
     artist = Artist.query.filter_by(id=artist_id).first()
     songs_list = radio_player.album_songs(artist,album)
+    album_info = radio_player.album_info(artist, album)
 
     session['last_url'] = url_for('artist.artist_album', artist_id=artist_id, album=album)
 
     template_page = 'artist_album_show.html'
 
-    return render_template(template_page, artist=artist, album=album, songs_list=songs_list, radio_player=radio_player, social_sites=CONFIG.SOCIAL_SITES)
+    return render_template(template_page, artist=artist, album_info=album_info, songs_list=songs_list, radio_player=radio_player, social_sites=CONFIG.SOCIAL_SITES)
 
 # ---> Load Album
 @artist.route('/artist/album/load/<artist_id>/<album>', methods=['GET'])
@@ -135,11 +148,11 @@ def artist_album_load(artist_id,album):
     songs_list = radio_player.album_songs(artist,album)
     radio_player.load_album(artist,album)
 
-    session['last_url'] = url_for('artist.artist_album', artist_id=artist_id, album=album)
+    redirect_page = url_for('artist.artist_album', artist_id=radio_player.artist.id, album=radio_player.album)
 
-    template_page = 'artist_album_show.html'
+    session['last_url'] = redirect_page
 
-    return render_template(template_page, artist=artist, album=album, songs_list=songs_list, radio_player=radio_player, social_sites=CONFIG.SOCIAL_SITES)
+    return redirect(redirect_page)
 
 # ---> Song Play
 @artist.route('/artist/album/song_play/<pos>', methods=['GET'])
@@ -151,11 +164,11 @@ def artist_album_song_play(pos):
     radio_player.play_song(pos)
     songs_list = radio_player.album_songs(artist,album)
 
-    session['last_url'] = url_for('artist.artist_album',artist_id=artist.id,album=album)
+    redirect_page = url_for('artist.artist_album', artist_id=radio_player.artist.id, album=radio_player.album)
 
-    template_page = 'artist_album_show.html'
+    session['last_url'] = redirect_page
 
-    return render_template(template_page, artist=artist, album=album, songs_list=songs_list, radio_player=radio_player, social_sites=CONFIG.SOCIAL_SITES)
+    return redirect(redirect_page)
 
 
 #################################################################################################################################
@@ -192,7 +205,7 @@ def artist_add():
         db.session.add(artist)
         db.session.commit()
 
-        artist_albums_path = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_ALBUMS_IMG_DIR, name)
+        artist_albums_path = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_ALBUM_IMG_DIR, name)
 
         if not(os.path.exists(artist_albums_path)):
             os.mkdir(artist_albums_path)
@@ -296,21 +309,6 @@ def artist_album_edit_image(id,album):
     return render_template(template_page, form=form,radio_player=radio_player)
 
 
-# ---> Artist Set Stars
-@artist.route('/artist/stars/<id>/<stars>', methods=['GET'])
-def artist_stars(id,stars):
-    artist = Artist.query.filter_by(id=id).first()
-
-    artist.stars = int(stars)
-
-    db.session.commit()
-
-    redirect_page = url_for('artist.artist_show',id=id)
-
-    session['last_url'] = redirect_page
-
-    return redirect(redirect_page)
-
 #################################################################################################################################
 # Artist Link -> Add, Edit & Delete
 #################################################################################################################################
@@ -324,7 +322,11 @@ def artist_add_link(id):
     if form.validate_on_submit():
 
         name = form.name.data
+        social_name = form.social_name.data
         url = form.url.data
+
+        if social_name != 'none':
+            name = social_name
 
         artist = Artist.query.filter_by(id=id).first()
 
@@ -392,4 +394,58 @@ def artist_link_delete(id):
     session['last_url'] = redirect_page
 
     return redirect(redirect_page)
+
+###########################################################################################
+## Fav, Unfav, Stars
+###########################################################################################
+
+# ---> Artist Fav
+@artist.route('/artist_fav/<id>', methods=['GET'])
+def artist_fav(id):
+    artist = Artist.query.filter_by(id=id).first()
+
+    artist.fav = True
+
+    db.session.commit()
+
+    redirect_page = url_for('artist.artist_show', id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+# ---> Artist UnFav
+@artist.route('/artist_unfav/<id>', methods=['GET'])
+def artist_unfav(id):
+    artist = Artist.query.filter_by(id=id).first()
+
+    artist.fav = False
+
+    db.session.commit()
+
+    redirect_page = url_for('artist.artist_show', id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+
+# ---> Artist Set Stars
+@artist.route('/artist/stars/<id>/<stars>', methods=['GET'])
+def artist_stars(id,stars):
+    artist = Artist.query.filter_by(id=id).first()
+
+    artist.stars = int(stars)
+
+    db.session.commit()
+
+    redirect_page = url_for('artist.artist_show',id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+
+
+
 

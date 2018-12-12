@@ -5,10 +5,11 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-player = Blueprint('player', __name__)
+player = Blueprint('player', __name__, template_folder='templates/base')
 
 from .models import Radios, Artist, Playlist, Podcast
 from . import db, radio_player
+from .forms import URLForm
 
 from sqlalchemy import desc
 
@@ -97,6 +98,31 @@ def play_song_pos(pos):
     redirect_page = session['last_url']
 
     return redirect(redirect_page)
+
+ #---> Play Song Pos
+
+@player.route('/play_url', methods=['GET', 'POST'])
+def play_url():
+
+    form = URLForm()
+
+    if form.validate_on_submit():
+
+        url = form.url.data
+    
+        radio_player.play_url(url)
+
+        redirect_page = '/'
+
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+    session['last_url'] = url_for('player.play_url')
+
+    template_page = 'play_url.html'
+
+    return render_template(template_page, form=form, radio_player=radio_player)
 
 
 ###########################################################################################

@@ -47,7 +47,7 @@
 
                  {% if (radio_player.loaded=='playlist') and (radio_player.playlist.id==playlist.id) %}
 
-                   {% if radio_player.song_pos==song['pos'] %}
+                   {% if radio_player.server_currentsong('pos')==song['pos'] %}
                      <div class="song-play">
                        <a href="{{url_for('playlist.playlist_play_song', id=playlist.id, pos=song['pos'])}}" class="card-link text-playing"><i class="far fa-play-circle fa-lg"></i></a>
                      </div>

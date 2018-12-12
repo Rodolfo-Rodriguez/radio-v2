@@ -19,6 +19,12 @@
          </div>
        </div>
 
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-center"><a href="/podcast/feed/update/{{podcast.id}}" class="card-link"><strong>Refresh Feed</strong></a></li>
+        </ul>
+      </div>
+
     </div>
 </div>
 
@@ -55,6 +61,7 @@
              </li>
 
           {% endfor %}
+
         </ul>
 
     </div>
@@ -67,3 +74,18 @@
 <!-- Page -->
 
 {% endblock body %}
+
+
+{% block scripts %}
+
+  <script>
+
+      $('.episode-icon').click(function(){
+        icon = $(this).find("i");
+        icon.toggleClass("fas fa-download fas fa-spinner fa-spin episode-down-icon")
+      })
+
+  </script>
+
+
+{% endblock scripts %}

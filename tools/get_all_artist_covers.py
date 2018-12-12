@@ -21,7 +21,7 @@ skip_dirs = ['.AppleDouble']
 
 artist_dir = sys.argv[1]
 
-dest_dir = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_ALBUMS_IMG_DIR)
+dest_dir = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_ALBUM_IMG_DIR)
 
 audio_files = []
 

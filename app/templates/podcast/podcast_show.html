@@ -2,6 +2,13 @@
 
 {% block title %} Album {% endblock %}
 
+{% block head %}
+
+    <!-- Progressbar -->
+    <link rel="stylesheet" type="text/css" href="/static/css/progressbar.css"/>
+
+{% endblock head %}
+
 {% block body %}
 
 <div class="row">
@@ -18,17 +25,15 @@
       </div>
 
 
-      {% if (radio_player.loaded=='podcast') and (radio_player.podcast.id==podcast.id) and (radio_player.state=='play')%}
+      {% if (radio_player.loaded=='podcast') and (radio_player.podcast.id==podcast.id) %}
 
         <div class="card-body">
 
-          <div class="player-controls">
-            <div class="player-mid-control" id="id_time">Time: {{radio_player.elapsed_time_str()}}</div>
-          </div>
-          <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar" style="width: {{radio_player.play_progress()}};" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
           
+          <div id="container_play"></div> 
+          
+          {% if (radio_player.state!='stop') %}
+
           <div class="player-controls">
             <div class="player-mid-control"><a href="/seekplus/30">+30s</a></div>
             <div class="player-mid-control"><a href="/seekplus/60">+60s</a></div>
@@ -41,6 +46,8 @@
             <div class="player-mid-control"><a href="/seekless/300">-5m</a></div>
             <div class="player-mid-control"><a href="/seekless/900">-15m</a></div>
           </div>
+          
+          {% endif %}
 
         </div>
 
@@ -53,15 +60,36 @@
                <div class="thumb-overlay-main-player">
                    <a href="{{ url_for('podcast.podcast_load', id=podcast.id) }}" class="thumb-icon-main-player" title="Play"><i class="far fa-play-circle fa-lg"></i></a>
                </div>
+
+             <div class="thumb-overlay-fav">
+               {% if podcast.fav %}
+                  <a href="{{url_for('podcast.podcast_unfav',id=podcast.id)}}"><i class="fas fa-star"></i></a>           
+               {% else %}
+                  <a href="{{url_for('podcast.podcast_fav',id=podcast.id)}}"><i class="far fa-star"></i></a>            
+               {% endif %}
+             </div>
+
            </div>
          </div>
        </div>
 
       <div class="card-body">
         <ul class="list-group list-group-flush">
-         <li class="list-group-item text-center"><a href="/podcast/country/{{podcast.country}}" class="card-link"><strong>{{podcast.country}}</strong></a></li>
+
+         {% if podcast.stars %}
+         <li class="list-group-item text-center" style="font-size: 1.5rem;">
+         {% for star in range(0,podcast.stars) %}
+           <a href="/podcast/stars/{{podcast.id}}/{{star + 1}}"><i class="fas fa-star"></i></a>
+         {% endfor %}
+         {% for star in range(podcast.stars,5) %}
+           <a href="/podcast/stars/{{podcast.id}}/{{star + 1}}"><i class="far fa-star"></i></a>
+         {% endfor %}
+         </li>
+         {% endif %}
+
+         <li class="list-group-item text-center"><a class="card-link" href="/podcast/country/{{podcast.country}}"> <img src="/static/images/flags/{{podcast.country}}-24.png"></a></li>
          <li class="list-group-item text-center"><a href="/podcast/style/{{podcast.style}}" class="card-link"><strong>{{podcast.style}}</strong></a></li>
-         <li class="list-group-item text-center"><a href="/podcast/feed/episodes/{{podcast.id}}" class="card-link"><strong>Check Feed</strong></a></li>
+         <li class="list-group-item text-center"><a href="/podcast/feed/episodes/{{podcast.id}}" class="card-link"><strong>Check Feed Episodes</strong></a></li>
         </ul>
       </div>
 
@@ -89,7 +117,7 @@
 
                  {% if (radio_player.loaded=='podcast') and (radio_player.podcast.id==podcast.id) %}
                    
-                   {% if radio_player.song_pos==song['pos'] %}
+                   {% if radio_player.server_currentsong('pos')==song['pos'] %}
                      <div class="song-play">
                       {% if radio_player.state=='play' %}
                         <a href="/pause" class="card-link text-playing"><i class="far fa-pause-circle fa-lg"></i></a>
@@ -180,16 +208,90 @@
   </div>
 </div>
 
-
 </div>
 
-<!-- Page -->
 
-<!-- <script type="text/javascript">
-   setTimeout(function(){
-       // location.reload();
-   },10);
-</script>
- -->
+{% endblock %}
 
-{% endblock body %}
+{% block scripts %}
+
+  <!-- Progress Bar JS -->
+  <script type="text/javascript" src="/static/js/progressbar.js"></script>
+
+  <!-- Player Bar JS -->
+  <script type="text/javascript">
+
+    var bar = new ProgressBar.Line(container_play, {
+      strokeWidth: 2,
+      easing: 'easeInOut',
+      duration: 1000,
+      color: '#00DD00',
+      trailColor: '#eee',
+      trailWidth: 1,
+      svgStyle: {width: '100%', height: '100%'},
+      text: {
+        style: {
+          color: '#FFFFFF',
+          position: 'absolute',
+          left: '120px',
+          bottom: '15px',
+          padding: 0,
+          margin: 0,
+        },
+      },
+    });
+
+
+    stime = {{radio_player.server_currentsong('time')}}   
+    elapsed = {{radio_player.server_status('elapsed')}}
+    val = elapsed / stime
+
+    init_msec = Date.now()
+    act_ela = elapsed * 1000
+    act_res = stime * 1000 - act_ela
+
+    val = act_ela / 1000 / stime
+
+    minutes = Math.floor((act_res / 1000/ 60));
+    seconds = Math.floor(act_res / 1000 - (minutes * 60));
+
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+
+    time_txt = minutes + ':' + seconds
+
+    bar.set(val)
+    bar.setText(time_txt);
+    
+    if ('{{radio_player.state}}' == 'play') {
+
+      setInterval(function() {
+        if ( bar.value() > 1 ) {
+          location.reload()
+        }
+
+        act_msec = Date.now()
+        dif_msec = act_msec - init_msec
+        act_ela = elapsed * 1000 + dif_msec
+        act_res = stime * 1000 - act_ela
+        val = act_ela / 1000 / stime
+
+        minutes = Math.floor((act_res / 1000/ 60));
+        seconds = Math.floor(act_res / 1000 - (minutes * 60));
+
+        if (minutes < 10) {minutes = "0"+minutes;}
+        if (seconds < 10) {seconds = "0"+seconds;}
+
+        time_txt = minutes + ':' + seconds
+
+        bar.animate(val);
+        bar.setText(time_txt);
+
+      }, 900);
+    
+    }
+    
+
+  </script>
+
+{% endblock %}

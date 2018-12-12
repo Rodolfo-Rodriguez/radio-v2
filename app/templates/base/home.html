@@ -12,6 +12,7 @@
       <h4 class="card-header">Radio Player</h4>
       <div class="card-body">
 
+
       <div class="row">
 
         <div class="col-lg-2">
@@ -52,23 +53,77 @@
 
         <div class="col-lg-2">
           <div class="card text-white bg-primary mb-3">
-            <div class="card-header">Album</div>
+            <div class="card-header">Playlist Length</div>
             <div class="card-body">
-              <h5 class="card-title">{{ radio_player.album }}</h5>
+              <h5 class="card-title">{{ radio_player.server_status('playlistlength') }}</h5>
             </div>
           </div>
         </div>
 
         <div class="col-lg-2">
           <div class="card text-white bg-primary mb-3">
-            <div class="card-header">Song Pos</div>
+            <div class="card-header">Pos</div>
             <div class="card-body">
-              <h5 class="card-title">{{ radio_player.song_pos }}</h5>
+              <h5 class="card-title">{{ radio_player.server_currentsong('pos') }}</h5>
             </div>
           </div>
         </div>
 
       </div>
+
+      <div class="row">
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Title</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('title') }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Artist</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('artist') }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Album</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('album') }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Stream Server</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('name') }}</h5>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-12">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">File</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('file') }}</h5>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+
 
       </div>
     </div>
@@ -89,6 +144,15 @@
             <div class="card-header">Radios</div>
             <div class="card-body">
               <h5 class="card-title">{{ db_manager.count_records('Radios') }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Programs</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ db_manager.count_records('Program') }}</h5>
             </div>
           </div>
         </div>
@@ -158,6 +222,8 @@
     </div>
   </div>
 </div>
+
+
 
 
 <!-- Page -->

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from flask_wtf.file import FileField, FileRequired
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo
 from wtforms import ValidationError
@@ -18,17 +18,14 @@ class ImageForm(FlaskForm):
     image_file = FileField('Image File',validators=[FileRequired()])
     submit = SubmitField('Submit')
 
-class PlaylistForm(FlaskForm):
+class ProgramForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    image = StringField('Image', validators=[DataRequired()])
-    playlist = StringField('Playlist', validators=[DataRequired()])
+    times = StringField('Times')
+    week_days = StringField('Week Days')
     description = StringField('Description')
-    type = StringField('Type')
-    submit = SubmitField('Submit')
-
-class LinkForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    url = StringField('URL', validators=[DataRequired()])
+    country = StringField('Country')
+    style = StringField('Style')
+    twitter = StringField('Twitter')
     submit = SubmitField('Submit')
 
 class ArtistForm(FlaskForm):
@@ -39,6 +36,27 @@ class ArtistForm(FlaskForm):
     style = StringField('Style')
     description = StringField('Description')
     submit = SubmitField('Submit')
+
+class PlaylistForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    image = StringField('Image', validators=[DataRequired()])
+    playlist = StringField('Playlist', validators=[DataRequired()])
+    description = StringField('Description')
+    type = StringField('Type')
+    submit = SubmitField('Submit')
+
+class LinkForm(FlaskForm):
+    name = StringField('Name')
+    social_name = SelectField('Social', choices=[('none', 'none'), 
+                                                ('twitter', 'Twitter'), 
+                                                ('instagram', 'Instagram'),
+                                                ('youtube','Youtube'),
+                                                ('spotify','Spotify'),
+                                                ('apple','Apple Music'),
+                                                ('soundcloud','Soundcloud')])
+    url = StringField('URL', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
 
 class PodcastForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
@@ -53,8 +71,13 @@ class PodcastForm(FlaskForm):
     publisher = StringField('Publisher')
     description = StringField('Description')
     priority = StringField('Priority')
+    stars = StringField('Stars')
     submit = SubmitField('Submit')
 
 class TagForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class URLForm(FlaskForm):
+    url = StringField('URL', validators=[DataRequired()])
     submit = SubmitField('Submit')

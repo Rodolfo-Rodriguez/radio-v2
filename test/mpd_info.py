@@ -59,9 +59,9 @@ print '\n'
 # print date_list
 # print '\n'
 
-# print "########## Search  ##########"
-# print search_res
-# print '\n'
+print "########## Search  ##########"
+print search_res
+print '\n'
 
 # print "########## Saved Playlist  ##########"
 # print saved_playlist
