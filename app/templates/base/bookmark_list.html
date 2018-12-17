@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %} Bookmark List {% endblock %}
+
+{% block head %}
+
+    <!-- DataTables CSS -->
+    <link "https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+
+{% endblock head %}
+
+
+{% block body %}
+
+<div class="bs-component">
+
+<div class="col-grid-full">
+
+  <div class="card text-white bg-dark" style="flex: 0 0 100%">
+
+  <h5 class="card-header">Bookmark Radios</h5>
+
+  <div class="card-body">
+
+  <table width="100%" class="table table-striped table-hover" id="dataTables">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Priority</th>
+        <th>URL</th>
+        <th>Image URL</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for bookmark in bookmark_list %}
+        <tr>
+          <td>{{bookmark.id}}</td>
+          <td>{{bookmark.priority}}</td>
+          <td>{{bookmark.url}}</td>
+          <td>{{bookmark.image_url}}</td>
+          <td><a href="/bookmark/edit/{{bookmark.id}}">Edit</a></td>
+          <td><a href="/bookmark/delete/{{bookmark.id}}">Delete</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+  </div>
+
+  </div>
+
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}
+
+{% block scripts %}
+
+  <!-- DataTables JavaScript -->
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+  <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+  <script>
+
+      $(document).ready(function() {
+          $('#dataTables').DataTable({
+              responsive: true,
+              stateSave: true,
+              "lengthMenu": [ 25,50 ],
+              "dom": '<"class=form-control"f<t>pl>'
+          });
+      });
+
+  </script>
+
+
+{% endblock scripts %}

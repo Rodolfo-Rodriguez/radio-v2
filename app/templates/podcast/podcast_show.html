@@ -24,12 +24,36 @@
         <p class="card-text">{{podcast.description}}</p>
       </div>
 
+       <div class="card-body" style ="padding: 5px;">
+         <div class="thumb-container">
+           <img src="/static/images/playlists/{{podcast.image}}" class="thumb-image">
+           <div class="thumb-overlay">
+               <div class="thumb-overlay-main-player">
+                   <a href="{{ url_for('podcast.podcast_load', id=podcast.id) }}" class="thumb-icon-main-player" title="Play"><i class="far fa-play-circle fa-lg"></i></a>
+               </div>
 
-      {% if (radio_player.loaded=='podcast') and (radio_player.podcast.id==podcast.id) %}
+             <div class="thumb-overlay-fav">
+               {% if podcast.fav %}
+                  <a href="{{url_for('podcast.podcast_unfav',id=podcast.id)}}"><i class="fas fa-star"></i></a>           
+               {% else %}
+                  <a href="{{url_for('podcast.podcast_fav',id=podcast.id)}}"><i class="far fa-star"></i></a>            
+               {% endif %}
+             </div>
+
+             <div class="thumb-overlay-bookmark">
+                <a href="{{url_for('podcast.podcast_bookmark',id=podcast.id)}}"><i class="fas fa-bookmark"></i></a>          
+             </div>
+
+           </div>
+         </div>
+       </div>
+
+
+        {% if (radio_player.loaded=='podcast') and (radio_player.podcast.id==podcast.id) %}
 
         <div class="card-body">
-
           
+          <p class="card-text text-center"><strong>{{radio_player.server_currentsong('title')}}</strong></p>
           <div id="container_play"></div> 
           
           {% if (radio_player.state!='stop') %}
@@ -53,25 +77,16 @@
 
        {% endif %}
 
-       <div class="card-body" style ="padding: 5px;">
-         <div class="thumb-container">
-           <img src="/static/images/playlists/{{podcast.image}}" class="thumb-image">
-           <div class="thumb-overlay">
-               <div class="thumb-overlay-main-player">
-                   <a href="{{ url_for('podcast.podcast_load', id=podcast.id) }}" class="thumb-icon-main-player" title="Play"><i class="far fa-play-circle fa-lg"></i></a>
-               </div>
 
-             <div class="thumb-overlay-fav">
-               {% if podcast.fav %}
-                  <a href="{{url_for('podcast.podcast_unfav',id=podcast.id)}}"><i class="fas fa-star"></i></a>           
-               {% else %}
-                  <a href="{{url_for('podcast.podcast_fav',id=podcast.id)}}"><i class="far fa-star"></i></a>            
-               {% endif %}
-             </div>
+        {% if (radio_player.loaded=='podcast-url') and (radio_player.podcast.id==podcast.id) %}
 
-           </div>
-         </div>
-       </div>
+        <div class="card-body">
+          
+          <p class="card-text text-center"><strong>{{radio_player.server_currentsong('file')}}</strong></p>
+          
+        </div>
+
+       {% endif %}
 
       <div class="card-body">
         <ul class="list-group list-group-flush">
@@ -152,6 +167,11 @@
         </ul>
 
     </div>
+
+    <div class="card-footer">
+      <p class="card-text text-right"><a class="card-link" href="/podcast/add_episode/{{podcast.id}}">Add Episode</a></p>
+    </div>
+
    </div>
   </div>
 </div>
@@ -233,7 +253,7 @@
         style: {
           color: '#FFFFFF',
           position: 'absolute',
-          left: '120px',
+          left: '100px',
           bottom: '15px',
           padding: 0,
           margin: 0,
@@ -252,13 +272,15 @@
 
     val = act_ela / 1000 / stime
 
-    minutes = Math.floor((act_res / 1000/ 60));
-    seconds = Math.floor(act_res / 1000 - (minutes * 60));
+    hours = Math.floor((act_res / 1000/ 60/ 60));
+    minutes = Math.floor((act_res / 1000/ 60 - (hours * 60)));
+    seconds = Math.floor(act_res / 1000 - (minutes * 60) - (hours * 3600));
 
+    if (hours < 10) {hours = "0"+hours;}
     if (minutes < 10) {minutes = "0"+minutes;}
     if (seconds < 10) {seconds = "0"+seconds;}
 
-    time_txt = minutes + ':' + seconds
+    time_txt = hours + ':' + minutes + ':' + seconds
 
     bar.set(val)
     bar.setText(time_txt);
@@ -276,13 +298,15 @@
         act_res = stime * 1000 - act_ela
         val = act_ela / 1000 / stime
 
-        minutes = Math.floor((act_res / 1000/ 60));
-        seconds = Math.floor(act_res / 1000 - (minutes * 60));
+        hours = Math.floor((act_res / 1000/ 60/ 60));
+        minutes = Math.floor((act_res / 1000/ 60 - (hours * 60)));
+        seconds = Math.floor(act_res / 1000 - (minutes * 60) - (hours * 3600));
 
+        if (hours < 10) {hours = "0"+hours;}
         if (minutes < 10) {minutes = "0"+minutes;}
         if (seconds < 10) {seconds = "0"+seconds;}
 
-        time_txt = minutes + ':' + seconds
+        time_txt = hours + ':' + minutes + ':' + seconds
 
         bar.animate(val);
         bar.setText(time_txt);

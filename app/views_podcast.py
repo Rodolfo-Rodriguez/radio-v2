@@ -7,9 +7,9 @@ sys.setdefaultencoding('utf8')
 
 podcast = Blueprint('podcast', __name__, template_folder='templates/podcast')
 
-from .models import Podcast, Podcast_Link
+from .models import Podcast, Podcast_Link, Bookmark
 from . import db, radio_player, CONFIG
-from .forms import ImageForm, LinkForm, PodcastForm, TagForm
+from .forms import ImageForm, LinkForm, PodcastForm, TagForm, BookmarkForm, URLForm
 
 from sqlalchemy import desc
 
@@ -144,6 +144,21 @@ def podcast_load(id):
     return redirect(redirect_page)
 
 
+# ---> Podcast Play Track
+@podcast.route('/podcast/play_track/<id>/<track_num>', methods=['GET'])
+def podcast_play_track(id,track_num):
+
+    podcast = Podcast.query.filter_by(id=id).first()
+    pod_info = PodcastInfo(podcast)
+
+    ep_url = pod_info.episode_url(track_num)
+
+    radio_player.play_podcast_url(podcast,ep_url)
+
+    redirect_page = session['last_url']
+
+    return redirect(redirect_page)
+
 # ---> Feed Update
 @podcast.route('/podcast/feed/update/<id>', methods=['GET'])
 def podcast_feed_update(id):
@@ -190,6 +205,33 @@ def podcast_download_episode(id,track_num):
 
     return redirect(redirect_page)
 
+# ---> Add Episode
+@podcast.route('/podcast/add_episode/<id>', methods=['GET', 'POST'])
+def podcast_add_episode(id):
+
+    form = URLForm()
+    
+    if form.validate_on_submit():
+
+        url = form.url.data
+        name = form.name.data
+
+        podcast = Podcast.query.filter_by(id=id).first()
+        pod_info = PodcastInfo(podcast)
+        pod_info.download_episode_from_url(url,name)
+
+        redirect_page = url_for('podcast.podcast_show',id=id)
+
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+    session['last_url'] = url_for('podcast.podcast_add_episode',id=id)
+
+    template_page = 'podcast_add_episode.html'
+
+    return render_template(template_page, form=form, radio_player=radio_player)
+
 
 # ---> Delete Episode
 @podcast.route('/podcast/delete_episode/<id>/<track>', methods=['GET', 'POST'])
@@ -226,13 +268,15 @@ def podcast_add():
 
         stars = 1
         fav = False
+        retag = False
 
         podcast = Podcast(name=name,
                         image=image,
                         playlist=playlist,
                         pod_dir=pod_dir,
                         stars=stars,
-                        fav=fav)
+                        fav=fav,
+                        retag=retag)
 
         db.session.add(podcast)
         db.session.commit()
@@ -274,7 +318,7 @@ def podcast_edit(id):
         podcast.feed_filter = form.feed_filter.data
         podcast.publisher = form.publisher.data
         podcast.priority = form.priority.data
-        podcast.stars = form.stars.data
+        podcast.retag = form.retag.data
 
         db.session.commit()
 
@@ -296,7 +340,7 @@ def podcast_edit(id):
     form.feed_filter.data = podcast.feed_filter 
     form.publisher.data = podcast.publisher 
     form.priority.data = podcast.priority 
-    form.stars.data = podcast.stars
+    form.retag.data = podcast.retag 
 
     session['last_url'] = url_for('podcast.podcast_edit',id=id)
 
@@ -466,6 +510,44 @@ def podcast_unfav(id):
     podcast.fav = False
 
     db.session.commit()
+
+    redirect_page = url_for('podcast.podcast_show', id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+# ---> Podcast Bookmark
+@podcast.route('/podcast_bookmark/<id>', methods=['GET'])
+def podcast_bookmark(id):
+    podcast = Podcast.query.filter_by(id=id).first()
+
+    bookmark_url_list = [ bookmark.url for bookmark in radio_player.bookmark_list ]
+
+    url = url_for('podcast.podcast_show',id=id)
+    image_url = '/static/images/playlists/' + podcast.image
+    priority = 29
+
+    if not(url in bookmark_url_list):
+
+        bookmark = Bookmark(url=url,
+                            image_url=image_url,
+                            priority=priority)
+
+        db.session.add(bookmark)
+        db.session.commit()
+
+        radio_player.update_bookmarks()
+
+    else:
+        bookmark = Bookmark.query.filter_by(url=url).first()
+
+        session['last_url'] = url_for('podcast.podcast_show', id=id)
+
+        redirect_page = url_for('base.bookmark_delete',id=bookmark.id)
+
+        return redirect(redirect_page)
+
 
     redirect_page = url_for('podcast.podcast_show', id=id)
 

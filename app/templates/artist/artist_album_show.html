@@ -22,11 +22,19 @@
                  <a href="{{ url_for('artist.artist_album_load', artist_id=artist.id, album=album_info['album']) }}" class="thumb-icon-main-player" title="Play"><i class="far fa-play-circle fa-lg"></i></a>
              </div>
            </div>
+          
+           <div class="thumb-overlay-bookmark">
+             <a href="{{url_for('artist.artist_album_bookmark',id=artist.id, album=album_info['album'])}}"><i class="fas fa-bookmark"></i></a>          
+           </div>
+         
          </div>
+
+       
        </div>
 
       {% if (radio_player.loaded=='album') and (radio_player.artist.id==artist.id) and (radio_player.album==album_info['album'])%}
        <p></p>
+       <p class="card-text text-center"><strong>{{radio_player.server_currentsong('title')}}</strong></p>
        <div id="container_play"></div>
       {% endif %}
 

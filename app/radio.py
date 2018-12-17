@@ -5,7 +5,7 @@ from sqlalchemy import desc
 
 from mpd import MPDClient
 
-from .models import Radios,Program,Artist,Playlist,Podcast
+from .models import Radios,Program,Artist,Playlist,Podcast, Bookmark
 from . import CONFIG
 
 ################################################################################################################################################################
@@ -17,7 +17,7 @@ class RadioPlayer:
       mpd_port = CONFIG.DEFAULT_MPD_PORT
       mpd_servers = CONFIG.MPD_SERVERS
       client = MPDClient()
-      fav_radios = []
+      bookmark_list = []
       state = ''
       loaded = ''
       radio = Radios()
@@ -195,13 +195,9 @@ class RadioPlayer:
                       self.radio = radio
 
 
-      def update_fav_radios(self):
-          radio_list = Radios.query.order_by(desc(Radios.stars)).order_by(desc(Radios.num_plays)).filter_by(fav=True).all()
+      def update_bookmarks(self):
 
-          self.fav_radios = []
-
-          for radio in radio_list:
-            self.fav_radios.append(radio)
+          self.bookmark_list = Bookmark.query.order_by(Bookmark.priority).all()
 
 
       def server_currentsong(self,key_value):
@@ -303,7 +299,7 @@ class RadioPlayer:
             if 'artist' in info:
               artist = info['artist']
             else:
-              artist = playlist
+              artist = playlist_name
 
             songs_list.append({'pos':pos,'title':title,'artist':artist,'track':pos+1,'time':time})
             pos = pos + 1
@@ -472,6 +468,21 @@ class RadioPlayer:
           self.client.disconnect()
 
 
+      def play_podcast_url(self,podcast,url):
+          self.client.connect(self.mpd_client, self.mpd_port)
+          self.client.clear()
+          self.client.add(url)
+          self.client.play(0)
+          self.client.close()
+          self.client.disconnect()
+
+          self.loaded = 'podcast-url'
+          self.state = 'play'
+          self.podcast = podcast
+          self.player_img = '/static/images/playlists/' + podcast.image
+
+
+
 ################################################################################################################################################################
 # Program Info
 ################################################################################################################################################################
@@ -600,7 +611,6 @@ class ProgramsInfo:
     for program in self.radio.program_list:
       if self.is_prog_live(program):
         self.program = program
-        print program.name
 
   
   # ---> Program Time

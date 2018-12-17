@@ -9,8 +9,8 @@ sys.setdefaultencoding('utf8')
 artist = Blueprint('artist', __name__, template_folder='templates/artist')
 
 from . import db, radio_player, CONFIG
-from .models import Artist, Artist_Link
-from .forms import ArtistForm, ImageForm, LinkForm
+from .models import Artist, Artist_Link, Bookmark
+from .forms import ArtistForm, ImageForm, LinkForm, BookmarkForm
 
 from sqlalchemy import desc
 
@@ -424,6 +424,44 @@ def artist_unfav(id):
     db.session.commit()
 
     redirect_page = url_for('artist.artist_show', id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+# ---> Album Bookmark
+@artist.route('/artist/album_bookmark/<id>/<album>', methods=['GET'])
+def artist_album_bookmark(id,album):
+    artist = Artist.query.filter_by(id=id).first()
+
+    bookmark_url_list = [ bookmark.url for bookmark in radio_player.bookmark_list ]
+
+    url = url_for('artist.artist_album',artist_id=id,album=album)
+    image_url = '/static/images/albums/' + artist.name + '/' + album + '.png'
+    priority = 19
+
+    if not(url in bookmark_url_list):
+
+        bookmark = Bookmark(url=url,
+                            image_url=image_url,
+                            priority=priority)
+
+        db.session.add(bookmark)
+        db.session.commit()
+
+        radio_player.update_bookmarks()
+
+    else:
+        bookmark = Bookmark.query.filter_by(url=url).first()
+
+        session['last_url'] = url_for('artist.artist_album', artist_id=id, album=album)
+
+        redirect_page = url_for('base.bookmark_delete',id=bookmark.id)
+
+        return redirect(redirect_page)
+
+
+    redirect_page = url_for('artist.artist_album', artist_id=id, album=album)
 
     session['last_url'] = redirect_page
 

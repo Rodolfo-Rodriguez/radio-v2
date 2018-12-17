@@ -10,7 +10,7 @@ sys.setdefaultencoding('utf8')
 radio = Blueprint('radio', __name__, template_folder='templates/radio')
 
 from . import db, radio_player, CONFIG
-from .models import Radios, Program, Artist, Playlist, Podcast, Radio_Link
+from .models import Radios, Program, Artist, Playlist, Podcast, Radio_Link, Bookmark
 from .forms import RadioForm, ImageForm, ProgramForm, LinkForm
 
 from radio import RadioPlayer, ProgramsInfo
@@ -414,7 +414,7 @@ def radio_link_delete(id):
     return redirect(redirect_page)
 
 ###########################################################################################
-## Fav, Unfav, Stars
+## Fav, Unfav, Bookmark, Stars
 ###########################################################################################
 
 # ---> Radio Fav
@@ -425,8 +425,6 @@ def radio_fav(id):
     radio.fav = True
 
     db.session.commit()
-
-    radio_player.update_fav_radios()
 
     redirect_page = url_for('radio.radio_show', id=id)
 
@@ -443,14 +441,49 @@ def radio_unfav(id):
 
     db.session.commit()
 
-    radio_player.update_fav_radios()
-
     redirect_page = url_for('radio.radio_show', id=id)
 
     session['last_url'] = redirect_page
 
     return redirect(redirect_page)
 
+# ---> Radio Bookmark
+@radio.route('/radio_bookmark/<id>', methods=['GET'])
+def radio_bookmark(id):
+    radio = Radios.query.filter_by(id=id).first()
+
+    bookmark_url_list = [ bookmark.url for bookmark in radio_player.bookmark_list ]
+
+    url = url_for('radio.playradio_menu',id=id)
+    image_url = '/static/images/radios/' + radio.image
+    priority = 9
+
+    if not(url in bookmark_url_list):
+
+        bookmark = Bookmark(url=url,
+                            image_url=image_url,
+                            priority=priority)
+
+        db.session.add(bookmark)
+        db.session.commit()
+
+        radio_player.update_bookmarks()
+    
+    else:
+        bookmark = Bookmark.query.filter_by(url=url).first()
+
+        session['last_url'] = url_for('radio.radio_show', id=id)
+
+        redirect_page = url_for('base.bookmark_delete',id=bookmark.id)
+
+        return redirect(redirect_page)
+
+
+    redirect_page = url_for('radio.radio_show', id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
 
 # ---> Radio Set Stars
 @radio.route('/radio/stars/<id>/<stars>', methods=['GET'])

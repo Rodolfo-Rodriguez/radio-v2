@@ -9,14 +9,14 @@ client = MPDClient()
 
 client.connect(mpd_client, mpd_port)
 
-artist = 'La Vela Puerca'
+playlist_name = 'AppsMac'
 
-alb_list = client.list('album','artist',artist)
+plinfo = client.listplaylistinfo(playlist_name)
 
-print "########## Search  ##########"
-print alb_list
-print '\n'
+print plinfo
 
 
 client.close()
 client.disconnect()
+
+

@@ -57,8 +57,8 @@
               <a class="navbar-brand nav-link" href="/pause"><i class="fas fa-pause"></i></a>
               <a class="navbar-brand nav-link" href="/next"><i class="fas fa-forward"></i></a>
 
-              {% for radio in radio_player.fav_radios %}
-                 <a class="navbar-brand nav-link" href="/playradio_menu/{{radio.id}}"><img src="/static/images/radios/{{radio.image}}" class="navbar-img"></a>
+              {% for bookmark in radio_player.bookmark_list %}
+                 <a class="navbar-brand nav-link" href="{{bookmark.url}}"><img src="{{bookmark.image_url}}" class="navbar-img"></a>
               {% endfor %}
 
            </ul>
@@ -113,6 +113,13 @@
                  <a class="dropdown-item" href="/playlist/list"><strong>List Playlist</strong></a>
                  <a class="dropdown-item" href="/playlist/all"><strong>All Playlists</strong></a>
                  <a class="dropdown-item" href="/playlist/type"><strong>Types</strong></a>
+               </div>
+             </li>
+
+             <li class="nav-item dropdown">
+               <a class="nav-link" data-toggle="dropdown" href="#" id="download"><i class="fas fa-bookmark"></i></a>
+               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="download">
+                 <a class="dropdown-item" href="/bookmark/list"><strong>List Bookmarks</strong></a>
                </div>
              </li>
 

@@ -66,6 +66,7 @@ class Podcast(db.Model):
     publisher = db.Column(db.String(80),nullable=True)
     priority = db.Column(db.Integer, nullable=True)
     fav = db.Column(db.Boolean,nullable=True)
+    retag = db.Column(db.Boolean,nullable=True)
     podcast_link_list = db.relationship('Podcast_Link', backref='podcast')
 
 class Radio_Link(db.Model):
@@ -88,3 +89,11 @@ class Podcast_Link(db.Model):
     name = db.Column(db.String(80),nullable=False)
     url = db.Column(db.String(120),nullable=False)
     podcast_id = db.Column(db.Integer, db.ForeignKey('podcast.id'), nullable=False)
+
+class Bookmark(db.Model):
+    __tablename__ = 'bookmark'
+    id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String(120),nullable=False)
+    image_url = db.Column(db.String(120),nullable=False)
+    priority = db.Column(db.Integer, nullable=True)
+

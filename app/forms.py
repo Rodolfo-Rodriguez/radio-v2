@@ -72,6 +72,7 @@ class PodcastForm(FlaskForm):
     description = StringField('Description')
     priority = StringField('Priority')
     stars = StringField('Stars')
+    retag = BooleanField('Add Date to Tag')
     submit = SubmitField('Submit')
 
 class TagForm(FlaskForm):
@@ -79,5 +80,12 @@ class TagForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class URLForm(FlaskForm):
+    name = StringField('Name')
     url = StringField('URL', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class BookmarkForm(FlaskForm):
+    url = StringField('URL', validators=[DataRequired()])
+    image_url = StringField('URL', validators=[DataRequired()])
+    priority = StringField('Priority')
     submit = SubmitField('Submit')

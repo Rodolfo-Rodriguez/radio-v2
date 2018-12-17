@@ -42,18 +42,24 @@
 
              <li class="list-group-item">
                <div class="episode-list-col">
-                  <div class="episode-track">{{episode['track']}}</div>
                   
                   {% if episode['downloaded'] == 'No' %}
 
+                    <div class="episode-icon"><a href="/podcast/play_track/{{podcast.id}}/{{episode['track']}}"><i class="far fa-play-circle fa-lg"></i></a></div>
                     <div class="episode-date">{{episode['pubdate']}}</div>
                     <div class="episode-title">{{episode['title']}}</div>
+                    <div class="episode-desc">{{episode['description']}}</div>
+                    <div class="episode-length">{{episode['length']}}</div>
                     <div class="episode-icon"><a href="/podcast/download/episode/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-download"></i></a></div>
                   
                   {% else %}
 
+                    <div class="episode-icon text-playing"><a href="/podcast/play_track/{{podcast.id}}/{{episode['track']}}"><i class="far fa-play-circle fa-lg"></i></a></div>
                     <div class="episode-date-down">{{episode['pubdate']}}</div>
                     <div class="episode-title-down">{{episode['title']}}</div>
+                    <div class="episode-desc-down">{{episode['description']}}</div>
+                    <div class="episode-length-down">{{episode['length']}}</div>
+                    <div class="episode-icon"></div>
                   
                   {% endif %}
                

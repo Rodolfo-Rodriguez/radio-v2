@@ -1,6 +1,7 @@
 
 import os, sys
-import xml.etree.ElementTree as ET
+#import xml.etree.ElementTree as ET
+import xml.etree.cElementTree as ET
 import wget
 import eyed3
 import datetime
@@ -60,16 +61,30 @@ class PodcastInfo:
 
 		for item in self.items_list:
 			item_title = item.find('title').text
-			item_pub_date = item.find('pubDate').text
+			item_pub_date = (item.find('pubDate').text).split(':')[0][0:-3]
 			item_url = item.find('enclosure').get('url')
+			item_length = str(int(item.find('enclosure').get('length')) / 1000 / 1000) + ' MB'
+
+			item_desc = item.find('description').text
+
+			if item_desc:
+				if '<p>' in item_desc:
+					item_desc = item_desc.split('<p>')[1].split('</p>')[0]
+			else:
+				item_desc = ''
 
 			if (item_url in self.down_episodes):
 				item_down = 'Yes'
 			else:
 				item_down = 'No'
 
-			if (self.podcast.feed_filter in item_url):
-				episodes_list.append({'track':track_num,'title':item_title,'pubdate':item_pub_date,'downloaded':item_down, 'url':item_url})
+			feed_filter_list = self.podcast.feed_filter.split(',')
+
+			ep_included = False
+			for feed_filter in feed_filter_list:
+				if (feed_filter in item_url) and not(ep_included):
+					episodes_list.append({'track':track_num,'title':item_title,'description':item_desc,'pubdate':item_pub_date,'downloaded':item_down, 'url':item_url, 'length':item_length})
+					ep_included = True
 			
 			track_num = track_num + 1
 
@@ -165,18 +180,21 @@ class PodcastInfo:
 			wget.download(item_url, pod_ep_name)
 			down_ep_f.write(item_url + '\n')
 
-			## Tag File
+			## Re-Tag File
 
-			pub_date_d = int(item_pub_date.split(' ')[1])
-			pub_date_mn = item_pub_date.split(' ')[2]
-			pub_date_y = int(item_pub_date.split(' ')[3])
+			if self.podcast.retag:				
+				pub_date_d = int(item_pub_date.split(' ')[1])
+				pub_date_mn = item_pub_date.split(' ')[2]
+				pub_date_y = int(item_pub_date.split(' ')[3])
 
-			pub_date_m = datetime.datetime.strptime(pub_date_mn, '%b').month
+				pub_date_m = datetime.datetime.strptime(pub_date_mn, '%b').month
 
-			pub_date = datetime.date(pub_date_y, pub_date_m, pub_date_d)
-			pub_date_txt = pub_date.strftime('%Y.%m.%d')
+				pub_date = datetime.date(pub_date_y, pub_date_m, pub_date_d)
+				pub_date_txt = pub_date.strftime('%Y.%m.%d')
 
-			title_tag = pub_date_txt + ' - ' + item_title
+				title_tag = pub_date_txt + ' - ' + item_title
+			else:
+				title_tag = item_title
 
 			if '.mp3' in ep_file:
 				self.tag_file(pod_ep_name,title_tag)
@@ -186,6 +204,41 @@ class PodcastInfo:
 		self.update_mpd_db()
 		self.update_playlist()
 
+
+	def download_episode_from_url(self,url,title):
+		
+		self.down_episodes = [line.rstrip('\n') for line in open(self.down_ep_file)]
+		self.update_items_list()
+
+		down_ep_f = open(self.down_ep_file,'a')
+		
+		if not(url in self.down_episodes):
+			ep_file = url.split('/')[-1]
+			if '.mp3' in ep_file:
+				ep_file = ep_file.split('.mp3')[0] + '.mp3'
+			pod_ep_name = self.podcast.pod_dir + '/' + ep_file
+			wget.download(url, pod_ep_name)
+			down_ep_f.write(url + '\n')
+				
+			## Re-Tag File
+
+			if '.mp3' in ep_file:
+				self.tag_file(pod_ep_name,title)
+
+		down_ep_f.close()
+
+		self.update_mpd_db()
+		self.update_playlist()
+
+	def episode_url(self,track_num):
+		
+		self.update_items_list()
+
+		item = self.items_list[int(track_num) - 1]
+		
+		item_url = item.find('enclosure').get('url')
+
+		return item_url
 
 
 	def create_init_files(self):

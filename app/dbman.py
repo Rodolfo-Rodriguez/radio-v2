@@ -223,11 +223,18 @@ class DBManager():
         pod_dir = words[10].decode('utf-8')
         publisher = words[11].decode('utf-8')
         priority = int(words[12])
+
         fav_txt = words[13]
         if fav_txt == 'True':
           fav = True
         else:
           fav = False
+
+        retag_txt = words[14]
+        if retag_txt == 'True':
+          retag = True
+        else:
+          retag = False
 
 
         record = Podcast(id=id,
@@ -243,7 +250,8 @@ class DBManager():
                         pod_dir=pod_dir,
                         publisher=publisher,
                         priority=priority,
-                        fav=fav)
+                        fav=fav,
+                        retag=retag)
 
         db.session.add(record)
         db.session.commit()
@@ -441,6 +449,7 @@ class DBManager():
       out_line = out_line + "|" + str(record.publisher)
       out_line = out_line + "|" + str(record.priority)
       out_line = out_line + "|" + str(record.fav)
+      out_line = out_line + "|" + str(record.retag)
 
       out_line = out_line.encode('utf-8')
 
