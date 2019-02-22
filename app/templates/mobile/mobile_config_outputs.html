@@ -1,0 +1,27 @@
+{% extends "mobile_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-body">
+
+    {% for output in radio_player.outputs() %}
+    
+    <div class="mobile-row">
+      {% if output['outputenabled'] == '1' %}
+        <a href="/mobile/toggle_output/{{output['outputid']}}" style="color: lightgreen;">{{ output['outputname'] }}</a>
+      {% else %}
+        <a href="/mobile/toggle_output/{{output['outputid']}}">{{ output['outputname'] }}</a>
+      {% endif %}
+    </div>
+
+    {% endfor %}
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

@@ -1,0 +1,58 @@
+{% extends "mobile_base.html" %}
+
+{% block title %} RadioPlayer {% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-body">
+
+  <div class="mobile-player-center">
+    <img src="{{radio_player.player_img}}">
+  </div>
+
+  {% if radio_player.loaded == 'radio' %}
+    <div class="mobile-player-artist"><p>{{ radio_player.radio.name }}</p></div>
+    <div class="mobile-player-album"><p>{{ radio_player.radio.country }}</p></div>
+    <div class="mobile-player-album"><p>{{ radio_player.radio.style }}</p></div>
+  {% endif %}
+
+  {% if radio_player.loaded == 'album' %}
+    <div class="mobile-player-artist"><p>{{ radio_player.server_currentsong('artist') }}</p></div> 
+    <div class="mobile-player-album"><p>{{ radio_player.server_currentsong('album') }}</p></div>
+    <div class="mobile-player-title"><p>{{ radio_player.server_currentsong('title') }}</p></div>
+  {% endif %}
+  
+
+</div>
+
+<div class="mobile-bar">
+  <div class="mobile-bar-item">
+
+    <a href="/mobile/show/playlist" style="font-size: 30px;"><i class="fas fa-list"></i></a>
+
+    <a href="/mobile/previous" style="font-size: 30px;"><i class="fas fa-backward"></i></a>
+
+    {% if radio_player.state != 'play' %}
+      <a href="/mobile/play" style="font-size: 50px; color: lightgreen;"><i class="far fa-play-circle fa-lg"></i></a>
+    {% else %}
+      <a href="/mobile/stop" style="font-size: 50px;"><i class="far fa-stop-circle fa-lg"></i></a>
+    {% endif %}
+
+    <a href="/mobile/next" style="font-size: 30px;"><i class="fas fa-forward"></i></a>
+  
+    {% if (radio_player.loaded == 'radio' and radio_player.radio.fav) or (radio_player.loaded == 'album' and radio_player.artist.fav) %}
+      <a href="/mobile/fav" style="color: tomato;"><i class="fas fa-heart"></i></a>
+    {% else %}
+      <a href="/mobile/fav" style="color: tomato;"><i class="far fa-heart"></i></a>
+    {% endif %}
+
+
+  </div>
+</div>
+
+
+<!-- Page -->
+
+{% endblock body %}

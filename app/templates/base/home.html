@@ -124,6 +124,26 @@
       
       </div>
 
+      <div class="row">
+
+      {% for output in radio_player.outputs() %}
+          <div class="col-lg-4">
+            <div class="card text-white bg-primary mb-3">
+              <div class="card-header">Output {{ output['outputid'] }}</div>
+              <div class="card-body">
+                <h5 class="card-title">{{ output['outputname'] }} [ {{ output['outputenabled'] }} ]  
+                  {% if output['outputenabled'] == "0" %}
+                    <a href='/toggle_output/{{output['outputid']}}'>Enable</a>
+                  {% else %}
+                    <a href='/toggle_output/{{output['outputid']}}'>Disable</a>
+                  {% endif %}
+                </h5>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
+      
+      </div>
 
       </div>
     </div>

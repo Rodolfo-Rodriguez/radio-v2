@@ -127,3 +127,15 @@ def bookmark_delete(id):
 
     return redirect(redirect_page)
 
+
+# ---> Toggle Output
+@base.route('/toggle_output/<id>', methods=['GET'])
+def toggle_output(id):
+
+    radio_player.toggle_output(id)
+
+    redirect_page = session['last_url']
+
+    return redirect(redirect_page)
+
+

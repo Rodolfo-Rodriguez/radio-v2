@@ -1,0 +1,23 @@
+{% extends "mobile_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-grid">
+
+  {% for artist in artist_list %}
+
+  <div class="mobile-cell">
+    <a href='/mobile/artist/show/{{artist.id}}'><img src="/static/images/artist/{{artist.image}}"></a>
+  </div>
+
+  {% endfor %}
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

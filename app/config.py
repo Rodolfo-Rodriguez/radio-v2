@@ -28,9 +28,9 @@ class Config:
 	DOWNLOADED_EPISODES_FILE = '.downloaded_episodes.txt'
 	BASE_URI = 'USB/WD-500'
 
-	DEFAULT_MPD_CLIENT = 'rune-1'
+	DEFAULT_MPD_CLIENT = 'rune-1v2'
 	DEFAULT_MPD_PORT = '6600'
-	MPD_SERVERS = [ { "name":"Oficina", "server":"rune-1" } , { "name":"Sala", "server":"rune-2" } ]
+	MPD_SERVERS = [ { "name":"Oficina", "server":"rune-1" } , { "name":"Sala", "server":"rune-2" }, { "name":"Oficina-v2", "server":"rune-1v2" } ]
 
 	SOCIAL_SITES = ['twitter', 'instagram', 'youtube', 'spotify', 'apple', 'soundcloud']
 

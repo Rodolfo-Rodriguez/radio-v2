@@ -1,0 +1,23 @@
+{% extends "mobile_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-body">
+
+  {% for item in radio_items %}
+
+  <div class="mobile-row">
+    <a href="/mobile/radio/list/{{filter_type}}/{{item}}">{{item}}</a>
+  </div>
+
+  {% endfor %}
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

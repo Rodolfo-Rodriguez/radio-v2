@@ -1,0 +1,23 @@
+{% extends "mobile_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-grid">
+
+  {% for info in album_info %}
+
+  <div class="mobile-cell">
+    <a href="/mobile/artist/album/load/{{artist.id}}/{{info['album']}}""><img src="/static/images/albums/{{artist.name}}/{{info['album']}}.png"></a>
+  </div>
+
+  {% endfor %}
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

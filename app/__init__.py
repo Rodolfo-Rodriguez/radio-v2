@@ -40,6 +40,7 @@ from .views_radio import radio
 from .views_artist import artist
 from .views_playlist import playlist
 from .views_podcast import podcast
+from .views_mobile import mobile
 
 app.register_blueprint(base)
 app.register_blueprint(player)
@@ -47,3 +48,4 @@ app.register_blueprint(radio)
 app.register_blueprint(artist)
 app.register_blueprint(playlist)
 app.register_blueprint(podcast)
+app.register_blueprint(mobile)

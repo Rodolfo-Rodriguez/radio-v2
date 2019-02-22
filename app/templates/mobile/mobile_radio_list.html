@@ -1,4 +1,4 @@
-{% extends "mobile/base.html" %}
+{% extends "mobile_base.html" %}
 
 {% block title %} Radios {% endblock %}
 
@@ -8,14 +8,10 @@
 
 <div class="mobile-grid">
 
-  <div class="mobile-cell">
-    <a href="/mobile">HOME</a>
-  </div>
-
-  {% for style in artist_styles %}
+  {% for radio in radio_list %}
 
   <div class="mobile-cell">
-    <a href="/mobile/artist/style/{{style}}">{{style}}</a>
+    <a href={{ url_for('mobile.mobile_radio_play',id=radio.id) }}><img src="/static/images/radios/{{radio.image}}"></a>
   </div>
 
   {% endfor %}

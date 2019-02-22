@@ -1,0 +1,33 @@
+{% extends "mobile_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-grid">
+
+  {% for radio in radio_list %}
+
+  <div class="mobile-cell">
+    <a href={{ url_for('mobile.mobile_radio_play',id=radio.id) }}><img src="/static/images/radios/{{radio.image}}"></a>
+  </div>
+
+  {% endfor %}
+
+
+ {% for artist in artist_list %}
+
+  <div class="mobile-cell">
+    <a href='/mobile/artist/show/{{artist.id}}'><img src="/static/images/artist/{{artist.image}}"></a>
+  </div>
+
+  {% endfor %}
+
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

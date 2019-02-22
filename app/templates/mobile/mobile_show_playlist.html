@@ -1,0 +1,29 @@
+{% extends "mobile_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-body">
+
+  {% for song in radio_player.current_playlist_songs() %}
+
+    <div class="mobile-song-row">
+      {% if radio_player.server_currentsong('pos') == song['pos'] %}
+      	<div class="mobile-song-track">{{song['track']}}</div>
+  	  	<div class="mobile-song-title"><a href="/mobile/play_pos/{{song['pos']}}" style="color: lightgreen;">{{song['title']}}</a></div>
+      {% else %}
+      	<div class="mobile-song-track">{{song['track']}}</div>
+  	  	<div class="mobile-song-title"><a href="/mobile/play_pos/{{song['pos']}}">{{song['title']}}</a></div>
+      {% endif %}
+    </div>
+
+  {% endfor %}
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

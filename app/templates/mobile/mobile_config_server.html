@@ -1,0 +1,39 @@
+{% extends "mobile_base.html" %}
+
+{% block title %} Radios {% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-body">
+    
+<!--     <div class="mobile-row">
+    {% if radio_player.mpd_client == 'rune-1' %}
+      <p>Oficina v1</p>
+    {% else %}
+      <a href="/mobile/mpd_client/rune-1">Oficina v1</a>
+    {% endif %}
+    </div>
+ -->
+    <div class="mobile-row">
+    {% if radio_player.mpd_client == 'rune-1v2' %}
+      <p>Oficina v2</p>
+    {% else %}
+      <a href="/mobile/mpd_client/rune-1v2">Oficina v2</a>
+    {% endif %}
+    </div>
+
+    <div class="mobile-row">
+    {% if radio_player.mpd_client == 'rune-2' %}
+      <p>Sala</p>
+    {% else %}
+      <a href="/mobile/mpd_client/rune-2">Sala</a>
+    {% endif %}
+    </div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

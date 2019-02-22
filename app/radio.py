@@ -481,6 +481,28 @@ class RadioPlayer:
           self.podcast = podcast
           self.player_img = '/static/images/playlists/' + podcast.image
 
+      def outputs(self):
+          self.client.connect(self.mpd_client, self.mpd_port)
+          
+          output_list = self.client.outputs()
+
+          self.client.close()
+          self.client.disconnect()
+
+          names = []
+          for output in output_list:
+            names.append(output['outputname'])
+
+          return output_list
+
+
+      def toggle_output(self,id):
+          self.client.connect(self.mpd_client, self.mpd_port)
+          
+          self.client.toggleoutput(id)
+
+          self.client.close()
+          self.client.disconnect()
 
 
 ################################################################################################################################################################
