@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webmin</title>
+  <link href="/static/css/ca/fonts.css" rel="stylesheet" type="text/css"/>
+  <link href="/static/css/ca/ca-styles.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="/static/js/ca-script.js"></script>
+  <script type="text/javascript" src="/static/js/timezones.js"></script>
+  <script type="text/javascript" src="/static/js/spin.min.js"></script>
+ </head>
+ <body id="body" onLoad="bodyOnLoad();">
+  <div id="contHeader" class="container-fluid content-center">
+   <div id="contHeaderContent" class="row main-header">
+    <h1 id="valHeaderProductModel" class="text-center"></h1>
+    <h2 id="valHeaderProductDesc" class="text-center"></h2>
+   </div>
+  </div>
+
+  <div id="contPopup" class="container-popup text-center">
+   <div id="divPopupBack" class="popup-background"></div>
+   <div style="display: table; height: 100%; width: 100%;">
+    <div style="display: table-cell; vertical-align: middle;">
+     <div id="contPopupContent" class="popup-content">
+      <a id="aPopupDefocuser" style="position: absolute;" href=""></a>
+      <div id="contPopupJSCheck">
+       This page requires JavaScript enabled!
+      </div>
+      <div id="contPopupIECheck" style="display:none;">
+       This browser is not supported!
+      </div>
+      <div id="contPopupButtons" style="display:none;">
+       <h3 id="valPopupButtonsHeader"></h3>
+       <p id="valPopupButtonsText"></p>
+       <div id="contBtnPopupOK" style="display:none;">
+        <div id="contBtnPopupOKOK" class="container-btn">
+         <button id="btnPopupOKOK" class="btn" onclick="popup.btnOKOKClick();"></button>
+        </div>
+       </div>
+       <div id="contBtnPopupYesNo" style="display:none;">
+        <button id="btnPopupYesNoYes" class="btn" onclick="popup.btnYesNoYesClick();"></button>
+        <button id="btnPopupYesNoNo" class="btn" onclick="popup.btnYesNoNoClick();"></button>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <script type="text/javascript">
+    document.getElementById("contPopupJSCheck").style.display = "none";
+    var b = document.createElement("b");
+    b.innerHTML = "<!--[if lte 9]><b id=\"TestIE\"></b><![endif]-->";
+    document.documentElement.appendChild(b);
+    if(document.getElementById("TestIE"))
+      document.getElementById("contPopupIECheck").style.display = "block";
+    else
+      document.getElementById("contPopupContent").style.display = "none";
+    document.documentElement.removeChild(b);
+   </script>
+  </div>
+
+  <div id="contScrollHelper">
+   <div class="container">
+
+    <div class="row content text-center">
+     <h3 id="valStatusHeader"></h3>
+     <div>
+      <b id="valStatusHdrConnection"></b> <span id="valStatusConnection"></span>
+     </div>
+     <div id="contStatusNetworkName" style="display:none;">
+      <b id="valStatusHdrNetworkName"></b> <span id="valStatusNetworkName"></span>
+     </div>
+     <div id="contStatusSignalStrength" style="display:none;">
+      <b id="valStatusHdrSignalStrength"></b> <span id="valStatusSignalStrength"></span>
+     </div>
+     <div>
+      <b id="valStatusHdrIPAddress"></b> <span id="valStatusIPAddress"></span>
+     </div>
+     <div id="contStatusIPv6Address" style="display:none;">
+      <b id="valStatusHdrIPv6Address"></b> <span id="valStatusIPv6Address"></span>
+     </div>
+     <div>
+      <b id="valStatusHdrSource"></b> <span id="valStatusCurrentSource">N/A</span>
+      <div id="contSourceInfo" onclick="secSource.btnNowPlayingClick();">&#x24d8;
+       <div id="contNowPlaying" class="tooltip">
+        <div id="contNowPlayingArt"></div>
+        <div id="contNowPlayingInfo">
+         <span id="valNowPlayingAlbum"></span>
+         <span id="valNowPlayingArtist"></span>
+         <span id="valNowPlayingTitle"></span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <div class="row content text-center">
+     <h3 id="valProductHeader"></h3>
+     <div class="input-group">
+      <div id="contProductName">
+       <input id="inpProductName" class="form-control" type="text" maxlength="32"/>
+      </div>
+      <br/>
+      <div id="contBtnProductSave" class="container-btn">
+       <button id="btnProductSave" class="btn" type="button" onclick="secProduct.btnSaveClick();"></button>
+      </div>
+     </div>
+     <p id="valProductDesc"></p>
+    </div>
+
+    <div class="row content text-center">
+     <h3 id="valNetworkHeader"></h3>
+     <div class="input-group">
+      <div>
+       <input id="chbWiFiManual" class="form-control" type="checkbox" onclick="secNetwork.chbWiFiManualClick();"/>
+       <span id="chbValWiFiManual"></span>
+      </div>
+      <br/>
+      <div id="contWiFiAuto">
+       <select id="selWiFiNetwork" class="form-control" onchange="secNetwork.selWiFiNetworkChange();">
+       </select>
+       <div id="contBtnWiFiRefresh" class="container-btn">
+        <button id="btnWiFiRefresh" class="btn" type="button" onclick="secNetwork.btnWiFiRefreshClick();"></button>
+       </div>
+      </div>
+      <div id="contWiFiManual" style="display:none;">
+       <input id="inpWiFiManualName" class="form-control" type="text"/>
+       <br/>
+       <select id="selWiFiEncryption" class="form-control" onchange="secNetwork.selWiFiEncryptionChange();">
+       </select>
+       <br/>
+      </div>
+      <div id="contWiFiKey" style="display:none;">
+       <input id="inpWiFiKey" class="form-control" type="password"/>
+       <br/>
+       <input id="chbWiFiKeyShow" class="form-control" type="checkbox" onclick="secNetwork.chbShowWiFiKeyClick();"/>
+       <span id="chbValWiFiKeyShow"></span>
+      </div>
+      <br/>
+      <div>
+       <input id="chbIPStatic" class="form-control" type="checkbox" onclick="secNetwork.chbStaticAddressConfigClick();"/>
+       <span id="chbValIPStatic"></span>
+      </div>
+      <div id="contIPSettings" style="display:none;">
+      </div>
+      <br/>
+      <div id="contBtnNetworkSave" class="container-btn">
+       <button id="btnNetworkSave" class="btn" type="button" onclick="secNetwork.btnSaveClick();"></button>
+      </div>
+     </div>
+     <p id="valNetworkDesc"></p>
+    </div>
+
+    <div id="contPowerSettings" class="row content text-center" style="display:none;">
+     <h3 id="valPowerHeader"></h3>
+     <div class="input-group">
+      <div>
+       <select id="selStandbyMode" class="form-control"></select>
+       <br/>
+       <select id="selAutoPowerDown" class="form-control"></select>
+      </div>
+      <br/>
+      <div id="contBtnPowerSave" class="container-btn">
+       <button id="btnPowerSave" class="btn" type="button" onclick="secPower.btnSaveClick();"></button>
+      </div>
+     </div>
+    </div>
+
+    <div id="contVolumeSettings" class="row content text-center" style="display:none;">
+     <h3 id="valVolumeHeader"></h3>
+     <div class="input-group">
+      <div id="contRngVolumeLimit" class="container-range-slider">
+       <input id="rngVolumeLimit" class="range-slider" type="range" min="1" oninput="secVolume.rngLimitChange();" onchange="secVolume.rngLimitChange();"/>
+      </div>
+     </div>
+     <br/>
+     <div id="contBtnVolumeSave" class="container-btn">
+      <button id="btnVolumeSave" class="btn" type="button" onclick="secVolume.btnSaveClick();"></button>
+     </div>
+     <p id="valVolumeLimit"></p>
+     <p id="valVolumeLimitDesc"></p>
+    </div>
+
+    <div id="contTimezone" class="row content text-center" style="display:none;">
+     <h3 id="valTimezoneHeader"></h3>
+     <div class="input-group">
+      <select id="selTimezoneTimezone" class="form-control"></select>
+     </div>
+     <br/>
+     <div id="contBtnTimezoneSave" class="container-btn">
+      <button id="btnTimezoneSave" class="btn" type="button" onclick="secTimezone.btnSaveClick();"></button>
+     </div>
+    </div>
+
+    <div id="contCast" class="row content text-center" style="display:none;">
+     <h3 id="valCastHeader"></h3>
+     <div id="contCastSetup" style="display:none;">
+      <div id="contBtnCastSetup" class="container-btn">
+        <button id="btnCastSetup" class="btn" type="button" onclick="secCast.btnSetupClick();"></button>
+      </div>
+      <p id="valCastNeedSetup"></p>
+     </div>
+     <div id="contCastContent" style="display:none;">
+      <div>
+       <input id="chbCastShareData" class="form-control" type="checkbox" onclick="secCast.chbShareDataClick();"/>
+       <span id="chbValCastShareData"></span>
+      </div>
+      <p id="contCastLinks"></p>
+     </div>
+    </div>
+
+    <div class="row content text-center">
+     <h3 id="valFirmwareHeader"></h3>
+     <div>
+      <b id="valFirmwareHdrCurrentVersion"></b> <span id="valCurrentVersion"></span>
+     </div>
+     <div>
+      <b id="valFirmwareHdrMCUVersion"></b> <span id="valMCUVersion"></span>
+     </div>
+     <div id="contFirmwareCast" style="display:none;">
+      <b id="valFirmwareHdrCastVersion"></b> <span id="valCastVersion"></span>
+     </div>
+     <div>
+      <b id="valFirmwareHdrUnitID"></b> <span id="valUnitID"></span>
+     </div>
+     <br/>
+     <div>
+      <div>
+       <input id="chbFirmwareEarlyUpdate" class="form-control" type="checkbox" onclick="secFirmware.chbEarlyUpdateClick();"/>
+       <span id="chbValFirmwareEarlyUpdate"></span>
+      </div>
+      <p id="valFirmwareEarlyDesc"></p>
+     </div>
+     <div id="contFirmwareCheck" style="display:none;">
+      <p id="valFirmwareAvailable"></p>
+      <div id="contBtnFirmwareCheck" class="container-btn">
+       <button id="btnFirmwareCheck" class="btn" type="button" onclick="secFirmware.btnCheckClick();"></button>
+      </div>
+     </div>
+    </div>
+
+    <div id="contServices" class="row content text-center" style="display: none;">
+     <h3 id="valServicesHeader"></h3>
+     <div id="contServicesItems">
+      <div id="contServicesItem" style="display: none;">
+       <div id="contServicesItemIn" class="container-preset">
+        <div id="contServicesValues" onclick="secServices.contServiceClick(this);">
+         <span id="valServicesLogo" class="service-logo"></span>
+        </div>
+        <div id="contBtnServicesEdit" class="container-preset-buttons">
+         <button id="btnServiceLink" class="btn" type="button" onclick="secServices.btnLinkClick(this);"></button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div id="contServicesLink" style="display: none;">
+      <input id="inpServicesLinkUsername" class="form-control" type="text"/>
+      <br/>
+      <input id="inpServicesLinkPassword" class="form-control" type="password"/>
+      <br/>
+     </div>
+    </div>
+
+    <div id="contPodcasts" class="row content text-center" style="display:none;">
+     <h3 id="valPodcastsHeader"></h3>
+     <div id="contPodcastsItems">
+      <div id="contPodcastsItem" style="display:none;">
+       <div class="container-preset">
+        <div id="contPodcastsValues" class="container-preset-values" onclick="secPodcasts.contPodcastClick(this);">
+         <b id="valPodcastsID"></b> <span id="valPodcastsName"></span><br/>
+        </div>
+        <div id="contBtnPodcastsEdit" class="container-preset-buttons">
+         <span id="valPodcastsURL" class="podcast-url"></span>
+         <button id="btnPodcastsRemove" class="btn" type="button" onclick="secPodcasts.btnRemoveClick(this);"></button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div id="contBtnPodcastsAddNew" class="container-btn">
+      <button id="btnPodcastsAddNew" class="btn" type="button" onclick="secPodcasts.btnAddNewClick();"></button>
+     </div>
+     <div id="contPodcastsNewPodcast" style="display:none;">
+      <input id="inpPodcastsNewName" class="form-control" type="text"/>
+      <br/>
+      <input id="inpPodcastsNewURL" class="form-control" type="text"/>
+      <br/>
+     </div>
+    </div>
+
+    <div id="contPresets" class="row content text-center" style="display:none;">
+     <h3 id="valPresetsHeader"></h3>
+     <div id="contPresetsItems">
+      <div id="contPresetsItem" style="display:none;">
+       <div class="container-preset">
+        <div id="contPresetsValues" class="container-preset-values" onclick="secPresets.contPresetClick(this);">
+         <b id="valPresetsID"></b> <span id="valPresetsName"></span><br/>
+        </div>
+        <div id="contBtnPresetsEdit" class="container-preset-buttons">
+         <button id="btnPresetsRename" class="btn" type="button" onclick="secPresets.btnRenameClick(this);"></button>
+         <button id="btnPresetsRemove" class="btn" type="button" onclick="secPresets.btnRemoveClick(this);"></button>
+         <button id="btnPresetsPlay" class="btn" type="button" onclick="secPresets.btnPlayClick(this);"></button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div id="contBtnPresetsAddNew" class="container-btn">
+      <button id="btnPresetsAddNew" class="btn" type="button" onclick="secPresets.btnAddNewClick();"></button>
+     </div>
+     <div id="contPresetsRenamePreset" style="display:none;">
+      <b id="valPresetsRenameID"></b>
+      <input id="inpPresetsRenameName" class="form-control" type="text"/>
+     </div>
+     <div id="contPresetsNewPreset" style="display:none;">
+      <select id="selPresetsNewID" class="form-control"></select>
+      <br/>
+      <input id="inpPresetsNewName" class="form-control" type="text"/>
+      <br/>
+      <input id="inpPresetsNewAddress" class="form-control" type="text"/>
+      <br/>
+     </div>
+    </div>
+
+    <div id="contWizard" style="display:none;">
+     <div id="contWizardName">
+      <p id="valWizardNameDesc"></p>
+      <input id="inpWizardName" class="form-control" type="text" maxlength="63"/>
+     </div>
+     <div id="contWizardPower">
+      <input id="chbWizardPowerNetwork" class="form-control" type="checkbox" checked/>
+      <span id="chbValWizardPowerNetwork"></span>
+     </div>
+     <div id="contWizardWiFiNetwork">
+      <div>
+       <select id="selWizardWiFiNetwork" class="form-control"></select>
+       <div id="contBtnWizardWiFiRefresh" class="container-btn">
+        <button id="btnWizardWiFiRefresh" class="btn" type="button"></button>
+       </div>
+      </div>
+      <br/>
+      <div>
+       <input id="chbWizardIPStatic" class="form-control" type="checkbox"/>
+       <span id="chbValWizardIPStatic"></span>
+      </div>
+     </div>
+     <div id="contWizardWiFiEnterName">
+      <input id="inpWizardWiFiEnterName" class="form-control" type="text" maxlength="32"/>
+     </div>
+     <div id="contWizardWiFiEncryption">
+      <select id="selWizardWiFiEncryption" class="form-control"></select>
+     </div>
+     <div id="contWizardWiFiEnterKey">
+      <input id="inpWizardWiFiEnterKey" class="form-control" type="password"/>
+      <br/>
+      <input id="chbWizardWiFiShowKey" class="form-control" type="checkbox"/>
+      <span id="chbValWizardWiFiShowKey"></span>
+     </div>
+    </div>
+
+   </div>
+   <div class="row text-center">Copyright &copy; 2018 &middot; All Rights Reserved &middot; Cambridge Audio</div>
+  </div>
+ </body>
+</html>

@@ -57,6 +57,18 @@ def radio_favorite():
 
     return render_template(template_page,radio_list=radio_list,radio_player=radio_player,title='Favorite Radios')
 
+# ---> Radio Presets
+@radio.route('/radio/presets', methods=['GET'])
+def radio_presets():
+    radio_list = Radios.query.filter(Radios.preset>0).order_by(Radios.preset).all()
+    #radio_player.update_state(radio_list)
+
+    session['last_url'] = url_for('radio.radio_all')
+
+    template_page = 'radio_grid.html'
+
+    return render_template(template_page,radio_list=radio_list,radio_player=radio_player,title='CNX Presets')
+
 # ---> Radio Styles
 @radio.route('/radio/styles', methods=['GET'])
 def radio_styles():
@@ -108,6 +120,20 @@ def radio_country(country):
     template_page = 'radio_grid.html'
 
     return render_template(template_page, radio_list=radio_list, radio_player=radio_player, title=country)
+
+
+# ---> Radio Grid
+@radio.route('/radio/grid', methods=['GET'])
+def radio_grid():
+    radio_player.update_bookmarks()
+
+    radio_list = Radios.query.filter(Radios.preset > 0).order_by(Radios.preset).all()
+
+    session['last_url'] = url_for('radio.radio_grid')
+
+    template_page = 'radio_grid_flat.html'
+
+    return render_template(template_page, radio_list=radio_list, radio_player=radio_player, title='Presets')
 
 ###########################################################################################
 ## Show, Play
@@ -456,7 +482,7 @@ def radio_bookmark(id):
 
     url = url_for('radio.playradio_menu',id=id)
     image_url = '/static/images/radios/' + radio.image
-    priority = 9
+    priority = len(bookmark_url_list) + 1
 
     if not(url in bookmark_url_list):
 
@@ -501,6 +527,25 @@ def radio_stars(id,stars):
     return redirect(redirect_page)
 
 
+# ---> Radio Set Preset
+@radio.route('/radio/set_preset/<id>/<preset>', methods=['GET'])
+def radio_set_preset(id,preset):
+    radio_new = Radios.query.filter_by(id=id).first()
+
+    radio_old = Radios.query.filter_by(preset=preset).first()
+
+    if radio_old:
+        radio_old.preset = 0
+
+    radio_new.preset = int(preset)
+
+    db.session.commit()
+
+    redirect_page = url_for('radio.radio_show',id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
 ###########################################################################################
 ## Program
 ###########################################################################################
@@ -614,5 +659,19 @@ def radio_program_delete(id):
     redirect_page = url_for('radio.radio_show',id=radio_id)
 
     session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+
+###########################################################################################
+## CNX Play
+###########################################################################################
+
+@radio.route('/radio/cnx/play/<preset_id>', methods=['GET'])
+def radio_cnx_play(preset_id):
+    
+    radio_player.cnx_play_preset(preset_id)
+
+    redirect_page = session['last_url']
 
     return redirect(redirect_page)

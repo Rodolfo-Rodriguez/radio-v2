@@ -1,6 +1,7 @@
 
-from flask import render_template, redirect, request, Blueprint, session, url_for
-import sys
+from flask import render_template, redirect, request, Blueprint, session, url_for, g
+import sys, os
+import urllib2
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -15,7 +16,7 @@ from sqlalchemy import desc
 
 from radio import RadioPlayer
 from podcast import PodcastInfo
-
+        
 ###########################################################################################
 # Podcast List and Load
 ###########################################################################################
@@ -205,6 +206,18 @@ def podcast_download_episode(id,track_num):
 
     return redirect(redirect_page)
 
+
+# ---> Download Episodes Statuss
+@podcast.route('/podcast/download/episode/status', methods=['GET'])
+def podcast_download_episode_status():
+
+    file_size_txt = '{:.0f}'.format(float(CONFIG.DOWN_FILE_SIZE) / 1000 / 1000)
+    c_file_size_txt = '{:.0f}'.format(float(CONFIG.DOWN_CURR_FILE_SIZE) / 1000 / 1000)
+
+    template_page = 'podcast_episode_down_status.html'
+
+    return render_template(template_page, CONFIG=CONFIG, file_size=file_size_txt, c_file_size = c_file_size_txt, radio_player=radio_player)
+
 # ---> Add Episode
 @podcast.route('/podcast/add_episode/<id>', methods=['GET', 'POST'])
 def podcast_add_episode(id):
@@ -218,6 +231,13 @@ def podcast_add_episode(id):
 
         podcast = Podcast.query.filter_by(id=id).first()
         pod_info = PodcastInfo(podcast)
+
+        if 'temp_file' in session:
+            del session['temp_file']
+
+        if 'file_size' in session:
+            del session['file_size']
+
         pod_info.download_episode_from_url(url,name)
 
         redirect_page = url_for('podcast.podcast_show',id=id)
@@ -230,7 +250,7 @@ def podcast_add_episode(id):
 
     template_page = 'podcast_add_episode.html'
 
-    return render_template(template_page, form=form, radio_player=radio_player)
+    return render_template(template_page, form=form, radio_player=radio_player, config=CONFIG)
 
 
 # ---> Delete Episode
@@ -526,7 +546,7 @@ def podcast_bookmark(id):
 
     url = url_for('podcast.podcast_show',id=id)
     image_url = '/static/images/playlists/' + podcast.image
-    priority = 29
+    priority = len(bookmark_url_list) + 1
 
     if not(url in bookmark_url_list):
 

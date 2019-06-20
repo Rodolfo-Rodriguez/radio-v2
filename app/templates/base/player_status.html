@@ -1,0 +1,174 @@
+{% extends "base/base.html" %}
+
+{% block title %} Radio List {% endblock %}
+
+{% block body %}
+
+<div class="bs-component">
+
+  <div class="col-grid-full">
+
+    <div class="card text-white bg-dark" style="flex: 0 0 100%">
+      <h4 class="card-header">Player State</h4>
+
+      <div class="card-body">
+    
+      <div class="row">
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Server Type</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_type }}</h5>
+            </div>
+          </div>
+        </div>
+
+          <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Server Name</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_name }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Server Port</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_port }}</h5>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Loaded</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.loaded }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">State</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.state }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Playlist Length</div>  
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_status('playlistlength') }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Pos</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('pos') }}</h5>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Title</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('title') }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Artist</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('artist') }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Album</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('album') }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Stream Server</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('name') }}</h5>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-12">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">File</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('file') }}</h5>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+
+      <div class="row">
+
+      {% for output in radio_player.outputs() %}
+          <div class="col-lg-4">
+            <div class="card text-white bg-primary mb-3">
+              <div class="card-header">Output {{ output['outputid'] }}</div>
+              <div class="card-body">
+                <h5 class="card-title">{{ output['outputname'] }} [ {{ output['outputenabled'] }} ]  
+                  {% if output['outputenabled'] == "0" %}
+                    <a href='/toggle_output/{{output['outputid']}}'>Enable</a>
+                  {% else %}
+                    <a href='/toggle_output/{{output['outputid']}}'>Disable</a>
+                  {% endif %}
+                </h5>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
+      
+      </div>
+
+      </div>
+    
+    </div>
+    
+  </div>
+
+</div>
+
+
+
+
+<!-- Page -->
+
+{% endblock body %}

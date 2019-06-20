@@ -10,7 +10,7 @@ sys.setdefaultencoding('utf8')
 base = Blueprint('base', __name__, template_folder='templates/base')
 
 from . import db, radio_player, CONFIG, db_manager
-from .forms import BookmarkForm
+from .forms import BookmarkForm, ConfigForm
 
 from radio import RadioPlayer, Bookmark
 
@@ -21,15 +21,14 @@ from radio import RadioPlayer, Bookmark
 # ---> Home
 @base.route('/', methods=['GET'])
 def home():
-
-    radio_player.disconnect()
+    
+    #radio_player.server_disconnect()
     radio_player.update_bookmarks()
 
-    session['last_url'] = '/'
+    session['last_url'] = '/radio/grid'
 
-    template_page = 'home.html'
+    return redirect("/radio/grid")
 
-    return render_template(template_page, radio_player=radio_player,db_manager=db_manager)
 
 ###########################################################################################
 ##  Playing
@@ -121,9 +120,43 @@ def bookmark_delete(id):
     db.session.delete(bookmark)
     db.session.commit()
 
+    bookmark_list = Bookmark.query.order_by('priority').all()
+
+    prio = 1
+    for bookmark in bookmark_list:
+        bookmark.priority = prio
+        db.session.commit()
+        prio = prio + 1
+
     radio_player.update_bookmarks()
 
+
     redirect_page = session['last_url']
+
+    return redirect(redirect_page)
+
+# ---> Bookmark Move Up
+@base.route('/bookmark/move_up/<id>', methods=['GET'])
+def bookmark_move_up(id):
+
+    bookmark_list = Bookmark.query.order_by('priority').all()
+
+    prio = 2
+
+    for idx in range(1,len(bookmark_list)):
+
+        if bookmark_list[idx].id == int(id):
+            bookmark_list[idx].priority = prio - 1
+            bookmark_list[idx-1].priority = prio            
+        else:
+            bookmark_list[idx].priority = prio
+        
+        prio = prio + 1
+        db.session.commit()
+
+    redirect_page = session['last_url']
+
+    radio_player.update_bookmarks()
 
     return redirect(redirect_page)
 
@@ -138,4 +171,33 @@ def toggle_output(id):
 
     return redirect(redirect_page)
 
+###########################################################################################
+# Config
+###########################################################################################
+
+# ---> Home
+@base.route('/config', methods=['GET', 'POST'])
+def config():
+
+    form = ConfigForm()
+
+    if form.validate_on_submit():
+
+        radio_player.bookmark_max = int(form.bookmark_max.data)
+
+        radio_player.update_bookmarks()
+
+        redirect_page = url_for('base.home')
+
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+    form.bookmark_max.data = radio_player.bookmark_max
+
+    session['last_url'] = url_for('base.config')
+
+    template_page = 'config.html'
+
+    return render_template(template_page, form=form, radio_player=radio_player)
 

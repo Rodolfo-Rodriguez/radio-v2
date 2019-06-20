@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %} Add Podcast Episode {% endblock %}
+
+{% block body %}
+
+<div class="bs-component">
+
+  <div class="col-grid-full">
+
+  <div class="card text-white bg-dark" style="flex: 0 0 100%">
+      <h5 class="card-header">File Download</h5>
+      <div class="card-body">
+          <div id="container_download"></div>
+          <p class="card-text" style="margin: 20px;"><a class="card-link" href="{{CONFIG.DOWN_REDIRECT_URL}}">{{CONFIG.DOWN_FILE}} [ {{c_file_size}} MB / {{file_size}} MB ]</a></p>
+      </div>        
+  </div>
+  
+  </div>
+</div>
+
+<!-- Page -->
+
+{% endblock body %}
+
+{% block scripts %}
+
+  <!-- Progress Bar JS -->
+  <script type="text/javascript" src="/static/js/progressbar.js"></script>
+
+  <!-- Player Bar JS -->
+  <script type="text/javascript">    
+    
+
+    var bar = new ProgressBar.Line(container_download, {  
+      strokeWidth: 4,
+      easing: 'easeInOut',
+      duration: 10,
+      color: '#00CC00',
+      trailColor: '#eee',
+      trailWidth: 1,
+      svgStyle: {width: '100%', height: '100%'},
+      text: {
+        style: {
+          // Text color.
+          // Default: same as stroke color (options.color)
+          color: '#999',
+          position: 'absolute',
+          right: '0',
+          top: '30px',
+          padding: 0,
+          margin: 0,
+          transform: null
+        },
+        autoStyleContainer: false
+      },
+      from: {color: '#FFEA82'},
+      to: {color: '#ED6A5A'},
+      step: (state, bar) => {
+        bar.setText(Math.round(bar.value() * 100) + ' %');
+      }
+    });
+
+    bar.set({{CONFIG.DOWN_PROG_BAR}});  // Number from 0.0 to 1.0
+
+    setInterval(function() {
+        if ( bar.value() < 1 ) {
+          location.reload()
+          //bar.set({{CONFIG.DOWN_PROG_BAR}})
+        }
+
+      }, 1000);
+
+
+  </script>
+
+{% endblock %}
+

@@ -438,7 +438,7 @@ def artist_album_bookmark(id,album):
 
     url = url_for('artist.artist_album',artist_id=id,album=album)
     image_url = '/static/images/albums/' + artist.name + '/' + album + '.png'
-    priority = 19
+    priority = len(bookmark_url_list) + 1
 
     if not(url in bookmark_url_list):
 

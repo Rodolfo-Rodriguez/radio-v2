@@ -53,9 +53,14 @@
            <ul class="navbar-nav mr-auto">
               <a class="navbar-brand nav-link" href="/previous"><i class="fas fa-backward"></i></a>
               <a class="navbar-brand nav-link" href="/stop"><i class="fas fa-stop"></i></a>
-              <a class="navbar-brand nav-link" href="/play"><i class="fas fa-play"></i></a>
-              <a class="navbar-brand nav-link" href="/pause"><i class="fas fa-pause"></i></a>
+              {% if radio_player.state == 'play' %}
+                 <a class="navbar-brand nav-link" href="/play_pause"><i class="fas fa-pause"></i></a>
+              {% else %}
+                 <a class="navbar-brand nav-link" href="/play_pause"><i class="fas fa-play"></i></a>
+              {% endif %}
               <a class="navbar-brand nav-link" href="/next"><i class="fas fa-forward"></i></a>
+
+              <a class="navbar-brand nav-link" href="/play_url"><i class="fas fa-link"></i></a>
 
               {% for bookmark in radio_player.bookmark_list %}
                  <a class="navbar-brand nav-link" href="{{bookmark.url}}"><img src="{{bookmark.image_url}}" class="navbar-img"></a>
@@ -65,17 +70,25 @@
 
          </div>
 
-         <div class="collapse navbar-collapse" id="navbarColor01">
+
+
+         <div class="collapse navbar-collapse" id="navbarColor01">          
 
            <ul class="navbar-nav ml-auto">
 
+            <a class="navbar-brand" href="/server/status">{{radio_player.current_server()}}</a>
+
+            <a class="navbar-brand nav-link" href="/radio/grid"><i class="fas fa-th-large"></i></a>
+            <a class="navbar-brand nav-link" href="/podcast/download/episode/status"><i class="fas fa-download"></i></a>
+
              <li class="nav-item dropdown">
               <a class="nav-link" data-toggle="dropdown" href="#" id="download"><i class="fas fa-broadcast-tower"></i></a>
-               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="download">
+               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download">
                  <a class="dropdown-item" href="/radio/add"><strong>Add Radio</strong></a>
                  <a class="dropdown-item" href="/radio/list"><strong>List Radios</strong></a>
                  <a class="dropdown-item" href="/radio/all"><strong>All Radios</strong></a>
                  <a class="dropdown-item" href="/radio/favorite"><strong>Fav Radios</strong></a>
+                 <a class="dropdown-item" href="/radio/presets"><strong>Presets</strong></a>
                  <a class="dropdown-item" href="/radio/styles"><strong>Styles</strong></a>
                  <a class="dropdown-item" href="/radio/countries"><strong>Countries</strong></a>
                  <a class="dropdown-item" href="/radio/list_program"><strong>List Programs</strong></a>
@@ -84,7 +97,7 @@
 
              <li class="nav-item dropdown">
                <a class="nav-link" data-toggle="dropdown" href="#" id="download"><i class="fas fa-compact-disc"></i></a>
-               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="download">
+               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download">
                  <a class="dropdown-item" href="/artist/add"><strong>Add Artist</strong></a>
                  <a class="dropdown-item" href="/artist/list"><strong>List Artist</strong></a>
                  <a class="dropdown-item" href="/artist/all"><strong>All Artist</strong></a>
@@ -96,7 +109,7 @@
 
              <li class="nav-item dropdown">
                <a class="nav-link" data-toggle="dropdown" href="#" id="download"><i class="fas fa-podcast"></i></a>
-               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="download">
+               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download">
                  <a class="dropdown-item" href="/podcast/add"><strong>Add Podcast</strong></a>
                  <a class="dropdown-item" href="/podcast/list"><strong>List Podcast</strong></a>
                  <a class="dropdown-item" href="/podcast/all"><strong>All Podcast</strong></a>
@@ -108,7 +121,7 @@
 
              <li class="nav-item dropdown">
                <a class="nav-link" data-toggle="dropdown" href="#" id="download"><i class="fas fa-music"></i></a>
-               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="download">
+               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download">
                  <a class="dropdown-item" href="/playlist/add"><strong>Add Playlist</strong></a>
                  <a class="dropdown-item" href="/playlist/list"><strong>List Playlist</strong></a>
                  <a class="dropdown-item" href="/playlist/all"><strong>All Playlists</strong></a>
@@ -118,18 +131,26 @@
 
              <li class="nav-item dropdown">
                <a class="nav-link" data-toggle="dropdown" href="#" id="download"><i class="fas fa-bookmark"></i></a>
-               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="download">
+               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download">
                  <a class="dropdown-item" href="/bookmark/list"><strong>List Bookmarks</strong></a>
                </div>
              </li>
 
              <li class="nav-item dropdown">
                <a class="nav-link" data-toggle="dropdown" href="#" id="download"><i class="fas fa-server"></i></a>
-               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="download">
-                 {% for server in radio_player.mpd_servers %}
-                   <a class="dropdown-item" href="/mpd_client/{{server['server']}}"><strong>{{server['name']}}</strong></a>
+               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download">
+                 {% for server in radio_player.server_names %}
+                   <a class="dropdown-item" href="/server/select/{{server}}"><strong>{{radio_player.server_names[server]}}</strong></a>
                  {% endfor %}
-                 <a class="dropdown-item" href="/play_url"><strong>Play URI</strong></a>
+               </div>
+             </li>
+
+             <li class="nav-item dropdown">
+               <a class="nav-link" data-toggle="dropdown" href="#" id="download"><i class="fas fa-cogs"></i></a>
+               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="download">
+                 <a class="dropdown-item" href="/config"><strong>Config</strong></a>
+                 <div class="dropdown-divider"></div>   
+                 <a class="dropdown-item" href="/db/status"><strong>DB Info</strong></a>
                </div>
              </li>
 

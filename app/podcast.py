@@ -1,5 +1,6 @@
-
+	
 import os, sys
+import urllib2
 #import xml.etree.ElementTree as ET
 import xml.etree.cElementTree as ET
 import wget
@@ -7,6 +8,8 @@ import eyed3
 import datetime
 
 from mpd import MPDClient
+
+from flask import url_for
 
 from .models import Podcast
 from . import CONFIG
@@ -24,8 +27,8 @@ class PodcastInfo:
 	down_episodes = []
 	pod_uri = ''
 	client = MPDClient()
-	mpd_client = CONFIG.DEFAULT_MPD_CLIENT
-	mpd_port = CONFIG.DEFAULT_MPD_PORT
+	mpd_client = CONFIG.DEFAULT_SERVER_NAME
+	mpd_port = CONFIG.DEFAULT_SERVER_PORT
 
 	def __init__(self,podcast):
 		self.podcast = podcast
@@ -101,7 +104,7 @@ class PodcastInfo:
 
 		inc_files = [f for f in os.listdir(self.podcast.pod_dir) if '.mp3' in f]
 
-		inc_files.sort(reverse=True)
+		inc_files.sort(reverse=False)
 
 		pl_f = open(self.playlist_file,'w')
 
@@ -153,6 +156,7 @@ class PodcastInfo:
 
 		audio.initTag()
 		audio.tag.title = unicode(title_tag)
+		audio.tag.album = unicode(self.podcast.name)
 		audio.tag.artist = unicode(self.podcast.name)
 		audio.tag.save()
 
@@ -171,13 +175,40 @@ class PodcastInfo:
 		item_url = item.find('enclosure').get('url')
 		item_title = item.find('title').text
 		item_pub_date = item.find('pubDate').text
+
+		CONFIG.DOWN_URL = item_url
+		CONFIG.DOWN_REDIRECT_URL = url_for('podcast.podcast_show', id=self.podcast.id)
+
+		u = urllib2.urlopen(item_url)
+		meta = u.info()
+		CONFIG.DOWN_FILE_SIZE = int(meta.getheaders("Content-Length")[0])
 		
 		if not(item_url in self.down_episodes):
 			ep_file = item_url.split('/')[-1]
 			if '.mp3' in ep_file:
 				ep_file = ep_file.split('.mp3')[0] + '.mp3'
 			pod_ep_name = self.podcast.pod_dir + '/' + ep_file
-			wget.download(item_url, pod_ep_name)
+
+			CONFIG.DOWN_FILE = pod_ep_name
+
+			f = open(pod_ep_name, 'wb')
+
+			CONFIG.DOWN_CURR_FILE_SIZE = 0
+			CONFIG.DOWN_IN_PROG = 1
+			block_sz = 8192
+
+			while True:
+				buffer = u.read(block_sz)
+				if not buffer:
+					break
+				
+				f.write(buffer)
+
+				CONFIG.DOWN_CURR_FILE_SIZE += len(buffer)
+				CONFIG.DOWN_PROG_BAR = float(CONFIG.DOWN_CURR_FILE_SIZE) / float(CONFIG.DOWN_FILE_SIZE)
+
+			CONFIG.DOWN_IN_PROG = 0
+
 			down_ep_f.write(item_url + '\n')
 
 			## Re-Tag File
@@ -210,16 +241,45 @@ class PodcastInfo:
 		self.down_episodes = [line.rstrip('\n') for line in open(self.down_ep_file)]
 		self.update_items_list()
 
+		CONFIG.DOWN_URL = url
+		CONFIG.DOWN_REDIRECT_URL = url_for('podcast.podcast_show', id=self.podcast.id)
+
+		u = urllib2.urlopen(url)
+		meta = u.info()
+		CONFIG.DOWN_FILE_SIZE = int(meta.getheaders("Content-Length")[0])
+
 		down_ep_f = open(self.down_ep_file,'a')
-		
+
 		if not(url in self.down_episodes):
 			ep_file = url.split('/')[-1]
 			if '.mp3' in ep_file:
 				ep_file = ep_file.split('.mp3')[0] + '.mp3'
 			pod_ep_name = self.podcast.pod_dir + '/' + ep_file
-			wget.download(url, pod_ep_name)
+
+			CONFIG.DOWN_FILE = pod_ep_name
+
+			f = open(pod_ep_name, 'wb')
+
+			CONFIG.DOWN_CURR_FILE_SIZE = 0
+			CONFIG.DOWN_IN_PROG = 1
+			block_sz = 8192
+
+			while True:
+				buffer = u.read(block_sz)
+				if not buffer:
+					break
+				
+				f.write(buffer)
+
+				CONFIG.DOWN_CURR_FILE_SIZE += len(buffer)
+				CONFIG.DOWN_PROG_BAR = float(CONFIG.DOWN_CURR_FILE_SIZE) / float(CONFIG.DOWN_FILE_SIZE)
+
+
+			CONFIG.DOWN_IN_PROG = 0
+
 			down_ep_f.write(url + '\n')
 				
+
 			## Re-Tag File
 
 			if '.mp3' in ep_file:

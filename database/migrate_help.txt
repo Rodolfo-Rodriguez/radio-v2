@@ -1,0 +1,26 @@
+--- Init
+
+-> borrar el directorio migrations
+
+rm -rf migrations
+
+-> dropear alembic_version table
+
+python drop_alembic_table.py
+
+-> Init
+
+python db_migrate db init
+
+
+--- Migrar
+
+python db_migrate db migrate
+
+--- Upgrade
+
+python db_migrate db upgrade
+
+--- Historia
+
+python db_migrate.py db history

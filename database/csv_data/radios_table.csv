@@ -1,80 +1,99 @@
-1|Oceano|http://radio1.oceanofm.com:8010|oceano.png|Uruguay|613|Talk|5|True|
-2|Del Sol|http://radio.dl.uy:9950/radio|delsol.png|Uruguay|541|Talk|5|True|Fm de Sol
-3|Sport 890|https://d1a7butsko8nkd.cloudfront.net/sport.mp3|sport890.png|Uruguay|62|Sports|5|True|
-4|Espectador|http://streaming.espectador.com/envivoaac|espectador.png|Uruguay|19|News|4|True|
-5|Metro|http://mp3.metroaudio1.stream.avstreaming.net:7200/metro|metro.png|Argentina|59|Talk|5|True|
-6|Sonar|http://mp3.sonarfm.cl|sonar.png|Chile|14|Rock|4|True|
-7|Bay Bridge|http://la2-ssd.myautodj.com:8037|bayridge.png|USA|11|Rock|4|False|
-8|Zero|http://unlimited4-us.dps.live/zero/aac/icecast.audio|zero.png|Chile|14|Rock|3|False|
-9|Radio X|http://vis.media-ice.musicradio.com/RadioXUKMP3|radiox.png|UK|24|Alt Rock|5|False|Radio X is available all across the UK on digital radio, on 104.9FM in London and 97.7FM in Manchester.
-10|Jazz FM|http://edge-ads-01-cr.sharp-stream.com/jazzfmmobile.mp3|Jazz FM.png|UK|18|Jazz|4|False|Jazz FM plays the world’s greatest jazz, blues and soul, from the world’s greatest artists. We call it 'Listen in Colour'.
-11|Radio Futura|http://radios-mp3-uy.cdn.nedmedia.io/uy-futura.mp3|radiofutura.png|Uruguay|8|Rock|4|False|
+1|Oceano|http://radio1.oceanofm.com:8010|oceano.png|Uruguay|1006|Talk|5|True|
+2|Del Sol|http://radio.dl.uy:9950/radio|delsol.png|Uruguay|1021|Talk|5|True|Fm de Sol
+3|Sport 890|http://radios-mp3-uy.cdn.nedmedia.io/sport.mp3|sport890.png|Uruguay|78|Sports|5|True|
+4|Espectador|http://espectador1.net.com.uy:8120/stream/13/|espectador.png|Uruguay|153|News|4|True|
+5|Metro|http://mp3.metroaudio1.stream.avstreaming.net:7200/metro|metro.png|Argentina|126|Talk|5|True|
+6|Sonar|http://mp3.sonarfm.cl|sonar.png|Chile|29|Rock|4|True|
+7|Bay Bridge|http://la2-ssd.myautodj.com:8037|bayridge.png|USA|13|Rock|4|False|
+8|Zero|http://unlimited4-us.dps.live/zero/aac/icecast.audio|zero.png|Chile|20|Rock|3|False|
+9|Radio X|http://vis.media-ice.musicradio.com/RadioXUKMP3|radiox.png|UK|30|Alt Rock|5|False|Radio X is available all across the UK on digital radio, on 104.9FM in London and 97.7FM in Manchester.
+10|Jazz FM|http://edge-ads-01-cr.sharp-stream.com/jazzfmmobile.mp3|Jazz FM.png|UK|67|Jazz|4|True|Jazz FM plays the world’s greatest jazz, blues and soul, from the world’s greatest artists. We call it 'Listen in Colour'.
+11|Radio Futura|http://radios-mp3-uy.cdn.nedmedia.io/uy-futura.mp3|radiofutura.png|Uruguay|26|Rock|4|False|
 12|Talk Sports|http://radio.talksport.com/stream|talksport.png|UK|5|Sports|4|False|
-13|Vorterix|http://192.99.150.52:9904/;|vorterix.png|Argentina|46|Rock|4|True|
+13|Vorterix|http://192.99.150.52:9904/;|vorterix.png|Argentina|58|Rock|4|True|
 14|Rock Sport|http://64.71.79.181:5106/stream.mp3|rocksport.png|USA|1|Sports|1|False|
 15|Doble Nueve|http://198.100.158.66:9028/;|doblenueve.png|Peru|4|Rock|1|False|
-16|Martha Vineyards Radio|http://peridot.streamguys.com:5850/mvy-mp3|mvyradio.png|USA|2|Alt Rock|1|False|
+16|Martha Vineyards Radio|http://peridot.streamguys.com:5850/mvy-mp3|mvyradio.png|USA|3|Alt Rock|1|False|
 17|88.5 FM So Cal|http://130.166.82.184:8000/;|fmsocal.png|USA|3|Rock|1|False|
-18|Urbana|http://streamingsc.urbana.com.uy:8000/aac|urbana.png|Uruguay|20|Electronic|5|False|
+18|Urbana|http://streamingsc.urbana.com.uy:8000/stream/2/|urbana.png|Uruguay|72|Electronic|5|False|
 19|Continental|https://14103.live.streamtheworld.com/CONTINENTAL_SC|continental.png|Argentina|2|News|3|False|
-20|Futuro|https://19793.live.streamtheworld.com/FUTUROAAC_SC|futuro.png|Chile|5|Rock|4|False|
+20|Futuro|https://19793.live.streamtheworld.com/FUTUROAAC_SC|futuro.png|Chile|6|Rock|4|False|
 21|Majestik Jukebox|http://uk3.internet-radio.com:8405/live|majestik.png|USA|4|Jazz|2|False|
 22|Venice Classical Radio|http://174.36.206.197:8000/;stream/1|venice.png|Italy|3|Classical|3|False|
-23|Jazz Groove West|http://west-mp3-128.streamthejazzgroove.com/;stream.mp3|jazzgroove.png|USA|15|Jazz|2|False|
+23|Jazz Groove West|http://west-mp3-128.streamthejazzgroove.com/;stream.mp3|jazzgroove.png|USA|21|Jazz|2|True|
 24|Best Smooth Jazz|http://64.95.243.43:8002/;stream/1|bestsmoothjazz.png|UK|5|Jazz|3|False|
-25|Nacional Rock|http://sa.mp3.icecast.magma.edge-access.net:7200/sc_rad39|nacionalrock.png|Argentina|5|Rock|3|False|
-26|Radio Marca|http://radiomarca.streaming-pro.com:8030/radiomarca.mp3|marca.png|Spain|37|Sports|4|False|
+25|Nacional Rock|http://sa.mp3.icecast.magma.edge-access.net:7200/sc_rad39|nacionalrock.png|Argentina|6|Rock|3|False|
+26|Radio Marca|http://radiomarca.streaming-pro.com:8030/radiomarca.mp3|marca.png|Spain|57|Sports|4|True|
 27|1010 AM|http://192.99.150.52:9204/;|radio1010am.png|Uruguay|4|Sports|2|False|
-28|Universal|http://radio.970universal.com:8010/stream/1/|universal.png|Uruguay|4|Sports|2|False|
+28|Universal|http://radio.970universal.com:8010/stream/1/|universal.png|Uruguay|5|Sports|2|False|
 29|Radio Carve|http://195.154.182.222:49037/stream/1/|carve.png|Uruguay|2|News|3|False|
-30|Cope|https://flucast-m01-06.flumotion.com/cope/madrid.mp3|cope.png|Spain|11|Sports|3|False|
-31|Cadena SER|http://20043.live.streamtheworld.com/CADENASER_SC|ser.png|Spain|8|News|3|False|
-32|Oasis FM|http://mp3.oasisfm.cl|Oasis FM.png|Chile|9|Rock|3|False|
-33|Deeper Shades of House|http://andromeda.housejunkie.ca:8000/radio.mp3|dsoh.png|USA|7|Electronic|2|False|
-34|Rock FM|http://195.10.10.201/cope/rockfm.mp3|rockfm.png|Spain|5|Rock|3|False|
-35|ADN Radio|https://18913.live.streamtheworld.com/ADNAAC_SC|adn.png|Chile|17|News|4|False|
-36|Static - New York's Alternative|http://stream.radio.co/saadd85319/listen|static.png|USA|3|Alt Rock|1|False|
-37|Radio New York Live|https://streaming.radiostreamlive.com/radionylive_devices|radionewyork.png|USA|11|Alt Rock|1|False|
-38|BBC Radio 4|http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio4fm_mf_q|bbc4.png|UK|1|News|1|False|
+30|Cope|https://flucast-m01-06.flumotion.com/cope/madrid.mp3|cope.png|Spain|14|Sports|3|False|
+31|Cadena SER|http://20043.live.streamtheworld.com/CADENASER_SC|ser.png|Spain|10|News|3|False|
+32|Oasis FM|http://mp3.oasisfm.cl|Oasis FM.png|Chile|13|Rock|3|False|
+33|Deeper Shades of House|http://andromeda.housejunkie.ca:8000/radio.mp3|dsoh.png|USA|8|Electronic|2|False|
+34|Rock FM|https://rockfm-cope-rrcast.flumotion.com/cope/rockfm-low.mp3|rockfm.png|Spain|10|Rock|3|False|
+35|ADN Radio|https://18913.live.streamtheworld.com/ADNAAC_SC|adn.png|Chile|26|News|4|False|
+36|Static - New York's Alternative|http://stream.radio.co/saadd85319/listen|static.png|USA|4|Alt Rock|1|False|
+37|Radio New York Live|https://streaming.radiostreamlive.com/radionylive_devices|radionewyork.png|USA|13|Alt Rock|1|False|
+38|BBC Radio 4|http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio4fm_mf_q|bbc4.png|UK|2|News|1|False|
 39|ESPN Radio|http://65.19.131.175/espn-networkmp3-48|espn.png|USA|2|Sports|1|False|
 40|Del Plata|http://radios-mp3-uy.cdn.nedmedia.io/uy-delplata.mp3|delplata.png|Uruguay|2|Talk|1|False|
 41|Monte Carlo|http://192.99.150.52:7900|montecarlo.png|Uruguay|3|News|2|False|
 42|La Red|http://|lared.png|Argentina|3|Sports|3|False|
 43|Concierto|http://19493.live.streamtheworld.com/CONCIERTO_SC|concierto.png|Chile|3|Hits|3|False|
-44|FM Tiempo|http://unlimited4-us.dps.live/fmtiempo/mp3/icecast.audio|fmtiempo.png|Chile|5|Rock|3|False|
+44|FM Tiempo|http://unlimited4-us.dps.live/fmtiempo/mp3/icecast.audio|fmtiempo.png|Chile|52|Rock|3|True|
 45|Rock and Pop|http://16983.live.streamtheworld.com/ROCK_AND_POP_SC|rockandpop.png|Chile|4|Rock|2|False|
-46|Azul|http://195.154.182.222:3320/stream|azul.png|Uruguay|12|Rock|3|False|
+46|Azul|http://195.154.182.222:3320/stream|azul.png|Uruguay|13|Rock|3|False|
 47|Aire FM|http://195.154.182.222:27125/stream|aire.png|Uruguay|3|Tropical|1|False|
-48|Sarandi|https://d1a7butsko8nkd.cloudfront.net/sarandi.mp3|sarandi.png|Uruguay|9|News|5|True|Radio Sarandi
+48|Sarandi|https://d1a7butsko8nkd.cloudfront.net/sarandi.mp3|sarandi.png|Uruguay|13|News|5|True|Radio Sarandi
 49|Bio Bio|http://unlimited4-us.dps.live/biobiosantiago/mp3/icecast.audio|biobio.png|Chile|5|News|1|False|
 50|RPP Noticias|https://18233.live.streamtheworld.com/RADIO_RPP.mp3|rpp.png|Peru|3|News|2|False|
-51|Studio 92|https://15363.live.streamtheworld.com/RADIO_STUDIO92.mp3|studio92.png|Peru|7|Hits|2|False|
+51|Studio 92|https://15363.live.streamtheworld.com/RADIO_STUDIO92.mp3|studio92.png|Peru|8|Hits|2|False|
 52|Oxigeno|https://15373.live.streamtheworld.com/RADIO_OXIGENO_SC|oxigeno.png|Peru|4|Rock|1|False|
-53|Radio Oasis|https://14003.live.streamtheworld.com/CRP_OAS_SC|radiooasis.png|Peru|7|Rock|3|False|
+53|Radio Oasis|https://14003.live.streamtheworld.com/CRP_OAS_SC|radiooasis.png|Peru|10|Rock|3|False|
 54|AM 750|http://192.99.38.174:9342/stream|am750.png|Argentina|5|News|3|False|
 55|La Costa FM|http://195.154.182.222:27126/stream|lacosta.png|Uruguay|2|Hits|1|False|
 56|Radiocero|http://192.99.150.52:7902|radiocero.png|Uruguay|2|Hits|1|False|
 57|Metropolis|http://51.15.152.81:8141/stream/1/|metropolis.png|Uruguay|2|Hits|1|False|
-58|Babel|http://radiosrnu.com:9340/stream/1/|Babel.png|Uruguay|23|Jazz|4|True|Música de calidad para perder los prejuicios.
-59|Concierto Urbana|http://streaming.conciertourbana.com/conciertourbana|conciertourbana.png|Uruguay|3|Hits|1|False|Somos la 92.5 FM de Montevideo, Uruguay: una radio de éxitos con los artistas más destacados del mundo.
+58|Babel|http://173.212.242.118:8092/stream|Babel.png|Uruguay|49|Jazz|4|True|Música de calidad para perder los prejuicios.
+59|Concierto Urbana|http://streaming.conciertourbana.com/conciertourbana|conciertourbana.png|Uruguay|4|Hits|1|False|Somos la 92.5 FM de Montevideo, Uruguay: una radio de éxitos con los artistas más destacados del mundo.
 60|Alfa FM|http://radioonline.netgate.com.uy:8000/alfafm|alfafm.png|Uruguay|3|Hits|1|False|
-61|WBGO|http://wbgo.streamguys.net/wbgo128|WBGO.png|USA|2|Jazz|3|False|
+61|WBGO|http://wbgo.streamguys.net/wbgo128|WBGO.png|USA|3|Jazz|3|False|
 62|Jazz Groove East|http://east-mp3-128.streamthejazzgroove.com/;stream.mp3|Jazz Groove East.png|USA|1|Jazz|2|False|
-63|Jazz 88.3|https://ksds-ice.streamguys1.com/ksds.mp3|Jazz 88.3.png|USA|2|Jazz|2|False|
-64|Jazz 24|http://icy1.abacast.com/kplu-jazz24aac-64|Jazz 24.png|USA|5|Jazz|3|False|Welcome to Jazz24, broadcasting from Seattle, Washington.
-66|Smooth Jazz|http://stream14.shoutcastsolutions.com:8057/256stream|SmoothJazz.png|Poland|3|Jazz|2|False|
+63|Jazz 88.3|https://ksds-ice.streamguys1.com/ksds.mp3|Jazz 88.3.png|USA|3|Jazz|2|False|
+64|Jazz 24|http://icy1.abacast.com/kplu-jazz24aac-64|Jazz 24.png|USA|10|Jazz|3|False|Welcome to Jazz24, broadcasting from Seattle, Washington.
+66|Smooth Jazz|http://stream14.shoutcastsolutions.com:8057/256stream|SmoothJazz.png|Poland|6|Jazz|2|False|
 67|KJazz 88.1|https://1.ice1.sslstream.com:80/kkjz_fm.aac|KJazz.png|USA|1|Jazz|2|False|
 68|ABC Radio|http://live-radio02.mediahubaustralia.com/JAZW/mp3/|ABC Radio.png|Australia|1|Jazz|2|False|ABC Jazz is a digital radio station, available on digital TV (Aus chan 201), DAB+, ABC Listen App and online.
-69|Jazz London|http://radio.canstream.co.uk:8075/live.mp3|Jazz London.png|UK|2|Jazz|3|False|
-70|Audiophile Jazz|http://8.38.78.173:8210|Audiophile Jazz.png|Greece|2|Jazz|1|False|
+69|Jazz London|http://radio.canstream.co.uk:8075/live.mp3|Jazz London.png|UK|3|Jazz|3|False|
+70|Audiophile Jazz|http://8.38.78.173:8210|Audiophile Jazz.png|Greece|3|Jazz|1|False|
 71|Audiophile Classic|http://8.38.78.173:8093|Audiophile Classic.png|Greece|1|Classical|2|False|
 72|Kiss|http://cloud2.cdnseguro.com:23538/;|Kiss.png|Brazil|1|Rock|1|False|
-73|Clasica|http://radiosrnu.com:9334/stream|Clasica.png|Uruguay|4|Classical|2|False|
+73|Clasica|http://radiosrnu.com:9334/stream|Clasica.png|Uruguay|5|Classical|2|False|
 74|Del Sur|http://radiosrnu.com:9338/stream|Del Sur.png|Uruguay|2|Rock|2|False|La emisora de la música nacional, conducida por músicos y periodistas vinculados a la música.
 75|Radio Uruguay|http://radiosrnu.com:9336/stream|Radio Uruguay.png|Uruguay|2|News|2|False|La radio de la palabra, la información y el periodismo, en todos sus géneros y contenidos.
-76|Onda Cero|http://icecast-streaming.nice264.com/ondacero|Onda Cero.png|Spain|3|Sports|1|False|
-77|RNE|http://195.10.10.206/rtve/rtve-rne.mp3|RNE.png|Spain|1|News|1|False|
+76|Onda Cero|http://icecast-streaming.nice264.com/ondacero|Onda Cero.png|Spain|4|Sports|1|False|
+77|RNE|http://195.10.10.206/rtve/rtve-rne.mp3|RNE.png|Spain|2|News|1|False|
 78|Clarin|http://usa15.ciudaddigital.com.uy:8032/ClarinAM|Clarin.png|Uruguay|1|Folclore|2|False|
 79|Radio Cooperativa|http://unlimited4-us.dps.live/cooperativafm/mp3/icecast.audio|Radio Cooperativa.png|Chile|1|News|3|False|
 80|Oriental|http://192.99.150.52:7906|Oriental.png|Uruguay|2|News|2|False|
 81|Radio Nacional|http://radio.radionacional.com.uy:8090/stream/1/|Radio Nacional.png|Uruguay|0||1|False|
+82|KEXP|https://kexp-mp3-128.streamguys1.com/kexp128.mp3|KEXP.png|USA|3|Rock|1|False|KEXP.ORG 90.3FM - where the music matters
+83|DubLab|http://dublab.out.airtime.pro:8000/dublab_b|DubLab.png|USA|2|Music|1|False|Future Roots Radio
+84|XRay|http://listen.xray.fm:8000/stream|XRay.png|USA|4|Music|3|False|We Are XRAY.fm /// 107.1, City-Wide! 91.1 KXRY Portland /// Portland's progressive blend of music and ideas. Radio is Yours.
+85|KUTX|https://kut2.streamguys1.com/kut2|KUTX.png|USA|5|Music|3|False|KUTX 98.9 The Austin Music Experience MP3 192kbps Stereo Stream
+86|WFMU|http://stream0.wfmu.org/freeform-128k.mp3|WFMU.png|USA|4|Music|2|False|WFMU Freeform Radio
+87|WWOZ|https://wwoz-sc.streamguys1.com/wwoz-hi.mp3|WWOZ.png|USA|22|Jazz|3|False|WWOZ 90.7 FM is the New Orleans Jazz and Heritage community radio station.
+88|BBC Radio 6|http://bbcmedia.ic.llnwd.net/stream/bbcmedia_6music_mf_q|BBC 6.png|UK|3|Music|2|False|
+89|WQXR|https://stream.wqxr.org/wqxr-web|WQXR.png|USA|10|Classical|1|False|WQXR: New York's Classical Music Station - MP3
+90|New Sounds|https://q2stream.wqxr.org/q2-web|New Sounds.png|USA|0|Music|1|False|
+91|KUSF|http://104.236.145.45:8000/stream|KUSF.png|USA|2|Music|1|False|Support KUSF & keep college radio alive! SF's student-run station streaming live from the University of San Francisco 24/7!
+92|Radio Free Brooklyn|http://patmos.cdnstream.com:9300/live|Radio Free Brooklyn.png|USA|1|Music|1|False|A 501(c)3 nonprofit organization providing a commercial-free freeform Internet Radio. Broadcasting live 24 hrs a day, 365 days a year.
+93|NTS Radio London|https://stream-relay-geo.ntslive.net/stream|NTS.png|UK|0|Music|1|False|Music discovery platform.
+94|NTS Radio LA|https://stream-relay-geo.ntslive.net/stream2|NTS Radio S2.png|USA|1|Music|1|False|
+95|SomaFM Indie Pop Rocks|http://ice3.somafm.com/indiepop-128-mp3|SomaFM Indie Pop Rocks.png|USA|2|Indie|1|False|
+96|Soma FM Groove Salad|http://ice3.somafm.com/groovesalad-256-mp3|Soma FM Groove Salad.png|USA|18|Music|1|False|Soma FM
+97|Soma FM Sonic Universe|http://ice3.somafm.com/sonicuniverse-128-mp3|Soma FM Sonic Universe.png|USA|2|Music|1|False|Nu Jazz plus avant-garde Euro Jazz: Transcending the boundaries of jazz with experimental takes on tradition.
+98|NSB Radio|http://live.nsbradio.co.uk:8904|NSB Radio.png|UK|10|Electronic|1|True|
+99|Giants of Jazz Radio|https://streaming.radio.co/s297e618a7/listen|Giants of Jazz Radio.png|UK|3|Jazz|1|False|
+100|Radio Cero|http://147.135.11.82:7902/;|Radio Cero.png|Uruguay|6|Music|3|False|

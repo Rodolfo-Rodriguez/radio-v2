@@ -1,13 +1,13 @@
 1|No Toquen nada|08:00-12:00|0,1,2,3,4|Joel, Sueco, Darwin|News|0|False|https://twitter.com/notoquennada|2
-2|Quien Te Dice|12:00-13:00|0,1,2,3,4|Fabregat, Bonino|News|0|False|https://twitter.com/quientedice995|2
+2|Quien Te Dice|12:00-13:00|0,1,2,3,4|Fabregat, Delgado|News|0|False|https://twitter.com/quientedice995|2
 3|La Mesa de los Galanes|13:00-16:00|0,1,2,3,4|Piñe, Fabregat, Diego, Camilo, Rafa|Humor|0|False|https://twitter.com/lamesa995|2
 4|Facil Desviarse|16:00-19:00|0,1,2,3,4|Diego Zas, Juanchi Hounie|News|0|False|https://twitter.com/facildesviarse|2
 5|13 a 0|19:00-20:30|0,1,2,3,4|Profe Piñeirua, Gonza Delgado|Sports|0|False|https://twitter.com/treceacero|2
-6|Todo Pasa|08:00-12:00|0,1,2,3,4|Mariano, Andres, Ines, Majo, Gustav||0|False|https://twitter.com/todopasaoceano|1
+6|Todo Pasa|07:00-12:00|0,1,2,3,4|Mariano, Andres, Majo||0|False|https://twitter.com/todopasaoceano|1
 7|Justicia Infinita|12:00-15:00|0,1,2,3,4|Camarota, Marrone, Pollo||0|False|https://twitter.com/justiciaradio|1
 8|De Arriba un Rayo|15:00-18:00|0,1,2,3,4|Cuico, Hugo, Flor, Majo y Amilcar.||0|False|https://twitter.com/arribaunrayo|1
 9|Abrepalabra|18:00-20:00|0,1,2,3,4|Gustavo Rey||0|False|https://twitter.com/abrepalabra|1
-10|No Somos Nadie|06:00-09:00|0,1,2,3,4|Juan Pablo Varsky||0|False|https://twitter.com/nadie951|5
+10|De Aca en Mas|06:00-09:00|0,1,2,3,4|Maria O Donnel||0|False||5
 11|Perros de la Calle|09:00-13:00|0,1,2,3,4|Andy Kusnetzof, Cayetano, Schultz||0|False|https://twitter.com/perroscalle|5
 12|Basta de Todo|13:00-17:00|0,1,2,3,4|Matias Martin, Diego Ripoll||0|False|https://twitter.com/bastatodo|5
 13|Metro y Medio|17:00-20:00|0,1,2,3,4|Sebastian Wainraich, Julieta Pink||0|False|https://twitter.com/metromedio|5
@@ -31,12 +31,11 @@
 31|Hora de Cierre|19:00-20:00|0,1,2,3,4|||0|False||48
 32|Agro Negocios Sarandi|20:00-21:00|0,1,2,3,4|||0|False||48
 33|Planeta Radio|21:00-22:00|0,1,2,3,4|||0|False||48
-34|La Mañana de El Espectador|07:00-10:00|0,1,2,3,4|Ivanna Vázquez y Micaela Cotelo||0|False|https://twitter.com/M810AM|4
-35|Rompkbzas|10:00-13:00|0,1,2,3,4|Daniel Figares||0|False|https://twitter.com/rompkbzas810|4
-36|Indice 810|13:00-14:00|0,1,2,3,4|||0|False||4
-37|Un Mundo Cualquiera|14:00-16:00|0,1,2,3,4| Christian Font y Mónica Lorenzo||0|False|https://twitter.com/unmundo810|4
-38|Tuya y Mia|16:00-18:00|0,1,2,3,4|Alberto Sonsol||0|False||4
-39|Basquetbol de Primera|18:00-19:00|0,1,2,3,4|Alberto Sonsol y Favio Ottonello||0|False||4
+34|No Toquen Nada|08:00-11:00|0,1,2,3,4|Joel, Sueco, Darwin||0|False|https://twitter.com/notoquennada|4
+36|Mas Temprano Que Tarde|14:00-16:00|0,1,2,3,4|Blanca Rodriguez, Wilmar Amaral, Diego Bello||0|False|https://twitter.com/mastemprano810|4
+37|Otro Elefante|11:00-14:00|0,1,2,3,4|Salvador Banchero, Penelope Saray||0|False|https://twitter.com/otroelefante810|4
+38|Bien Igual|16:00-18:00|0,1,2,3,4|Alberto Sonsol, Rafa Cotelo, Tano Abadie||0|False|https://twitter.com/bienigual810|4
+39|Tuya y Mia|18:00-19:15|0,1,2,3,4|Alberto Sonsol, Jorge Sere, Oscar Bello, Diego Sonsol, Lali Sonsol|Sport|0|False|https://twitter.com/tuyaymia810|4
 40|Sonar Informativo|07:00-09:00|0,1,2,3,4|Rafael Cavada y Patricia Venegas|News|0|False||6
 41|Mundo Sonar|10:00-13:00|0,1,2,3,4|Alfredo Lewin||0|False||6
 42|EPA!|13:00-15:00|0,1,2,3,4|Felipe Bianchi y Pablo Márquez||0|False||6
@@ -86,11 +85,10 @@
 87|No toquen Nada (Concentrado)|20:30-21:00|0,1,2,3,4|Joel, Sueco, Darwin||0|False||2
 88|La Música DelSol|21:00-23:59|0,1,2,3|||0|False|None|2
 89|Locos por el Fútbol|00:00-03:00|0,6|Adrián, Daniel Richard, Germán y Yuri.||0|False||2
-90|La Música DelSol|03:00-08:00|0|||0|False|None|2
-91|La Música DelSol|02:00-08:00|1,2,3,4,5|||0|False||2
-92|Abran cancha|12:00-14:00|5|Horacio Abadie||0|False||2
+90|La Música DelSol|03:00-07:00|0|||0|False||2
+91|La Música DelSol|02:00-07:00|1,2,3,4,5|||0|False||2
+92|Abran cancha|12:00-14:00|5|Horacio Abadie||0|False|https://twitter.com/995abrancancha|2
 93|Ciudad Paraíso|21:00-23:59|4|Diego González||0|False||2
-94|Informativo de Canal 12|07:00-08:00|0,1,2,3,4|||0|False||1
 95|Post|00:00-07:00|0,1,2,3,4|Musica||0|False||1
 96|Play|21:00-23:59|5|||0|False|None|1
 97|Play|00:00-01:00|6|||0|False|None|1
@@ -128,3 +126,7 @@
 130|Vorterix Metal|20:00-23:59|6|||0|False|None|13
 132|Jazz1|14:00-15:08|0,1,2,3,4|||0|False||58
 133|Jazz2|15:08-16:00|0,1,2,3,4|||0|False||58
+134|Doble Click|07:00-08:00|0,1,2,3,4|Lucia Brocal, Paula Scorza||0|False||2
+135|Al Dia 810|07:00-08:00|0,1,2,3,4|||0|False|https://twitter.com/aldia810|4
+136|Basquetbol de Primera|19:15-20:00|0,1,2,3,4|Alberto Sonsol, Carlos Peinado, Flavio Ottonello||0|False|https://twitter.com/basquet810|4
+137|Feliz Dia|11:00-13:00|0,1,2,3,4|Gustav||0|False|https://twitter.com/elgrangustaf|100

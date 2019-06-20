@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+  {% extends "base.html" %}
 
 {% block title %} RadioPlayer {% endblock %}
 
@@ -121,11 +121,27 @@
 
              <li class="list-group-item">
                <div class="info-list-items">
-                 <div class="info-title"><strong>Plays</strong></div>
-                 <div class="info-text">{{radio.num_plays}}</div>
+                 <div class="info-title"><strong>Preset</strong></div>
+                 <div class="info-text">
+                 {% for btx in range(1,10) %}
+                    {% if radio.preset == btx %}
+                        <button type="button" class="btn btn-success btn-sm" style="padding: 7px;">0{{btx}}</button>
+                    {% else %}
+                        <a href="/radio/set_preset/{{radio.id}}/{{btx}}"><button type="button" class="btn btn-secondary btn-sm" style="padding: 7px;">0{{btx}}</button></a>
+                    {% endif %}
+                 {% endfor %}
+
+                 {% for btx in range(10,21) %}
+                    {% if radio.preset == btx %}
+                        <button type="button" class="btn btn-success btn-sm" style="padding: 7px;">{{btx}}</button>
+                    {% else %}
+                        <a href="/radio/set_preset/{{radio.id}}/{{btx}}"><button type="button" class="btn btn-secondary btn-sm" style="padding: 7px;">{{btx}}</button></a>
+                    {% endif %}
+                 {% endfor %}
+                 </div>
                </div>
              </li>
-
+      
         </ul>
 
     </div>

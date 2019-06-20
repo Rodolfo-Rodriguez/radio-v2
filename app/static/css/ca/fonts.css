@@ -1,0 +1,29 @@
+@font-face {
+ font-family: 'brandon_grotesquelight';
+ src: url('brandon_light-webfont.woff2') format('woff2'),
+      url('brandon_light-webfont.woff') format('woff');
+ font-weight: normal;
+ font-style: normal;
+}
+
+@font-face {
+ font-family: 'brandon_grotesquelight';
+ src: url('brandon_reg-webfont.woff2') format('woff2'),
+      url('brandon_reg-webfont.woff') format('woff');
+ font-weight: bold;
+ font-style: normal;
+}
+
+@font-face {
+ font-family: 'TisaPro';
+ src: url('TisaPro.woff') format('woff');
+ font-weight: normal;
+ font-style: normal;
+}
+
+@font-face {
+ font-family: 'TisaPro';
+ src: url('TisaPro-Bold.woff') format('woff');
+ font-weight: bold;
+ font-style: normal;
+}

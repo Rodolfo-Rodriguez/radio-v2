@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %} RadioPlayer {% endblock %}
+
+{% block body %}
+
+<div class="bs-component">
+
+<div class="col-grid-full">
+
+    <div class="card text-white bg-dark" style="flex: 0 0 100%">
+      <h5 class="card-header">{{title}}</h5>
+      <div class="card-body">
+        <div class="row">
+
+        {% for radio in radio_list %}
+
+          <div class="col-grid-element-full">
+            <div class="thumb-container">
+              <a href="/playradio_menu/{{radio.id}}"><img src="/static/images/radios/{{radio.image}}" class="thumb-image"></a>
+            </div>
+         </div>
+
+
+        {% endfor %}
+
+       </div>
+
+    </div>
+   </div>
+  
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

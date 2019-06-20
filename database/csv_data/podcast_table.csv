@@ -35,3 +35,9 @@
 36|Ernesto|Ernesto.png|Ernesto|Uruguay|Ernesto el Robot|Oceano|4|https://www.oceano.uy/api/podcast.php|ernesto|/Podcasts/Oceano/Ernesto|Oceano||False|False
 37|Oceano Sports Radio|OSR.jpg|OceanoSportsRadio|Uruguay||Oceano|1|https://www.oceano.uy/api/podcast.php|OSR|/Podcasts/Oceano/OceanoSportsRadio|Oceano||False|True
 38|Abrepalabra|Abrepalabra.jpg|Abrepalabra|Uruguay||Oceano|3|https://www.oceano.uy/api/podcast.php|Abrepalabra|/Podcasts/Oceano/Abrepalabra|||False|True
+39|Cerca de la Revolución|Cerca.jpg|Cerca|Argentina||Music|1|https://feeds.podcastmirror.com/cerca-de-la-revolucion||/Podcasts/Music/Cerca|||False|False
+40|Otro Elefante|otroelefante.png|OtroElefante|Uruguay||Espectador|4|http://picluster-3:8080/static/feeds/fake.rss||/Podcasts/Espectador/OtroElefante|Espectador|3|False|False
+41|Bien Igual|bienigual.png|BienIgual|Uruguay||Espectador|3|http://picluster-3:8080/static/feeds/fake.rss||/Podcasts/Espectador/BienIgual|Espectador|4|False|False
+42|El Primer Palo|primerpalo.png|PrimerPalo|Spain||Sports|3|https://esradio.libertaddigital.com/el-primer-palo/podcast.xml||/Podcasts/Deportes/PrimerPalo|Espectador|10|False|False
+43|Sergio Pena|SergioPena.png|SergioPena|Uruguay||Espectador|3|http://picluster-3:8080/static/feeds/fake.rss||/Podcasts/Espectador/SergioPena|||False|False
+44|Dobrich|Dobrich.jpg|Dobrich|Uruguay||Espectador|3|http://picluster-3:8080/static/feeds/fake.rss||/Podcasts/Espectador/Dobrich|||False|False

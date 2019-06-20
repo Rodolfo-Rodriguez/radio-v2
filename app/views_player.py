@@ -8,7 +8,7 @@ sys.setdefaultencoding('utf8')
 player = Blueprint('player', __name__, template_folder='templates/base')
 
 from .models import Radios, Artist, Playlist, Podcast
-from . import db, radio_player
+from . import db, radio_player, db_manager
 from .forms import URLForm
 
 from sqlalchemy import desc
@@ -31,6 +31,15 @@ def play():
 
     return redirect(redirect_page)
 
+# ---> Play Pause
+
+@player.route('/play_pause', methods=['GET'])
+def play_pause():
+    radio_player.play_pause()
+
+    redirect_page = session['last_url']
+
+    return redirect(redirect_page)
 # ---> Stop
 
 @player.route('/stop', methods=['GET'])
@@ -129,17 +138,29 @@ def play_url():
 ##  Server
 ###########################################################################################
 
+# ---> Server Status
+@player.route('/server/status', methods=['GET'])
+def server_status():
+    session['last_url'] = url_for('player.server_status')
+    template_page = 'player_status.html'
+    return render_template(template_page, radio_player=radio_player)
+
+# ---> Select Server
+@player.route('/server/select/<hostname>', methods=['GET'])
+def server_select(hostname):
+    radio_player.select_server(hostname)
+    return redirect(session['last_url'])
+
 # ---> Disconnect from Server
-
-@player.route('/mpd_disconnect', methods=['GET'])
+@player.route('/server/disconnect', methods=['GET'])
 def server_disconnect():
-    radio_player.disconnect()
-    return redirect('/')
+    radio_player.server_disconnect()
+    return redirect(session['last_url'])
 
-# ---> Server
-
-@player.route('/mpd_client/<hostname>', methods=['GET'])
-def server(hostname):
-    radio_player.connect(hostname)
-    return redirect('/')
+# ---> DB Status
+@player.route('/db/status', methods=['GET'])
+def db_status():
+    session['last_url'] = url_for('player.db_status')
+    template_page = 'db_status.html'
+    return render_template(template_page, radio_player=radio_player, db_manager=db_manager)
 

@@ -29,6 +29,7 @@
         <th>Priority</th>
         <th>URL</th>
         <th>Image URL</th>
+        <th>Move</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
@@ -40,6 +41,7 @@
           <td>{{bookmark.priority}}</td>
           <td>{{bookmark.url}}</td>
           <td>{{bookmark.image_url}}</td>
+          <td><a href="/bookmark/move_up/{{bookmark.id}}"><i class="fas fa-arrow-alt-circle-up"></i></a></td>
           <td><a href="/bookmark/edit/{{bookmark.id}}">Edit</a></td>
           <td><a href="/bookmark/delete/{{bookmark.id}}">Delete</a></td>
         </tr>

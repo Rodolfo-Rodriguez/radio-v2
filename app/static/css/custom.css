@@ -557,7 +557,7 @@
 }
 .info-text{
   text-align: left;
-  flex: 1 1 80%;
+  flex: 1 1 85%;
 }
 
 .info-prog{
@@ -593,3 +593,10 @@
   color: lightgreen;
 }
 
+
+#container_download {
+  margin: 20px;
+  width: 97%;
+  height: 8px;
+  position: relative;
+}

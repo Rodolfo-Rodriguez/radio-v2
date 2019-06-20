@@ -1,30 +1,26 @@
 {% extends "base.html" %}
 
-{% block title %} Add Podcast Episode {% endblock %}
+{% block title %} Config {% endblock %}
 
 {% block body %}
 
 <div class="row">
    <div class="col-lg-10 offset-lg-1">
      <div class="bs-component">
-
        <form method="POST">
 
         {{form.csrf_token}}
-
+         
          <fieldset>
+           <legend>Config</legend>
 
-           <legend>Add Podcast Episode</legend>
-
-           <div class="form-group">{{form.name.label}} {{form.name(class="form-control")}}</div>
-           <div class="form-group">{{form.url.label}} {{form.url(class="form-control")}}</div>
-
+           <div class="form-group">{{form.bookmark_max.label}} {{form.bookmark_max(class="form-control")}}</div>
+         
          </fieldset>
 
          {{form.submit(class="btn btn-primary")}}
-
+      
       </form>
-    
     </div>
   </div>
 </div>
@@ -32,4 +28,3 @@
 <!-- Page -->
 
 {% endblock body %}
-

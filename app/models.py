@@ -13,6 +13,7 @@ class Radios(db.Model):
     stars = db.Column(db.Integer,nullable=True)
     fav = db.Column(db.Boolean,nullable=False)
     description = db.Column(db.String(120),nullable=True)
+    preset = db.Column(db.Integer,nullable=True)    
     radio_link_list = db.relationship('Radio_Link', backref='radios')
     program_list = db.relationship('Program', backref='radios')
 

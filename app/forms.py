@@ -12,6 +12,7 @@ class RadioForm(FlaskForm):
     country = StringField('Country')
     style = StringField('Style')
     description = StringField('Description')
+    preset = StringField('Preset')
     submit = SubmitField('Submit')
 
 class ImageForm(FlaskForm):
@@ -88,4 +89,8 @@ class BookmarkForm(FlaskForm):
     url = StringField('URL', validators=[DataRequired()])
     image_url = StringField('URL', validators=[DataRequired()])
     priority = StringField('Priority')
+    submit = SubmitField('Submit')
+
+class ConfigForm(FlaskForm):
+    bookmark_max = StringField('Bookmark Max', validators=[DataRequired()])
     submit = SubmitField('Submit')
