@@ -13,7 +13,7 @@ SOAPAction = '"urn:UuVol-com:service:UuVolSimpleRemote:1#KeyPressed"'
 
 xml_body = """
 <u:KeyPressed xmlns:u="urn:UuVol-com:service:UuVolSimpleRemote:1">
-	<Key>MUTE</Key>
+	<Key>VOL_UP</Key>
 	<Duration>SHORT</Duration>
 </u:KeyPressed>		
 """

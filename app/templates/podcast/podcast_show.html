@@ -157,6 +157,7 @@
                    <div class="song-text">{{song['title']}}</div>
                    <div class="song-time">{{song['time']}}</div>
                    <div class="song-tag"><a href="/podcast/edit_tag/{{podcast.id}}/{{song['track']}}"><i class="fas fa-edit"></i></a></div>
+                   <div class="song-tag"><a href="/podcast/episode_url/{{podcast.id}}/{{song['track']}}"><i class="fas fa-link"></i></a></div>
                    <div class="song-tag"><a href="/podcast/delete_episode/{{podcast.id}}/{{song['track']}}"><i class="fas fa-trash-alt"></i></a></div>
                  {% endif %}
 
@@ -166,10 +167,6 @@
           {% endfor %}
         </ul>
 
-    </div>
-
-    <div class="card-footer">
-      <p class="card-text text-right"><a class="card-link" href="/podcast/add_episode/{{podcast.id}}">Add Episode</a></p>
     </div>
 
    </div>

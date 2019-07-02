@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Sergio Pena</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/sergiopena</url>
+        <title>Sergio Pena</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description></description>
+    <pubDate>"Mon 01 Jul 2019 18:28:00"</pubDate>
+
+	<item>
+		<title>Los Dolcheviques </title>
+		<pubDate>Tue, 18 Jun 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/1914.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/1914.mp3</guid>
+	</item>
+
+	<item>
+		<title>Campañas políticas en entredicho </title>
+		<pubDate>Tue, 25 Jun 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2039.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2039.mp3</guid>
+	</item>
+
+	<item>
+		<title>El Partido Bilosófico desde Brasil</title>
+		<pubDate>Day, 20 Jun 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/1967.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/1967.mp3</guid>
+	</item>
+
+	<item>
+		<title>Con Pena comprendo el Terraflanismo</title>
+		<pubDate>Day, 20 Jun 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/1511.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/1511.mp3</guid>
+	</item>
+
+</channel></rss>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Coqueto Escenario</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/luboadusto</url>
+        <title>Coqueto Escenario</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description>Periodista deportivo nacido en 1931. En Uruguay. Menos proceso y más pierna fuerte.</description>
+    <pubDate>"Mon 01 Jul 2019 17:57:33"</pubDate>
+
+	<item>
+		<title>Volvió el viejo</title>
+		<pubDate>Mon, 01 Jul 2019 00:00:00 +0000</pubDate>
+		<description></description>
+		<enclosure url="http://audios.oceanofm.com/programas/TodoPasa/19-07-012amaanaCoquetoescenario.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/TodoPasa/19-07-012amaanaCoquetoescenario.mp3</guid>
+	</item>
+
+</channel></rss>

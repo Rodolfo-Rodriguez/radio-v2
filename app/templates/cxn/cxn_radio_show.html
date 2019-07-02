@@ -1,0 +1,169 @@
+  {% extends "base.html" %}
+
+{% block title %} RadioPlayer {% endblock %}
+
+{% block body %}
+
+<div class="row">
+
+  <div class="col-player">
+    <div class="card text-white bg-primary mb-3">   
+      <h5 class="card-header">Cambridge CXNv2</h5>
+      <div class="card-body" style ="padding: 5px;">           
+        <div class="thumb-container">
+          <img src={{radio_player.player_img}} class="thumb-image">
+        </div>      
+      </div>       
+    </div>
+  </div>
+
+  <div class="col-info">
+
+    <div class="bs-component">
+      <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+
+        {% if radio_player.cxn_client.playback_details['source-type'] == '0' or radio_player.cxn_client.playback_details['source-type'] == '1' %}
+
+        <h5 class="card-header">Stream Info</h5>
+        
+        <div class="card-body">
+        
+          <ul class="list-group list-group-flush">
+
+            <li class="list-group-item">
+              <div class="info-list-items">
+                <div class="info-title"><strong>Source</strong></div>
+                <div class="info-text">{{radio_player.cxn_client.playback_details['source-name']}}</div>
+              </div>
+            </li>
+
+            <li class="list-group-item">
+              <div class="info-list-items">
+                <div class="info-title"><strong>Title</strong></div>
+                <div class="info-text">{{radio_player.cxn_client.playback_details['title']}}</div>
+              </div>
+            </li>
+
+            <li class="list-group-item">
+              <div class="info-list-items">
+                <div class="info-title"><strong>URL</strong></div>
+                <div class="info-text">{{radio_player.cxn_client.playback_details['url']}}</div>
+              </div>
+            </li>  
+
+             <li class="list-group-item">
+               <div class="info-list-items">
+                 <div class="info-title"><strong>Preset</strong></div> 
+                 <div class="info-text">
+                 {% for btx in range(1,10) %}
+                    {% if radio_player.preset_playing == btx %}
+                      <a><button type="button" class="btn btn-success btn-sm" style="padding: 7px;">0{{btx}}</button></a>
+                    {% else %}
+                      <a href="/cxn/radio/add_current_to_preset/{{btx}}"><button type="button" class="btn btn-secondary btn-sm" style="padding: 7px;">0{{btx}}</button></a>
+                    {% endif %}
+                 {% endfor %}
+
+                 {% for btx in range(10,20) %}
+                    {% if radio_player.preset_playing == btx %}
+                      <a><button type="button" class="btn btn-success btn-sm" style="padding: 7px;">{{btx}}</button></a>
+                    {% else %}
+                      <a href="/cxn/radio/add_current_to_preset/{{btx}}"><button type="button" class="btn btn-secondary btn-sm" style="padding: 7px;">{{btx}}</button></a>
+                    {% endif %}
+                 {% endfor %}
+
+                 {% if radio_player.preset_playing == 20 %}
+                    <a><button type="button" class="btn btn-success btn-sm" style="padding: 7px;">20</button></a>
+                  {% else %}
+                    <a><button type="button" class="btn btn-warning btn-sm" style="padding: 7px;">20</button></a>
+                  {% endif %}
+
+                 </div>
+               </div>
+             </li>
+
+            {% if radio_player.preset_playing > 0 %}
+              <li class="list-group-item">
+                <div class="info-list-items">
+                  <div class="info-title"><strong>Radio</strong></div>
+                  <div class="info-text"><a href="/radio_show/{{preset.radios.id}}">{{preset.radios.name}}</a></div>
+                </div>
+              </li>  
+            {% endif %}
+
+
+          </ul>
+
+
+        </div>
+
+
+        {% endif %}
+
+        {% if radio_player.cxn_client.playback_details['source-type'] == '3' %}
+        <h5 class="card-header">Playlist Info</h5>
+
+        <div class="card-body">
+        
+          <ul class="list-group list-group-flush">
+
+            <li class="list-group-item">
+              <div class="info-list-items">
+                <div class="info-title"><strong>Source</strong></div>
+                <div class="info-text">{{radio_player.cxn_client.playback_details['source-name']}}</div>
+              </div>
+            </li>
+
+            <li class="list-group-item">
+              <div class="info-list-items">
+                <div class="info-title"><strong>Title</strong></div>
+                <div class="info-text">{{radio_player.cxn_client.playback_details['pl_title']}}</div>
+              </div>
+            </li>
+
+            <li class="list-group-item">
+              <div class="info-list-items">
+                <div class="info-title"><strong>Artist</strong></div>
+                <div class="info-text">{{radio_player.cxn_client.playback_details['pl_artist']}}</div>
+              </div>
+            </li>
+
+            <li class="list-group-item">
+              <div class="info-list-items">
+                <div class="info-title"><strong>Album</strong></div>
+                <div class="info-text">{{radio_player.cxn_client.playback_details['pl_album']}}</div>
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+
+        {% endif %}
+
+      </div>
+    </div>
+  
+  </div>
+
+  <div class="col-links">
+    <div class="bs-component">
+      <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+        <h5 class="card-header">Format</h5>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-left">{{radio_player.cxn_client.playback_details['codec']}}</li>
+            <li class="list-group-item text-left">{{radio_player.cxn_client.playback_details['bit-rate']}} Kb/sec</li>
+            <li class="list-group-item text-left">{{radio_player.cxn_client.playback_details['sample-rate']}} Khz</li>
+            <li class="list-group-item text-left">{{radio_player.cxn_client.playback_details['bit-depth']}} bits</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Page -->
+
+{% endblock body %}
+

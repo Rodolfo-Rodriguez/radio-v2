@@ -30,8 +30,10 @@ from models import Radios, Artist, Playlist, Podcast, Artist_Link, Radio_Link, P
 from .dbman import DBManager
 db_manager = DBManager(db)
 
-from radio import RadioPlayer
+from download_manager import DownloadManager
+download_manager = DownloadManager()
 
+from radio import RadioPlayer
 radio_player = RadioPlayer()
 
 from .views_base import base
@@ -40,6 +42,7 @@ from .views_radio import radio
 from .views_artist import artist
 from .views_playlist import playlist
 from .views_podcast import podcast
+from .views_cxn import cxn
 from .views_mobile import mobile
 
 app.register_blueprint(base)
@@ -48,4 +51,5 @@ app.register_blueprint(radio)
 app.register_blueprint(artist)
 app.register_blueprint(playlist)
 app.register_blueprint(podcast)
+app.register_blueprint(cxn)
 app.register_blueprint(mobile)

@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0"><specVersion><major>1</major>
+<minor>0</minor>
+</specVersion>
+<serviceStateTable><stateVariable sendEvents="no"><name>KeyString</name>
+<dataType>string</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+</serviceStateTable>
+<actionList><action><name>KeyPressed</name>
+<argumentList><argument><name>Key</name>
+<direction>in</direction>
+<relatedStateVariable>KeyString</relatedStateVariable>
+</argument>
+<argument><name>Duration</name>
+<direction>in</direction>
+<relatedStateVariable>KeyString</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+</actionList>
+</scpd>

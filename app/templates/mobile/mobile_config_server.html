@@ -8,27 +8,19 @@
 
 <div class="mobile-body">
     
-<!--     <div class="mobile-row">
-    {% if radio_player.mpd_client == 'rune-1' %}
-      <p>Oficina v1</p>
-    {% else %}
-      <a href="/mobile/mpd_client/rune-1">Oficina v1</a>
-    {% endif %}
-    </div>
- -->
     <div class="mobile-row">
-    {% if radio_player.mpd_client == 'rune-1v2' %}
-      <p>Oficina v2</p>
+    {% if radio_player.server_name == 'rune-1' %}
+      <p>Oficina</p>
     {% else %}
-      <a href="/mobile/mpd_client/rune-1v2">Oficina v2</a>
+      <a href="/mobile/server/select/rune-1">Oficina</a>
     {% endif %}
     </div>
 
     <div class="mobile-row">
-    {% if radio_player.mpd_client == 'rune-2' %}
-      <p>Sala</p>
+    {% if radio_player.server_name == 'cxn' %}
+      <p>CNX Sala</p>
     {% else %}
-      <a href="/mobile/mpd_client/rune-2">Sala</a>
+      <a href="/mobile/server/select/cxn">CNX Sala</a>
     {% endif %}
     </div>
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Oceano Sports Radio</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/osr</url>
+        <title>Oceano Sports Radio</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description></description>
+    <pubDate>"Mon 01 Jul 2019 18:04:58"</pubDate>
+
+	<item>
+		<title>OSR: Los futuros VARistas</title>
+		<pubDate>Mon, 01 Jul 2019 00:00:00 +0000</pubDate>
+		<description></description>
+		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-01OSR2.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-01OSR2.mp3</guid>
+	</item>
+
+	<item>
+		<title>OSR: así se vivió Uruguay - Ecuador</title>
+		<pubDate>Sun, 16 Jun 2019 00:00:00 +0000</pubDate>
+		<description></description>
+		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/URUVSECUresumen.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/URUVSECUresumen.mp3</guid>
+	</item>
+
+	<item>
+		<title>OSR: El "Clásico del hambre"</title>
+		<pubDate>Fri, 28 Jun 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-28OSR.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-28OSR.mp3</guid>
+	</item>
+
+</channel></rss>

@@ -4,6 +4,19 @@ from flask_wtf.file import FileField, FileRequired
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo
 from wtforms import ValidationError
 
+class RadioSearchForm(FlaskForm):
+    name = StringField('Name')
+    location = SelectField('Location', choices=[
+                                                ('-1', 'none'), 
+                                                ('237', 'Uruguay'),
+                                                ('10','Argentina'),
+                                                ('45', 'Chile'), 
+                                                ('173', 'Peru'),
+                                                ('236', 'USA'),
+                                                ('234', '<UK></UK>')
+                                                ])
+    submit = SubmitField('Submit')
+
 class RadioForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     image = StringField('Image')
@@ -76,6 +89,12 @@ class PodcastForm(FlaskForm):
     retag = BooleanField('Add Date to Tag')
     submit = SubmitField('Submit')
 
+class PodcastEpisodeForm(FlaskForm):
+    title = StringField('Title')
+    url = StringField('URL', validators=[DataRequired()])
+    date = StringField('Date')
+    submit = SubmitField('Submit')
+
 class TagForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     submit = SubmitField('Submit')
@@ -94,3 +113,10 @@ class BookmarkForm(FlaskForm):
 class ConfigForm(FlaskForm):
     bookmark_max = StringField('Bookmark Max', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+class PresetForm(FlaskForm):
+    name = StringField('Name')
+    description = StringField('Description')
+    url = StringField('URL', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+

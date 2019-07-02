@@ -1,24 +1,2 @@
-<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:rawvoice="http://www.rawvoice.com/rawvoiceRssModule/" version="2.0">
-    <channel>
-        <title><![CDATA[Fake Feed]]></title>
-        <link>https://delsol.uy/</link>
-        <image>
-            <url>https://delsol.uy/public/lb/img/programas/darwin_podcast.jpg</url>
-            <title><![CDATA[Darwin Desbocatti]]></title>
-            <link>https://delsol.uy/</link>
-        </image>
-        <description></description>
-        <language>es-AR</language>
-        <atom:link href="http://podcasts.nraboy.com/podcast.xml" rel="self" type="application/rss+xml"/>
-        <lastBuildDate>Thu, 23 May 19 20:22:53 -0300</lastBuildDate>
-        <pubDate>Thu, 23 May 19 20:22:53 -0300</pubDate>
-        <item>
-            <title><![CDATA[Generic Fake Feed]]></title>
-            <link>https://cdn.dl.uy/solmp3/12839.mp3</link>
-            <pubDate>Mon, 20 May 2019 12:50:39</pubDate>
-            <description><![CDATA[This is a Fake Feed]]></description>
-            <enclosure url="https://cdn.dl.uy/solmp3/12839.mp3" length="0" type="audio/mpeg"/>
-            <guid>https://cdn.dl.uy/solmp3/12839.mp3</guid>
-        </item>
-    </channel>
-</rss>
+<rss><channel>
+</channel></rss>

@@ -24,14 +24,6 @@
                  <div class="thumb-overlay-link">
                    <a href={{ url_for('radio.radio_show',id=radio.id) }} class="thumb-link-text" title="Play">{{radio.name}}</a>
                  </div>
-                  <div class="thumb-overlay-stars">
-                    {% for st in range (0,radio.stars) %}
-                       <i class="fas fa-star"></i>
-                    {% endfor %}
-                  </div>
-                  <div class="thumb-overlay-delete">
-                    <a href="/radio/delete/{{radio.id}}" class="thumb-icon-delete" title="Delete"><i class="fas fa-trash-alt"></i></a>
-                  </div>
                 </div>
               </div>
          </div>

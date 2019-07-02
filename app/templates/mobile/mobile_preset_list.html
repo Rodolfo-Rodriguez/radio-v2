@@ -1,0 +1,23 @@
+{% extends "mobile_base.html" %}
+
+{% block title %} Radios {% endblock %}
+
+{% block body %}
+
+<!-- Page -->
+
+<div class="mobile-grid">
+
+  {% for preset in preset_list %}
+
+  <div class="mobile-cell">
+    <a href={{ url_for('mobile.mobile_radio_play',id=preset.radios.id) }}><img src="/static/images/radios/{{preset.radios.image}}"></a>
+  </div>
+
+  {% endfor %}
+
+</div>	
+
+<!-- Page -->
+
+{% endblock body %}

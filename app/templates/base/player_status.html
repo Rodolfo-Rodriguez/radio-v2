@@ -42,6 +42,15 @@
           </div>
         </div>
 
+        <div class="col-lg-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Power State</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.power_state() }}</h5>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="row">
@@ -86,6 +95,19 @@
 
       <div class="row">
 
+        <div class="col-lg-12">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-header">File</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ radio_player.server_currentsong('file') }}</h5>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+
+      <div class="row">
+
         <div class="col-lg-3">
           <div class="card text-white bg-primary mb-3">
             <div class="card-header">Title</div>
@@ -122,19 +144,6 @@
           </div>
         </div>
 
-      </div>
-
-      <div class="row">
-
-        <div class="col-lg-12">
-          <div class="card text-white bg-primary mb-3">
-            <div class="card-header">File</div>
-            <div class="card-body">
-              <h5 class="card-title">{{ radio_player.server_currentsong('file') }}</h5>
-            </div>
-          </div>
-        </div>
-      
       </div>
 
       <div class="row">

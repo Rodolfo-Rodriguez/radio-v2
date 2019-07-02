@@ -1,6 +1,6 @@
 
 from flask import render_template, redirect, request, Blueprint, session, url_for
-import sys, os
+import sys, os, time
 
 from sqlalchemy import desc
 
@@ -10,10 +10,10 @@ sys.setdefaultencoding('utf8')
 radio = Blueprint('radio', __name__, template_folder='templates/radio')
 
 from . import db, radio_player, CONFIG
-from .models import Radios, Program, Artist, Playlist, Podcast, Radio_Link, Bookmark
-from .forms import RadioForm, ImageForm, ProgramForm, LinkForm
+from .models import Radios, Program, Artist, Playlist, Podcast, Radio_Link, Bookmark, Preset
+from .forms import RadioForm, ImageForm, ProgramForm, LinkForm, RadioSearchForm, PresetForm
 
-from radio import RadioPlayer, ProgramsInfo
+from program_info import ProgramsInfo
 from podcast import PodcastInfo
 
 
@@ -60,14 +60,14 @@ def radio_favorite():
 # ---> Radio Presets
 @radio.route('/radio/presets', methods=['GET'])
 def radio_presets():
-    radio_list = Radios.query.filter(Radios.preset>0).order_by(Radios.preset).all()
-    #radio_player.update_state(radio_list)
+
+    preset_list = Preset.query.all()
 
     session['last_url'] = url_for('radio.radio_all')
 
-    template_page = 'radio_grid.html'
+    template_page = 'radio_preset_list.html'
 
-    return render_template(template_page,radio_list=radio_list,radio_player=radio_player,title='CNX Presets')
+    return render_template(template_page,preset_list=preset_list,radio_player=radio_player,title='Presets')
 
 # ---> Radio Styles
 @radio.route('/radio/styles', methods=['GET'])
@@ -135,6 +135,19 @@ def radio_grid():
 
     return render_template(template_page, radio_list=radio_list, radio_player=radio_player, title='Presets')
 
+
+# ---> Radio Presets Grid
+@radio.route('/radio/grid/presets', methods=['GET'])
+def radio_grid_presets():
+
+    preset_list = Preset.query.all()
+
+    session['last_url'] = url_for('radio.radio_grid_presets')
+
+    template_page = 'radio_grid_presets.html'
+
+    return render_template(template_page, preset_list=preset_list, radio_player=radio_player)
+
 ###########################################################################################
 ## Show, Play
 ###########################################################################################
@@ -193,10 +206,15 @@ def playradio(id):
 def playradio_menu(id):
 
     radio = Radios.query.filter_by(id=id).first()
-    radio.num_plays = radio.num_plays + 1
-    db.session.commit()
+    preset_id = radio.preset_number()
 
-    radio_player.playradio(radio)
+    if radio_player.server_type == 'CXN':
+        if preset_id > 0:
+            radio_player.cxn_play_preset(preset_id)
+            time.sleep(4)
+            radio_player.update_server_status()
+    else:
+        radio_player.playradio(radio)
     
     if 'list_week_day' in session:
         del session['list_week_day']
@@ -205,6 +223,24 @@ def playradio_menu(id):
 
     return redirect(redirect_page)
 
+
+# ----> Play Radio Preset
+@radio.route('/play/radio/preset/<id>', methods=['GET'])
+def play_radio_preset(id):
+
+    preset = Preset.query.filter_by(id=id).first()
+
+    if radio_player.server_type == 'CXN':
+        radio_player.cxn_play_preset(id)
+        time.sleep(4)
+        radio_player.update_server_status()
+
+        redirect_page = url_for('cxn.cxn_radio_show')
+    else:
+        radio_player.playradio(preset.radios)
+        redirect_page = url_for('radio.radio_show', id=preset.radio_id)
+
+    return redirect(redirect_page)
 
 ###########################################################################################
 ## Radio Add, Edit, Delete
@@ -351,6 +387,57 @@ def radio_edit_image(id):
 
     return render_template(template_page, form=form, radio_player=radio_player)
 
+###########################################################################################
+## Presets
+###########################################################################################
+
+# ---> Set to Preset 20
+@radio.route('/radio/set_to_preset20/<id>', methods=['GET', 'POST'])
+def radio_set_to_preset20(id):
+
+    radio = Radios.query.filter_by(id=id).first()
+    preset = Preset.query.filter_by(id=20).first()
+
+    preset.url = radio.url
+    preset.name = radio.name
+    preset.radios = radio
+
+    db.session.commit()
+
+    return redirect(session['last_url'])
+
+
+# ---> Preset Edit
+@radio.route('/radio/preset/edit/<id>', methods=['GET', 'POST'])
+def radio_preset_edit(id):
+
+    preset = Preset.query.filter_by(id=id).first()
+
+    form = PresetForm()
+
+    if form.validate_on_submit():
+
+        preset.name = form.name.data
+        preset.description = form.description.data
+        preset.url = form.url.data
+
+        db.session.commit() 
+
+        redirect_page = '/radio/presets'
+
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+    form.name.data = preset.name
+    form.description.data = preset.description
+    form.url.data = preset.url
+
+    session['last_url'] = url_for('radio.radio_preset_edit',id=id)
+
+    template_page = 'radio_preset_edit.html'
+
+    return render_template(template_page, form=form, radio_player=radio_player)
 
 ###########################################################################################
 ## Radio Link Add, Edit, Delete
@@ -659,19 +746,5 @@ def radio_program_delete(id):
     redirect_page = url_for('radio.radio_show',id=radio_id)
 
     session['last_url'] = redirect_page
-
-    return redirect(redirect_page)
-
-
-###########################################################################################
-## CNX Play
-###########################################################################################
-
-@radio.route('/radio/cnx/play/<preset_id>', methods=['GET'])
-def radio_cnx_play(preset_id):
-    
-    radio_player.cnx_play_preset(preset_id)
-
-    redirect_page = session['last_url']
 
     return redirect(redirect_page)

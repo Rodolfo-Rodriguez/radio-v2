@@ -23,6 +23,9 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item text-center"><a href="/podcast/feed/update/{{podcast.id}}" class="card-link"><strong>Refresh Feed</strong></a></li>
         </ul>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-center"><a href="/podcast/feed/upload_to_server/{{podcast.id}}" class="card-link"><strong>Upload to Server</strong></a></li>
+        </ul>
       </div>
 
     </div>
@@ -35,7 +38,7 @@
   <div class="bs-component">
     <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
       <h5 class="card-header">Episodes in the Feed</h5>
-      <div class="card-body">
+      <div class="card-body"> 
 
         <ul class="list-group list-group-flush">
           {% for episode in episodes_list %}
@@ -51,6 +54,9 @@
                     <div class="episode-desc">{{episode['description']}}</div>
                     <div class="episode-length">{{episode['length']}}</div>
                     <div class="episode-icon"><a href="/podcast/download/episode/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-download"></i></a></div>
+                    <div class="episode-icon"><a href="{{episode['url']}}"><i class="fas fa-link"></i></a></div>
+                    <div class="episode-icon"><a href="/podcast/add_to_preset20/{{podcast.id}}/{{episode['track']}}">P20</a></div>
+                    <div class="episode-icon"><a href="/podcast/list_to_move/episode/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-share"></i></a></div>
                   
                   {% else %}
 
@@ -60,6 +66,9 @@
                     <div class="episode-desc-down">{{episode['description']}}</div>
                     <div class="episode-length-down">{{episode['length']}}</div>
                     <div class="episode-icon"></div>
+                    <div class="episode-icon"><a href="{{episode['url']}}"><i class="fas fa-link"></i></a></div>
+                    <div class="episode-icon"><a href="/podcast/add_to_preset20/{{podcast.id}}/{{episode['track']}}">P20</a></div>
+                      <div class="episode-icon"><a href="/podcast/list_to_move/episode/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-share"></i></a></div>
                   
                   {% endif %}
                
@@ -71,6 +80,14 @@
         </ul>
 
     </div>
+
+    <div class="card-footer">
+      <p class="card-text text-right">
+        <a class="card-link" href="/podcast/import_from_url/{{podcast.id}}">Import URL</a>
+        <a class="card-link" href="/podcast/add_to_feed/{{podcast.id}}">Add Episode</a>
+      </p>
+    </div>
+
    </div>
   </div>
 </div>
@@ -88,7 +105,7 @@
 
       $('.episode-icon').click(function(){
         icon = $(this).find("i");
-        icon.toggleClass("fas fa-download fas fa-spinner fa-spin episode-down-icon")
+        icon.toggleClass("fas fa-download fas fa-spinner fa-spin episode-down-icon");
       })
 
   </script>

@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %} Radio List {% endblock %}
+
+{% block head %}
+
+  <link href="/static/css/ca/fonts.css" rel="stylesheet" type="text/css"/>
+  <link href="/static/css/ca/ca-styles.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="/static/js/ca-script.js"></script>
+  <script type="text/javascript" src="/static/js/timezones.js"></script>
+  <script type="text/javascript" src="/static/js/spin.min.js"></script>
+
+{% endblock head %}
+
+
+{% block body_header %}id="body" onLoad="bodyOnLoad();"{% endblock body_header %}
+
+
+{% block body %}
+
+  <div id="contHeader" class="container-fluid content-center">
+   <div id="contHeaderContent" class="row main-header">
+    <h1 id="valHeaderProductModel" class="text-center"></h1>
+    <h2 id="valHeaderProductDesc" class="text-center"></h2>
+   </div>
+  </div>
+
+  <div id="contPopup" class="container-popup text-center">
+   <div id="divPopupBack" class="popup-background"></div>
+   <div style="display: table; height: 100%; width: 100%;">
+    <div style="display: table-cell; vertical-align: middle;">
+     <div id="contPopupContent" class="popup-content">
+      <a id="aPopupDefocuser" style="position: absolute;" href=""></a>
+      <div id="contPopupJSCheck">
+       This page requires JavaScript enabled!
+      </div>
+      <div id="contPopupIECheck" style="display:none;">
+       This browser is not supported!
+      </div>
+      <div id="contPopupButtons" style="display:none;">
+       <h3 id="valPopupButtonsHeader"></h3>
+       <p id="valPopupButtonsText"></p>
+       <div id="contBtnPopupOK" style="display:none;">
+        <div id="contBtnPopupOKOK" class="container-btn">
+         <button id="btnPopupOKOK" class="btn" onclick="popup.btnOKOKClick();"></button>
+        </div>
+       </div>
+       <div id="contBtnPopupYesNo" style="display:none;">
+        <button id="btnPopupYesNoYes" class="btn" onclick="popup.btnYesNoYesClick();"></button>
+        <button id="btnPopupYesNoNo" class="btn" onclick="popup.btnYesNoNoClick();"></button>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <script type="text/javascript">
+    document.getElementById("contPopupJSCheck").style.display = "none";
+    var b = document.createElement("b");
+    b.innerHTML = "<!--[if lte 9]><b id=\"TestIE\"></b><![endif]-->";
+    document.documentElement.appendChild(b);
+    if(document.getElementById("TestIE"))
+      document.getElementById("contPopupIECheck").style.display = "block";
+    else
+      document.getElementById("contPopupContent").style.display = "none";
+    document.documentElement.removeChild(b);
+   </script>
+  </div>
+
+  <div id="contScrollHelper">
+   <div class="container">
+
+    <div id="contPresets" class="row content text-center" style="display:none;">
+     <h3 id="valPresetsHeader"></h3>
+     <div id="contPresetsItems">
+      <div id="contPresetsItem" style="display:none;">
+       <div class="container-preset">
+        <div id="contPresetsValues" class="container-preset-values" onclick="secPresets.contPresetClick(this);">
+         <b id="valPresetsID"></b> <span id="valPresetsName"></span><br/>
+        </div>
+        <div id="contBtnPresetsEdit" class="container-preset-buttons">
+         <button id="btnPresetsRename" class="btn" type="button" onclick="secPresets.btnRenameClick(this);"></button>
+         <button id="btnPresetsRemove" class="btn" type="button" onclick="secPresets.btnRemoveClick(this);"></button>
+         <button id="btnPresetsPlay" class="btn" type="button" onclick="secPresets.btnPlayClick(this);"></button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div id="contBtnPresetsAddNew" class="container-btn">
+      <button id="btnPresetsAddNew" class="btn" type="button" onclick="secPresets.btnAddNewClick();"></button>
+     </div>
+     <div id="contPresetsRenamePreset" style="display:none;">
+      <b id="valPresetsRenameID"></b>
+      <input id="inpPresetsRenameName" class="form-control" type="text"/>
+     </div>
+     <div id="contPresetsNewPreset" style="display:none;">
+      <select id="selPresetsNewID" class="form-control"></select>
+      <br/>
+      <input id="inpPresetsNewName" class="form-control" type="text"/>
+      <br/>
+      <input id="inpPresetsNewAddress" class="form-control" type="text"/>
+      <br/>
+     </div>
+    </div>
+
+    <div id="contWizard" style="display:none;">
+     <div id="contWizardName">
+      <p id="valWizardNameDesc"></p>
+      <input id="inpWizardName" class="form-control" type="text" maxlength="63"/>
+     </div>
+     <div id="contWizardPower">
+      <input id="chbWizardPowerNetwork" class="form-control" type="checkbox" checked/>
+      <span id="chbValWizardPowerNetwork"></span>
+     </div>
+     <div id="contWizardWiFiNetwork">
+      <div>
+       <select id="selWizardWiFiNetwork" class="form-control"></select>
+       <div id="contBtnWizardWiFiRefresh" class="container-btn">
+        <button id="btnWizardWiFiRefresh" class="btn" type="button"></button>
+       </div>
+      </div>
+      <br/>
+      <div>
+       <input id="chbWizardIPStatic" class="form-control" type="checkbox"/>
+       <span id="chbValWizardIPStatic"></span>
+      </div>
+     </div>
+     <div id="contWizardWiFiEnterName">
+      <input id="inpWizardWiFiEnterName" class="form-control" type="text" maxlength="32"/>
+     </div>
+     <div id="contWizardWiFiEncryption">
+      <select id="selWizardWiFiEncryption" class="form-control"></select>
+     </div>
+     <div id="contWizardWiFiEnterKey">
+      <input id="inpWizardWiFiEnterKey" class="form-control" type="password"/>
+      <br/>
+      <input id="chbWizardWiFiShowKey" class="form-control" type="checkbox"/>
+      <span id="chbValWizardWiFiShowKey"></span>
+     </div>
+    </div>
+
+   </div>
+
+{% endblock body %}
+
+{% block scripts %}
+
+{% endblock scripts %}
+

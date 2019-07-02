@@ -25,11 +25,22 @@ def home():
     #radio_player.server_disconnect()
     radio_player.update_bookmarks()
 
-    session['last_url'] = '/radio/grid'
+    session['last_url'] = '/radio/grid/presets'
 
-    return redirect("/radio/grid")
+    return redirect("/radio/grid/presets")
 
+###########################################################################################
+# Admin
+###########################################################################################
 
+# ---> Admin
+@base.route('/admin', methods=['GET'])
+def admin():
+    
+    session['last_url'] = '/admin'
+
+    return render_template('admin.html')
+    
 ###########################################################################################
 ##  Playing
 ###########################################################################################
@@ -57,6 +68,10 @@ def playling():
     elif (radio_player.loaded=='podcast-url'):
 
         redirect_page = url_for('podcast.podcast_show', id=radio_player.podcast.id)
+
+    elif (radio_player.loaded=='cxn_radio'):
+
+        redirect_page = url_for('cxn.cxn_radio_show')
 
     else:
         redirect_page = url_for('base.home')
@@ -200,4 +215,16 @@ def config():
     template_page = 'config.html'
 
     return render_template(template_page, form=form, radio_player=radio_player)
+
+###########################################################################################
+# Test
+###########################################################################################
+
+# ---> Test
+@base.route('/test', methods=['GET'])
+def test():
+
+    url = 'http://radio.dl.uy:9950/radio'
+
+    return redirect(url)
 

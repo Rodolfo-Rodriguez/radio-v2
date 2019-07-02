@@ -3,7 +3,7 @@ import os
 
 from . import db
 from . import CONFIG
-from .models import Radios, Program, Artist, Playlist, Podcast, Artist_Link, Radio_Link, Podcast_Link
+from .models import Radios, Program, Artist, Playlist, Podcast, Artist_Link, Radio_Link, Podcast_Link, Bookmark, Preset
 
 class DBManager():
 
@@ -30,7 +30,14 @@ class DBManager():
       return self.db.session.query(Artist_Link).count()
     elif table_name == 'Podcast_Link':
       return self.db.session.query(Podcast_Link).count()
+    elif table_name == 'Bookmark':
+      return self.db.session.query(Bookmark).count()
+    elif table_name == 'Preset':
+      return self.db.session.query(Preset).count()
 
+  def csv_file(self, table_name):
+
+    return os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_TABLE_FILE[table_name])
 
   ################################################################################################################################################################
   # Drop and Create Radio DB
@@ -41,19 +48,291 @@ class DBManager():
     self.db.drop_all()
     self.db.create_all()
 
+  ################################################################################################################################################################
+  # Export Data
+  ################################################################################################################################################################
 
+  def export_csv_data(self):
+
+    print "===> Exporting Tables to Files"
+    log_message = "{} -> {} [{}]"
+
+  # ----------------------------------- Radio ---------------------------------------
+    table_name = 'Radios'
+    csv_file = self.csv_file(table_name)
+
+    f = open(csv_file,"w")
+
+    record_list = Radios.query.all()
+
+    for record in record_list:
+      out_line = u"""{}|{}|{}|{}|{}|{}|{}|{}|{}|{}\n""".format(
+        record.id, 
+        record.name, 
+        record.url,
+        record.image,
+        record.country,
+        record.num_plays,
+        record.style,
+        record.stars,
+        record.fav,
+        record.description
+      )
+
+      out_line = out_line.encode('utf-8')
+
+      f.write(out_line)
+
+    f.close()
+
+    print log_message.format(table_name, csv_file, len(record_list))
+  # ----------------------------------- Program ---------------------------------------
+    table_name = 'Program'
+    csv_file = self.csv_file(table_name)
+
+    f = open(csv_file,"w")
+    
+    record_list = Program.query.all()
+
+    for record in record_list:
+      out_line = u"""{}|{}|{}|{}|{}|{}|{}|{}|{}|{}\n""".format(
+        record.id, 
+        record.name, 
+        record.times,
+        record.week_days,
+        record.description,
+        record.style,
+        record.stars,
+        record.fav,
+        record.twitter,
+        record.radio_id 
+      )
+
+      out_line = out_line.encode('utf-8')
+
+      f.write(out_line)
+
+    f.close()
+
+    print log_message.format(table_name, csv_file, len(record_list))
+  # ----------------------------------- Artist ---------------------------------------
+    table_name = 'Artist'
+    csv_file = self.csv_file(table_name)
+
+    f = open(csv_file,"w")
+    
+    record_list = Artist.query.all()
+
+    for record in record_list:
+      out_line = u"""{}|{}|{}|{}|{}|{}|{}|{}\n""".format(
+        record.id, 
+        record.name, 
+        record.image,
+        record.country,
+        record.description,
+        record.style,
+        record.stars,
+        record.fav
+      )
+
+      out_line = out_line.encode('utf-8')
+
+      f.write(out_line)
+
+    f.close()
+
+    print log_message.format(table_name, csv_file, len(record_list))
+  # ----------------------------------- Playlist ---------------------------------------
+    table_name = 'Playlist'
+    csv_file = self.csv_file(table_name)
+
+    f = open(csv_file,"w")
+
+    record_list = Playlist.query.all()
+
+    for record in record_list:
+      out_line = u"""{}|{}|{}|{}|{}|{}\n""".format(
+        record.id, 
+        record.name, 
+        record.image,
+        record.playlist,
+        record.description,
+        record.type
+      )
+
+      out_line = out_line.encode('utf-8')
+
+      f.write(out_line)
+
+    f.close()
+
+    print log_message.format(table_name, csv_file, len(record_list))
+  # ----------------------------------- Podcast ---------------------------------------
+    table_name = 'Podcast'
+    csv_file = self.csv_file(table_name)
+
+    f = open(csv_file,"w")
+
+    record_list = Podcast.query.all()
+
+    for record in record_list:
+      out_line = u"""{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}|{}\n""".format(
+        record.id, 
+        record.name, 
+        record.image,
+        record.playlist,
+        record.country,
+        record.description,
+        record.style,
+        record.stars,
+        record.feed_url,
+        record.feed_filter,
+        record.pod_dir,
+        record.publisher,
+        record.priority,
+        record.fav,
+        record.retag
+      )
+
+      out_line = out_line.encode('utf-8')
+
+      f.write(out_line)
+
+    f.close()
+
+    print log_message.format(table_name, csv_file, len(record_list))
+  # ----------------------------------- Radio Link ---------------------------------------
+    table_name = 'Radio_Link'
+    csv_file = self.csv_file(table_name)
+
+    f = open(csv_file,"w")
+
+    record_list = Radio_Link.query.all()
+
+    for record in record_list:
+      out_line = u"""{}|{}|{}|{}\n""".format(
+        record.id, 
+        record.name, 
+        record.url,
+        record.radio_id
+      )
+
+      out_line = out_line.encode('utf-8')
+
+      f.write(out_line)
+
+    f.close()
+
+    print log_message.format(table_name, csv_file, len(record_list))
+  # ----------------------------------- Artist Link ---------------------------------------
+    table_name = 'Artist_Link'
+    csv_file = self.csv_file(table_name)
+
+    f = open(csv_file,"w")
+
+    record_list = Artist_Link.query.all()
+
+    for record in record_list:
+      out_line = u"""{}|{}|{}|{}\n""".format(
+        record.id, 
+        record.name, 
+        record.url,
+        record.artist_id
+      )
+
+      out_line = out_line.encode('utf-8')
+
+      f.write(out_line)
+
+    f.close()
+
+    print log_message.format(table_name, csv_file, len(record_list))
+  # ----------------------------------- Podcast Link ---------------------------------------
+    table_name = 'Podcast_Link'
+    csv_file = self.csv_file(table_name)
+
+    f = open(csv_file,"w")
+
+    record_list = Podcast_Link.query.all()
+
+    for record in record_list:
+      out_line = u"""{}|{}|{}|{}\n""".format(
+        record.id, 
+        record.name, 
+        record.url,
+        record.podcast_id
+      )
+
+      out_line = out_line.encode('utf-8')
+
+      f.write(out_line)
+
+    f.close()
+
+    print log_message.format(table_name, csv_file, len(record_list))
+  # ----------------------------------- Bookmark ---------------------------------------
+    table_name = 'Bookmark'
+    csv_file = self.csv_file(table_name)
+
+    f = open(csv_file,"w")
+
+    record_list = Bookmark.query.all()
+
+    for record in record_list:
+      out_line = u"""{}|{}|{}|{}\n""".format(
+        record.id, 
+        record.url, 
+        record.image_url,
+        record.priority
+      )
+
+      out_line = out_line.encode('utf-8')
+
+      f.write(out_line)
+
+    f.close()
+
+    print log_message.format(table_name, csv_file, len(record_list))
+
+  # ----------------------------------- Preset ---------------------------------------
+    table_name = 'Preset'
+    csv_file = self.csv_file(table_name)
+
+    f = open(csv_file,"w")
+
+    record_list = Preset.query.all()
+
+    for record in record_list:
+      out_line = u"""{}|{}|{}|{}|{}\n""".format(
+        record.id,
+        record.name,
+        record.description,
+        record.url,
+        record.radio_id
+      )
+
+      out_line = out_line.encode('utf-8')
+
+      f.write(out_line)
+
+    f.close()
+
+    print log_message.format(table_name, csv_file, len(record_list))
   ################################################################################################################################################################
   # Import Data
   ################################################################################################################################################################
 
   def import_csv_data(self):
 
-  # ----------------------------------- Radios ---------------------------------------
+    print "===> Importing Tables from Files"
+    log_message = "{} [{}]"
 
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_RADIOS_TABLE_FILE)
+  # ----------------------------------- Radios ---------------------------------------
+    table_name = 'Radios'
+    csv_file = self.csv_file(table_name)
 
     with open(csv_file,"r") as csv:
-
+      
       csv_data = csv.readlines()
 
       for line in csv_data:
@@ -75,25 +354,30 @@ class DBManager():
           fav = False
         description = words[9].decode('utf-8')
 
-        record = Radios(id=id,
-                        name=name,
-                        url=url,
-                        image=image,
-                        country=country,
-                        num_plays=num_plays,
-                        style=style,
-                        stars=stars,
-                        fav=fav,
-                        description=description)
+        record = Radios(
+          id=id,
+          name=name,
+          url=url,
+          image=image,
+          country=country,
+          num_plays=num_plays,
+          style=style,
+          stars=stars,
+          fav=fav,
+          description=description
+        )
 
         db.session.add(record)
         db.session.commit()
 
     csv.close()
 
-# ----------------------------------- Program ---------------------------------------
+    record_cout = self.count_records(table_name)
+    print log_message.format(table_name, record_cout)
 
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_PROGRAM_TABLE_FILE)
+# ----------------------------------- Program ---------------------------------------
+    table_name = 'Program'
+    csv_file = self.csv_file(table_name)
 
     with open(csv_file,"r") as csv:
       csv_data = csv.readlines()
@@ -119,25 +403,30 @@ class DBManager():
 
         radio = Radios.query.filter_by(id=radio_id).first()
 
-        record = Program(id=id,
-                        name=name,
-                        times=times,
-                        week_days=week_days,
-                        description=description,
-                        style=style,
-                        stars=stars,
-                        fav=fav,
-                        twitter=twitter,
-                        radios=radio)
+        record = Program(
+          id=id,
+          name=name,
+          times=times,
+          week_days=week_days,
+          description=description,
+          style=style,
+          stars=stars,
+          fav=fav,
+          twitter=twitter,
+          radios=radio
+        )
 
         db.session.add(record)
         db.session.commit()
 
     csv.close()
 
-# ----------------------------------- Artist ---------------------------------------
+    record_cout = self.count_records(table_name)
+    print log_message.format(table_name, record_cout)
 
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_ARTIST_TABLE_FILE)
+# ----------------------------------- Artist ---------------------------------------
+    table_name = 'Artist'
+    csv_file = self.csv_file(table_name)
 
     with open(csv_file,"r") as csv:
       csv_data = csv.readlines()
@@ -155,22 +444,27 @@ class DBManager():
         stars = words[6]
         fav = words[7]
 
-        record = Artist(id=id,
-                        name=name,
-                        image=image,
-                        country=country,
-                        description=description,
-                        style=style,
-                        stars=stars)
+        record = Artist(
+          id=id,
+          name=name,
+          image=image,
+          country=country,
+          description=description,
+          style=style,
+          stars=stars
+        )
 
         db.session.add(record)
         db.session.commit()
 
     csv.close()
 
-  # ----------------------------------- Playlist ---------------------------------------
+    record_cout = self.count_records(table_name)
+    print log_message.format(table_name, record_cout)
 
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_PLAYLIST_TABLE_FILE)
+  # ----------------------------------- Playlist ---------------------------------------
+    table_name = 'Playlist'
+    csv_file = self.csv_file(table_name)
 
     with open(csv_file,"r") as csv:
       csv_data = csv.readlines()
@@ -186,22 +480,26 @@ class DBManager():
         description = words[4].decode('utf-8')
         type = words[5].decode('utf-8')
 
-        record = Playlist(id=id,
-                          name=name,
-                          image=image,
-                          playlist=playlist,
-                          description=description,
-                          type=type)
+        record = Playlist(
+          id=id,
+          name=name,
+          image=image,
+          playlist=playlist,
+          description=description,
+          type=type
+        )
 
         db.session.add(record)
         db.session.commit()
 
     csv.close()
 
+    record_cout = self.count_records(table_name)
+    print log_message.format(table_name, record_cout)
   
   # ----------------------------------- Podcast ---------------------------------------
-
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_PODCAST_TABLE_FILE)
+    table_name = 'Podcast'
+    csv_file = self.csv_file(table_name)
 
     with open(csv_file,"r") as csv:
       csv_data = csv.readlines()
@@ -222,7 +520,12 @@ class DBManager():
         feed_filter = words[9].decode('utf-8')
         pod_dir = words[10].decode('utf-8')
         publisher = words[11].decode('utf-8')
-        priority = int(words[12])
+        
+        priority_txt = words[12]
+        if (priority_txt == 'None') or (priority_txt == ''):
+          priority = 0
+        else:
+          priority = int(priority_txt)
 
         fav_txt = words[13]
         if fav_txt == 'True':
@@ -237,30 +540,35 @@ class DBManager():
           retag = False
 
 
-        record = Podcast(id=id,
-                        name=name,
-                        image=image,
-                        playlist=playlist,
-                        country=country,
-                        description=description,
-                        style=style,
-                        stars=stars,
-                        feed_url=feed_url,
-                        feed_filter=feed_filter,
-                        pod_dir=pod_dir,
-                        publisher=publisher,
-                        priority=priority,
-                        fav=fav,
-                        retag=retag)
+        record = Podcast(
+          id=id,
+          name=name,
+          image=image,
+          playlist=playlist,
+          country=country,
+          description=description,
+          style=style,
+          stars=stars,
+          feed_url=feed_url,
+          feed_filter=feed_filter,
+          pod_dir=pod_dir,
+          publisher=publisher,
+          priority=priority,
+          fav=fav,
+          retag=retag
+        )
 
         db.session.add(record)
         db.session.commit()
 
     csv.close()
 
-  # ----------------------------------- Radio Links ---------------------------------------
+    record_cout = self.count_records(table_name)
+    print log_message.format(table_name, record_cout)
 
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_RADIO_LINK_TABLE_FILE)
+  # ----------------------------------- Radio Links ---------------------------------------
+    table_name = 'Radio_Link'
+    csv_file = self.csv_file(table_name)
 
     with open(csv_file,"r") as csv:
       csv_data = csv.readlines()
@@ -276,20 +584,24 @@ class DBManager():
 
         radio = Radios.query.filter_by(id=radio_id).first()
 
-        record = Radio_Link(id=id,
-                            name=name,
-                            url=url,
-                            radios=radio)
+        record = Radio_Link(
+          id=id,
+          name=name,
+          url=url,
+          radios=radio
+        )
 
         db.session.add(record)
         db.session.commit()
 
     csv.close()
 
+    record_cout = self.count_records(table_name)
+    print log_message.format(table_name, record_cout)
 
 # ----------------------------------- Artist Links ---------------------------------------
-
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_ARTIST_LINK_TABLE_FILE)
+    table_name = 'Artist_Link'
+    csv_file = self.csv_file(table_name)
 
     with open(csv_file,"r") as csv:
       csv_data = csv.readlines()
@@ -306,20 +618,24 @@ class DBManager():
 
         artist = Artist.query.filter_by(id=artist_id).first()
 
-        record = Artist_Link(id=id,
-                              name=name,
-                              url=url,
-                              artist=artist)
+        record = Artist_Link(
+          id=id,
+          name=name,
+          url=url,
+          artist=artist
+        )
 
         db.session.add(record)
         db.session.commit()
 
     csv.close()
 
+    record_cout = self.count_records(table_name)
+    print log_message.format(table_name, record_cout)
 
   # ----------------------------------- Podcast Links ---------------------------------------
-
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_PODCAST_LINK_TABLE_FILE)
+    table_name = 'Podcast_Link'
+    csv_file = self.csv_file(table_name)
 
     with open(csv_file,"r") as csv:
       csv_data = csv.readlines()
@@ -335,186 +651,83 @@ class DBManager():
 
         podcast = Podcast.query.filter_by(id=podcast_id).first()
 
-        record = Podcast_Link(id=id,
-                              name=name,
-                              url=url,
-                              podcast=podcast)
+        record = Podcast_Link(
+          id=id,
+          name=name,
+          url=url,
+          podcast=podcast
+        )
 
         db.session.add(record)
         db.session.commit()
 
     csv.close()
 
+    record_cout = self.count_records(table_name)
+    print log_message.format(table_name, record_cout)
 
-  ################################################################################################################################################################
-  # Export Data
-  ################################################################################################################################################################
+  # ----------------------------------- Bookmark  ---------------------------------------
+    table_name = 'Bookmark'
+    csv_file = self.csv_file(table_name)
 
-  def export_csv_data(self):
+    with open(csv_file,"r") as csv:
+      csv_data = csv.readlines()
 
-   # ----------------------------------- Radio ---------------------------------------
+      for line in csv_data:
+        line = line.rstrip()
+        words = line.split("|")
 
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_RADIOS_TABLE_FILE)
+        id = int(words[0])
+        url = words[1].decode('utf-8')
+        image_url = words[2].decode('utf-8')
+        priority = int(words[3])
 
-    f = open(csv_file,"w")
+        record = Bookmark(
+          id=id,
+          url=url,
+          image_url=image_url,
+          priority=priority
+        )
 
-    record_list = Radios.query.all()
+        db.session.add(record)
+        db.session.commit()
 
-    for record in record_list:
-      out_line = str(record.id)
-      out_line = out_line + "|" + str(record.name)
-      out_line = out_line + "|" + str(record.url)
-      out_line = out_line + "|" + str(record.image)
-      out_line = out_line + "|" + str(record.country)
-      out_line = out_line + "|" + str(record.num_plays)
-      out_line = out_line + "|" + str(record.style)
-      out_line = out_line + "|" + str(record.stars)
-      out_line = out_line + "|" + str(record.fav)
-      out_line = out_line + "|" + str(record.description)
+    csv.close()
 
-      out_line = out_line.encode('utf-8')
+    record_cout = self.count_records(table_name)
+    print log_message.format(table_name, record_cout)
 
-      f.write(out_line + "\n")
+  # ----------------------------------- Bookmark  ---------------------------------------
+    table_name = 'Preset'
+    csv_file = self.csv_file(table_name)
 
-    f.close()
+    with open(csv_file,"r") as csv:
+      csv_data = csv.readlines()
 
-  # ----------------------------------- Program ---------------------------------------
+      for line in csv_data:
+        line = line.rstrip()
+        words = line.split("|")
 
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_PROGRAM_TABLE_FILE)
+        id = int(words[0])
+        name = words[1].decode('utf-8')
+        description = words[2].decode('utf-8')
+        url = words[3].decode('utf-8')
+        radio_id = int(words[4])
 
-    f = open(csv_file,"w")
+        radio = Radios.query.filter_by(id=radio_id).first()
 
-    record_list = Program.query.all()
+        record = Preset(
+          id=id,
+          name=name,
+          description=description,
+          url=url,
+          radios=radio
+        )
 
-    for record in record_list:
-      out_line = str(record.id)
-      out_line = out_line + "|" + str(record.name)
-      out_line = out_line + "|" + str(record.times)
-      out_line = out_line + "|" + str(record.week_days)
-      out_line = out_line + "|" + str(record.description)
-      out_line = out_line + "|" + str(record.style)
-      out_line = out_line + "|" + str(record.stars)
-      out_line = out_line + "|" + str(record.fav)
-      out_line = out_line + "|" + str(record.twitter)
-      out_line = out_line + "|" + str(record.radio_id)
+        db.session.add(record)
+        db.session.commit()
 
-      out_line = out_line.encode('utf-8')
+    csv.close()
 
-      f.write(out_line + "\n")
-
-    f.close()
-
-  # ----------------------------------- Playlist ---------------------------------------
-
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_PLAYLIST_TABLE_FILE)
-
-    f = open(csv_file,"w")
-
-    record_list = Playlist.query.all()
-
-    for record in record_list:
-      out_line = str(record.id)
-      out_line = out_line + "|" + str(record.name)
-      out_line = out_line + "|" + str(record.image)
-      out_line = out_line + "|" + str(record.playlist)
-      out_line = out_line + "|" + str(record.description)
-      out_line = out_line + "|" + str(record.type)
-
-      out_line = out_line.encode('utf-8')
-
-      f.write(out_line + "\n")
-
-    f.close()
-
-  # ----------------------------------- Podcast ---------------------------------------
-
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_PODCAST_TABLE_FILE)
-
-    f = open(csv_file,"w")
-
-    record_list = Podcast.query.all()
-
-    for record in record_list:
-      out_line = str(record.id)
-      out_line = out_line + "|" + str(record.name)
-      out_line = out_line + "|" + str(record.image)
-      out_line = out_line + "|" + str(record.playlist)
-      out_line = out_line + "|" + str(record.country)
-      out_line = out_line + "|" + str(record.description)
-      out_line = out_line + "|" + str(record.style)
-      out_line = out_line + "|" + str(record.stars)
-      out_line = out_line + "|" + str(record.feed_url)
-      out_line = out_line + "|" + str(record.feed_filter)
-      out_line = out_line + "|" + str(record.pod_dir)
-      out_line = out_line + "|" + str(record.publisher)
-      out_line = out_line + "|" + str(record.priority)
-      out_line = out_line + "|" + str(record.fav)
-      out_line = out_line + "|" + str(record.retag)
-
-      out_line = out_line.encode('utf-8')
-
-      f.write(out_line + "\n")
-
-    f.close()
-
-  # ----------------------------------- Artist Link ---------------------------------------
-
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_ARTIST_LINK_TABLE_FILE)
-
-    f = open(csv_file,"w")
-
-    record_list = Artist_Link.query.all()
-
-    for record in record_list:
-      out_line = str(record.id)
-      out_line = out_line + "|" + str(record.name)
-      out_line = out_line + "|" + str(record.url)
-      out_line = out_line + "|" + str(record.artist_id)
-
-      out_line = out_line.encode('utf-8')
-
-      f.write(out_line + "\n")
-
-    f.close()
-
-  # ----------------------------------- Radio Link ---------------------------------------
-
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_RADIO_LINK_TABLE_FILE)
-
-    f = open(csv_file,"w")
-
-    record_list = Radio_Link.query.all()
-
-    for record in record_list:
-      out_line = str(record.id)
-      out_line = out_line + "|" + str(record.name)
-      out_line = out_line + "|" + str(record.url)
-      out_line = out_line + "|" + str(record.radio_id)
-
-      out_line = out_line.encode('utf-8')
-
-      f.write(out_line + "\n")
-
-    f.close()
-
-  # ----------------------------------- Podcast Link ---------------------------------------
-
-    csv_file = os.path.join(CONFIG.PROJECT_ROOT_DIR, CONFIG.PROJECT_CSV_DIR, CONFIG.CSV_PODCAST_LINK_TABLE_FILE)
-
-    f = open(csv_file,"w")
-
-    record_list = Podcast_Link.query.all()
-
-    for record in record_list:
-      out_line = str(record.id)
-      out_line = out_line + "|" + str(record.name)
-      out_line = out_line + "|" + str(record.url)
-      out_line = out_line + "|" + str(record.podcast_id)
-
-      out_line = out_line.encode('utf-8')
-
-      f.write(out_line + "\n")
-
-    f.close()
-
-
+    record_cout = self.count_records(table_name)
+    print log_message.format(table_name, record_cout)

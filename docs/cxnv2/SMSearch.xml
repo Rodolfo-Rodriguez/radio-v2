@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0"><specVersion><major>1</major>
+<minor>0</minor>
+</specVersion>
+<serviceStateTable><stateVariable sendEvents="no"><name>LocationXML</name>
+<dataType>string</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no"><name>GenreXML</name>
+<dataType>string</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no"><name>ResultXML</name>
+<dataType>string</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no"><name>CodecList</name>
+<dataType>string</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no"><name>CodecFilter</name>
+<dataType>string</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no"><name>NameFilter</name>
+<dataType>string</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no"><name>LocationIDFilter</name>
+<dataType>i4</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no"><name>GenreIDFilter</name>
+<dataType>i4</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no"><name>MinBitrateFilter</name>
+<dataType>i4</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+</serviceStateTable>
+<actionList><action><name>GetLocationList</name>
+<argumentList><argument><name>LocationXML</name>
+<direction>out</direction>
+<relatedStateVariable>LocationXML</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+<action><name>GetGenreList</name>
+<argumentList><argument><name>GenreXML</name>
+<direction>out</direction>
+<relatedStateVariable>GenreXML</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+<action><name>GetCodecList</name>
+<argumentList><argument><name>CodecList</name>
+<direction>out</direction>
+<relatedStateVariable>CodecList</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+<action><name>Search</name>
+<argumentList><argument><name>NameFilter</name>
+<direction>in</direction>
+<relatedStateVariable>NameFilter</relatedStateVariable>
+</argument>
+<argument><name>CodecFilter</name>
+<direction>in</direction>
+<relatedStateVariable>CodecFilter</relatedStateVariable>
+</argument>
+<argument><name>LocationIDFilter</name>
+<direction>in</direction>
+<relatedStateVariable>LocationIDFilter</relatedStateVariable>
+</argument>
+<argument><name>GenreIDFilter</name>
+<direction>in</direction>
+<relatedStateVariable>GenreIDFilter</relatedStateVariable>
+</argument>
+<argument><name>MinBitrateFilter</name>
+<direction>in</direction>
+<relatedStateVariable>MinBitrateFilter</relatedStateVariable>
+</argument>
+<argument><name>ResultXML</name>
+<direction>out</direction>
+<relatedStateVariable>ResultXML</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+</actionList>
+</scpd>

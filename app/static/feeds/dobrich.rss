@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Dobrich</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/dobrich</url>
+        <title>Dobrich</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description></description>
+    <pubDate>"Mon 01 Jul 2019 18:17:53"</pubDate>
+
+	<item>
+		<title>El Padrino Negro</title>
+		<pubDate>Day, 27 Jun 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2096.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2096.mp3</guid>
+	</item>
+
+	<item>
+		<title>Rever series </title>
+		<pubDate>Wed, 26 Jun 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2068.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2068.mp3</guid>
+	</item>
+
+	<item>
+		<title>Chernobyl: un hito impensado  </title>
+		<pubDate>Thu, 20 Jun 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/1964.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/1964.mp3</guid>
+	</item>
+
+	<item>
+		<title>Mujeres del Mundo y su Musica</title>
+		<pubDate>Day, 18 Jun 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/1911.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/1911.mp3</guid>
+	</item>
+
+</channel></rss>

@@ -1,12 +1,12 @@
 1|Led Zeppelin|Led Zeppelin.png|England|Acknowledged as the most successful and influential band of the heavy rock era, with a catalog that continues to inspire.|Classic Rock|5|None
 2|The Beatles|The Beatles.png|England|The most popular and influential rock act of all time, a band that blazed several new trails for popular music.|Classic Rock|5|None
 3|The Doors|The Doors.png|USA|Mystical blues-based rock group based around the dark poetry and shamanic presence of Jim Morrison. |Classic Rock|5|None
-4|The Police|The Police.png|England|British rock trio with an innovative rock/reggae fusion, superb songwriting, and crossover appeal that shot them straight to international stardom.|Rock|5|True
+4|The Police|The Police.png|England|British rock trio with an innovative rock/reggae fusion, superb songwriting, and crossover appeal that shot them straight to international stardom.|Rock|5|None
 5|Nirvana|Nirvana.png|USA|Nirvana fue una banda de grunge estadounidense procedente de Aberdeen, Washington, Estados Unidos integrada por el vocalista y guitarrista Kurt Cobain y el bajista Krist Novoselic en 1987.|Grunge|5|None
 6|La Vela Puerca|La Vela Puerca.png|Uruguay||Rock Uruguayo|4|None
 7|Patricio Rey & Sus Redonditos De Ricota|Patricio Rey & Sus Redonditos De Ricota.png|Argentina|Patricio Rey & Sus Redonditos De Ricota|Rock Argentino|5|None
 8|Pearl Jam|Pearl Jam.png|USA|Pearl Jam es un grupo de grunge y rock alternativo formado en Seattle, Estados Unidos, en el año 1990. Con la edición de su su álbum debut Ten en 1991, Pearl Jam irrumpiría con fuerza en el ámbito musical.|Grunge|5|None
-9|Trotsky Vengarán|Trotsky Vengarán.png|Uruguay||Rock Uruguayo|5|True
+9|Trotsky Vengarán|Trotsky Vengarán.png|Uruguay||Rock Uruguayo|5|None
 10|The Who|The Who.png|England|An explosive combo that pioneered progressive and arena rock, each new sound increasing their influence and legacy.|Classic Rock|3|None
 11|Buitres|Buitres.png|Uruguay|Buitres Después de la Una, abreviado BDDL1, o simplemente Buitres, es un grupo uruguayo de rock formado en 1989 tras la separación de Los Estómagos. |Rock Uruguayo|5|None
 12|La Trampa|La Trampa.png|Uruguay||Rock Uruguayo|5|None
@@ -23,7 +23,7 @@
 23|Chicos Electricos|Chicos Electricos.png|Uruguay||Rock Uruguayo|4|None
 24|Gillespi|Gillespi.png|Argentina||Jazz|4|None
 25|Cadaveres Ilustres|Cadaveres Ilustres.png|Uruguay||Rock Uruguayo|3|None
-26|Doberman|Doberman.png|Uruguay||Rock Uruguayo|3|None
+26|Doberman|Doberman.png|Uruguay| Doberman es una banda uruguaya que se formó a mediadios del 2002. En el 2004 ganaron un concurso organizado por Pepsi y Canal 10, destacándose por sobre más de 500 bandas.|Rock Uruguayo|3|None
 27|El Fuerte Punto Baz|El Fuerte Punto Baz.png|Uruguay||Rock Uruguayo|4|None
 28|No Te Va Gustar|No Te Va Gustar.png|Uruguay||Rock Uruguayo|5|None
 29|Chopper|Chopper.png|Uruguay||Rock Uruguayo|3|None
@@ -46,10 +46,9 @@
 46|Alice In Chains|Alice In Chains.png|USA|Alice in Chains es una banda de grunge estadounidense, fundada en 1987 en Seattle. Con un nombre que ya en sí mismo denota un tinte oscuro, desempeñando un sonido más pesado y orientado al heavy metal.|Grunge|3|None
 47|Blind Melon|Blind Melon.png|USA|Blind Melon es una banda de Rock formada en 1989 en el estado de California. Su actividad se extendió desde 1989 hasta 1995, año de la inesperada muerte de su vocalista, Shannon Hoon.|Grunge|3|None
 48|Red Hot Chili Peppers|Red Hot Chili Peppers.png|USA||Alt Rock|5|None
-49|Radiohead|Radiohead.png|USA||Alternative|4|None
-50|The White Stripes|The White Stripes.png|USA||Alternative|4|None
+49|Radiohead|Radiohead.png|UK||Alternative|4|None
 51|The Strokes|The Strokes.png|USA||Alternative|4|None
-52|Muse|Muse.png|USA||Alternative|3|None
+52|Muse|Muse.png|UK||Alternative|3|None
 53|The Smashing Pumpkins|The Smashing Pumpkins.png|USA||Alt Rock|3|None
 54|Ramones|Ramones.png|USA||Punk|5|None
 55|The Clash|The Clash.png|England||Punk|5|None
@@ -105,10 +104,62 @@
 105|Lou Reed & The Velvet Underground|Lou Reed & The Velvet Underground.png|USA||Rock|3|None
 106|Midnight Oil|Midnight Oil.png|Australia||Rock|3|None
 107|Lou Reed and Metallica|Lou Reed and Metallica.png|USA||Rock|1|None
-108|Iggy Pop|Iggy Pop.png|USA||Hard Rock|1|None
+108|Iggy Pop|Iggy Pop.png|USA||Hard Rock|4|None
 109|Green Day|Green Day.png|USA||Punk|4|None
 110|The Offspring|The Offspring.png|USA||Punk|1|None
 111|La Polla Records|La Polla Records.png|Spain||Punk|3|None
 112|Loquillo y Los Trogloditas|Loquillo y Los Trogloditas.png|Spain||Rock Español|3|None
 113|Manu Chao|Manu Chao.png|Spain||Rock Español|1|None
 114|Paco De Lucia|Paco De Lucia.png|Spain||Flamenco|1|None
+115|Deep Purple|Deep Purple.png|UK||Heavy Metal|4|None
+116|Iron Maiden|Iron Maiden.png|UK||Heavy Metal|5|None
+117|Ozzy Osbourne|Ozzy Osbourne.png|UK||Heavy Metal|4|None
+118|Nightwish|Nightwish.png|Finland||Heavy Metal|4|None
+119|Aerosmith|Aerosmith.png|USA||Hard Rock|3|None
+120|The Cult|The Cult.png|USA||Hard Rock|4|None
+121|Guns N' Roses|Guns N' Roses.png|USA||Hard Rock|3|None
+122|Black Label Society|Black Label Society.png|USA||Hard Rock|4|None
+123|Helmet|Helmet.png|USA||Hard Rock|3|None
+124|Prong|Prong.png|USA||Hard Rock|4|None
+125|Silverchair|Silverchair.png|USA||Alt Rock|2|None
+126|Arctic Monkeys|Arctic Monkeys.png|USA||Alt Rock|4|None
+127|Beastie Boys|Beastie Boys.png|USA||Alt Rock|4|None
+128|Deftones|Deftones.png|USA||Alt Rock|1|None
+129|Oasis|Oasis.png|UK||Alt Rock|3|None
+130|Rage Against The Machine|Rage Against The Machine.png|USA||Alt Rock|3|None
+131|Papa Roach|Papa Roach.png|USA||Alt Rock|2|None
+132|Infectious Grooves|Infectious Grooves.png|USA||Alt Rock|1|None
+133|Nickelback|Nickelback.png|USA||Alt Rock|1|None
+134|The White Stripes|The White Stripes.png|USA||Alt Rock|4|None
+135|The Presidents Of The United States Of America|The Presidents Of The United States Of America.png|USA||Alt Rock|1|None
+136|The Bravery|The Bravery.png|USA||Alt Rock|3|None
+137|Snow Patrol|Snow Patrol.png|Ireland||Alt Rock|1|None
+138|Beady Eye|Beady Eye.png|UK||Alt Rock|1|None
+139|Beck|Beck.png|USA||Alternative|1|None
+140|Collective Soul|Collective Soul.png|USA||Alternative|1|None
+141|Frank Black|Frank Black.png|USA||Alternative|1|None
+142|Franz Ferdinand|Franz Ferdinand.png|Scotland||Alternative|3|None
+143|Gotye|Gotye.png|Australia|Wouter Andre "Wally" De Backer, también conocido por su nombre artístico Gotye, es un músico, cantante y compositor australiano nacido en Bélgica.|Alternative|2|None
+144|Incubus|Incubus.png|USA|Incubus es una banda de rock alternativo​​ estadounidense formado por el vocalista Brandon Boyd, guitarrista Mike Einziger y batería José Pasillas.|Alternative|2|None
+145|Jane's Addiction|Jane's Addiction.png|USA||Alternative|3|None
+146|Primal Scream|Primal Scream.png|Scotland||Alternative|3|None
+147|The Cranberries|The Cranberries.png|Ireland||Alternative|2|None
+148|The Flaming Lips|The Flaming Lips.png|USA||Alternative|2|None
+149|The Rapture|The Rapture.png|USA||Alternative|1|None
+150|The Vines|The Vines.png|Australia||Alternative|3|None
+151|BB King|BB King.png|USA||Blues|4|None
+152|Buddy Guy|Buddy Guy.png|USA||Blues|3|None
+153|Eric Clapton|Eric Clapton.png|UK||Blues|4|None
+154|Kenny Wayne Shepherd|Kenny Wayne Shepherd.png|USA||Blues|2|None
+155|Stevie Ray Vaughan|Stevie Ray Vaughan.png|USA||Blues|5|None
+156|Eric Clapton & B.B.King|Eric Clapton & B.B.King.png|USA||Blues|4|None
+157|Black Sabbath|Black Sabbath.png|UK||Classic Rock|4|None
+158|Bob Dylan|Bob Dylan.png|USA||Classic Rock|3|None
+159|Jimi Hendrix|Jimi Hendrix.png|USA||Classic Rock|5|None
+160|The Rolling Stones|The Rolling Stones.png|UK||Classic Rock|5|None
+161|Buenos Muchachos|Buenos Muchachos.png|Uruguay||Rock Uruguayo|4|None
+162|La Hermana Menor|La Hermana Menor.png|Uruguay||Rock Uruguayo|1|None
+163|La Saga|La Saga.png|Uruguay||Rock Uruguayo|3|None
+164|La Teja Pride|La Teja Pride.png|Uruguay||Hip Hop|3|None
+165|Rey Toro|Rey Toro.png|Uruguay||Rock Uruguayo|3|None
+166|Snake|Snake.png|Uruguay||Rock Uruguayo|2|None

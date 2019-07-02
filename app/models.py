@@ -13,9 +13,28 @@ class Radios(db.Model):
     stars = db.Column(db.Integer,nullable=True)
     fav = db.Column(db.Boolean,nullable=False)
     description = db.Column(db.String(120),nullable=True)
-    preset = db.Column(db.Integer,nullable=True)    
     radio_link_list = db.relationship('Radio_Link', backref='radios')
     program_list = db.relationship('Program', backref='radios')
+    preset_list = db.relationship('Preset', backref='radios')
+
+    def preset_number(self):
+        if self.preset_list:
+            return self.preset_list[0].id
+        else:
+            return 0
+
+    def preset_name(self):
+        if self.preset_list:
+            return self.preset_list[0].name
+        else:
+            return ''
+
+    def preset_url(self):
+        if self.preset_list:
+            return self.preset_list[0].url
+        else:
+            return ''
+
 
 class Program(db.Model):
     __tablename__ = 'program'
@@ -97,4 +116,16 @@ class Bookmark(db.Model):
     url = db.Column(db.String(120),nullable=False)
     image_url = db.Column(db.String(120),nullable=False)
     priority = db.Column(db.Integer, nullable=True)
+
+class Preset(db.Model):
+    __tablename__ = 'preset'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80),nullable=False)
+    description = db.Column(db.String(120),nullable=True)
+    url = db.Column(db.String(120),nullable=False)
+    radio_id = db.Column(db.Integer, db.ForeignKey('radios.id'), nullable=False)
+
+    def radio_name(self):
+        radio = Radios.query.filter_by(id=self.radio_id).first()
+        return radio.name
 

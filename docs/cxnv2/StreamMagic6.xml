@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0"><specVersion><major>1</major>
+<minor>0</minor>
+</specVersion>
+<serviceStateTable><stateVariable sendEvents="no"><name>MCUFirmwareVersion</name>
+<dataType>string</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no"><name>MCUCommand</name>
+<dataType>ui2</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no"><name>MCUCommandData</name>
+<dataType>bin.hex</dataType>
+<defaultValue></defaultValue>
+</stateVariable>
+</serviceStateTable>
+<actionList><action><name>GetMCUFirmwareVersion</name>
+<argumentList><argument><name>Version</name>
+<direction>out</direction>
+<relatedStateVariable>MCUFirmwareVersion</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+<action><name>SendCommand</name>
+<argumentList><argument><name>Command</name>
+<direction>in</direction>
+<relatedStateVariable>MCUCommand</relatedStateVariable>
+</argument>
+<argument><name>Data</name>
+<direction>in</direction>
+<relatedStateVariable>MCUCommandData</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+</actionList>
+</scpd>

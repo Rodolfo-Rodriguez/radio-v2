@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %} Presets {% endblock %}
+
+{% block body %}
+
+<div class="bs-component">
+
+<div class="col-grid-full">
+
+    <div class="card text-white bg-dark" style="flex: 0 0 100%">
+      <h5 class="card-header">Presets</h5>
+      <div class="card-body">
+        <div class="row">
+
+        {% for preset in preset_list %}
+
+          <div class="col-grid-element-full">
+              <div class="thumb-container">
+                <img src="/static/images/radios/{{preset.radios.image}}" class="thumb-image">
+                <div class="thumb-overlay">
+
+                 <div class="thumb-overlay-link">
+                   <a href="/play/radio/preset/{{preset.id}}" class="thumb-link-text" title="Play">{{preset.name}}</a>
+                 </div>
+                </div>
+                
+                {% if radio_player.preset_playing == preset.id %}
+                  <div class="thumb-overlay-preset" style="background-color: green;">
+                   {{preset.id}}
+                 </div>
+                {% else %}
+                  <div class="thumb-overlay-preset">
+                   {{preset.id}}
+                 </div>
+               {% endif %}
+
+              </div>
+         </div>
+
+
+        {% endfor %}
+
+       </div>
+
+    </div>
+   </div>
+  
+</div>
+
+</div>
+
+<!-- Page -->
+
+{% endblock body %}

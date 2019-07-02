@@ -1,12 +1,17 @@
 #!/usr/bin/python2
 
 import datetime
+	
+## Format Today
+#today = datetime.date.today()
+#today = datetime.datetime.utcnow()
+#today_txt = today.strftime("%a, %d %b de %Y %H:%M:%S")
 
-d = datetime.date(2008, 12, 22)
 
-print d
+#	HERE = tz.tzlocal()
+now = datetime.datetime.now()
 
-month_name = 'Dec'
-month_number = datetime.datetime.strptime(month_name, '%b').month
+today_txt = now.strftime("%a, %d %b de %Y %H:%M:%S")
+print today_txt
 
-print month_number
+

@@ -8,9 +8,9 @@ sys.setdefaultencoding('utf8')
 
 podcast = Blueprint('podcast', __name__, template_folder='templates/podcast')
 
-from .models import Podcast, Podcast_Link, Bookmark
-from . import db, radio_player, CONFIG
-from .forms import ImageForm, LinkForm, PodcastForm, TagForm, BookmarkForm, URLForm
+from .models import Podcast, Podcast_Link, Bookmark, Preset, Radios
+from . import db, radio_player, CONFIG, download_manager
+from .forms import ImageForm, LinkForm, PodcastForm, TagForm, BookmarkForm, URLForm, PodcastEpisodeForm
 
 from sqlalchemy import desc
 
@@ -37,7 +37,7 @@ def podcast_list():
 @podcast.route('/podcast/all', methods=['GET'])
 def podcast_all():
 
-    podcast_list = Podcast.query.order_by(Podcast.priority).all()
+    podcast_list = Podcast.query.order_by(desc(Podcast.stars), Podcast.priority).all()
 
     session['last_url'] = url_for('podcast.podcast_all')
 
@@ -175,6 +175,21 @@ def podcast_feed_update(id):
     return redirect(redirect_page)
 
 
+# ---> Upload Feed to Server
+@podcast.route('/podcast/feed/upload_to_server/<id>', methods=['GET'])
+def podcast_feed_upload_to_server(id):
+
+    podcast = Podcast.query.filter_by(id=id).first()
+    pod_info = PodcastInfo(podcast)
+    pod_info.upload_feed_to_server()
+    
+    redirect_page = url_for('podcast.podcast_feed_episodes', id=id)
+
+    session['last_url'] = redirect_page
+
+    return redirect(redirect_page)
+
+
 # ---> Feed Episodes
 @podcast.route('/podcast/feed/episodes/<id>', methods=['GET'])
 def podcast_feed_episodes(id):
@@ -211,12 +226,9 @@ def podcast_download_episode(id,track_num):
 @podcast.route('/podcast/download/episode/status', methods=['GET'])
 def podcast_download_episode_status():
 
-    file_size_txt = '{:.0f}'.format(float(CONFIG.DOWN_FILE_SIZE) / 1000 / 1000)
-    c_file_size_txt = '{:.0f}'.format(float(CONFIG.DOWN_CURR_FILE_SIZE) / 1000 / 1000)
-
     template_page = 'podcast_episode_down_status.html'
 
-    return render_template(template_page, CONFIG=CONFIG, file_size=file_size_txt, c_file_size = c_file_size_txt, radio_player=radio_player)
+    return render_template(template_page, radio_player=radio_player, download_manager = download_manager)
 
 # ---> Add Episode
 @podcast.route('/podcast/add_episode/<id>', methods=['GET', 'POST'])
@@ -226,8 +238,8 @@ def podcast_add_episode(id):
     
     if form.validate_on_submit():
 
-        url = form.url.data
         name = form.name.data
+        url = form.url.data
 
         podcast = Podcast.query.filter_by(id=id).first()
         pod_info = PodcastInfo(podcast)
@@ -253,6 +265,65 @@ def podcast_add_episode(id):
     return render_template(template_page, form=form, radio_player=radio_player, config=CONFIG)
 
 
+# ---> Add URL to local feed
+@podcast.route('/podcast/add_to_feed/<id>', methods=['GET', 'POST'])
+def podcast_add_to_feed(id):
+
+    form = PodcastEpisodeForm()
+    
+    if form.validate_on_submit():
+
+        title = form.title.data
+        url = form.url.data
+        date = form.date.data
+
+        podcast = Podcast.query.filter_by(id=id).first()
+        pod_info = PodcastInfo(podcast)
+
+        pod_info.add_episode_to_feed(title, url, date)
+
+        redirect_page = url_for('podcast.podcast_feed_episodes',id=id)
+
+        session['last_url'] = redirect_page
+
+        return redirect(redirect_page)
+
+    form.title.data = session['feed_title']
+    form.url.data = session['feed_url']
+    form.date.data = session['feed_date']
+
+    session['last_url'] = url_for('podcast.podcast_add_to_feed',id=id)
+
+    template_page = 'podcast_add_to_feed.html'
+
+    return render_template(template_page, form=form, radio_player=radio_player, config=CONFIG)
+
+
+# ---> Import Feed from URL
+@podcast.route('/podcast/import_from_url/<id>', methods=['GET','POST'])
+def podcast_import_from_url(id):
+
+    form = URLForm()
+
+    if form.validate_on_submit():
+
+        url = form.url.data
+
+        podcast = Podcast.query.filter_by(id=id).first()
+        pod_info = PodcastInfo(podcast)
+        feed_data = pod_info.import_feed_from_web(url)
+
+        session['feed_title'] = feed_data['title']
+        session['feed_url'] = feed_data['audio_url']
+        session['feed_date'] = feed_data['pub_date']
+
+        return redirect( url_for('podcast.podcast_add_to_feed', id=id) )
+
+    else:
+
+        return render_template('podcast_import_from_url.html', form=form, radio_player=radio_player)
+
+
 # ---> Delete Episode
 @podcast.route('/podcast/delete_episode/<id>/<track>', methods=['GET', 'POST'])
 def podcast_delete_episode(id,track):
@@ -267,6 +338,66 @@ def podcast_delete_episode(id,track):
     session['last_url'] = redirect_page
 
     return redirect(redirect_page)
+
+
+# ---> List to Move Episode
+@podcast.route('/podcast/list_to_move/episode/<src_id>/<track>', methods=['GET'])
+def podcast_list_to_move_episode(src_id,track):
+
+    podcast_list = Podcast.query.all()
+
+    session['last_url'] = url_for('podcast.podcast_list_to_move_episode', src_id=src_id, track=track)
+
+    template_page = 'podcast_list_to_move.html'
+
+    return render_template(template_page, podcast_list=podcast_list, radio_player=radio_player, src_id=src_id, track=track)
+
+
+# ---> Move Episode
+@podcast.route('/podcast/move/episode/<src_id>/<track>/<dst_id>', methods=['GET'])
+def podcast_move_episode(src_id,track,dst_id):
+
+    src_podcast = Podcast.query.filter_by(id=src_id).first()
+    src_pod_info = PodcastInfo(src_podcast)
+
+    src_pod_info.update_items_list()
+    episode_info = src_pod_info.episode_list()[int(track) - 1]
+
+    title = episode_info['title']
+    url = episode_info['url']
+    date = episode_info['pubdate']
+
+    dst_podcast = Podcast.query.filter_by(id=dst_id).first()
+    dst_pod_info = PodcastInfo(dst_podcast)
+
+    dst_pod_info.add_episode_to_feed(title, url, date)
+
+    return redirect(url_for('podcast.podcast_feed_episodes',id=dst_id))
+
+
+# ---> Add to Preset 20
+@podcast.route('/podcast/add_to_preset20/<id>/<track>', methods=['GET'])
+def podcast_add_to_preset20(id,track):
+
+    podcast = Podcast.query.filter_by(id=id).first()
+    pod_info = PodcastInfo(podcast)
+
+    pod_info.update_items_list()
+    episode_info = pod_info.episode_list()[int(track) - 1]
+
+    title = episode_info['title']
+    url = episode_info['url']
+
+    preset = Preset.query.filter_by(id=20).first()
+    radio = Radios.query.filter_by(name='Preset20').first()
+
+    preset.url = url
+    preset.name = title
+    preset.radios = radio
+
+    db.session.commit()
+
+    return redirect(url_for('podcast.podcast_feed_episodes',id=id))
 
 
 ###########################################################################################
@@ -592,5 +723,14 @@ def podcast_stars(id,stars):
     return redirect(redirect_page)
 
 
+# ---> Podcast External URL
+@podcast.route('/podcast/episode_url/<id>/<track_num>', methods=['GET'])
+def podcast_episode_url(id,track_num):
 
+    podcast = Podcast.query.filter_by(id=id).first()
+    pod_info = PodcastInfo(podcast)
+
+    ext_url = pod_info.episode_ext_url(int(track_num))
+
+    return redirect(ext_url)
 

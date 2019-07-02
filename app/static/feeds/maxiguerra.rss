@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Maxi Guerra</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/maxiguerra</url>
+        <title>Maxi Guerra</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description>Maxi Guerra</description>
+    <pubDate>"Mon 01 Jul 2019 18:12:03"</pubDate>
+
+	<item>
+		<title>Las vidas extras de Wilko Johnson </title>
+		<pubDate>Mon, 1 Jul 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2149.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2149.mp3</guid>
+	</item>
+
+	<item>
+		<title>Dylan y Scorsese: La verdad está en las canciones </title>
+		<pubDate>Wed, 19 Jun 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/1939.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/1939.mp3</guid>
+	</item>
+
+	<item>
+		<title> Tres Cruces y su etnógrafa involuntaria </title>
+		<pubDate>Mon, 10 Jun 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/1749.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/1749.mp3</guid>
+	</item>
+
+	<item>
+		<title>Los años astringentes de Leonard Cohen </title>
+		<pubDate>Mon, 29 Apr 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.espectador.com/810mp3/1021.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/1021.mp3</guid>
+	</item>
+
+</channel></rss>

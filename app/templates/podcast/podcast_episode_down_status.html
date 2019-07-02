@@ -12,7 +12,9 @@
       <h5 class="card-header">File Download</h5>
       <div class="card-body">
           <div id="container_download"></div>
-          <p class="card-text" style="margin: 20px;"><a class="card-link" href="{{CONFIG.DOWN_REDIRECT_URL}}">{{CONFIG.DOWN_FILE}} [ {{c_file_size}} MB / {{file_size}} MB ]</a></p>
+          <p class="card-text" style="margin: 20px;">
+            <a class="card-link" href="{{ download_manager.down_redirect_url }}">{{ download_manager.down_prog_bar_txt }}</a>
+          </p>
       </div>        
   </div>
   
@@ -61,12 +63,11 @@
       }
     });
 
-    bar.set({{CONFIG.DOWN_PROG_BAR}});  // Number from 0.0 to 1.0
+    bar.set({{download_manager.down_prog_bar}});  // Number from 0.0 to 1.0
 
     setInterval(function() {
         if ( bar.value() < 1 ) {
           location.reload()
-          //bar.set({{CONFIG.DOWN_PROG_BAR}})
         }
 
       }, 1000);

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Tasa de Embarque</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/tasadeembarque</url>
+        <title>Tasa de Embarque</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description></description>
+    <pubDate>"Mon 01 Jul 2019 18:51:10"</pubDate>
+
+	<item>
+		<title>La Ruta de los Corales</title>
+		<pubDate>Tue, 17 Abr 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.dl.uy//solmp3/12245.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/12245.mp3</guid>
+	</item>
+
+	<item>
+		<title>Sevilla, Córdoba y Granada</title>
+		<pubDate>Tue, 24 Oct 2018 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.dl.uy//solmp3/9467.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/9467.mp3</guid>
+	</item>
+
+	<item>
+		<title>Barra da Tijuca</title>
+		<pubDate>Day, 17 Feb 2017 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.dl.uy//solmp3/207.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/207.mp3</guid>
+	</item>
+
+	<item>
+		<title>Estambul</title>
+		<pubDate>Day, 12 Sep 2018 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.dl.uy//solmp3/8686.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/8686.mp3</guid>
+	</item>
+
+	<item>
+		<title>Paris</title>
+		<pubDate>Mon, 20 May 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.dl.uy//solmp3/13053.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/13053.mp3</guid>
+	</item>
+
+	<item>
+		<title>Santiago</title>
+		<pubDate>Mon, 27 Feb 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.dl.uy//solmp3/11224.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/11224.mp3</guid>
+	</item>
+
+	<item>
+		<title>Croacia</title>
+		<pubDate>Mon, 15 Aug 2018 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.dl.uy//solmp3/8141.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/8141.mp3</guid>
+	</item>
+
+	<item>
+		<title>Lima</title>
+		<pubDate>Mon, 9 Feb 2017 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.dl.uy//solmp3/257.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/257.mp3</guid>
+	</item>
+
+</channel></rss>

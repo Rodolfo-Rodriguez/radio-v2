@@ -1,23 +1,25 @@
-import os, sys
+import os
 import time
-import requests 
-
-from sqlalchemy import desc
 
 from mpd import MPDClient
+from cxn_client import CXNClient
 
-from .models import Radios,Program,Artist,Playlist,Podcast, Bookmark
+from .models import Radios,Program,Artist,Playlist,Podcast, Bookmark, Preset
+from .program_info import ProgramsInfo
 from . import CONFIG
+
 
 ################################################################################################################################################################
 # Radio Player
 ################################################################################################################################################################
 
 class RadioPlayer:
-  server_name = CONFIG.DEFAULT_SERVER_NAME
-  server_port = CONFIG.DEFAULT_SERVER_PORT
-  server_type = CONFIG.DEFAULT_SERVER_TYPE
-  mpd_client = MPDClient()
+  server_name = ''
+  server_port = 0
+  server_type = ''
+
+  mpd_client = None
+  cxn_client = None
 
   server_names = CONFIG.SERVER_NAMES
       
@@ -25,34 +27,42 @@ class RadioPlayer:
   bookmark_max = CONFIG.BOOKMARK_MAX
 
   state = ''
-  loaded = ''
+  loaded = ''  # none, radio, cxn_radio, podcast, playlist, album
   album = ''
   player_img = ''
 
-  radio = Radios()
-  playlist = Playlist()
-  artist = Artist()
-  podcast = Podcast()
+  preset_playing = 0
+
+  radio = None
+  playlist = None
+  artist = None
+  podcast = None
 
   def __init__(self):
     self.state = 'stop'
     self.loaded = 'none'
-    self.player_img = '/static/images/radios/empty.png'
+    self.player_img = '{}/radios/empty.png'.format(CONFIG.FLASK_IMG_DIR)
+    
+    self.server_name = CONFIG.DEFAULT_SERVER_NAME
+    self.server_port = CONFIG.DEFAULT_SERVER_PORT
+    self.server_type = CONFIG.DEFAULT_SERVER_TYPE
+    
+    self.mpd_client = MPDClient()
+    self.cxn_client = CXNClient(self.server_name, self.server_port, CONFIG.CXN_ID)
+    #self.update_bookmarks()
 
 ################################################################################################################################################################
-# Server
+# Server - Connect / Disconnect
 ################################################################################################################################################################
-
-  def update_server_type(self,hostname):
-    if hostname in CONFIG.MPD_SERVERS:
-      self.server_type = 'MPD'
-    else:
-      self.server_type = 'CXN'
 
   def select_server(self,hostname):
     self.server_name = hostname
     self.server_port = CONFIG.SERVER_PORTS[hostname]
-    self.update_server_type(hostname)
+    self._update_server_type(hostname)
+    if self.server_type == 'CXN':
+      self.cxn_client.update_server(self.server_name, self.server_port, CONFIG.CXN_ID)
+    
+    self.update_server_status()
 
   def server_connect(self):
     if self.server_type == 'MPD':
@@ -60,15 +70,133 @@ class RadioPlayer:
 
   def server_disconnect(self):
     if self.server_type == 'MPD':
-      self.mpd_client.close()
       self.mpd_client.disconnect()
 
   def current_server(self):
     return self.server_names[self.server_name]
 
+  
 ################################################################################################################################################################
-# Player
+# Server - Status
 ################################################################################################################################################################
+
+  def update_server_status(self):
+    
+    if self.server_type == 'CXN':
+      
+      self.cxn_client.update_playback_details()
+
+      if self.cxn_client.playback_details['state'] == 'Playing':
+        self.state = 'play'
+        self.loaded = 'cxn_radio'
+        self.player_img = self.cxn_client.playback_details['album-art-url']
+        self._update_preset_playing()        
+      else:
+        self.state = 'stop'
+        self.loaded = 'none'
+        self.player_img = '{}/radios/empty.png'.format(CONFIG.FLASK_IMG_DIR)
+    
+    else:
+
+      self.state = self.server_status('state')
+      file = self.server_currentsong('file')
+      
+      if CONFIG.BASE_URI in file:
+        if self.podcast != None:
+          self.loaded = 'podcast'
+          self.player_img = os.path.join(CONFIG.FLASK_IMG_DIR, 'playlists', self.podcast.image)
+        else:
+          self.loaded = 'none'
+          self.player_img = '{}/radios/empty.png'.format(CONFIG.FLASK_IMG_DIR)
+      else:
+        if self.radio == None:
+          self._update_radio_playing()
+
+        self.loaded = 'radio'
+        self.player_img = os.path.join(CONFIG.FLASK_IMG_DIR, 'radios', self.radio.image)
+
+    self.update_bookmarks()
+
+
+  def _update_server_type(self,hostname):
+    if hostname in CONFIG.MPD_SERVERS:
+      self.server_type = 'MPD'
+    else:
+      self.server_type = 'CXN'
+
+  def _update_preset_playing(self):
+    stream_url = self.cxn_client.playback_details['url']
+    preset_url_list = [ preset.url for preset in Preset.query.all() ]
+    if stream_url in preset_url_list: 
+      self.preset_playing = preset_url_list.index(stream_url) + 1
+    else:
+      self.preset_playing = 0
+
+  def _update_radio_playing(self):
+    stream_url = self.server_currentsong('file')
+    radio_url_list = [ radio.url for radio in Radios.query.order_by(Radios.id).all() ]
+    if stream_url in radio_url_list: 
+      radio_id = radio_url_list.index(stream_url) + 1
+      self.radio = Radios.query.filter_by(id=radio_id).first()
+
+  def update_bookmarks(self):
+    self.bookmark_list = Bookmark.query.order_by(Bookmark.priority).all()[0:self.bookmark_max]
+
+
+  def power_state(self):
+    if (self.server_type == 'CXN'):
+      power_state = self.cxn_client.get_power_state()
+    else:
+      power_state = 'Unknown'
+
+    return power_state
+
+################################################################################################################################################################
+# Player Control
+################################################################################################################################################################
+
+  def power(self):
+    if (self.server_type == 'CXN'):
+      power_state = self.cxn_client.get_power_state()
+      if power_state == 'ON':
+        self.cxn_client.send_command('POWER_OFF')
+      else:
+        self.cxn_client.send_command('POWER_ON')
+      
+      self.cxn_client.press_remote_key('POWER','SHORT')
+
+  def vol_up(self):
+    if (self.server_type == 'CXN'):
+      self.cxn_client.send_command('VOL_UP')
+    else:
+      self.server_connect()
+      vol = int(self.mpd_client.status()['volume'])
+      if vol < 100:
+        self.mpd_client.setvol(vol + 1)
+      self.server_disconnect()
+
+
+  def vol_down(self):
+    if (self.server_type == 'CXN'):
+      self.cxn_client.send_command('VOL_DOWN')
+    else:
+      self.server_connect()
+      vol = int(self.mpd_client.status()['volume'])
+      if vol > 0:
+        self.mpd_client.setvol(vol - 1)
+      self.server_disconnect()
+
+  def vol_mute(self):
+    if (self.server_type == 'CXN'):
+      self.cxn_client.press_remote_key('MUTE','SHORT')
+    else:
+      self.server_connect()
+      vol = int(self.mpd_client.status()['volume'])
+      if vol > 0:
+        self.mpd_client.setvol(0)
+      else:
+        self.mpd_client.setvol(CONFIG.DEFAULT_VOLUME  )
+      self.server_disconnect()
 
   def play_url(self,url):
     if (self.server_type == 'MPD'):
@@ -84,93 +212,28 @@ class RadioPlayer:
       self.player_img = '/static/images/radios/empty.png'
 
   def playradio(self,radio):
-    play_ok = False
+
     if (self.server_type == 'MPD'):
       self.server_connect()
       self.mpd_client.clear()
       self.mpd_client.add(radio.url)
       self.mpd_client.play(0)
       self.server_disconnect()
-      play_ok = True
-    else:
-      if (radio.preset > 0) and (radio.preset < 21):
-        self.cxn_play_preset(radio.preset)
-        play_ok = True
 
-    if play_ok:
       self.loaded = 'radio'
       self.state = 'play'
       self.radio = radio
       self.album = ''
-      self.player_img = '/static/images/radios/' + radio.image
+      self.player_img = os.path.join(CONFIG.FLASK_IMG_DIR, 'radios', radio.image)
 
-  def play_pause(self):
-    if self.state == 'play':
-      self.state = 'pause'
+      self.preset_playing = radio.preset_number()
+
     else:
-      self.state = 'play'          
-
-    if (self.server_type == 'MPD'):
-      self.server_connect()          
-      if self.state == 'play':
-        self.mpd_client.pause()
-      else:
-        self.mpd_client.play()
-      self.server_disconnect()
-    else:
-      self.cxn_play_remote('PLAY_PAUSE')
-          
-  def play(self):
-    self.state = 'play'
-    if (self.server_type == 'MPD'):
-      self.server_connect()
-      self.mpd_client.play()
-      self.server_disconnect()
-    else:
-      self.cxn_play_remote('PLAY_PAUSE')
-
-  def stop(self):
-    self.state = 'stop'
-    if (self.server_type == 'MPD'):
-      self.server_connect()
-      self.mpd_client.stop()
-      self.server_disconnect()
-    else:
-      self.cxn_play_remote('STOP')
-
-  def pause(self):
-    self.state = 'pause'
-    if (self.server_type == 'MPD'):
-      self.server_connect()
-      self.mpd_client.pause()
-      self.server_disconnect()
-    else:
-      self.cxn_play_remote('PLAY_PAUSE')
-
-  def next(self):
-    if self.loaded in ['album','playlist','podcast']:
-      if (self.server_type == 'MPD'):
-        self.server_connect()
-        pos = int(self.mpd_client.currentsong()['pos'])
-        playlist_len = int(self.mpd_client.status()['playlistlength'])      
-        if pos < (playlist_len - 1):
-          self.mpd_client.next()
-        self.server_disconnect()
-      else:
-        self.cxn_play_remote('NEXT')
-
-  def previous(self):
-    if self.loaded in ['album','playlist','podcast']:
-      if (self.server_type == 'MPD'):
-        self.server_connect()
-        pos = int(self.mpd_client.currentsong()['pos'])
-        playlist_len = int(self.mpd_client.status()['playlistlength'])
-        if pos > 0:
-          self.mpd_client.previous()
-        self.server_disconnect()
-      else:
-        self.cxn_play_remote('PREVIOUS')
-
+      if (radio.preset > 0) and (radio.preset < 21):
+        self.cxn_client.play_preset(radio.preset)
+        time.sleep(4)
+        self.update_server_status()
+        
   def play_song(self,pos):
     if (self.server_type == 'MPD'):
       self.server_connect()
@@ -207,8 +270,155 @@ class RadioPlayer:
       return elapsed_time
 
 ################################################################################################################################################################
+# CXN Control
+################################################################################################################################################################
+
+  #--> Press Remote Key
+  def cxn_press_remote_key(self, key, duration):
+
+    self.cxn_client.press_remote_key(key, duration)
+
+  #--> Play Preset
+  def cxn_play_preset(self, preset_id):
+    
+    self.cxn_client.play_preset(preset_id)
+    self.loaded = 'cxn_radio'
+    self.preset_playing = int(preset_id)
+
+  #--> Play Radio ID
+  def cxn_play_radio(self, radio_id):
+    
+    self.cxn_client.play_radio(radio_id)
+    self.loaded = 'cxn_radio'
+    self.preset_playing = 0
+    self.station_id_playing = radio_id
+
+  #--> Send Command
+  def cxn_send_command(self, command):
+
+    self.cxn_client.send_command(command)
+
+  #--> Get Power State
+  def cxn_get_power_state(self):
+
+    state = self.cxn_client.get_power_state()
+    return state
+
+  def cxn_search_radio(self, name, location):
+
+    radio_list = self.cxn_client.search_radio(name, location)
+    return radio_list
+
+  def cxn_locations(self):
+
+    location_list = self.cxn_client.locations()
+    return location_list
+
+  def cxn_genre_list(self):
+
+    genre_list = self.cxn_client.genre_list()
+    return genre_list
+
+  def list_radios_in_cxn_location(self, location_id):
+
+    radio_list = self.cxn_client.list_radios_in_location(location_id)
+    return radio_list
+
+  def list_radios_in_cxn_genre(self, genre_id):
+
+    radio_list = self.cxn_client.list_radios_in_genre(genre_id)
+    return radio_list
+
+
+  def cxn_set_preset(self, preset_id):
+
+    self.cxn_client.set_preset(preset_id, self.station_id_playing)
+    
+
+################################################################################################################################################################
 # Status
 ################################################################################################################################################################
+
+  def play_pause(self):
+
+    if (self.server_type == 'MPD'):
+      self.server_connect()          
+      
+      if self.state == 'play':
+        self.mpd_client.pause()
+        self.state = 'pause'
+      else:
+        self.mpd_client.play()
+        self.state = 'play'
+      
+      self.server_disconnect()
+    else:
+      self.cxn_client.press_remote_key('PLAY_PAUSE','SHORT')
+      if self.state == 'play':
+        self.state = 'pause'
+      else:
+        self.state = 'play'          
+          
+  def play(self):
+    self.state = 'play'
+    if (self.server_type == 'MPD'):
+      self.server_connect()
+      self.mpd_client.play()
+      self.server_disconnect()
+    else:
+      self.cxn_client.press_remote_key('PLAY_PAUSE','SHORT')
+
+  def stop(self):
+    self.state = 'stop'
+    if (self.server_type == 'MPD'):
+      self.server_connect()
+      self.mpd_client.stop()
+      self.server_disconnect()
+    else:
+      self.cxn_client.press_remote_key('STOP','SHORT')
+
+  def pause(self):
+    self.state = 'pause'
+    if (self.server_type == 'MPD'):
+      self.server_connect()
+      self.mpd_client.pause()
+      self.server_disconnect()
+    else:
+      self.cxn_client.press_remote_key('PLAY_PAUSE','SHORT')
+
+  def next(self):
+    if self.loaded in ['album','playlist','podcast']:
+      if (self.server_type == 'MPD'):
+        self.server_connect()
+        pos = int(self.mpd_client.currentsong()['pos'])
+        playlist_len = int(self.mpd_client.status()['playlistlength'])      
+        if pos < (playlist_len - 1):
+          self.mpd_client.next()
+        self.server_disconnect()
+      else:
+        self.cxn_client.press_remote_key('SKIP_NEXT','SHORT')
+
+  def previous(self):
+    if self.loaded in ['album','playlist','podcast']:
+      if (self.server_type == 'MPD'):
+        self.server_connect()
+        pos = int(self.mpd_client.currentsong()['pos'])
+        playlist_len = int(self.mpd_client.status()['playlistlength'])
+        if pos > 0:
+          self.mpd_client.previous()
+        self.server_disconnect()
+      else:
+        self.cxn_client.press_remote_key('SKIP_PREVIOUS','SHORT')
+
+  def volume(self):
+    if (self.server_type == 'MPD'):
+      self.server_connect()
+      volume = int(self.mpd_client.status()['volume'])
+      self.server_disconnect()
+    else:
+      volume = CONFIG.DEFAULT_VOLUME
+
+    return volume
 
   def update_state(self,radio_list):
     if (self.server_type == 'MPD'):
@@ -226,9 +436,6 @@ class RadioPlayer:
           for radio in radio_list:
             if radio.url == current_link:
               self.radio = radio
-
-  def update_bookmarks(self):
-    self.bookmark_list = Bookmark.query.order_by(Bookmark.priority).all()[0:self.bookmark_max]
 
   def server_currentsong(self,key_value):
     if (self.server_type == 'MPD'):
@@ -279,6 +486,8 @@ class RadioPlayer:
       return play_progress_str
     else:
       return ''
+
+
 
 ################################################################################################################################################################
 # Playlist
@@ -485,247 +694,3 @@ class RadioPlayer:
       self.server_connect()
       self.mpd_client.toggleoutput(id)
       self.server_disconnect()
-
-################################################################################################################################################################
-# CXN Control
-################################################################################################################################################################
-
-  def cxn_play_preset(self, preset_id):
-
-    URL = 'http://' + self.server_name + ':' + self.server_port + '/' + CONFIG.CXN_ID + '/RecivaRadio/invoke'
-    SOAPAction = '"urn:UuVol-com:service:UuVolControl:5#PlayPreset"'
-
-    xml_body = """
-    <u:PlayPreset xmlns:u="urn:UuVol-com:service:UuVolControl:5">
-      <NewPresetNumberValue>""" +  str(preset_id) + """</NewPresetNumberValue>
-    </u:PlayPreset>   
-    """
-    
-    xml = """
-    <?xml vesion="1.0" encoding="UTF-8"?>
-      <s:Envelope 
-        s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" 
-        xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-      <s:Body>
-    """ + xml_body + """
-      </s:Body>
-    </s:Envelope>
-    """ 
-
-    headers = { "Content-Type" : "text/xml", 
-                "SOAPAction" : SOAPAction,
-                "User-Agent" : "CambridgeConnect/3.2.1 (iOS) UPnP/1.0 DLNADOC/1.50 Platinum/1.0.4.11",
-                "Host" : self.server_name}
-
-    response = requests.post(URL, data=xml, headers=headers, verify=False)
-
-
-  def cxn_play_remote(self,remote_key):
-
-    URL = 'http://' + self.server_name + ':' + self.server_port + '/' + CONFIG.CXN_ID + '/RecivaSimpleRemote/invoke'
-    SOAPAction = '"urn:UuVol-com:service:UuVolSimpleRemote:1#KeyPressed"'
-
-    xml_body = """
-    <u:KeyPressed xmlns:u="urn:UuVol-com:service:UuVolSimpleRemote:1">
-      <Key>""" + remote_key + """</Key>
-      <Duration>SHORT</Duration>
-    </u:KeyPressed>   
-    """
-    
-    xml = """
-    <?xml vesion="1.0" encoding="UTF-8"?>
-      <s:Envelope 
-        s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" 
-        xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-      <s:Body>
-    """ + xml_body + """
-      </s:Body>
-    </s:Envelope>
-    """
-    
-    headers = { "Content-Type" : "text/xml", 
-                "SOAPAction" : SOAPAction,
-                "User-Agent" : "CambridgeConnect/3.2.1 (iOS) UPnP/1.0 DLNADOC/1.50 Platinum/1.0.4.11",
-                "Host" : self.server_name}
-
-    response = requests.post(URL, data=xml, headers=headers, verify=False)
-
-
-################################################################################################################################################################
-# Program Info
-################################################################################################################################################################
-
-class ProgramsInfo:
-  radio = Radios()
-  program = Program()
-  week_day_letters = ['Lun','Mar','Mie','Jue','Vie','Sab','Dom']
-  timezone = 0
-  week_day = 0
-  list_week_day = 0
-
-  def __init__(self,radio):
-    self.radio = radio
-    self.timezone = self.timezone()
-    self.week_day = self.act_week_day()
-    self.list_week_day = self.week_day
-    self.program_update()
-
-  # ---> Set Week Day
-  def week_day_letter(self,wday):
-
-    if int(wday) in [0,1,2,3,4,5,6]:
-      return self.week_day_letters[int(wday)]
-
-  # ---> Set Week Day
-  def set_list_week_day(self,wday):
-
-    if int(wday) in [0,1,2,3,4,5,6]:
-      self.list_week_day = wday
-
-  # ---> Progams List
-  def program_list(self):
-
-    self.radio.program_list.sort(key=lambda x: x.times)
-
-    return self.radio.program_list
-
-  # ---> TimeZone
-  def timezone(self):
-
-    if self.radio.country in CONFIG.TIMEZONES:
-      timezone = CONFIG.TIMEZONES[self.radio.country]
-    else:
-      timezone = 0
-
-    return timezone
-      
-  # ---> Actual Week Day
-  def act_hour(self):
-        
-    act_hour = int(time.localtime().tm_hour) + self.timezone
-    act_hour = act_hour % 24
-        
-    return act_hour
-
-  # ---> Actual Week Day
-  def act_week_day(self):
-        
-    act_wday = time.localtime().tm_wday
-    act_hour = int(time.localtime().tm_hour) + self.timezone
-
-    if act_hour < 0:
-      act_wday = act_wday - 1
-    if act_hour > 23:
-      act_wday = act_wday + 1
-        
-    return act_wday
-
-  # ---> Radio Time
-  def radio_time_day(self):
-
-    act_wday = self.act_week_day()
-
-    act_h = self.act_hour()
-    if act_h < 10:
-      act_h_txt = '0' + str(act_h)
-    else:
-      act_h_txt = str(act_h)
-
-    act_m = int(time.localtime().tm_min)
-    if act_m < 10:
-      act_m_txt = '0' + str(act_m)
-    else:
-      act_m_txt = str(act_m)
-
-    str_h = act_h_txt + ':' + act_m_txt + ' [ ' + self.week_day_letter(act_wday) + ' ]'
-
-    return str_h
-
-
-  # ---> Check if Program is Live
-  def is_prog_today(self,program):
-
-    prog_wdays = program.week_days.split(',')
-        
-    return (str(self.list_week_day) in prog_wdays)
-
-
-  # ---> Check Program Live
-  def is_prog_live(self,program):
-
-    act_h = self.act_hour()
-
-    act_m = int(time.localtime().tm_min)
-    act_day_m = act_h * 60 + act_m
-
-    prog_wdays = program.week_days.split(',')
-
-    prog_ini_h = int(program.times.split('-')[0].split(':')[0])
-    prog_ini_m = int(program.times.split('-')[0].split(':')[1])
-
-    prog_end_h = int(program.times.split('-')[1].split(':')[0])
-    prog_end_m = int(program.times.split('-')[1].split(':')[1])
-
-    prog_day_ini_m = prog_ini_h * 60 + prog_ini_m
-    prog_day_end_m = prog_end_h * 60 + prog_end_m
-
-    return ( (str(self.act_week_day()) in prog_wdays) and (act_day_m >= prog_day_ini_m) and (act_day_m < prog_day_end_m) )
-
-  # ---> Program Time
-  def program_update(self):
-
-    self.program = None
-
-    for program in self.radio.program_list:
-      if self.is_prog_live(program):
-        self.program = program
-
-  
-  # ---> Program Time
-  def program_time(self):
-
-    self.program_update()
-
-    if self.program:
-      prog_ini_h = int(self.program.times.split('-')[0].split(':')[0])
-      prog_ini_m = int(self.program.times.split('-')[0].split(':')[1])
-
-      prog_end_h = int(self.program.times.split('-')[1].split(':')[0])
-      prog_end_m = int(self.program.times.split('-')[1].split(':')[1])
-
-      prog_day_ini_m = prog_ini_h * 60 + prog_ini_m
-      prog_day_end_m = prog_end_h * 60 + prog_end_m
-
-      prog_time_s = (prog_day_end_m - prog_day_ini_m) * 60
-        
-      return prog_time_s
-
-    else:
-
-      return 0
-
-
-  # ---> Program Elapsed Time
-  def program_elapsed_time(self):
-
-    self.program_update()
-
-    if self.program:
-      act_h = self.act_hour()
-      act_m = int(time.localtime().tm_min)
-
-      act_day_m = act_h * 60 + act_m
-
-      prog_ini_h = int(self.program.times.split('-')[0].split(':')[0])
-      prog_ini_m = int(self.program.times.split('-')[0].split(':')[1])
-
-      prog_day_ini_m = prog_ini_h * 60 + prog_ini_m
-
-      prog_elapsed_time_s = (act_day_m - prog_day_ini_m) * 60
-          
-      return prog_elapsed_time_s
-
-    else:
-
-      return 0
-

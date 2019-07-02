@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>Admin</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="/static/icons/player.ico"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Slte CSS -->
+    <link rel="stylesheet" href="/static/css/slate/bootstrap.css" media="screen">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/custom.css" media="screen">
+
+    <!-- Font Awsome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+</head>
+  
+<body {% block body_header %}{% endblock body_header %}>
+
+  <div class="container" style="max-width: 1500px;">
+
+    <div class="bs-component">
+
+      <div class="col-grid-full">
+
+        <div class="card text-white bg-dark" style="flex: 0 0 100%">
+          <h4 class="card-header">Admin</h4>
+
+          <div class="card-body">
+        
+            <div class="row">
+
+              <div class="col-lg-6">
+                <div class="card text-white bg-primary mb-3">
+                  <div class="card-header">Server</div>
+
+                  <div class="card-body"><h5 class="card-title"><a href={{ url_for('player.server_disconnect') }}>Disconnect</a></h5></div>
+                  <div class="card-body"><h5 class="card-title"><a href="">Restart Player</a></h5></div>
+
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="card text-white bg-primary mb-3">
+                  <div class="card-header">Server</div>
+                  <div class="card-body">
+                    <h5 class="card-title">   </h5>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          
+          </div>
+        
+        </div>
+        
+      </div>
+
+    </div>
+
+  </div>
+
+</body>

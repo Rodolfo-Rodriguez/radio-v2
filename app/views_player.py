@@ -21,8 +21,16 @@ from podcast import PodcastInfo
 ##  Controls
 ###########################################################################################
 
-# ---> Play
+# ---> Power
+@player.route('/power', methods=['GET'])
+def power():
+    radio_player.power()
 
+    redirect_page = session['last_url']
+
+    return redirect(redirect_page)
+
+# ---> Play
 @player.route('/play', methods=['GET'])
 def play():
     radio_player.play()
@@ -133,6 +141,32 @@ def play_url():
 
     return render_template(template_page, form=form, radio_player=radio_player)
 
+# ---> Volume Up
+@player.route('/vol_up', methods=['GET'])
+def vol_up():
+    radio_player.vol_up()
+
+    redirect_page = session['last_url']
+
+    return redirect(redirect_page)
+
+# ---> Volume Down
+@player.route('/vol_down', methods=['GET'])
+def vol_down():
+    radio_player.vol_down()
+
+    redirect_page = session['last_url']
+
+    return redirect(redirect_page)
+
+# ---> Volume Mute
+@player.route('/vol_mute', methods=['GET'])
+def vol_mute():
+    radio_player.vol_mute()
+
+    redirect_page = session['last_url']
+
+    return redirect(redirect_page)
 
 ###########################################################################################
 ##  Server
@@ -141,6 +175,9 @@ def play_url():
 # ---> Server Status
 @player.route('/server/status', methods=['GET'])
 def server_status():
+
+    radio_player.update_server_status()
+    
     session['last_url'] = url_for('player.server_status')
     template_page = 'player_status.html'
     return render_template(template_page, radio_player=radio_player)
@@ -149,7 +186,10 @@ def server_status():
 @player.route('/server/select/<hostname>', methods=['GET'])
 def server_select(hostname):
     radio_player.select_server(hostname)
-    return redirect(session['last_url'])
+
+    session['last_url'] = url_for('player.server_status')
+    template_page = 'player_status.html'
+    return render_template(template_page, radio_player=radio_player)
 
 # ---> Disconnect from Server
 @player.route('/server/disconnect', methods=['GET'])

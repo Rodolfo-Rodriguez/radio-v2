@@ -9,19 +9,29 @@ class Config:
 	PROJECT_DB_FILENAME = 'radio.db'
 	SQLITE_DATABASE_FILE = ''
 
-	PROJECT_CSV_DIR = 'database/csv_data' 
-  	CSV_RADIOS_TABLE_FILE = 'radios_table.csv'
-  	CSV_PROGRAM_TABLE_FILE = 'program_table.csv'
-  	CSV_ARTIST_TABLE_FILE = 'artist_table.csv'
-  	CSV_PLAYLIST_TABLE_FILE = 'playlist_table.csv'
-  	CSV_PODCAST_TABLE_FILE = 'podcast_table.csv'
-  	CSV_RADIO_LINK_TABLE_FILE = 'radio_link_table.csv'
-  	CSV_ARTIST_LINK_TABLE_FILE = 'artist_link_table.csv'
-  	CSV_PODCAST_LINK_TABLE_FILE = 'podcast_link_table.csv'
+	PROJECT_CSV_DIR = 'database/csv_data'
+
+	CSV_TABLE_FILE = {
+		'Radios' : 'radios_table.csv',
+		'Program' : 'program_table.csv',
+		'Artist' : 'artist_table.csv',
+		'Playlist' : 'playlist_table.csv',
+		'Podcast' : 'podcast_table.csv',
+		'Radio_Link' : 'radio_link_table.csv',
+		'Artist_Link' : 'artist_link_table.csv',
+		'Podcast_Link' : 'podcast_link_table.csv',
+		'Bookmark' : 'bookmark_table.csv',
+		'Preset' : 'preset_table.csv'
+	}
+
+	FLASK_IMG_DIR = '/static/images'
 
 	PROJECT_RADIOS_IMG_DIR = 'app/static/images/radios'
 	PROJECT_ARTIST_IMG_DIR = 'app/static/images/artist'
 	PROJECT_ALBUM_IMG_DIR = 'app/static/images/albums'
+	PROJECT_FEED_DIR = 'app/static/feeds'
+
+	PODCAST_BASE_URL = '/static/Podcast'
 
 	PLAYLIST_DIR = '/Playlists'
 	PODCAST_FEED_FILE = '.podcast_feed.rss'
@@ -34,13 +44,15 @@ class Config:
 	
 	MPD_SERVERS = ["rune-1", "rune-2"]
 
-	SERVER_NAMES = { "rune-1":"MPD Oficina", 
-					"rune-2":"MPD Sala",
-					"cxn":"CXNv2" }
+	SERVER_NAMES = { 
+		"rune-1":"MPD-Office",
+		"cxn":"CXN" 
+	}
 	
-	SERVER_PORTS = { "rune-1":"6600", 
-					"rune-2":"6600",
-					"cxn":"8050" }
+	SERVER_PORTS = { 
+		"rune-1":"6600",
+		"cxn":"8050"
+	}
 			
 	CXN_ID = '9ffd0730-00fb-455b-aa2f-8fc8df0c268f'
 
@@ -60,18 +72,7 @@ class Config:
 				'Greece':2 }
 
 	BOOKMARK_MAX = 10
-	DOWN_LOG_FILE = '/tmp/download.log'
-
-	### Temp download variabbles
-
-	DOWN_IN_PROG = 0
-	DOWN_REDIRECT_URL = ''
-	DOWN_URL = ''
-	DOWN_FILE = ''
-	DOWN_FILE_SIZE = 0
-	DOWN_CURR_FILE_SIZE = 0
-	DOWN_PROG_BAR = 0.0
-
+	DEFAULT_VOLUME = 50
 
 	def __init__(self):
 

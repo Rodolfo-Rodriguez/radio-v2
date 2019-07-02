@@ -795,50 +795,50 @@ var SMoIP = function() {
     invokeCallback("onConnectionOpen", [ ]);
 
     var cmds = [
-      {
-        cmd: priv.commands.system.info,
-        msg: "SystemInfo",
-      },
-      {
-        cmd: priv.commands.system.network,
-        msg: "NetworkSettings",
-      },
-      {
-        cmd: priv.commands.system.networkWireless,
-        msg: "WirelessSettings",
-      },
-      {
-        cmd: priv.commands.system.powerSpec,
-        msg: "PowerSpec",
-      },
-      {
-        cmd: priv.commands.system.power,
-        msg: "PowerSettings",
-      },
-      {
-        cmd: priv.commands.system.sources,
-        msg: "AvailableSources",
-      },
-      {
-        cmd: priv.commands.system.sourcesCast,
-        msg: "GoogleCastSettings",
-      },
-      {
-        cmd: priv.commands.system.update,
-        msg: "FirmwareUpdates",
-      },
-      {
-        cmd: priv.commands.zone.audioSpec,
-        msg: "AudioSpec",
-      },
-      {
-        cmd: priv.commands.zone.audio,
-        msg: "AudioSettings",
-      },
-      {
-        cmd: priv.commands.zone.play_state,
-        msg: "PlayState",
-      },
+      // {
+      //   cmd: priv.commands.system.info,
+      //   msg: "SystemInfo",
+      // },
+      // {
+      //   cmd: priv.commands.system.network,
+      //   msg: "NetworkSettings",
+      // },
+      // {
+      //   cmd: priv.commands.system.networkWireless,
+      //   msg: "WirelessSettings",
+      // },
+      // {
+      //   cmd: priv.commands.system.powerSpec,
+      //   msg: "PowerSpec",
+      // },
+      // {
+      //   cmd: priv.commands.system.power,
+      //   msg: "PowerSettings",
+      // },
+      // {
+      //   cmd: priv.commands.system.sources,
+      //   msg: "AvailableSources",
+      // },
+      // {
+      //   cmd: priv.commands.system.sourcesCast,
+      //   msg: "GoogleCastSettings",
+      // },
+      // {
+      //   cmd: priv.commands.system.update,
+      //   msg: "FirmwareUpdates",
+      // },
+      // {
+      //   cmd: priv.commands.zone.audioSpec,
+      //   msg: "AudioSpec",
+      // },
+      // {
+      //   cmd: priv.commands.zone.audio,
+      //   msg: "AudioSettings",
+      // },
+      // {
+      //   cmd: priv.commands.zone.play_state,
+      //   msg: "PlayState",
+      // },
       {
         cmd: priv.commands.presets.list,
         msg: "Presets",
@@ -929,13 +929,13 @@ var SMoIP = function() {
       if(!priv.WSHandle)
       {
         priv.WSHandle = new WS();
-        priv.WSHandle.open(window.location.host + "/smoip");
+        priv.WSHandle.open("192.168.1.4/smoip");
         priv.WSHandle.connectOpenCallback(onWSOpen);
         priv.WSHandle.connectCloseCallback(onWSClose);
         priv.WSHandle.connectMessageCallback(onWSMessage);
       }
       log.fnExit();
-    },
+    },  
     setProductName: function(callback, name) {
       if(!priv.WSHandle)
         return;
@@ -1894,39 +1894,36 @@ var secStatus = {
   },
   updateConnection: function(conn) {
     var el = secStatus.aElements;
-    var txt = aTexts.network.Wired;
-    vat show = [ ];
-    // var txt = "";
-    // var show = [ ];
-    // if(secStatus.aConnections[conn])
-    // {
-    //   txt = secStatus.aConnections[conn].name;
-    //   show = secStatus.aConnections[conn].show;
-    // }
-    // el.setValue("valStatusConnection", txt);
-    // el.visible("contStatusNetworkName", show.indexOf("NetworkName") >= 0);
-    // el.visible("contStatusSignalStrength", show.indexOf("SignalStrength") >= 0);
+    var txt = "";
+    var show = [ ];
+    if(secStatus.aConnections[conn])
+    {
+      txt = secStatus.aConnections[conn].name;
+      show = secStatus.aConnections[conn].show;
+    }
+    el.setValue("valStatusConnection", txt);
+    el.visible("contStatusNetworkName", show.indexOf("NetworkName") >= 0);
+    el.visible("contStatusSignalStrength", show.indexOf("SignalStrength") >= 0);
   },
   updateIPAddress: function(obj) {
     var el = secStatus.aElements;
-    el.setValue("valStatusIPAddress","192.168.1.4")
-    // if(obj.ipv4 && obj.ipv4.address)
-    //   el.setValue("valStatusIPAddress", obj.ipv4.address);
-    // if(obj.ipv6 && obj.ipv6.address)
-    // {
-    //   el.setValue("valStatusIPv6Address", obj.ipv6.address);
-    //   el.show("contStatusIPv6Address");
-    // }
+    if(obj.ipv4 && obj.ipv4.address)
+      el.setValue("valStatusIPAddress", obj.ipv4.address);
+    if(obj.ipv6 && obj.ipv6.address)
+    {
+      el.setValue("valStatusIPv6Address", obj.ipv6.address);
+      el.show("contStatusIPv6Address");
+    }
   },
   updateCurrentNetwork: function(obj) {
     var el = secStatus.aElements;
-    // if(obj && obj.current)
-    // {
-    //   el.setValue("valStatusSignalStrength", obj.current.signal
-    //                                        ? (obj.current.signal + "%")
-    //                                        : "");
-    //   el.setValue("valStatusNetworkName", secNetwork.hex2text(obj.current.ssid));
-    // }
+    if(obj && obj.current)
+    {
+      el.setValue("valStatusSignalStrength", obj.current.signal
+                                           ? (obj.current.signal + "%")
+                                           : "");
+      el.setValue("valStatusNetworkName", secNetwork.hex2text(obj.current.ssid));
+    }
   },
   init: function() {
     var el = secStatus.aElements;
@@ -2062,7 +2059,7 @@ var secProduct = {
     }
     else
     {
-      secCast.updateName(productName);
+			secCast.updateName(productName);
       spin.invokeButtonAction({
         elements: el.add([ "inpProductName", "btnProductSave" ]),
         container: el["contBtnProductSave"],
@@ -3212,7 +3209,7 @@ var secCast = {
   tutorialText: "",
   updateName: function(name) {
     secCast.tutorialText = aTexts.cast.TutorialDescription.replace(/PRODUCT/g, name);
-  },
+	},
   startTutorial: function(data) {
     var txt = aTexts.cast;
     var popupData = {
@@ -4598,7 +4595,7 @@ var wizard = {
               info: aTexts.product.ProductName,
               func: applyTask,
             });
-            secCast.updateName(value);
+			      secCast.updateName(value);
             wizard.next();
           }
         };
@@ -4915,18 +4912,18 @@ function bodyOnLoad() {
     text: aTexts.Loading + "...",
   });
 
-  secStatus.init();
-  secProduct.init();
-  secNetwork.init();
-  secPower.init();
-  secVolume.init();
-  secTimezone.init();
-  secCast.init();
-  secFirmware.init();
-  secServices.init();
-  secPodcasts.init();
+  // secStatus.init();
+  // secProduct.init();
+  // secNetwork.init();
+  // secPower.init();
+  // secVolume.init();
+  // secTimezone.init();
+  // secCast.init();
+  // secFirmware.init();
+  // secServices.init();
+  // secPodcasts.init();
   secPresets.init();
-  wizard.init();
+  // wizard.init();
 
   var init0 = function() {
     popup.updateMessage({
@@ -5020,3 +5017,4 @@ function bodyOnLoad() {
   });
   smoip.start();
 }
+

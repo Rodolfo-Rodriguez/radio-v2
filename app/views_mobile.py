@@ -1,6 +1,6 @@
 
 from flask import render_template, redirect, request, Blueprint, session, url_for
-import sys, os
+import sys, os, time
 
 from sqlalchemy import desc
 
@@ -10,7 +10,7 @@ sys.setdefaultencoding('utf8')
 mobile = Blueprint('mobile', __name__, template_folder='templates/mobile')
 
 from . import db, radio_player, CONFIG, db_manager
-from .models import Radios, Program, Artist, Playlist, Podcast, Radio_Link, Bookmark
+from .models import Radios, Program, Artist, Playlist, Podcast, Radio_Link, Bookmark, Preset
 from .forms import BookmarkForm
 
 from radio import RadioPlayer, Bookmark
@@ -23,7 +23,7 @@ from radio import RadioPlayer, Bookmark
 @mobile.route('/mobile', methods=['GET'])
 def mobile_home():
 
-    radio_player.disconnect()
+    #radio_player.disconnect()
 
     session['last_url'] = url_for('mobile.mobile_home')
 
@@ -84,6 +84,18 @@ def mobile_radio_filter_list(filter_type):
     session['last_url'] = url_for('mobile.mobile_radio_filter_list', filter_type=filter_type)
 
     return render_template('mobile_radio_filter_list.html', radio_player=radio_player, filter_type=filter_type ,radio_items=radio_items)
+
+
+
+# ---> Radio Presets Grid
+@mobile.route('/mobile/radio/presets', methods=['GET'])
+def mobile_radio_presets():
+
+    preset_list = Preset.query.all()
+
+    session['last_url'] = url_for('mobile.mobile_radio_presets')
+
+    return render_template('mobile_preset_list.html', radio_player=radio_player, preset_list=preset_list)
 
 
 ###########################################################################################
@@ -171,13 +183,54 @@ def mobile_artist_album_load(artist_id,album):
 # Mobile Play, Stop
 ###########################################################################################
 
+# ---> Power
+@mobile.route('/mobile/power', methods=['GET'])
+def mobile_power():
+    radio_player.power()
+
+    redirect_page = session['last_url']
+
+    return redirect(redirect_page)
+
+
+# ---> Volume Up
+@mobile.route('/mobile/vol_up', methods=['GET'])
+def mobile_vol_up():
+    radio_player.vol_up()
+
+    redirect_page = session['last_url']
+
+    return redirect(redirect_page)
+
+# ---> Volume Down
+@mobile.route('/mobile/vol_down', methods=['GET'])
+def mobile_vol_down():
+    radio_player.vol_down()
+
+    redirect_page = session['last_url']
+
+    return redirect(redirect_page)
+
+
 # ---> Player
 @mobile.route('/mobile/player', methods=['GET'])
 def mobile_player():
 
     session['last_url'] = url_for('mobile.mobile_player')
-    
-    return render_template('mobile_player.html',radio_player=radio_player)
+
+    if radio_player.server_type == 'CXN':
+        preset_id = radio_player.preset_playing
+        preset = Preset.query.filter_by(id=preset_id).first()
+        if preset:
+            radio = preset.radios
+        else:
+            radio = None
+            
+        return render_template('mobile_cxn_player.html',radio_player=radio_player, radio=radio)
+    else:
+        return render_template('mobile_player.html',radio_player=radio_player)
+
+
 
 # ---> Playlist
 @mobile.route('/mobile/show/playlist', methods=['GET'])
@@ -193,14 +246,22 @@ def mobile_show_playlist():
 def mobile_radio_play(id):
 
     radio = Radios.query.filter_by(id=id).first()
-    radio.num_plays = radio.num_plays + 1
-    db.session.commit()
+    preset_id = radio.preset_number()
 
-    radio_player.playradio(radio)
-    
     session['last_url'] = url_for('mobile.mobile_player')
+
+    if radio_player.server_type == 'CXN':
+        if preset_id > 0:
+            radio_player.cxn_play_preset(preset_id)
+            time.sleep(4)
+            radio_player.update_server_status()
+
+            return render_template('mobile_cxn_player.html',radio_player=radio_player, radio=radio)
+    else:
+        radio_player.playradio(radio)
+        return render_template('mobile_player.html',radio_player=radio_player)
     
-    return render_template('mobile_player.html',radio_player=radio_player)
+    
 
 # ---> Stop
 
@@ -317,14 +378,13 @@ def mobile_config_outputs():
     return render_template('mobile_config_outputs.html',radio_player=radio_player)
 
 
-# ---> MPD Client
-
-@mobile.route('/mobile/mpd_client/<hostname>', methods=['GET'])
-def mobile_mpd_client(hostname):
-
-    radio_player.connect(hostname)
+# ---> Select Server
+@mobile.route('/mobile/server/select/<hostname>', methods=['GET'])
+def mobile_server_select(hostname):
+    radio_player.select_server(hostname)
 
     return redirect(url_for('mobile.mobile_config_server'))
+
 
 
 # ---> Toggle Output
