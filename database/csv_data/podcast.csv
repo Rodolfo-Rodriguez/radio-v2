@@ -1,10 +1,10 @@
 1|La Mesa de los Galanes|LaMesa.png|LaMesa|Uruguay|Humor y actualidad con la participación de Jorge Piñeyrúa, Rafael Cotelo, Pablo Fabregat, Diego González, Pablo Aguirrezábal, Camilo Fernández y Gastón Carbajal.|Del Sol|5|https://delsol.uy//feed/lamesa||/Podcasts/DelSol/LaMesa|Del Sol|1|True|True
-2|De Arriba Un Rayo|DeArriba.png|DeArriba|Uruguay|De Arriba un Rayo. Un programa de Juguete.|Oceano|5|https://www.oceano.uy/api/podcast.php|DeArribaunRayo|/Podcasts/Oceano/DeArriba|Oceano|2|False|True
+2|De Arriba Un Rayo|dearriba.jpg|DeArriba|Uruguay|De Arriba un Rayo. Un programa de Juguete.|Oceano|5|http://picluster-3:8080/static/feeds/dearriba.rss||/Podcasts/Oceano/DeArriba|Oceano|2|False|True
 3|Darwin|Darwin.png|Darwin|Uruguay|Dawrin Desbocati|Del Sol|4|https://delsol.uy//feed/darwin||/Podcasts/DelSol/Darwin|Del Sol|1|False|True
-4|Justicia Infinita|Justicia.png|Justicia|Uruguay|Justicia Infinita|Oceano|5|https://www.oceano.uy/api/podcast.php|JusticiaInfinita|/Podcasts/Oceano/Justicia|Oceano|2|False|True
+4|Justicia Infinita|justicia.jpg|Justicia|Uruguay|Justicia Infinita|Oceano|5|http://picluster-3:8080/static/feeds/justicia.rss||/Podcasts/Oceano/Justicia|Oceano|2|False|True
 5|La Venganza|Venganza.png|Venganza|Argentina|Alejandro Dolina. Patricio Barton. El trio sin nombre. Gillespi. Medianoche por AM 750.|Del Sol|5|https://venganzasdelpasado.com.ar/posts.rss||/Podcasts/DelSol/Venganza|Del Sol|4|False|True
 6|Facil Desviarse|Facil.png|Facil|Uruguay|Facil Desviarse|Del Sol|5|https://delsol.uy//feed/facildesviarse||/Podcasts/DelSol/Facil|Del Sol|1|False|True
-7|Todo Pasa|Todo.png|Todo|Uruguay|Programa periodístico de Oceano FM con Mariano Lopez, Andres Reyes, Majo Borjes e Ines Pereira.|Oceano|5|https://www.oceano.uy/api/podcast.php|TodoPasa|/Podcasts/Oceano/Todo|Oceano|2|True|True
+7|Todo Pasa|todopasa.jpg|Todo|Uruguay|Programa periodístico de Oceano FM con Mariano Lopez, Andres Reyes, Majo Borjes e Ines Pereira.|Oceano|5|http://picluster-3:8080/static/feeds/todopasa.rss||/Podcasts/Oceano/Todo|Oceano|2|True|True
 8|Coffee Break|CoffeeBreak.png|CoffeeBreak|Spain|Coffee Break: Señal y Ruido es la tertulia semanal en la que, medio en broma medio en serio, repasamos las últimas noticias de la actualidad científica.|Ciencia|3|https://www.ivoox.com/coffee-break-senal-ruido_fg_f1172891_filtro_1.xml||/Podcasts/Ciencia/CoffeeBreak||3|False|False
 9|Astroblog|Astroblog.png|Astroblog|Chile|Astronomia y Algo Mas es un podcast de Astronomía creado por Ricardo Garcia.|Ciencia|3|http://www.astroblog.cl/feed/||/Podcasts/Ciencia/Astroblog||3|False|False
 10|Puro Mac|PuroMac.png|PuroMac|USA|Puromac es una conversación sobre todo el mundo de Apple entre dos viejos amigos, uno que originalmente era un fanático de Windows, y el otro que es un entusiasta de Apple de toda la vida.|Tecnologia|3|http://feeds.5by5.tv/puromac||/Podcasts/Tecnologia/PuroMac||1|False|False
@@ -16,7 +16,7 @@
 17|Tech News Weekly|TechNewsWeekly.png|TechNewsWeekly|USA|Tech News Weekly hosted by Jason Howell and Megan Morrone brings you interviews from tech journalists who make or break the top stories of the week.|Tecnologia|3|http://feeds.twit.tv/tnw.xml||/Podcasts/Tecnologia/TechNewsWeekly||1|False|False
 18|Ask a Spaceman|AskASpaceman.png|AskASpaceman|USA|Ask a Spaceman - Paul M Sutter|Ciencia|3|https://askaspaceman.libsyn.com/rss||/Podcasts/Ciencia/AskASpaceman||3|False|False
 19|La Brujula de la Ciencia|LaBrujula.png|LaBrujula|Spain|La Brujula de la Ciencia|Ciencia|3|https://www.ivoox.com/brujula-ciencia_fg_f1171949_filtro_1.xml||/Podcasts/Ciencia/LaBrujula||3|False|False
-20|DJ Frankie Vazquez|DJFrankieVazquez.png|DJFrankieVazquez|USA|DJ Frankie Vazquez brings you Full Mixes of EDM / Trance / House Music / Reggaeton / Freestyle / Hip Hop / and more.|Electronic|2|http://djfrankievazquez.podbean.com/feed.xml||/Podcasts/Electronic/DJFrankieVazquez||2|False|False
+20|DJ Frankie Vazquez|DJFrankieVazquez.png|DJFrankieVazquez|USA|DJ Frankie Vazquez brings you Full Mixes of EDM / Trance / House Music / Reggaeton / Freestyle / Hip Hop / and more.|Electronic|2|https://feed.podbean.com/djfrankievazquez/feed.xml||/Podcasts/Electronic/DJFrankieVazquez||2|False|False
 21|No Toquen Nada|NoToquenNada.png|NoToquenNada|Uruguay|No Toquen Nada|Del Sol|5|https://delsol.uy//feed/notoquennada||/Podcasts/DelSol/NoToquenNada|Del Sol|1|False|True
 22|This Week in Tech|TWIT.png|TWIT|USA|Hosted by Leo Laporte Your first podcast of the week is the last word in tech. Join the top tech pundits in a roundtable discussion of the latest trends in high tech|Tecnologia|3|http://feeds.twit.tv/twit.xml||/Podcasts/Tecnologia/TWIT|TWIT|1|False|False
 23|Talk Python To Me|TalkPython.png|TalkPython|USA|A podcast on Python and related technologies|Program|3|https://talkpython.fm/episodes/rss||/Podcasts/Program/TalkPython||2|False|False
@@ -28,16 +28,20 @@
 29|El Chiringuito de Jugones|Chiringuito.png|Chiringuito|Spain|Tertulia futbolistica de Mega|Sports|2|https://www.ivoox.com/chiringuito-jugones_fg_f1617621_filtro_1.xml||/Podcasts/Deportes/Chiringuito||1|False|True
 30|Appsmac en 8 minutos|AppsMac.png|AppsMac|Spain|Aplicaciones para iPhone, iPad o Mac y experiencias de un usuario de OS X en movilidad.|Tecnologia|3|http://feedpress.me/A8M||/Podcasts/Tecnologia/AppsMac|Av Podcast|1|False|False
 31|Daniel and Jorge|DanielAndJorge.png|DanielAndJorge|USA|A fun-filled discussion of the big, mind-blowing, unanswered questions about the Universe. Daniel Whiteson (a Physicist who works at CERN) and Jorge Cham (a popular online cartoonist).|Ciencia|3|https://feeds.megaphone.fm/danielandjorgeexplaintheuniverse||/Podcasts/Ciencia/DanielAndJorge||3|False|True
-32|Coqueto Escenario|CoquetoEscenario.png|CoquetoEscenario|Uruguay|Periodista deportivo nacido en 1931. En Uruguay. Menos proceso y más pierna fuerte.|Oceano|4|https://www.oceano.uy/api/podcast.php|oquetoescenario,dusto|/Podcasts/Oceano/Coqueto|Oceano|2|False|True
+32|Coqueto Escenario|CoquetoEscenario.png|CoquetoEscenario|Uruguay|Periodista deportivo nacido en 1931. En Uruguay. Menos proceso y más pierna fuerte.|Oceano|4|http://picluster-3:8080/static/feeds/luboadusto.rss|oquetoescenario,dusto|/Podcasts/Oceano/Coqueto|Oceano|2|False|True
 33|Gustaff|Gustaf.png|Gustaf|Uruguay|El Humor Salvara el Mundo. Gustaff en Todo Pasa|Oceano|1|https://www.oceano.uy/api/podcast.php|Seba,Adonis,Planchon,Negativo|/Podcasts/Oceano/Gustaf|Oceano|1|False|True
 34|Oceano|Oceano.png|Oceano|Uruguay|Oceano|Oceano|5|https://www.oceano.uy/api/podcast.php||/Podcasts/Oceano/Oceano|Oceano|2|False|True
-35|13 a 0|13a0.png|13a0|Uruguay||Sports|1|https://delsol.uy//feed/13a0||/Podcasts/DelSol/13a0|Del Sol|1|False|True
-36|Ernesto|Ernesto.png|Ernesto|Uruguay|Ernesto el Robot|Oceano|4|https://www.oceano.uy/api/podcast.php|ernesto|/Podcasts/Oceano/Ernesto|Oceano|2|False|False
-37|Oceano Sports Radio|OSR.jpg|OceanoSportsRadio|Uruguay||Oceano|4|https://www.oceano.uy/api/podcast.php|OSR|/Podcasts/Oceano/OceanoSportsRadio|Oceano|2|False|True
-38|Abrepalabra|Abrepalabra.jpg|Abrepalabra|Uruguay||Oceano|5|https://www.oceano.uy/api/podcast.php|Abrepalabra|/Podcasts/Oceano/Abrepalabra||2|False|True
+35|13a0|13a0.png|13a0|Uruguay||Sports|5|http://picluster-3:8080/static/feeds/13a0.rss||/Podcasts/DelSol/13a0|Del Sol|2|False|True
+36|Ernesto|Ernesto.png|Ernesto|Uruguay|Ernesto el Robot|Oceano|4|http://picluster-3:8080/static/feeds/ernesto.rss||/Podcasts/Oceano/Ernesto|Oceano|2|False|True
+37|Oceano Sports Radio|OSR.jpg|OceanoSportsRadio|Uruguay||Oceano|4|http://picluster-3:8080/static/feeds/osr.rss||/Podcasts/Oceano/OSR|Oceano|2|False|True
+38|Abrepalabra|abrepalabra.jpg|Abrepalabra|Uruguay||Oceano|5|http://picluster-3:8080/static/feeds/abrepalabras.rss||/Podcasts/Oceano/Abrepalabra||2|False|True
 39|Cerca de la Revolución|Cerca.jpg|Cerca|Argentina||Music|2|https://feeds.podcastmirror.com/cerca-de-la-revolucion||/Podcasts/Music/Cerca||2|False|False
-40|Otro Elefante|otroelefante.png|OtroElefante|Uruguay||Espectador|5|http://picluster-3:8080/static/feeds/fake.rss||/Podcasts/Espectador/OtroElefante|Espectador|3|False|False
-41|Bien Igual|bienigual.png|BienIgual|Uruguay||Espectador|5|http://picluster-3:8080/static/feeds/fake.rss||/Podcasts/Espectador/BienIgual|Espectador|3|False|False
+40|Otro Elefante|otroelefante.png|OtroElefante|Uruguay|Otro Elefante en El Espectador|Espectador|5|http://picluster-3:8080/static/feeds/otroelefante.rss||/Podcasts/Espectador/OtroElefante|Espectador|3|False|True
+41|Bien Igual|bienigual.png|BienIgual|Uruguay||Espectador|5|http://picluster-3:8080/static/feeds/bienigual.rss||/Podcasts/Espectador/BienIgual|Espectador|3|False|True
 42|El Primer Palo|primerpalo.png|PrimerPalo|Spain||Sports|2|https://esradio.libertaddigital.com/el-primer-palo/podcast.xml||/Podcasts/Deportes/PrimerPalo|Espectador|1|False|False
-43|Sergio Pena|SergioPena.png|SergioPena|Uruguay||Espectador|4|http://picluster-3:8080/static/feeds/fake.rss||/Podcasts/Espectador/SergioPena||3|False|False
-44|Dobrich|Dobrich.jpg|Dobrich|Uruguay||Espectador|4|http://picluster-3:8080/static/feeds/fake.rss||/Podcasts/Espectador/Dobrich||3|False|False
+43|Sergio Pena|SergioPena.png|SergioPena|Uruguay||Espectador|4|http://picluster-3:8080/static/feeds/sergiopena.rss||/Podcasts/Espectador/SergioPena||3|False|True
+44|Dobrich|dobrich.jpg|Dobrich|Uruguay|Columna de Miguel Angel Dobrich en Otro Elefante|Espectador|4|http://picluster-3:8080/static/feeds/dobrich.rss||/Podcasts/Espectador/Dobrich||3|False|True
+45|Master|Master.png|Master|Uruguay|Master Feed for all files|Master|5|http://picluster-3:8080/static/feeds/master.rss||/Podcasts/Master||0|False|True
+46|Radio Ambulante|RadioAmbulante.png|RadioAmbulante|USA|Radio Ambulante|Periodismo|1|http://feeds-origin.podtrac.com/SWY1x6vXZVFJ||/Podcasts/Varios/RadioAmbulante|NPR|1|False|False
+47|Tasa de Embarque|TasaDeEmarque.png|TasaDeEmarque|Uruguay||Del Sol|4|http://picluster-3:8080/static/feeds/tasadeembarque.rss||/Podcasts/DelSol/TasaDeEmarque|Del Sol|1|False|True
+48|Maxi Guerra|MaxiGuerra.png|MaxiGuerra|Uruguay|Columna de Maxi Guerra en Otro Elefante|Espectador|4|http://picluster-3:8080/static/feeds/maxiguerra.rss||/Podcasts/Espectador/MaxiGuerra|Espectador|3|False|True

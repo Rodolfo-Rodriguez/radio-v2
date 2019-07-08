@@ -6,74 +6,119 @@
 
 <div class="row">
 
+<!--   Player Colum.  -->
+
 <div class="col-player">
-<!--   <div class="bs-component"> -->
 
     <div class="card text-white bg-dark mb-3">
 
-      <h5 class="card-header"><a href="/podcast/show/{{podcast.id}}">{{podcast.name}}</a></h5>
+      <h5 class="card-header">
+          <div class="row">
+            <div class="header-text">{{podcast.name}}</div>
+            <div class="header-icon"><a href="/podcast/edit/{{podcast.id}}"><i class="fas fa-edit"></i></a></div>
+          </div>
+      </h5>
+
+        <div class="card-body">
+          <p class="card-text">{{podcast.description}}</p>
+        </div>
 
        <div class="card-body" style ="padding: 5px;">
          <div class="thumb-container">
-           <a href="/podcast/show/{{podcast.id}}"><img src="/static/images/playlists/{{podcast.image}}" class="thumb-image"></a>
+             <img src="/static/images/playlists/{{podcast.image}}" class="thumb-image">
+             <div class="thumb-overlay">
+
+               <div class="thumb-overlay-fav">
+                 {% if podcast.fav %}
+                    <a href="{{url_for('podcast.podcast_unfav',id=podcast.id)}}"><i class="fas fa-star"></i></a>           
+                 {% else %}
+                    <a href="{{url_for('podcast.podcast_fav',id=podcast.id)}}"><i class="far fa-star"></i></a>            
+                 {% endif %}
+               </div>
+
+               <div class="thumb-overlay-bookmark">
+                  <a href="{{url_for('podcast.podcast_bookmark',id=podcast.id)}}"><i class="fas fa-bookmark"></i></a>          
+               </div>
+
+             </div>
          </div>
        </div>
 
       <div class="card-body">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item text-center"><a href="/podcast/feed/update/{{podcast.id}}" class="card-link"><strong>Refresh Feed</strong></a></li>
-        </ul>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item text-center"><a href="/podcast/feed/upload_to_server/{{podcast.id}}" class="card-link"><strong>Upload to Server</strong></a></li>
+           {% if podcast.stars %}
+           <li class="list-group-item text-center" style="font-size: 1.5rem;">
+           {% for star in range(0,podcast.stars) %}
+             <a href="/podcast/stars/{{podcast.id}}/{{star + 1}}"><i class="fas fa-star"></i></a>
+           {% endfor %}
+           {% for star in range(podcast.stars,5) %}
+             <a href="/podcast/stars/{{podcast.id}}/{{star + 1}}"><i class="far fa-star"></i></a>
+           {% endfor %}
+           </li>
+           {% endif %}
+
+           <li class="list-group-item text-center"><a class="card-link" href="/podcast/country/{{podcast.country}}"> <img src="/static/images/flags/{{podcast.country}}-24.png"></a></li>
+           <li class="list-group-item text-center"><a href="/podcast/style/{{podcast.style}}" class="card-link"><strong>{{podcast.style}}</strong></a></li>
         </ul>
       </div>
 
     </div>
 </div>
 
-<!--   </div> -->
 
-<div class="col-grid">
+<!--   Central Colum.  -->
+
+
+<div class="col-info">
 
   <div class="bs-component">
     <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
-      <h5 class="card-header">Episodes in the Feed</h5>
+      <h5 class="card-header">
+          <div class="row">
+            <div class="header-text">Episodes in the Feed</div>
+            <div class="sync-icon"><a href="/podcast/feed/update/{{podcast.id}}"><i class="fas fa-sync-alt"></i></a></div>
+            <div class="header-icon"><a href="/podcast/episode/list/{{podcast.id}}"><i class="fas fa-list-ul"></i></a></div>
+            <div class="header-icon"><a href="/podcast/show/{{podcast.id}}"><i class="fas fa-podcast"></i></a></div>
+          </div>      
+      </h5>
+      
       <div class="card-body"> 
 
         <ul class="list-group list-group-flush">
           {% for episode in episodes_list %}
-
+            {% if podcast.url_is_in_db(episode['url']) %}
              <li class="list-group-item">
                <div class="episode-list-col">
                   
-                  {% if episode['downloaded'] == 'No' %}
-
-                    <div class="episode-icon"><a href="/podcast/play_track/{{podcast.id}}/{{episode['track']}}"><i class="far fa-play-circle fa-lg"></i></a></div>
-                    <div class="episode-date">{{episode['pubdate']}}</div>
-                    <div class="episode-title">{{episode['title']}}</div>
-                    <div class="episode-desc">{{episode['description']}}</div>
-                    <div class="episode-length">{{episode['length']}}</div>
-                    <div class="episode-icon"><a href="/podcast/download/episode/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-download"></i></a></div>
-                    <div class="episode-icon"><a href="{{episode['url']}}"><i class="fas fa-link"></i></a></div>
-                    <div class="episode-icon"><a href="/podcast/add_to_preset20/{{podcast.id}}/{{episode['track']}}">P20</a></div>
-                    <div class="episode-icon"><a href="/podcast/list_to_move/episode/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-share"></i></a></div>
-                  
-                  {% else %}
-
-                    <div class="episode-icon text-playing"><a href="/podcast/play_track/{{podcast.id}}/{{episode['track']}}"><i class="far fa-play-circle fa-lg"></i></a></div>
-                    <div class="episode-date-down">{{episode['pubdate']}}</div>
-                    <div class="episode-title-down">{{episode['title']}}</div>
-                    <div class="episode-desc-down">{{episode['description']}}</div>
-                    <div class="episode-length-down">{{episode['length']}}</div>
-                    <div class="episode-icon"></div>
-                    <div class="episode-icon"><a href="{{episode['url']}}"><i class="fas fa-link"></i></a></div>
-                    <div class="episode-icon"><a href="/podcast/add_to_preset20/{{podcast.id}}/{{episode['track']}}">P20</a></div>
-                      <div class="episode-icon"><a href="/podcast/list_to_move/episode/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-share"></i></a></div>
-                  
-                  {% endif %}
-               
+                  <div class="episode-icon text-down"><a href="/podcast/play_track/{{podcast.id}}/{{episode['track']}}"><i class="far fa-play-circle fa-lg"></i></a></div>
+                  <div class="episode-date text-down">{{episode['pubdate']}}</div>
+                  <div class="episode-title text-down">{{episode['title']}}</div>
+                  <div class="episode-desc text-down">{{episode['description']}}</div>
+                  <div class="episode-length text-down">{{episode['length']}}</div>
+                  <div class="episode-icon text-down"><a href="{{episode['url']}}"><i class="fas fa-link"></i></a></div>
+                  <div class="episode-icon text-down"></div>
+                  <div class="episode-icon text-down"><a href="/podcast/add_to_preset20/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-th-large "></i></a></div>
+                  <div class="episode-icon text-down"><a href="/podcast/list_to_move/episode/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-copy"></i></a></div>
+                                 
                </div>
              </li>
+             {% else %}
+             <li class="list-group-item">
+               <div class="episode-list-col">
+                  
+                  <div class="episode-icon"><a href="/podcast/play_track/{{podcast.id}}/{{episode['track']}}"><i class="far fa-play-circle fa-lg"></i></a></div>
+                  <div class="episode-date">{{episode['pubdate']}}</div>
+                  <div class="episode-title">{{episode['title']}}</div>
+                  <div class="episode-desc">{{episode['description']}}</div>
+                  <div class="episode-length">{{episode['length']}}</div>
+                  <div class="episode-icon"><a href="{{episode['url']}}"><i class="fas fa-link"></i></a></div>
+                  <div class="episode-icon"><a href="/podcast/episode/add_to_db/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-plus "></i></a></div>
+                  <div class="episode-icon"><a href="/podcast/add_to_preset20/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-th-large "></i></a></div>
+                  <div class="episode-icon"><a href="/podcast/list_to_move/episode/{{podcast.id}}/{{episode['track']}}"><i class="fas fa-copy"></i></a></div>
+                                 
+               </div>
+             </li>
+             {% endif %}
 
           {% endfor %}
 
@@ -81,16 +126,56 @@
 
     </div>
 
-    <div class="card-footer">
-      <p class="card-text text-right">
-        <a class="card-link" href="/podcast/import_from_url/{{podcast.id}}">Import URL</a>
-        <a class="card-link" href="/podcast/add_to_feed/{{podcast.id}}">Add Episode</a>
-      </p>
-    </div>
-
    </div>
   </div>
 </div>
+
+
+<!--   Links Colum.  -->
+
+
+  <div class="col-links">
+
+    <div class="bs-component">
+      <div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+        
+        <h5 class="card-header">
+          <div class="row">
+            {% for link in podcast.podcast_link_list %}
+              {% if link.name in social_sites %}
+                <div class="social-icon">
+                  <a target="blank" href="{{link.url}}" class="card-link" style="font-size: 1.5rem;"><i class="fab fa-{{link.name}} "></i></a>
+                </div>
+              {% endif %}
+            {% endfor %}
+            <div class="header-text"></div>
+            <div class="header-icon"><a href="/podcast/add_link/{{podcast.id}}"><i class="fas fa-plus"></i></a></div>
+          </div>
+        </h5>
+
+        <div class="card-body">
+
+          <ul class="list-group list-group-flush">
+                
+                {% for link in podcast.podcast_link_list %}
+                  {% if not(link.name in social_sites) %}
+                   <li class="list-group-item">
+                    <div class="episode-list-col">
+                      <div class="song-text"><a target="blank" href="{{link.url}}" class="card-link">{{link.name}}</a></div>
+                      <div class="song-tag"><a href="/podcast/edit_link/{{link.id}}"><i class="fas fa-edit"></i></a></div>
+                      <div class="song-tag"><a href="/podcast/delete_link/{{link.id}}"><i class="fas fa-trash-alt"></i></a></div>
+                    </div>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+
+          </ul>
+
+        </div>
+
+     </div>
+    </div>
+  </div>
 
 </div>
 
@@ -103,9 +188,9 @@
 
   <script>
 
-      $('.episode-icon').click(function(){
+      $('.sync-icon').click(function(){
         icon = $(this).find("i");
-        icon.toggleClass("fas fa-download fas fa-spinner fa-spin episode-down-icon");
+        icon.toggleClass("fas fa-sync-alt fas fa-spinner fa-spin episode-down-icon");
       })
 
   </script>

@@ -4,7 +4,7 @@ import time
 from mpd import MPDClient
 from cxn_client import CXNClient
 
-from .models import Radios,Program,Artist,Playlist,Podcast, Bookmark, Preset
+from .models import Radios,Program,Artist,Playlist,Podcast, Bookmark, Preset, Episode
 from .program_info import ProgramsInfo
 from . import CONFIG
 
@@ -37,6 +37,7 @@ class RadioPlayer:
   playlist = None
   artist = None
   podcast = None
+  episode = None
 
   def __init__(self):
     self.state = 'stop'
@@ -102,18 +103,20 @@ class RadioPlayer:
       file = self.server_currentsong('file')
       
       if CONFIG.BASE_URI in file:
-        if self.podcast != None:
-          self.loaded = 'podcast'
-          self.player_img = os.path.join(CONFIG.FLASK_IMG_DIR, 'playlists', self.podcast.image)
+        if self.episode != None:
+          self._set_loaded('episode', self.episode)
         else:
           self.loaded = 'none'
           self.player_img = '{}/radios/empty.png'.format(CONFIG.FLASK_IMG_DIR)
       else:
-        if self.radio == None:
-          self._update_radio_playing()
-
-        self.loaded = 'radio'
-        self.player_img = os.path.join(CONFIG.FLASK_IMG_DIR, 'radios', self.radio.image)
+        self._update_radio_playing()
+        if self.radio != None:
+          self._set_loaded('radio', self.radio)
+        else:
+          if self.episode != None:
+            self._set_loaded('episode-url', self.episode)
+          else:
+            self._set_loaded('podcast-url', self.podcast)
 
     self.update_bookmarks()
 
@@ -150,6 +153,67 @@ class RadioPlayer:
       power_state = 'Unknown'
 
     return power_state
+
+
+  def _set_loaded(self, loaded, loaded_obj, state='play'):
+
+    if loaded == 'radio':
+      self.loaded = 'radio'
+      self.state = state
+      self.radio = loaded_obj
+      self.playlist = None
+      self.artist = None
+      self.podcast = None
+      self.episode = None
+      self.player_img = os.path.join(CONFIG.FLASK_IMG_DIR, 'radios', self.radio.image)
+    
+    elif loaded == 'playlist':
+      self.loaded = 'playlist'
+      self.state = state
+      self.radio = None
+      self.playlist = loaded_obj
+      self.artist = None
+      self.podcast = None
+      self.episode = None
+
+    elif loaded == 'artist':
+      self.loaded = 'artist'
+      self.state = state
+      self.radio = None
+      self.playlist = None
+      self.artist = loaded_obj
+      self.podcast = None
+      self.episode = None
+
+    elif loaded == 'podcast-url':
+      self.loaded = 'podcast-url'
+      self.state = state
+      self.radio = None
+      self.playlist = None
+      self.artist = None
+      self.podcast = loaded_obj
+      self.episode = None
+      self.player_img = os.path.join(CONFIG.FLASK_IMG_DIR, 'playlists', self.podcast.image)
+
+    elif loaded == 'episode':
+      self.loaded = 'episode'
+      self.state = state
+      self.radio = None
+      self.playlist = None
+      self.artist = None
+      self.podcast = None
+      self.episode = loaded_obj
+      self.player_img = os.path.join(CONFIG.FLASK_IMG_DIR, 'playlists', self.episode.podcast.image)
+
+    elif loaded == 'episode-url':
+      self.loaded = 'episode'
+      self.state = state
+      self.radio = None
+      self.playlist = None
+      self.artist = None
+      self.podcast = None
+      self.episode = loaded_obj
+      self.player_img = os.path.join(CONFIG.FLASK_IMG_DIR, 'playlists', self.episode.podcast.image)
 
 ################################################################################################################################################################
 # Player Control
@@ -670,10 +734,32 @@ class RadioPlayer:
       self.mpd_client.play(0)
       self.server_disconnect()
 
-      self.loaded = 'podcast-url'
-      self.state = 'play'
-      self.podcast = podcast
-      self.player_img = '/static/images/playlists/' + podcast.image
+      self._set_loaded('podcast-url', podcast)
+
+  def play_episode_file(self, episode):
+
+    url = CONFIG.BASE_URI + episode.podcast.pod_dir + '/' + episode.local_file
+
+    if (self.server_type == 'MPD'):
+      self.server_connect()
+      self.mpd_client.clear()
+      self.mpd_client.add(url)
+      self.mpd_client.play(0)
+      self.server_disconnect()
+
+      self._set_loaded('episode', episode)
+
+  def play_episode_url(self, episode):
+
+    url = episode.url
+    if (self.server_type == 'MPD'):
+      self.server_connect()
+      self.mpd_client.clear()
+      self.mpd_client.add(url)
+      self.mpd_client.play(0)
+      self.server_disconnect()
+
+      self._set_loaded('episode-url', episode)
 
   def outputs(self):
     output_list = []

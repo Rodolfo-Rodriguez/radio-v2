@@ -93,6 +93,10 @@ class PodcastEpisodeForm(FlaskForm):
     title = StringField('Title')
     url = StringField('URL', validators=[DataRequired()])
     date = StringField('Date')
+    description = StringField('Description')
+    audio_size = StringField('Audio Size')
+    downloaded = BooleanField('File Downloaded')
+    local_file = StringField('Local File')
     submit = SubmitField('Submit')
 
 class TagForm(FlaskForm):

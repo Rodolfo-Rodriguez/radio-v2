@@ -29,6 +29,7 @@
         <th>Country</th>
         <th>Style</th>
         <th>Move</th>
+        <th>Move</th>
       </tr>
     </thead>
     <tbody>
@@ -38,7 +39,8 @@
           <td><a href="{{ url_for('podcast.podcast_show',id=podcast.id) }}">{{podcast.name}}</a></td>
           <td>{{podcast.country}}</td>
           <td>{{podcast.style}}</td>
-          <td><a href="{{ url_for('podcast.podcast_move_episode',src_id=src_id,track=track,dst_id=podcast.id) }}">Move</a></td>
+          <td><a href="{{ url_for('podcast.podcast_move_episode',src_id=src_id,track=track,dst_id=podcast.id) }}">To Feed</a></td>
+          <td><a href="{{ url_for('podcast.podcast_episode_copy',src_id=src_id,track=track,dst_id=podcast.id) }}">To DB</a></td>
         </tr>
       {% endfor %}
     </tbody>

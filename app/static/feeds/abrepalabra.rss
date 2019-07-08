@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Abrepalabra</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/abrepalabras</url>
+        <title>Abrepalabra</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description></description>
+    <pubDate>"Tue 02 Jul 2019 19:13:51"</pubDate>
+
+	<item>
+		<title>Abrepalabra 02/07/19</title>
+		<pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
+		<description>Programa completo emitido el día dos de julio de 2019.</description>
+		<enclosure url="http://audios.oceanofm.com/programas/Abrepalabra/19-07-02completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/Abrepalabra/19-07-02completo.mp3</guid>
+	</item>
+
+	<item>
+		<title>Abrepalabra 01/07/19</title>
+		<pubDate>Mon, 01 Jul 2019 00:00:00 +0000</pubDate>
+		<description>Programa completo emitido el día primero de julio de 2019.</description>
+		<enclosure url="http://audios.oceanofm.com/programas/Abrepalabra/19-07-01completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/Abrepalabra/19-07-01completo.mp3</guid>
+	</item>
+
+	<item>
+		<title>Seriados: Dark</title>
+		<pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate>
+		<description>None</description>
+		<enclosure url="http://audios.oceanofm.com/programas/Abrepalabra/19-06-27seriados-AudioTrimmer.com.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/Abrepalabra/19-06-27seriados-AudioTrimmer.com.mp3</guid>
+	</item>
+
+</channel></rss>

@@ -1,83 +1,134 @@
-<rss><channel>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Ernesto</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/ernesto</url>
+        <title>Ernesto</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description>Ernesto el Robot</description>
+    <pubDate>"Fri, 05 Jul 2019 14:27:37"</pubDate>
 
 	<item>
-		<title>La encuesta de ErnABELARDO</title>
-		<pubDate>Day, 24 Jun 2019 12:00:00</pubDate>
+		<title>Ernesto y los pectorales ciclópeos de Abril</title>
+		<pubDate>Tue, 08 May 2018 12:00:00</pubDate>
 		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-24ernesto.mp3" length="12130328" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-24ernesto.mp3</guid>
-	</item>
-
-	<item>
-		<title>Ernesto el portero</title>
-		<pubDate>Day, 2 Apr 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-04-02ernesto.mp3" length="6800930" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-04-02ernesto.mp3</guid>
-	</item>
-
-	<item>
-		<title>Ernesto el bello</title>
-		<pubDate>Day, 11 Dic 2018 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/18-12-11ernestoelbello.mp3" length="10671650" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/18-12-11ernestoelbello.mp3</guid>
-	</item>
-
-	<item>
-		<title>Ernesto hace la cola</title>
-		<pubDate>Day, 13 Nov 2018 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-11-13ernestohacelacola.mp3" length="9256336" type="audio/mpeg"/>
-		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-11-13ernestohacelacola.mp3</guid>
-	</item>
-
-	<item>
-		<title>Ernesto y la ropa interior de Majo</title>
-		<pubDate>Day, 30 Oct 2018 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-30ernesto.mp3" length="10873838" type="audio/mpeg"/>
-		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-30ernesto.mp3</guid>
-	</item>
-
-	<item>
-		<title>Ernesto el grande</title>
-		<pubDate>Day, 23 Oct 2018 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-23ernesto.mp3" length="8038507" type="audio/mpeg"/>
-		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-23ernesto.mp3</guid>
-	</item>
-
-	<item>
-		<title>Ernesto es inocente</title>
-		<pubDate>Day, 16 Oct 2018 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-16ernestoypepperadeclarar.mp3" length="10156306" type="audio/mpeg"/>
-		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-16ernestoypepperadeclarar.mp3</guid>
-	</item>
-
-	<item>
-		<title>Se mamó Ernesto</title>
-		<pubDate>Day, 4 Oct 2018 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-04ernesto.mp3" length="6397808" type="audio/mpeg"/>
-		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-04ernesto.mp3</guid>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-05-08ernesto.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-05-08ernesto.mp3</guid>
 	</item>
 
 	<item>
 		<title>Ernesto y el malvón de Majo</title>
-		<pubDate>Day, 18 Sep 2018 12:00:00</pubDate>
+		<pubDate>Tue, 18 Sep 2018 12:00:00</pubDate>
 		<description></description>
-		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-09-18ernesto.mp3" length="10742285" type="audio/mpeg"/>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-09-18ernesto.mp3" length="0" type="audio/mpeg"/>
 		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-09-18ernesto.mp3</guid>
 	</item>
 
 	<item>
-		<title>Ernesto y los pectorales ciclópeos de Abril</title>
-		<pubDate>Day, 8 May 2018 12:00:00</pubDate>
+		<title>Se mamó Ernesto</title>
+		<pubDate>Thu, 04 Oct 2018 12:00:00</pubDate>
 		<description></description>
-		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-05-08ernesto.mp3" length="18507131" type="audio/mpeg"/>
-		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-05-08ernesto.mp3</guid>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-04ernesto.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-04ernesto.mp3</guid>
+	</item>
+
+	<item>
+		<title>Ernesto es inocente</title>
+		<pubDate>Tue, 16 Oct 2018 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-16ernestoypepperadeclarar.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-16ernestoypepperadeclarar.mp3</guid>
+	</item>
+
+	<item>
+		<title>Ernesto el grande</title>
+		<pubDate>Tue, 23 Oct 2018 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-23ernesto.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-23ernesto.mp3</guid>
+	</item>
+
+	<item>
+		<title>Ernesto y la ropa interior de Majo</title>
+		<pubDate>Tue, 30 Oct 2018 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-30ernesto.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-10-30ernesto.mp3</guid>
+	</item>
+
+	<item>
+		<title>Ernesto hace la cola</title>
+		<pubDate>Tue, 13 Nov 2018 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/18-11-13ernestohacelacola.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/18-11-13ernestohacelacola.mp3</guid>
+	</item>
+
+	<item>
+		<title>Ernesto el bello</title>
+		<pubDate>Tue, 11 Dec 2018 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/18-12-11ernestoelbello.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/18-12-11ernestoelbello.mp3</guid>
+	</item>
+
+	<item>
+		<title>Ernesto el portero</title>
+		<pubDate>Tue, 02 Apr 2019 12:00:00</pubDate>
+		<description>La invasión entró en receso y el robot que vino a "estudiar" nuestro mundo se embarcó en un nuevo divertimento que lidia entre el chusmerío y el espionaje.</description>
+		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-04-02ernesto.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-04-02ernesto.mp3</guid>
+	</item>
+
+	<item>
+		<title>La encuesta de ErnABELARDO</title>
+		<pubDate>Mon, 24 Jun 2019 12:00:00</pubDate>
+		<description>Con toda la maquinaria forzada, el encuestador que vino a interrogar nuestro mundo llamó a los rayitos con una sospechosa batería de preguntas.</description>
+		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-24ernesto.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-24ernesto.mp3</guid>
+	</item>
+
+	<item>
+		<title>Ernesto el votante</title>
+		<pubDate>Mon, 01 Jul 2019 12:00:00</pubDate>
+		<description>El Robot que vino a estudiar nuestro mundo quiso conocer las mieles del sufragio, y se acercó a un circuito para vivir la experiencia como uno de nosotros.</description>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/19-07-01ernesto.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/19-07-01ernesto.mp3</guid>
+	</item>
+
+	<item>
+		<title>Ernesto el basquetbolista</title>
+		<pubDate>Thu, 06 Jun 2019 12:00:00</pubDate>
+		<description>Entre las finales de la NBA y de la Liga Uruguaya de la Liga Uruguaya de Básquetbol y el robot japonés que encesta como un campeón, teníamos que preguntar a Ernesto qué tal exprime la naranja.</description>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/19-06-06ernesto.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/19-06-06ernesto.mp3</guid>
+	</item>
+
+	<item>
+		<title>Ernesto: el robot de los 1000 gestos</title>
+		<pubDate>Tue, 01 Jan 2019 12:00:00</pubDate>
+		<description>La inexpresividad puede jugar una mala pasada a cualquier ser extraterrestre que intente convivir pasando desapercibido en nuestro planeta. Charlamos con Ernesto, un experto en la materia.</description>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/19-05-21ernesto.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/19-05-21ernesto.mp3</guid>
+	</item>
+
+	<item>
+		<title>Ernesto el enfermero</title>
+		<pubDate>Thu, 16 May 2019 12:00:00</pubDate>
+		<description>Un robot que ayuda a los ancianos no puede ser competencia para nuestro querido Ernesto, que puede dejar de lado la invasión (al menos por un rato) para dedicarse a que nadie le haga sobra.</description>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/19-05-16ernesto.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/19-05-16ernesto.mp3</guid>
+	</item>
+
+	<item>
+		<title>Ernesto el empleador</title>
+		<pubDate>Tue, 09 Apr 2019 12:00:00</pubDate>
+		<description>El robot que vino a estudiar nuestro planeta tiene un nuevo emprendimiento como reclutador de personal para la invas... para fines laborales no determinados.</description>
+		<enclosure url="https://audios.oceanofm.com/programas/DeArribaunRayo/19-04-09ernesto.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/DeArribaunRayo/19-04-09ernesto.mp3</guid>
 	</item>
 
 </channel></rss>

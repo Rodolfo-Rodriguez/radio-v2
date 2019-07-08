@@ -353,6 +353,14 @@
   color: lightgreen;
 }
 
+.fa-save:hover {
+  color: orange;
+}
+
+.fa-copy:hover {
+  color: orange;
+}
+
 .fa-twitter:hover {
   color: skyblue;
 }
@@ -424,52 +432,65 @@
   flex: 0 0 40px;
   color: lightgreen;
 }
-.episode-date{
-  text-align: left;
-  flex: 0 0 140px;
-}
-.episode-date-down{
-  text-align: left;
-  flex: 0 0 140px;
+
+.text-down{
   color: lightgreen;
 }
-.episode-title{
+.text-down a {
+  color: lightgreen;
+}
+
+.header-text{
   text-align: left;
-  padding-left: 15px;
   flex: 1 1 auto;
+  padding-left: 10px;
 }
-.episode-title-down{
-  text-align: left;
-  padding-left: 15px;
-  flex: 1 1 auto;
-  color: lightgreen;
-}
-.episode-desc{
-  text-align: left;
-  padding-left: 15px;
-  flex: 0 0 500px;
-}
-.episode-desc-down{
-  text-align: left;
-  padding-left: 15px;
-  flex: 0 0 500px;
-  color: lightgreen;
-}
-.episode-length{
-  text-align: center;
-  flex: 0 0 80px;
-}
-.episode-length-down{
-  text-align: center;
-  flex: 0 0 80px;
-  color: lightgreen;
-}
-.episode-icon{
+
+.header-icon{
   text-align: center;
   flex: 0 0 30px;
 }
+.create-feed-icon{
+  text-align: center;
+  flex: 0 0 30px;
+}
+.sync-icon{
+  text-align: center;
+  flex: 0 0 30px;
+}
+.social-icon{
+  text-align: center;
+  flex: 0 0 40px;
+  padding-left: 10px;
+}
 
-.episode-down-icon {
+.episode-date{
+  text-align: center;
+  flex: 0 0 80px;
+}
+.episode-title{
+  text-align: left;
+  padding-left: 10px;
+  flex: 0 0 170px;
+}
+.episode-desc{
+  text-align: left;
+  padding-left: 10px;
+  flex: 1 1 auto;
+}
+.episode-length{
+  text-align: center;
+  flex: 0 0 70px;
+}
+
+.episode-icon{
+  text-align: center;
+  flex: 0 0 25px;
+}
+
+.episode-down-icon{
+  text-align: center;
+  flex: 0 0 25px;
   color: orange;
 }
 

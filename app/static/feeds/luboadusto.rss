@@ -9,14 +9,38 @@
         <link>http://www.the2rods.com</link>
     </image>
     <description>Periodista deportivo nacido en 1931. En Uruguay. Menos proceso y más pierna fuerte.</description>
-    <pubDate>"Mon 01 Jul 2019 17:57:33"</pubDate>
+    <pubDate>"Fri, 05 Jul 2019 13:35:47"</pubDate>
+
+	<item>
+		<title>Adusto ante Peluffo</title>
+		<pubDate>Tue, 02 Jul 2019 12:00:00</pubDate>
+		<description>El viejo investigó a fondo al músico y lo puso contra las cuerdas, no de la viola, con un cuestionario perspicaz. Lacalle Pou o Talvi, Chile o Perú, Pando o París, "Coco" Conde o Jorge Seré, y más</description>
+		<enclosure url="https://audios.oceanofm.com/programas/TodoPasa/19-07-022amaanaCoquetoescenarioconGuillePelufo.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/TodoPasa/19-07-022amaanaCoquetoescenarioconGuillePelufo.mp3</guid>
+	</item>
 
 	<item>
 		<title>Volvió el viejo</title>
-		<pubDate>Mon, 01 Jul 2019 00:00:00 +0000</pubDate>
-		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/TodoPasa/19-07-012amaanaCoquetoescenario.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/TodoPasa/19-07-012amaanaCoquetoescenario.mp3</guid>
+		<pubDate>Mon, 01 Jul 2019 12:00:00</pubDate>
+		<description>Con mucha data, desparpajo y entusiasmo, Lubo Adusto retornó al estudio tras una lesión de sóleo que lo tuvo de licencia. Todo lo que dejaron las elecciones, noticias insólitas y la eliminación de Uruguay en América</description>
+		<enclosure url="https://audios.oceanofm.com/programas/TodoPasa/19-07-012amaanaCoquetoescenario.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://audios.oceanofm.com/programas/TodoPasa/19-07-012amaanaCoquetoescenario.mp3</guid>
+	</item>
+
+	<item>
+		<title>La fama es lo de menos</title>
+		<pubDate>Fri, 05 Jul 2019 00:00:00</pubDate>
+		<description>Lubo Adusto volvió recargado con la historia del "chinwenwencha", que trabaja en un merendero de Juan B Justo. El moment</description>
+		<enclosure url="http://audios.oceanofm.com/programas/TodoPasa/19-07-05segundamaanaadusto.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/TodoPasa/19-07-05segundamaanaadusto.mp3</guid>
+	</item>
+
+	<item>
+		<title>Tranquinal cero cinco</title>
+		<pubDate>Wed, 03 Jul 2019 00:00:00</pubDate>
+		<description>Lubo Adusto Freire estuvo atento a las repercusiones de la eliminación argentina de la Copa América y se detuvo en los d</description>
+		<enclosure url="http://audios.oceanofm.com/programas/TodoPasa/19-07-032amaanaCoquetoescenario.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/TodoPasa/19-07-032amaanaCoquetoescenario.mp3</guid>
 	</item>
 
 </channel></rss>

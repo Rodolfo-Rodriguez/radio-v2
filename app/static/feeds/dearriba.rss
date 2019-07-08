@@ -1,59 +1,46 @@
-<rss><channel>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>De Arriba Un Rayo</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/dearriba</url>
+        <title>De Arriba Un Rayo</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description>De Arriba un Rayo. Un programa de Juguete.</description>
+    <pubDate>"Fri, 05 Jul 2019 13:35:28"</pubDate>
 
 	<item>
-		<title>DDLE: ¡Es culpa del poio!</title>
-		<pubDate>Fri, 28 Jun 2019 00:00:00 +0000</pubDate>
+		<title>De Arriba Un Rayo 01/07/19</title>
+		<pubDate>Mon, 01 Jul 2019 00:00:00</pubDate>
 		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-28ddle.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-28ddle.mp3</guid>
+		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-07-01completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-07-01completo.mp3</guid>
 	</item>
 
 	<item>
-		<title>De Arriba Un Rayo 28/06/19</title>
-		<pubDate>Fri, 28 Jun 2019 00:00:00 +0000</pubDate>
+		<title>De Arriba Un Rayo 02/07/19</title>
+		<pubDate>Tue, 02 Jul 2019 00:00:00</pubDate>
 		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-28completo.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-28completo.mp3</guid>
+		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-07-02completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-07-02completo.mp3</guid>
 	</item>
 
 	<item>
-		<title>De Arriba Un Rayo 27/06/19</title>
-		<pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate>
+		<title>De Arriba Un Rayo 03/07/19</title>
+		<pubDate>Wed, 03 Jul 2019 00:00:00</pubDate>
 		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-27completo.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-27completo.mp3</guid>
+		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-07-03completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-07-03completo.mp3</guid>
 	</item>
 
 	<item>
-		<title>De Arriba Un Rayo 26/06/19</title>
-		<pubDate>Wed, 26 Jun 2019 00:00:00 +0000</pubDate>
+		<title>De Arriba Un Rayo 04/07/19</title>
+		<pubDate>Thu, 04 Jul 2019 00:00:00</pubDate>
 		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-26completo.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-26completo.mp3</guid>
-	</item>
-
-	<item>
-		<title>De Arriba Un Rayo 25/06/19</title>
-		<pubDate>Tue, 25 Jun 2019 00:00:00 +0000</pubDate>
-		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-25completo.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-25completo.mp3</guid>
-	</item>
-
-	<item>
-		<title>De Arriba Un Rayo 24/06/19</title>
-		<pubDate>Mon, 24 Jun 2019 00:00:00 +0000</pubDate>
-		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-24completo.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-24completo.mp3</guid>
-	</item>
-
-	<item>
-		<title>De Arriba Un Rayo 17/06/19</title>
-		<pubDate>Mon, 17 Jun 2019 00:00:00 +0000</pubDate>
-		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-17completo.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-06-17completo.mp3</guid>
+		<enclosure url="http://audios.oceanofm.com/programas/DeArribaunRayo/19-07-04completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/DeArribaunRayo/19-07-04completo.mp3</guid>
 	</item>
 
 </channel></rss>

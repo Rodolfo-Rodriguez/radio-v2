@@ -1,11 +1,11 @@
-1|RSS Feed|https://www.oceano.uy/api/podcast.php|7
+1|RSS Feed|http://feeds.the2rods.com/feed/todopasa|7
 2|Web|https://www.oceano.uy/todopasa|7
-3|RSS Feed|https://www.oceano.uy/api/podcast.php|2
+3|RSS Feed|http://feeds.the2rods.com/feed/dearriba|2
 4|Web|https://www.oceano.uy/dearribaunrayo|2
 5|twitter|https://twitter.com/todopasaoceano|7
 6|twitter|https://twitter.com/arribaunrayo|2
-7|RSS Feed|https://www.oceano.uy/api/podcast.php|4
-8|RSS Feed|https://www.oceano.uy/api/podcast.php|32
+7|RSS Feed|http://feeds.the2rods.com/feed/justicia|4
+8|RSS Feed|http://feeds.the2rods.com/feed/luboadusto|32
 9|RSS Feed|https://www.oceano.uy/api/podcast.php|33
 10|RSS Feed|https://www.oceano.uy/api/podcast.php|34
 11|Web|https://www.oceano.uy|34
@@ -112,7 +112,6 @@
 114|PHD Comics|http://phdcomics.com|31
 115|Web|https://www.oceano.uy/dearribaunrayo/77-ernesto|36
 116|RSS Feed|https://www.oceano.uy/api/podcast.php|36
-117|Coqueto Escenario|http://picluster-3:8080/podcast/show/32|7
 118|twitter|https://twitter.com/oceano_sports|37
 119|Web|https://www.oceano.uy/justiciainfinita/94-oceano-sports-radio|37
 120|twitter|https://twitter.com/abrepalabra|38
@@ -130,3 +129,27 @@
 132|twitter|https://twitter.com/eselprimerpalo|42
 133|Web|https://espectador.com/otroelefante/sergiopena|43
 134|Web|https://espectador.com/otroelefante/dobrich|44
+135|Web|http://radioambulante.org/|46
+136|iVoox|https://www.ivoox.com/podcast-radio-ambulante_sq_f170211_1.html|46
+137|Sticher|https://www.stitcher.com/podcast/radio-ambulante|46
+138|instagram|https://www.instagram.com/radioambulante/|46
+139|twitter|https://twitter.com/radioambulante|46
+140|Web|https://delsol.uy/quientedice/tasaembarque|47
+141|Web|https://espectador.com/otroelefante/maxiguerra|48
+142|RSS Feed|http://feeds.the2rods.com/feed/sergiopena|43
+143|Feedburner|http://feeds.feedburner.com/the2rods/Master|45
+144|PocketCast|https://play.pocketcasts.com/web/podcasts/a07808c0-7cb7-0137-f540-17da1cd0d495|45
+146|PocketCast|https://play.pocketcasts.com/web/podcasts/de157b50-7e78-0137-f540-17da1cd0d495|48
+147|RSS Feed|http://feeds.the2rods.com/feed/maxiguerra|48
+148|RSS Feed|http://feeds.the2rods.com/feed/otroelefante|40
+149|PocketCast|https://play.pocketcasts.com/web/podcasts/88501a60-7e7e-0137-f540-17da1cd0d495|40
+150|PocketCast|https://play.pocketcasts.com/web/podcasts/25cabe80-7e82-0137-f540-17da1cd0d495|32
+151|RSS Feed|http://feeds.the2rods.com/feed/dobrich|44
+152|PocketCast|https://play.pocketcasts.com/web/podcasts/ee5776a0-7e84-0137-f540-17da1cd0d495|44
+153|PocketCast|https://play.pocketcasts.com/web/podcasts/fb7f0ed0-7e85-0137-f540-17da1cd0d495|43
+154|RSS Feed|http://feeds.the2rods.com/feed/tasadeembarque|47
+155|PocketCast|https://play.pocketcasts.com/web/podcasts/0deea730-7e87-0137-f540-17da1cd0d495|47
+156|PocketCast|https://play.pocketcasts.com/web/podcasts/486d06d0-7f24-0137-f540-17da1cd0d495|2
+157|PocketCast|https://play.pocketcasts.com/web/podcasts/7d762d00-7f25-0137-f540-17da1cd0d495|4
+158|PocketCast|https://play.pocketcasts.com/web/podcasts/2ae18b30-7f28-0137-f540-17da1cd0d495|7
+159|PocketCast|https://play.pocketcasts.com/web/podcasts/64e6a6a0-7f6b-0137-f540-17da1cd0d495|38

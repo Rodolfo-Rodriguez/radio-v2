@@ -9,12 +9,20 @@
         <link>http://www.the2rods.com</link>
     </image>
     <description></description>
-    <pubDate>"Mon 01 Jul 2019 18:28:00"</pubDate>
+    <pubDate>"Fri, 05 Jul 2019 10:25:36"</pubDate>
+
+	<item>
+		<title>La derrota </title>
+		<pubDate>Tue, 02 Jul 2019 12:00:00</pubDate>
+		<description>None</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2178.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2178.mp3</guid>
+	</item>
 
 	<item>
 		<title>Los Dolcheviques </title>
 		<pubDate>Tue, 18 Jun 2019 12:00:00</pubDate>
-		<description></description>
+		<description>None</description>
 		<enclosure url="https://cdn.espectador.com/810mp3/1914.mp3" length="0" type="audio/mpeg"/>
 		<guid>https://cdn.espectador.com/810mp3/1914.mp3</guid>
 	</item>
@@ -22,25 +30,17 @@
 	<item>
 		<title>Campañas políticas en entredicho </title>
 		<pubDate>Tue, 25 Jun 2019 12:00:00</pubDate>
-		<description></description>
+		<description>None</description>
 		<enclosure url="https://cdn.espectador.com/810mp3/2039.mp3" length="0" type="audio/mpeg"/>
 		<guid>https://cdn.espectador.com/810mp3/2039.mp3</guid>
 	</item>
 
 	<item>
-		<title>El Partido Bilosófico desde Brasil</title>
-		<pubDate>Day, 20 Jun 2019 12:00:00</pubDate>
+		<title>Plataforma de Screaming  </title>
+		<pubDate>Thu, 04 Jul 2019 12:00:00</pubDate>
 		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/1967.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/1967.mp3</guid>
-	</item>
-
-	<item>
-		<title>Con Pena comprendo el Terraflanismo</title>
-		<pubDate>Day, 20 Jun 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/1511.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/1511.mp3</guid>
+		<enclosure url="https://cdn.espectador.com/810mp3/2227.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2227.mp3</guid>
 	</item>
 
 </channel></rss>

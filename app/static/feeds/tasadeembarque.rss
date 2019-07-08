@@ -9,38 +9,30 @@
         <link>http://www.the2rods.com</link>
     </image>
     <description></description>
-    <pubDate>"Mon 01 Jul 2019 18:51:10"</pubDate>
+    <pubDate>"Fri, 05 Jul 2019 10:16:03"</pubDate>
 
 	<item>
-		<title>La Ruta de los Corales</title>
-		<pubDate>Tue, 17 Abr 2019 12:00:00</pubDate>
+		<title>Lima</title>
+		<pubDate>Thu, 09 Feb 2017 12:00:00</pubDate>
 		<description></description>
-		<enclosure url="https://cdn.dl.uy//solmp3/12245.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.dl.uy//solmp3/12245.mp3</guid>
+		<enclosure url="https://cdn.dl.uy//solmp3/257.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/257.mp3</guid>
 	</item>
 
 	<item>
-		<title>Sevilla, Córdoba y Granada</title>
-		<pubDate>Tue, 24 Oct 2018 12:00:00</pubDate>
+		<title>Croacia</title>
+		<pubDate>Wed, 15 Aug 2018 12:00:00</pubDate>
 		<description></description>
-		<enclosure url="https://cdn.dl.uy//solmp3/9467.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.dl.uy//solmp3/9467.mp3</guid>
+		<enclosure url="https://cdn.dl.uy//solmp3/8141.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/8141.mp3</guid>
 	</item>
 
 	<item>
-		<title>Barra da Tijuca</title>
-		<pubDate>Day, 17 Feb 2017 12:00:00</pubDate>
+		<title>Santiago</title>
+		<pubDate>Wed, 27 Feb 2019 12:00:00</pubDate>
 		<description></description>
-		<enclosure url="https://cdn.dl.uy//solmp3/207.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.dl.uy//solmp3/207.mp3</guid>
-	</item>
-
-	<item>
-		<title>Estambul</title>
-		<pubDate>Day, 12 Sep 2018 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.dl.uy//solmp3/8686.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.dl.uy//solmp3/8686.mp3</guid>
+		<enclosure url="https://cdn.dl.uy//solmp3/11224.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/11224.mp3</guid>
 	</item>
 
 	<item>
@@ -52,27 +44,27 @@
 	</item>
 
 	<item>
-		<title>Santiago</title>
-		<pubDate>Mon, 27 Feb 2019 12:00:00</pubDate>
+		<title>Estambul</title>
+		<pubDate>Wed, 12 Sep 2018 12:00:00</pubDate>
 		<description></description>
-		<enclosure url="https://cdn.dl.uy//solmp3/11224.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.dl.uy//solmp3/11224.mp3</guid>
+		<enclosure url="https://cdn.dl.uy//solmp3/8686.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/8686.mp3</guid>
 	</item>
 
 	<item>
-		<title>Croacia</title>
-		<pubDate>Mon, 15 Aug 2018 12:00:00</pubDate>
+		<title>Sevilla, Córdoba y Granada</title>
+		<pubDate>Wed, 24 Oct 2018 12:00:00</pubDate>
 		<description></description>
-		<enclosure url="https://cdn.dl.uy//solmp3/8141.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.dl.uy//solmp3/8141.mp3</guid>
+		<enclosure url="https://cdn.dl.uy//solmp3/9467.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/9467.mp3</guid>
 	</item>
 
 	<item>
-		<title>Lima</title>
-		<pubDate>Mon, 9 Feb 2017 12:00:00</pubDate>
+		<title>La Ruta de los Corales</title>
+		<pubDate>Wed, 17 Apr 2019 12:00:00</pubDate>
 		<description></description>
-		<enclosure url="https://cdn.dl.uy//solmp3/257.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.dl.uy//solmp3/257.mp3</guid>
+		<enclosure url="https://cdn.dl.uy//solmp3/12245.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/12245.mp3</guid>
 	</item>
 
 </channel></rss>

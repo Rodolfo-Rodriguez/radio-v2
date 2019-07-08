@@ -1,5 +1,5 @@
-1|Oceano|http://radio1.oceanofm.com:8010|oceano.png|Uruguay|1075|Talk|5|True|
-2|Del Sol|http://radio.dl.uy:9950/radio|delsol.png|Uruguay|1236|Talk|5|True|Fm de Sol
+1|Oceano|http://radio1.oceanofm.com:8010|oceano.png|Uruguay|1078|Talk|5|True|
+2|Del Sol|http://radio.dl.uy:9950/radio|delsol.png|Uruguay|1241|Talk|5|True|Fm de Sol
 3|Sport 890|http://radios-mp3-uy.cdn.nedmedia.io/sport.mp3|sport890.png|Uruguay|95|Sports|5|True|
 4|Espectador|http://espectador1.net.com.uy:8120/stream/13/|espectador.png|Uruguay|185|News|4|True|
 5|Metro|http://mp3.metroaudio1.stream.avstreaming.net:7200/metro|metro.png|Argentina|130|Talk|5|True|
@@ -32,7 +32,7 @@
 32|Oasis FM|http://mp3.oasisfm.cl|Oasis FM.png|Chile|13|Rock|3|False|
 33|Deeper Shades of House|http://andromeda.housejunkie.ca:8000/radio.mp3|dsoh.png|USA|8|Electronic|2|False|
 34|Rock FM|https://rockfm-cope-rrcast.flumotion.com/cope/rockfm-low.mp3|rockfm.png|Spain|10|Rock|3|False|
-35|ADN Radio|https://18913.live.streamtheworld.com/ADNAAC_SC|adn.png|Chile|27|News|4|False|
+35|ADN Radio|https://18913.live.streamtheworld.com/ADNAAC_SC|adn.png|Chile|28|News|4|False|
 36|Static - New York's Alternative|http://stream.radio.co/saadd85319/listen|static.png|USA|4|Alt Rock|1|False|
 37|Radio New York Live|https://streaming.radiostreamlive.com/radionylive_devices|radionewyork.png|USA|13|Alt Rock|1|False|
 38|BBC Radio 4|http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio4fm_mf_q|bbc4.png|UK|2|News|1|False|
@@ -41,7 +41,7 @@
 41|Monte Carlo|http://192.99.150.52:7900|montecarlo.png|Uruguay|3|News|2|False|
 42|La Red|http://|lared.png|Argentina|3|Sports|3|False|
 43|Concierto|http://19493.live.streamtheworld.com/CONCIERTO_SC|concierto.png|Chile|3|Hits|3|False|
-44|FM Tiempo|http://unlimited4-us.dps.live/fmtiempo/mp3/icecast.audio|fmtiempo.png|Chile|64|Rock|3|True|
+44|FM Tiempo|https://unlimited4-us.dps.live/fmtiempo/mp3/icecast.audio|fmtiempo.png|Chile|64|Rock|3|True|
 45|Rock and Pop|http://16983.live.streamtheworld.com/ROCK_AND_POP_SC|rockandpop.png|Chile|4|Rock|2|False|
 46|Azul|http://195.154.182.222:3320/stream|azul.png|Uruguay|13|Rock|3|False|
 47|Aire FM|http://195.154.182.222:27125/stream|aire.png|Uruguay|3|Tropical|1|False|
@@ -101,4 +101,4 @@
 102|Beethoven|http|Beethoven.png|Chile|7|Classical|1|False|
 103|Radio Swiss Jazz|http://stream.srg-ssr.ch/m/rsj/mp3_128|Radio Swiss Jazz.png|Switzerland|6|Jazz|3|False|
 104|Radio GFM 90.1|http://r6.ciclano.io:10009/stream?1561069712872|Radio GFM 90.1.png|Brazil|1|Pop|1|False|
-105|Fake Radio|http://fakeradio.com|Fake Radio.png|USA|0|Fake|1|False|
+105|Preset20|http://192.168.1.203:8080/preset20|Fake Radio.png|USA|0|Fake|1|False|CXN Preset #20

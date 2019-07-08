@@ -1,11 +1,54 @@
-<rss><channel>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Abrepalabra</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/abrepalabras</url>
+        <title>Abrepalabra</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description></description>
+    <pubDate>"Fri, 05 Jul 2019 13:38:18"</pubDate>
 
 	<item>
 		<title>Seriados: Dark</title>
-		<pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate>
-		<description></description>
+		<pubDate>Thu, 27 Jun 2019 00:00:00</pubDate>
+		<description>None</description>
 		<enclosure url="http://audios.oceanofm.com/programas/Abrepalabra/19-06-27seriados-AudioTrimmer.com.mp3" length="0" type="audio/mpeg"/>
 		<guid>http://audios.oceanofm.com/programas/Abrepalabra/19-06-27seriados-AudioTrimmer.com.mp3</guid>
+	</item>
+
+	<item>
+		<title>Abrepalabra 01/07/19</title>
+		<pubDate>Mon, 01 Jul 2019 00:00:00</pubDate>
+		<description>Programa completo emitido el día primero de julio de 2019.</description>
+		<enclosure url="http://audios.oceanofm.com/programas/Abrepalabra/19-07-01completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/Abrepalabra/19-07-01completo.mp3</guid>
+	</item>
+
+	<item>
+		<title>Abrepalabra 02/07/19</title>
+		<pubDate>Tue, 02 Jul 2019 00:00:00</pubDate>
+		<description>Programa completo emitido el día dos de julio de 2019.</description>
+		<enclosure url="http://audios.oceanofm.com/programas/Abrepalabra/19-07-02completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/Abrepalabra/19-07-02completo.mp3</guid>
+	</item>
+
+	<item>
+		<title>Abrepalabra 04/07/19</title>
+		<pubDate>Thu, 04 Jul 2019 00:00:00</pubDate>
+		<description>Programa completo emitido el día cuatro de julio del 2019.</description>
+		<enclosure url="http://audios.oceanofm.com/programas/Abrepalabra/19-07-04completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/Abrepalabra/19-07-04completo.mp3</guid>
+	</item>
+
+	<item>
+		<title>Abrepalabra 03/07/19</title>
+		<pubDate>Wed, 03 Jul 2019 00:00:00</pubDate>
+		<description>Programa completo emitido el d{ia tres de julio de 2019.</description>
+		<enclosure url="http://audios.oceanofm.com/programas/Abrepalabra/19-07-03completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/Abrepalabra/19-07-03completo.mp3</guid>
 	</item>
 
 </channel></rss>

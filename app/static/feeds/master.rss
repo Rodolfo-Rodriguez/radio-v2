@@ -4,51 +4,10 @@
     <title>Master</title>
     <link>https://www.the2rods.com</link>
     <image>
-    	<url>http://feeds.the2rods.com/Master/image</url>
+    	<url>http://feeds.the2rods.com/image/master</url>
         <title>Master</title>
         <link>http://www.the2rods.com</link>
     </image>
     <description>Master Feed for all files</description>
-    <pubDate>"Mon 01 Jul 2019 16:20:56"</pubDate>
-
-	<item>
-		<title>OSR: Los futuros VARistas</title>
-		<pubDate>Mon, 01 Jul 2019 00:00:00 +0000</pubDate>
-		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-01OSR2.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-01OSR2.mp3</guid>
-	</item>
-
-	<item>
-		<title>Volvió el viejo</title>
-		<pubDate>Mon, 01 Jul 2019 00:00:00 +0000</pubDate>
-		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/TodoPasa/19-07-012amaanaCoquetoescenario.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/TodoPasa/19-07-012amaanaCoquetoescenario.mp3</guid>
-	</item>
-
-	<item>
-		<title>Las vidas extras de Wilko Johnson </title>
-		<pubDate>Mon, 1 Jul 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/2149.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/2149.mp3</guid>
-	</item>
-
-	<item>
-		<title>Estambul</title>
-		<pubDate>Day, 12 Sep 2018 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.dl.uy//solmp3/8686.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.dl.uy//solmp3/8686.mp3</guid>
-	</item>
-
-	<item>
-		<title>El Padrino Negro</title>
-		<pubDate>Day, 27 Jun 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/2096.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/2096.mp3</guid>
-	</item>
-
+    <pubDate>"Tue 02 Jul 2019 21:58:14"</pubDate>
 </channel></rss>

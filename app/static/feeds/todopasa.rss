@@ -1,11 +1,30 @@
-<rss><channel>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Todo Pasa</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/todopasa</url>
+        <title>Todo Pasa</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description>Programa periodístico de Oceano FM con Mariano Lopez, Andres Reyes, Majo Borjes e Ines Pereira.</description>
+    <pubDate>"Fri, 05 Jul 2019 13:36:49"</pubDate>
 
 	<item>
-		<title>Vuelve el Cosquín Rock</title>
-		<pubDate>Fri, 28 Jun 2019 00:00:00 +0000</pubDate>
-		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/TodoPasa/19-06-282amaanaJosPalazzoCosquinRock.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/TodoPasa/19-06-282amaanaJosPalazzoCosquinRock.mp3</guid>
+		<title>No vendan la piel del oso...</title>
+		<pubDate>Thu, 04 Jul 2019 00:00:00</pubDate>
+		<description>Perú goleó a Chile y se metió en la final. Con un plan rigurosamente aplicado el equipo de Gareca rompió todos los pronósticos. Además Ernesto Filippi, exárbitro e instructor, actual docente en reglas de juego, analizó ventajas y condiciones del uso del VAR en la Copa América. Columna de Mario Bardanca.</description>
+		<enclosure url="http://audios.oceanofm.com/programas/19-07-04MarioBardanca.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/19-07-04MarioBardanca.mp3</guid>
+	</item>
+
+	<item>
+		<title>La final menos esperada</title>
+		<pubDate>Fri, 05 Jul 2019 00:00:00</pubDate>
+		<description>Brasil, con su prestigio y figuras, se hará cargo del protagonismo en Maracaná ante Perú, que llega con rendimiento crec</description>
+		<enclosure url="http://audios.oceanofm.com/programas/19-07-05mario.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/19-07-05mario.mp3</guid>
 	</item>
 
 </channel></rss>

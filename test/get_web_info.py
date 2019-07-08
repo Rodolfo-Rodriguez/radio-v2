@@ -12,15 +12,16 @@ from feed_manager import FeedManager
 
 # url = sys.argv[1]
 
-url = 'https://espectador.com/otroelefante/maxiguerra/las-vidas-extras-de-wilko-johnson'
-url = 'https://delsol.uy/lamesa/deporgol/ranchero-con-detalles-de-la-gira-de-penarol-en-estados-unidos'
-url = 'https://delsol.uy/notoquennada/ntnconcentrado/miranda-y-la-union-ultraderechista-talvi-y-la-renovacion-cosse-y-su-aporte-en-la-campana'
+#url = 'https://espectador.com/otroelefante/maxiguerra/las-vidas-extras-de-wilko-johnson'
+#url = 'https://delsol.uy/lamesa/deporgol/ranchero-con-detalles-de-la-gira-de-penarol-en-estados-unidos'
+#url = 'https://delsol.uy/notoquennada/ntnconcentrado/miranda-y-la-union-ultraderechista-talvi-y-la-renovacion-cosse-y-su-aporte-en-la-campana'
+url = 'https://delsol.uy/copaamerica/audios/sol_13671'
 
 feed_manager = FeedManager(url)
-title = feed_manager.get_title()
-# audio_url = feed_manager.get_audio_url()
-pub_date = feed_manager.get_pub_date()
+#title = feed_manager.get_title()
+audio_url = feed_manager.get_audio_url()
+#pub_date = feed_manager.get_pub_date()
 
-print title
-# print audio_url
-print pub_date 
+#print title
+print audio_url
+#print pub_date 

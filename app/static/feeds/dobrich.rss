@@ -9,38 +9,54 @@
         <link>http://www.the2rods.com</link>
     </image>
     <description></description>
-    <pubDate>"Mon 01 Jul 2019 18:17:53"</pubDate>
-
-	<item>
-		<title>El Padrino Negro</title>
-		<pubDate>Day, 27 Jun 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/2096.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/2096.mp3</guid>
-	</item>
-
-	<item>
-		<title>Rever series </title>
-		<pubDate>Wed, 26 Jun 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/2068.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/2068.mp3</guid>
-	</item>
+    <pubDate>"Fri, 05 Jul 2019 13:48:02"</pubDate>
 
 	<item>
 		<title>Chernobyl: un hito impensado  </title>
 		<pubDate>Thu, 20 Jun 2019 12:00:00</pubDate>
-		<description></description>
+		<description>Migue Dobrich y Maxi Guerra nos hablan del drama histórico, desarrollado en una mini serie de cinco capítulos por HBO en coproducción con Netflix.</description>
 		<enclosure url="https://cdn.espectador.com/810mp3/1964.mp3" length="0" type="audio/mpeg"/>
 		<guid>https://cdn.espectador.com/810mp3/1964.mp3</guid>
 	</item>
 
 	<item>
-		<title>Mujeres del Mundo y su Musica</title>
-		<pubDate>Day, 18 Jun 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/1911.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/1911.mp3</guid>
+		<title>Rever series </title>
+		<pubDate>Wed, 26 Jun 2019 12:00:00</pubDate>
+		<description>Volver a las cosas que más disfrutamos, Migue Dobrich nos cuenta sobre los cambios de Netflix.</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2068.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2068.mp3</guid>
+	</item>
+
+	<item>
+		<title>El futuro de los videojuegos </title>
+		<pubDate>Thu, 06 Jun 2019 12:00:00</pubDate>
+		<description>Miguel Ángel Dobrich habló de “Google Stadia” la nueva plataforma que se lanzará en noviembre y ofrecerá vía streaming la posibilidad de jugar desde cualquier dispositivo.</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/1700.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/1700.mp3</guid>
+	</item>
+
+	<item>
+		<title>Vacaciones de julio puertas adentro </title>
+		<pubDate>Tue, 02 Jul 2019 12:00:00</pubDate>
+		<description>Migue Dobrich nos da una serie de recomendaciones disponibles en internet, para mirar con los más chicos en estas vacaciones de invierno.</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2175.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2175.mp3</guid>
+	</item>
+
+	<item>
+		<title>Capítulo II de “vacaciones de julio puertas adentro” </title>
+		<pubDate>Thu, 04 Jul 2019 12:00:00</pubDate>
+		<description>Migue Dobrich te recomienda películas  para disfrutar en familia en este receso invernal. Encontrá estas joyitas de los años 80 y 90 a un clic de distancia.</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2228.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2228.mp3</guid>
+	</item>
+
+	<item>
+		<title>Clarence Avant: El Padrino Negro </title>
+		<pubDate>Thu, 27 Jun 2019 12:00:00</pubDate>
+		<description>Migue Dobrich nos cuenta sobre el documental  que habla padrino de la música. Netflix rescata la historia de Clarence Avant, un genio de los negocios que ayudó a los personajes más influyentes y poderosos de los Estados Unidos como Michael Jackson, Barack Obama y Bill Clinton.</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2096.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2096.mp3</guid>
 	</item>
 
 </channel></rss>

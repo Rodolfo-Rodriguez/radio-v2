@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>13a0</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/13a0</url>
+        <title>13a0</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description></description>
+    <pubDate>"Tue 02 Jul 2019 21:53:20"</pubDate>
+
+	<item>
+		<title>El colectivo de Brasil le ganó a una Argentina que luchó</title>
+		<pubDate>Tue, 2 Jul 2019 12:00:00</pubDate>
+		<description></description>
+		<enclosure url="https://cdn.dl.uy//solmp3/13737.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/13737.mp3</guid>
+	</item>
+
+	<item>
+		<title>Gonza Delgado tratando de resucitar desde Brasil</title>
+		<pubDate>Sun, 30 Jun 2019 12:00:00</pubDate>
+		<description>None</description>
+		<enclosure url="https://cdn.dl.uy//solmp3/13671.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.dl.uy//solmp3/13671.mp3</guid>
+	</item>
+
+</channel></rss>

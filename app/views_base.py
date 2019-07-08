@@ -69,6 +69,14 @@ def playling():
 
         redirect_page = url_for('podcast.podcast_show', id=radio_player.podcast.id)
 
+    elif (radio_player.loaded=='episode'):
+
+        redirect_page = url_for('podcast.podcast_show', id=radio_player.episode.podcast.id)
+
+    elif (radio_player.loaded=='episode-url'):
+
+        redirect_page = url_for('podcast.podcast_show', id=radio_player.episode.podcast.id)
+
     elif (radio_player.loaded=='cxn_radio'):
 
         redirect_page = url_for('cxn.cxn_radio_show')

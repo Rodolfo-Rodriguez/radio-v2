@@ -11,19 +11,6 @@ class Config:
 
 	PROJECT_CSV_DIR = 'database/csv_data'
 
-	CSV_TABLE_FILE = {
-		'Radios' : 'radios_table.csv',
-		'Program' : 'program_table.csv',
-		'Artist' : 'artist_table.csv',
-		'Playlist' : 'playlist_table.csv',
-		'Podcast' : 'podcast_table.csv',
-		'Radio_Link' : 'radio_link_table.csv',
-		'Artist_Link' : 'artist_link_table.csv',
-		'Podcast_Link' : 'podcast_link_table.csv',
-		'Bookmark' : 'bookmark_table.csv',
-		'Preset' : 'preset_table.csv'
-	}
-
 	FLASK_IMG_DIR = '/static/images'
 
 	PROJECT_RADIOS_IMG_DIR = 'app/static/images/radios'
@@ -58,18 +45,19 @@ class Config:
 
 	SOCIAL_SITES = ['twitter', 'instagram', 'youtube', 'spotify', 'apple', 'soundcloud']
 
-	TIMEZONES = {'Uruguay':-3, 
-				'Argentina':-3, 
-				'Chile':-3, 
-				'Spain':1, 
-				'Brazil':-3, 
-				'USA':-5, 
-				'Peru':-5,
-				'Australia':11, 
-				'UK':0,
-				'Italy':1,
-				'Poland': 1,
-				'Greece':2 }
+	TIMEZONES = {'Uruguay':2, 
+				'Argentina':2, 
+				'Chile':1, 
+				'Spain':7, 
+				'Brazil':2, 
+				'USA':1, 
+				'Peru':0,
+				'Australia':15, 
+				'UK':6,
+				'Italy':7,
+				'Poland': 7,
+				'Switzerland': 7,
+				'Greece':8 }
 
 	BOOKMARK_MAX = 10
 	DEFAULT_VOLUME = 50

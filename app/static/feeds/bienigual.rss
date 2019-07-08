@@ -1,11 +1,22 @@
-<rss><channel>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Bien Igual</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/bienigual</url>
+        <title>Bien Igual</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description></description>
+    <pubDate>"Tue 02 Jul 2019 14:06:23"</pubDate>
 
 	<item>
-		<title>Black Mirror</title>
-		<pubDate>Day, 21 Jun 2019 12:00:00</pubDate>
+		<title>Próximo estreno: Years and Years</title>
+		<pubDate>Thu, 27 Jun 2019 12:00:00</pubDate>
 		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/1997.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/1997.mp3</guid>
+		<enclosure url="https://cdn.espectador.com/810mp3/2104.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2104.mp3</guid>
 	</item>
 
 </channel></rss>

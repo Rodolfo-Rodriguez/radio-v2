@@ -8,39 +8,47 @@
         <title>Maxi Guerra</title>
         <link>http://www.the2rods.com</link>
     </image>
-    <description>Maxi Guerra</description>
-    <pubDate>"Mon 01 Jul 2019 18:12:03"</pubDate>
+    <description>Columna de Maxi Guerra en Otro Elefante</description>
+    <pubDate>"Fri, 05 Jul 2019 14:03:31"</pubDate>
 
 	<item>
 		<title>Las vidas extras de Wilko Johnson </title>
-		<pubDate>Mon, 1 Jul 2019 12:00:00</pubDate>
-		<description></description>
+		<pubDate>Mon, 01 Jul 2019 12:00:00</pubDate>
+		<description>Maxi Guerra habla de uno de los guitarristas más influyentes del rock inglés y de sus sorprendentes idas y vueltas con la muerte</description>
 		<enclosure url="https://cdn.espectador.com/810mp3/2149.mp3" length="0" type="audio/mpeg"/>
 		<guid>https://cdn.espectador.com/810mp3/2149.mp3</guid>
 	</item>
 
 	<item>
-		<title>Dylan y Scorsese: La verdad está en las canciones </title>
-		<pubDate>Wed, 19 Jun 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/1939.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/1939.mp3</guid>
+		<title>En busca del comunista más comunista de Islandia </title>
+		<pubDate>Wed, 03 Jul 2019 12:00:00</pubDate>
+		<description>Un apartamento. Un testamento. Un diputado que debe decidir quién es el mejor marxista para heredarlo. Maxi Guerra nos trae una alucinante crónica islandesa.</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2201.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2201.mp3</guid>
 	</item>
 
 	<item>
-		<title> Tres Cruces y su etnógrafa involuntaria </title>
-		<pubDate>Mon, 10 Jun 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/1749.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/1749.mp3</guid>
+		<title>Las voces de Svetlana Alexiévich </title>
+		<pubDate>Thu, 04 Jul 2019 12:00:00</pubDate>
+		<description>Maxi Guerra nos habla de una autora que buscó en Chernobyl, la Segunda Guerra Mundial y el fin de la URSS algo distinto: qué cambiaba en la vida interior de las personas.</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2224.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2224.mp3</guid>
 	</item>
 
 	<item>
-		<title>Los años astringentes de Leonard Cohen </title>
-		<pubDate>Mon, 29 Apr 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/1021.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/1021.mp3</guid>
+		<title>Letizia Battaglia, la mujer que fotografió a la mafia </title>
+		<pubDate>Tue, 25 Jun 2019 12:00:00</pubDate>
+		<description>Maxi Guerra repasa vida y obra de la fotógrafa que retrató los años más terribles de la Cosa Nostra</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2036.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2036.mp3</guid>
+	</item>
+
+	<item>
+		<title>Nick Cave responde </title>
+		<pubDate>Mon, 24 Jun 2019 12:00:00</pubDate>
+		<description>“Red hand files”, una plataforma de conversación entre el músico y sus fanáticos, es una forma única de abordar el duelo, la creatividad, el fracaso y la religión.</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2011.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2011.mp3</guid>
 	</item>
 
 </channel></rss>

@@ -4,35 +4,51 @@
     <title>Otro Elefante</title>
     <link>https://www.the2rods.com</link>
     <image>
-    	<url>http://feeds.the2rods.com/Otro Elefante/image</url>
+    	<url>http://feeds.the2rods.com/image/otroelefante</url>
         <title>Otro Elefante</title>
         <link>http://www.the2rods.com</link>
     </image>
-    <description></description>
-    <pubDate>"Mon 01 Jul 2019 17:10:55"</pubDate>
+    <description>Otro Elefante en El Espectador</description>
+    <pubDate>"Mon, 08 Jul 2019 09:30:45"</pubDate>
 
 	<item>
-		<title>Programa completo del 01/07/2019 </title>
-		<pubDate>Mon, 1 Jul 2019 12:00:00</pubDate>
-		<description></description>
+		<title>Programa completo del Lun 01/07/2019 </title>
+		<pubDate>Mon, 01 Jul 2019 12:00:00</pubDate>
+		<description>Charla de arranque: Democracia electoral—Manifiesto del Moncho: Promesas para una columna—Maxi Guerra: Las vidas extras de Wilko Johnson—Darío Sztajnszrajber: Platón, apología de Sócrates</description>
 		<enclosure url="https://cdn.espectador.com/810mp3/2158.mp3" length="0" type="audio/mpeg"/>
 		<guid>https://cdn.espectador.com/810mp3/2158.mp3</guid>
 	</item>
 
 	<item>
-		<title>El gran debate</title>
-		<pubDate>Day, 27 Jun 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/2099.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/2099.mp3</guid>
+		<title>Programa completo del Mar 02/07/2019 </title>
+		<pubDate>Tue, 02 Jul 2019 12:00:00</pubDate>
+		<description>Charla de arranque: Caminar juntos—Miguel Ángel Dobrich: Vacaciones de julio puertas adentro—Pablo Silvera: Trilogía E.N.I—L´almacen de los males necesarios: La derrota</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2180.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2180.mp3</guid>
 	</item>
 
 	<item>
-		<title>El equipo de prensa cubrió el detrás de escena</title>
-		<pubDate>Day, 27 Jun 2019 12:00:00</pubDate>
-		<description></description>
-		<enclosure url="https://cdn.espectador.com/810mp3/2098.mp3" length="0" type="audio/mpeg"/>
-		<guid>https://cdn.espectador.com/810mp3/2098.mp3</guid>
+		<title>Programa completo del Mie 03/07/2019 </title>
+		<pubDate>Wed, 03 Jul 2019 12:00:00</pubDate>
+		<description>Charla de arranque: Aniversario del Walkman—Maxi Guerra: En busca del comunista más comunista de Islandia—Moncho: Una columna que no es columna</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2204.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2204.mp3</guid>
+	</item>
+
+	<item>
+		<title>Programa completo del Jue 04/07/2019 </title>
+		<pubDate>Thu, 04 Jul 2019 12:00:00</pubDate>
+		<description>Charla de arranque: Protocolo de emergencia—Miguel Ángel Dobrich: Capítulo II de “vacaciones de julio puertas adentro”—Maxi Guerra: Las voces de Svetlana Alexiévich—Sergio Pena: Plataforma de Screaming</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2229.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2229.mp3</guid>
+	</item>
+
+	<item>
+		<title>Programa completo del 05/07/2019 </title>
+		<pubDate>Fri, 05 Jul 2019 12:00:00</pubDate>
+		<description>Charla de arranque: El universo de las espadas—Entrevista a la banda Hablan por la espalda—Entrevista a el “Mono”, Federico Bavosi: Un valor de deportista</description>
+		<enclosure url="https://cdn.espectador.com/810mp3/2259.mp3" length="0" type="audio/mpeg"/>
+		<guid>https://cdn.espectador.com/810mp3/2259.mp3</guid>
 	</item>
 
 </channel></rss>

@@ -1,51 +1,54 @@
-<rss><channel>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Justicia Infinita</title>
+    <link>https://www.the2rods.com</link>
+    <image>
+    	<url>http://feeds.the2rods.com/image/justicia</url>
+        <title>Justicia Infinita</title>
+        <link>http://www.the2rods.com</link>
+    </image>
+    <description>Justicia Infinita</description>
+    <pubDate>"Fri, 05 Jul 2019 21:51:04"</pubDate>
 
 	<item>
-		<title>Falero y el pronóstico para las Internas</title>
-		<pubDate>Fri, 28 Jun 2019 00:00:00 +0000</pubDate>
+		<title>Justicia Infinita 04/07/19</title>
+		<pubDate>Thu, 04 Jul 2019 00:00:00</pubDate>
 		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-28meteorologo.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-28meteorologo.mp3</guid>
+		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-04programaentero.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-04programaentero.mp3</guid>
 	</item>
 
 	<item>
-		<title>Justicia Infinita 28/06/19</title>
-		<pubDate>Fri, 28 Jun 2019 00:00:00 +0000</pubDate>
+		<title>Justicia Infinita 03/07/19</title>
+		<pubDate>Wed, 03 Jul 2019 00:00:00</pubDate>
 		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-28programaentero.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-28programaentero.mp3</guid>
+		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-03programaentero.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-03programaentero.mp3</guid>
 	</item>
 
 	<item>
-		<title>Justicia Infinita 27/06/19</title>
-		<pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate>
+		<title>Justicia Infinita 02/07/19</title>
+		<pubDate>Tue, 02 Jul 2019 00:00:00</pubDate>
 		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-27programaentero.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-27programaentero.mp3</guid>
+		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-02completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-02completo.mp3</guid>
 	</item>
 
 	<item>
-		<title>Justicia Infinita 26/06/19</title>
-		<pubDate>Wed, 26 Jun 2019 00:00:00 +0000</pubDate>
+		<title>Justicia Infinita 01/07/19</title>
+		<pubDate>Mon, 01 Jul 2019 00:00:00</pubDate>
 		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-26programaentero.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-26programaentero.mp3</guid>
+		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-01programaentero.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-01programaentero.mp3</guid>
 	</item>
 
 	<item>
-		<title>Justicia Infinita 25/06/19</title>
-		<pubDate>Tue, 25 Jun 2019 00:00:00 +0000</pubDate>
+		<title>Justicia Infinita 05/07/19</title>
+		<pubDate>Fri, 05 Jul 2019 00:00:00</pubDate>
 		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-25programaentero.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-25programaentero.mp3</guid>
-	</item>
-
-	<item>
-		<title>Justicia Infinita 24/06/19</title>
-		<pubDate>Mon, 24 Jun 2019 00:00:00 +0000</pubDate>
-		<description></description>
-		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-24programaentero.mp3" length="0" type="audio/mpeg"/>
-		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-06-24programaentero.mp3</guid>
+		<enclosure url="http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-05completo.mp3" length="0" type="audio/mpeg"/>
+		<guid>http://audios.oceanofm.com/programas/JusticiaInfinita/19-07-05completo.mp3</guid>
 	</item>
 
 </channel></rss>
