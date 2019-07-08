@@ -31,12 +31,14 @@ class Config:
 	
 	MPD_SERVERS = ["rune-1", "rune-2"]
 
-	SERVER_NAMES = { 
+	SERVER_NAMES = {
+		"none":"NC",
 		"rune-1":"MPD-Office",
 		"cxn":"CXN" 
 	}
 	
 	SERVER_PORTS = { 
+		"none":"0",
 		"rune-1":"6600",
 		"cxn":"8050"
 	}

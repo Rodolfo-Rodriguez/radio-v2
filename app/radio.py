@@ -83,7 +83,12 @@ class RadioPlayer:
 
   def update_server_status(self):
     
-    if self.server_type == 'CXN':
+    if self.server_type == 'NC':
+      self.state = 'stop'
+      self.loaded = 'none'
+      self.player_img = '{}/radios/empty.png'.format(CONFIG.FLASK_IMG_DIR)
+
+    elif self.server_type == 'CXN':
       
       self.cxn_client.update_playback_details()
 
@@ -122,7 +127,9 @@ class RadioPlayer:
 
 
   def _update_server_type(self,hostname):
-    if hostname in CONFIG.MPD_SERVERS:
+    if hostname == 'none':
+      self.server_type = 'NC'
+    elif hostname in CONFIG.MPD_SERVERS:
       self.server_type = 'MPD'
     else:
       self.server_type = 'CXN'
@@ -232,7 +239,7 @@ class RadioPlayer:
   def vol_up(self):
     if (self.server_type == 'CXN'):
       self.cxn_client.send_command('VOL_UP')
-    else:
+    elif (self.server_type == 'MPD'):
       self.server_connect()
       vol = int(self.mpd_client.status()['volume'])
       if vol < 100:
@@ -243,7 +250,7 @@ class RadioPlayer:
   def vol_down(self):
     if (self.server_type == 'CXN'):
       self.cxn_client.send_command('VOL_DOWN')
-    else:
+    elif (self.server_type == 'MPD'):
       self.server_connect()
       vol = int(self.mpd_client.status()['volume'])
       if vol > 0:
@@ -253,7 +260,7 @@ class RadioPlayer:
   def vol_mute(self):
     if (self.server_type == 'CXN'):
       self.cxn_client.press_remote_key('MUTE','SHORT')
-    else:
+    elif (self.server_type == 'MPD'):
       self.server_connect()
       vol = int(self.mpd_client.status()['volume'])
       if vol > 0:
@@ -292,7 +299,7 @@ class RadioPlayer:
 
       self.preset_playing = radio.preset_number()
 
-    else:
+    elif (self.server_type == 'CXN'):
       if (radio.preset > 0) and (radio.preset < 21):
         self.cxn_client.play_preset(radio.preset)
         time.sleep(4)
@@ -416,7 +423,8 @@ class RadioPlayer:
         self.state = 'play'
       
       self.server_disconnect()
-    else:
+    
+    elif (self.server_type == 'CXN'):
       self.cxn_client.press_remote_key('PLAY_PAUSE','SHORT')
       if self.state == 'play':
         self.state = 'pause'
@@ -425,33 +433,40 @@ class RadioPlayer:
           
   def play(self):
     self.state = 'play'
+    
     if (self.server_type == 'MPD'):
       self.server_connect()
       self.mpd_client.play()
       self.server_disconnect()
-    else:
+    
+    elif (self.server_type == 'CXN'):
       self.cxn_client.press_remote_key('PLAY_PAUSE','SHORT')
 
   def stop(self):
     self.state = 'stop'
+    
     if (self.server_type == 'MPD'):
       self.server_connect()
       self.mpd_client.stop()
       self.server_disconnect()
-    else:
+    
+    elif (self.server_type == 'CXN'):
       self.cxn_client.press_remote_key('STOP','SHORT')
 
   def pause(self):
     self.state = 'pause'
+    
     if (self.server_type == 'MPD'):
       self.server_connect()
       self.mpd_client.pause()
       self.server_disconnect()
-    else:
+    
+    elif (self.server_type == 'CXN'):
       self.cxn_client.press_remote_key('PLAY_PAUSE','SHORT')
 
   def next(self):
     if self.loaded in ['album','playlist','podcast']:
+      
       if (self.server_type == 'MPD'):
         self.server_connect()
         pos = int(self.mpd_client.currentsong()['pos'])
@@ -459,11 +474,13 @@ class RadioPlayer:
         if pos < (playlist_len - 1):
           self.mpd_client.next()
         self.server_disconnect()
-      else:
+      
+      elif (self.server_type == 'CXN'):
         self.cxn_client.press_remote_key('SKIP_NEXT','SHORT')
 
   def previous(self):
     if self.loaded in ['album','playlist','podcast']:
+      
       if (self.server_type == 'MPD'):
         self.server_connect()
         pos = int(self.mpd_client.currentsong()['pos'])
@@ -471,7 +488,8 @@ class RadioPlayer:
         if pos > 0:
           self.mpd_client.previous()
         self.server_disconnect()
-      else:
+      
+      elif (self.server_type == 'CXN'):
         self.cxn_client.press_remote_key('SKIP_PREVIOUS','SHORT')
 
   def volume(self):
@@ -479,8 +497,12 @@ class RadioPlayer:
       self.server_connect()
       volume = int(self.mpd_client.status()['volume'])
       self.server_disconnect()
-    else:
+    
+    elif (self.server_type == 'CXN'):
       volume = CONFIG.DEFAULT_VOLUME
+    
+    else:
+      volume = 0
 
     return volume
 
@@ -525,6 +547,7 @@ class RadioPlayer:
         return status[key_value]
       else:
         return ''
+    
     else:
       return ''
 
@@ -536,6 +559,7 @@ class RadioPlayer:
       elapsed_time_str = '{:d}:{:02d}'.format(m,s)
       self.server_disconnect()
       return elapsed_time_str  
+    
     else:
       return 0  
 
@@ -548,6 +572,7 @@ class RadioPlayer:
       play_progress_str = str(play_progress) + '%'
       self.server_disconnect()
       return play_progress_str
+    
     else:
       return ''
 
@@ -618,6 +643,7 @@ class RadioPlayer:
       pl_info = self.mpd_client.playlistinfo()
       self.server_disconnect()
       return pl_info
+    
     else:
       return ''
 
